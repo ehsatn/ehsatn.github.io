@@ -5,12 +5,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add click event to each card
     cards.forEach(card => {
         card.addEventListener('click', (event) => {
-            // Get card number
+            // Get card number and IBAN
             const cardNumber = card.getAttribute('data-card-number');
+            const iban = card.getAttribute('data-iban');
+
+            // Show choice dialog
+            const choice = confirm('Choose what to copy:\n\nOK = Copy Card Number\nCancel = Copy IBAN');
+            
+            let textToCopy, tooltipMessage;
+            
+            if (choice) {
+                // Copy card number
+                textToCopy = cardNumber.replace(/\s/g, '');
+                tooltipMessage = 'Card number copied to clipboard';
+            } else {
+                // Copy IBAN
+                textToCopy = iban.replace(/\s/g, '');
+                tooltipMessage = 'IBAN copied to clipboard';
+            }
 
             // Copy to clipboard
-            navigator.clipboard.writeText(cardNumber.replace(/\s/g, ''))
+            navigator.clipboard.writeText(textToCopy)
                 .then(() => {
+                    // Update tooltip message
+                    tooltip.querySelector('.tooltip-content').textContent = tooltipMessage;
+                    
                     // Show tooltip
                     tooltip.classList.add('show');
 

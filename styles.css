@@ -195,6 +195,19 @@ body {
   font-family: 'Courier New', monospace;
   position: relative;
   z-index: 2;
+  margin-bottom: 0.5rem;
+}
+
+.iban-number {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #666666;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  z-index: 2;
+  opacity: 0.8;
 }
 
 /* Modern Gradient Section (Bottom 50%) */
@@ -331,6 +344,11 @@ body {
   color: #000000;
 }
 
+.card:hover .iban-number {
+  color: #333333;
+  opacity: 1;
+}
+
 /* Modern Tooltip */
 .tooltip {
   position: fixed;
@@ -410,6 +428,11 @@ body {
     letter-spacing: 0.12em;
   }
   
+  .iban-number {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  
   .main-title {
     font-size: 36px;
   }
@@ -451,6 +474,11 @@ body {
   .card-number {
     font-size: 16px;
     letter-spacing: 0.1em;
+  }
+  
+  .iban-number {
+    font-size: 11px;
+    letter-spacing: 0.06em;
   }
   
   .card-expiry {
