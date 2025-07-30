@@ -1,0 +1,505 @@
+/* Modern Credit Card Design - Clean & Modern */
+:root {
+  /* Color Palette */
+  --primary: #5E35B1;
+  --secondary: #00BCD4;
+  --neutral: #F5F7FA;
+  --text: #263238;
+  
+  /* Professional Card Colors */
+  --yellow-primary: #D4AF37;
+  --yellow-secondary: #B8860B;
+  --yellow-accent: #8B6914;
+  
+  --green-primary: #2E7D32;
+  --green-secondary: #388E3C;
+  --green-accent: #1B5E20;
+  
+  --red-primary: #C62828;
+  --red-secondary: #D32F2F;
+  --red-accent: #B71C1C;
+  
+  --blue-primary: #1565C0;
+  --blue-secondary: #1976D2;
+  --blue-accent: #0D47A1;
+  
+  /* Typography */
+  --font-family: 'Inter', sans-serif;
+  --header-size: 42px;
+  --header-weight: 700;
+  --header-line-height: 1.1;
+  --subheader-size: 16px;
+  --subheader-weight: 500;
+  --body-size: 16px;
+  --body-weight: 400;
+  --body-line-height: 1.5;
+  
+  /* Card Dimensions */
+  --card-width: 420px;
+  --card-height: 260px;
+  --content-padding: 28px;
+  
+  /* Effects */
+  --glass-blur: 16px;
+  --shadow: 0 25px 80px rgba(0, 0, 0, 0.08);
+  --transition: 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background: #F1F3F4;
+  color: var(--text);
+  line-height: var(--body-line-height);
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Clean Background */
+.bg-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #f3f3f3;
+  z-index: -1;
+}
+
+
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Clean Header */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.main-title {
+  font-size: var(--header-size);
+  font-weight: var(--header-weight);
+  line-height: var(--header-line-height);
+  color: #1A1A1A;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  position: relative;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subtitle {
+  font-size: var(--subheader-size);
+  font-weight: var(--subheader-weight);
+  line-height: var(--body-line-height);
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Modern Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  padding: 1rem;
+  justify-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Professional Credit Card Container */
+.card {
+  width: var(--card-width);
+  height: var(--card-height);
+  border-radius: 28px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+  background: #FFFFFF;
+  position: relative;
+  transform: translateZ(0);
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Professional Glassmorphic Section (Top 50%) */
+.glassmorphic-section {
+  height: 80%;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.glassmorphic-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.3) 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+.bank-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1A1A1A;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 2;
+}
+
+.card-number {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #1A1A1A;
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  position: relative;
+  z-index: 2;
+}
+
+/* Modern Gradient Section (Bottom 50%) */
+.gradient-section {
+  height: 50%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 2rem;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+  .card-expiry {
+  font-size: 10px;
+  font-weight: 500;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.95;
+}
+
+.card-holder {
+  font-size: 12px;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.card-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.logo-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.circle-1 {
+  transform: translateX(-2px);
+}
+
+.circle-2 {
+  transform: translateX(-4px);
+}
+
+/* Professional Card Color Themes */
+.card-yellow .gradient-section {
+  background: linear-gradient(135deg, #D4AF37 0%, #B8860B 50%, #8B6914 100%);
+}
+
+.card-green .gradient-section {
+  background: linear-gradient(135deg, #2E7D32 0%, #388E3C 50%, #1B5E20 100%);
+}
+
+.card-red .gradient-section {
+  background: linear-gradient(135deg, #C62828 0%, #D32F2F 50%, #B71C1C 100%);
+}
+
+.card-blue .gradient-section {
+  background: linear-gradient(135deg, #1565C0 0%, #1976D2 50%, #0D47A1 100%);
+}
+
+/* Color-Specific Glassmorphic Sections */
+.card-yellow .glassmorphic-section {
+  background: rgba(212, 175, 55, 0.08);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: inset 0 1px 0 rgba(212, 175, 55, 0.3);
+}
+
+.card-green .glassmorphic-section {
+  background: rgba(46, 125, 50, 0.08);
+  border-bottom: 1px solid rgba(46, 125, 50, 0.2);
+  box-shadow: inset 0 1px 0 rgba(46, 125, 50, 0.3);
+}
+
+.card-red .glassmorphic-section {
+  background: rgba(198, 40, 40, 0.08);
+  border-bottom: 1px solid rgba(198, 40, 40, 0.2);
+  box-shadow: inset 0 1px 0 rgba(198, 40, 40, 0.3);
+}
+
+.card-blue .glassmorphic-section {
+  background: rgba(21, 101, 192, 0.08);
+  border-bottom: 1px solid rgba(21, 101, 192, 0.2);
+  box-shadow: inset 0 1px 0 rgba(21, 101, 192, 0.3);
+}
+
+/* Professional Hover Effects */
+.card-yellow:hover .glassmorphic-section {
+  background: rgba(212, 175, 55, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.card-green:hover .glassmorphic-section {
+  background: rgba(46, 125, 50, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.card-red:hover .glassmorphic-section {
+  background: rgba(198, 40, 40, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.card-blue:hover .glassmorphic-section {
+  background: rgba(21, 101, 192, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.card:hover .card-number {
+  color: #000000;
+}
+
+.card:hover .bank-name {
+  color: #000000;
+}
+
+/* Modern Tooltip */
+.tooltip {
+  position: fixed;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--text);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+}
+
+.tooltip.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.tooltip-content {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+/* Responsive Design */
+@media (min-width: 1200px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 1000px;
+    gap: 5rem;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 350px;
+    margin: 0 auto;
+    gap: 3rem;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 350px;
+    height: 220px;
+  }
+  
+  .glassmorphic-section {
+    padding: 1.2rem;
+  }
+  
+  .gradient-section {
+    padding: 1.2rem;
+  }
+  
+  .bank-name {
+    font-size: 16px;
+  }
+  
+  .card-number {
+    font-size: 18px;
+    letter-spacing: 0.12em;
+  }
+  
+  .main-title {
+    font-size: 36px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  body {
+    padding: 3rem 1.5rem;
+  }
+  
+  .header {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 28px;
+  }
+  
+  .card {
+    height: 200px;
+  }
+  
+  .glassmorphic-section {
+    padding: 1rem;
+  }
+  
+  .gradient-section {
+    padding: 1rem;
+  }
+  
+  .bank-name {
+    font-size: 14px;
+  }
+  
+  .card-number {
+    font-size: 16px;
+    letter-spacing: 0.1em;
+  }
+  
+  .card-expiry {
+    font-size: 11px;
+  }
+  
+  .card-holder {
+    font-size: 12px;
+  }
+  
+  .logo-circle {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Focus states for accessibility */
+.card:focus {
+  outline: 3px solid var(--primary);
+  outline-offset: 6px;
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 6px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .tooltip {
+    transition: none;
+    animation: none;
+  }
+  
+  .card:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+  
+  .tooltip {
+    display: none !important;
+  }
+}
