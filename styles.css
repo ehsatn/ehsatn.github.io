@@ -24,9 +24,9 @@
   --blue-accent: #0D47A1;
   
   /* Typography */
-  --font-family: 'Inter', sans-serif;
+  --font-family: 'Poppins', sans-serif;
   --header-size: 42px;
-  --header-weight: 700;
+  --header-weight: 800;
   --header-line-height: 1.1;
   --subheader-size: 16px;
   --subheader-weight: 500;
