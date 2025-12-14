@@ -177,16 +177,31 @@ header h1 {
 }
 
 .search-item {
-  padding: 10px 12px;
+  padding: 12px 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
 }
 
 .search-item:last-child { border-bottom: none; }
 .search-item:hover { background: var(--bg2); }
+.search-item:active { background: var(--teal-glow); }
+
+.search-item img {
+  flex-shrink: 0;
+}
+
+.search-custom {
+  background: var(--teal-glow);
+  border: 1px dashed var(--teal);
+}
+
+.search-custom:hover {
+  background: rgba(0, 229, 176, 0.2);
+}
 
 .search-symbol {
   font-weight: 600;
@@ -196,6 +211,7 @@ header h1 {
 .search-pair {
   color: var(--text2);
   font-size: 0.8rem;
+  margin-right: auto;
 }
 
 /* Tabs */

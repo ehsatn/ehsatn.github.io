@@ -1,5 +1,5 @@
-// Service Worker v1.1 - Trading Assistant PWA
-const CACHE_NAME = 'trading-assistant-v1.1';
+// Service Worker v1.1 - Trade Pro PWA
+const CACHE_NAME = 'trade-pro-v1.1';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -47,8 +47,8 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   
-  // API requests - network only (Binance data)
-  if (url.hostname.includes('binance') || url.hostname.includes('api')) {
+  // API requests - network only (Binance, CoinMarketCap, CoinGecko, CryptoCompare data)
+  if (url.hostname.includes('binance') || url.hostname.includes('coinmarketcap') || url.hostname.includes('coingecko') || url.hostname.includes('cryptocompare') || url.hostname.includes('allorigins') || url.hostname.includes('api')) {
     event.respondWith(
       fetch(event.request)
         .catch(() => {

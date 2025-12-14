@@ -1,6 +1,6 @@
 {
-  "name": "Trading Assistant Pro",
-  "short_name": "TradeAssist",
+  "name": "Trade Pro",
+  "short_name": "Trade Pro",
   "description": "دستیار هوشمند معاملات با تحلیل تکنیکال پیشرفته",
   "start_url": "/index.html",
   "display": "standalone",
