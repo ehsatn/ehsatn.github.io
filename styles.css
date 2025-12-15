@@ -1470,6 +1470,65 @@ header h1 {
   line-height: 1.6;
 }
 
+/* Update banner */
+.update-banner {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.update-banner.show {
+  display: flex;
+}
+
+.update-text {
+  font-size: 0.9rem;
+  color: var(--text2);
+}
+
+.update-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.update-btn {
+  background: linear-gradient(90deg, var(--teal), var(--teal-dark));
+  color: #000;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.update-btn:hover {
+  background: var(--teal-dark);
+}
+
+.update-dismiss {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.update-dismiss:hover {
+  color: var(--text);
+  border-color: var(--text3);
+}
+
 /* Responsive */
 @media (max-width: 400px) {
   .entry-details { grid-template-columns: 1fr; }

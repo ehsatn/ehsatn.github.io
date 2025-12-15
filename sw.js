@@ -1,5 +1,5 @@
-// Service Worker v1.1 - Trade Pro PWA
-const CACHE_NAME = 'trade-pro-v1.1';
+// Service Worker v1.2 - Trade Pro PWA
+const CACHE_NAME = 'trade-pro-v1.2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -22,7 +22,6 @@ self.addEventListener('install', (event) => {
         console.log('📦 Caching static assets');
         return cache.addAll(STATIC_ASSETS);
       })
-      .then(() => self.skipWaiting())
   );
 });
 
@@ -41,6 +40,13 @@ self.addEventListener('activate', (event) => {
       );
     }).then(() => self.clients.claim())
   );
+});
+
+// Listen for skipWaiting request from client when user accepts update
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 // Fetch - Network first for API, Cache first for static
