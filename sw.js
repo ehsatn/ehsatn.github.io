@@ -1,5 +1,5 @@
-// Service Worker v1.2 - Trade Pro PWA
-const CACHE_NAME = 'trade-pro-v1.2';
+// Service Worker v1.2 - signight PWA
+const CACHE_NAME = 'signight-v1.3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -7,7 +7,7 @@ const STATIC_ASSETS = [
   '/app.js',
   '/core.js',
   '/chart.js',
-  '/backtest.js',
+  '/monte-carlo.js',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png'
@@ -19,7 +19,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
-        console.log('📦 Caching static assets');
+        console.log('[Cache] Caching static assets');
         return cache.addAll(STATIC_ASSETS);
       })
   );
@@ -27,13 +27,13 @@ self.addEventListener('install', (event) => {
 
 // Activate
 self.addEventListener('activate', (event) => {
-  console.log('✅ Service Worker activated');
+  console.log('[SW] Service Worker activated');
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME) {
-            console.log('🗑️ Deleting old cache:', cacheName);
+            console.log('[Cache] Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
         })

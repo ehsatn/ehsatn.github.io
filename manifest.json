@@ -1,6 +1,6 @@
 {
-  "name": "Trade Pro",
-  "short_name": "Trade Pro",
+  "name": "signight",
+  "short_name": "signight",
   "description": "دستیار هوشمند معاملات با تحلیل تکنیکال پیشرفته",
   "start_url": "/index.html",
   "display": "standalone",
