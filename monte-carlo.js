@@ -1,1 +1,1003 @@
-var a0_0x2e743f=a0_0xc46e;function a0_0x5eb1(){var _0x570922=['histogram','tradingFee','assign','push','line','exit','Test\x20size:','avgWinRate','sqrt','signal','profitFactor','fees','10298736fKYSIV','probabilityOfProfit','maxDrawdown','1884096jDgsEv','result','slMultiplier','نتایج\x20K-Fold\x20کافی\x20نیست','kFolds','remainingSize','netReturn','tp1ClosePercent','MonteCarlo','exitIndex','filter','هیچ\x20معامله‌ای\x20در\x20داده‌های\x20موجود\x20یافت\x20نشد.\x20سیگنال‌های\x20کمی\x20وجود\x20دارد.','floor','پایان\x20دوره','partialExitPrice','isPartial','type','excellent','داده\x20کافی\x20نیست','7NyTWgp','length','[Monte\x20Carlo]\x20Fallback:\x20single\x20period\x20backtest','analyzeVolume','avgProfitFactor','scenario','strong_down','4342416AbCJyB','long','strength','avgReturn','atr','exitValue','60kHhMsa','confidence','down','tp1','calcEMA','confidenceLevel','max','trainPercent','tp2','totalTrades','lower','slippage','entryPrice','[Monte\x20Carlo]\x20Train\x20size:','cos','برک‌ایون','[Monte\x20Carlo]\x20Starting\x20Walk-Forward\x20with\x20','error','calcADX','reduce','RSI\x20Oversold','initialCapital','entryIndex','riskFreeRate','\x20periods\x20after\x20','استاپ‌لاس','322865TcAMiA','moderate','slice','tp1Hit','entryFee','adx','نتایج\x20Walk-Forward\x20کافی\x20نیست','strong_up','testPercent','trend','621382mBypjP','pow','min','partialPnl','riskPercent','aggressive','6421200XBuEZC','sharpeRatio','size','map','leverage','داده\x20کافی\x20نیست\x20(حداقل\x20100\x20کندل\x20لازم\x20است)','apply','\x20candles','Trend','tp2Multiplier','periodResults','calcATR','3CYoFfu','calcRSI','holdingPeriod','تارگت\x20۱','winRate','pnl','short','tp1Multiplier','strategy','random','calcBB','simulations','reason','abs','RSI','تارگت\x20۲','exitPrice','reasons','[Monte\x20Carlo]\x20Found\x20','initialMargin','pnlPercent','2357811WslSBZ','price','neutral','log','sort'];a0_0x5eb1=function(){return _0x570922;};return a0_0x5eb1();}function a0_0xc46e(_0x4041a3,_0xd1621b){_0x4041a3=_0x4041a3-0x141;var _0x5eb118=a0_0x5eb1();var _0xc46ea1=_0x5eb118[_0x4041a3];return _0xc46ea1;}(function(_0x1d14ed,_0x4293df){var _0x358e63=a0_0xc46e,_0x1a4fbd=_0x1d14ed();while(!![]){try{var _0x38f944=-parseInt(_0x358e63(0x172))/0x1*(-parseInt(_0x358e63(0x160))/0x2)+parseInt(_0x358e63(0x187))/0x3+-parseInt(_0x358e63(0x166))/0x4+parseInt(_0x358e63(0x156))/0x5+-parseInt(_0x358e63(0x1b5))/0x6*(-parseInt(_0x358e63(0x1ae))/0x7)+-parseInt(_0x358e63(0x198))/0x8+parseInt(_0x358e63(0x19b))/0x9*(parseInt(_0x358e63(0x1bb))/0xa);if(_0x38f944===_0x4293df)break;else _0x1a4fbd['push'](_0x1a4fbd['shift']());}catch(_0x3e2e1c){_0x1a4fbd['push'](_0x1a4fbd['shift']());}}}(a0_0x5eb1,0xd456d));var MonteCarlo=(function(){var _0x4ef774={'initialCapital':0x3e8,'riskPercent':0x2,'strategy':'default','slMultiplier':1.5,'tp1Multiplier':0x2,'tp2Multiplier':3.5,'tp1ClosePercent':0x32,'leverage':0x3,'tradingFee':0.001,'slippage':0.0005,'trainPercent':0x32,'testPercent':0xf,'minPeriods':0x8,'maxPeriods':0x1e,'kFolds':0x5,'simulations':0x3e8,'confidenceLevel':0x5f,'riskFreeRate':0.05};function _0x4873a9(_0x30b725,_0x225ca5){var _0x436024=a0_0xc46e;if(!_0x30b725||_0x30b725[_0x436024(0x1af)]<0x32)return{'error':_0x436024(0x1ad)};var _0x3fdfce=Object[_0x436024(0x18e)]({},_0x4ef774,_0x225ca5||{}),_0x5e7826=_0x3fdfce[_0x436024(0x151)],_0x5daf11=_0x5e7826,_0x139493=null,_0x203fcc=[],_0x3b18b4=0x0,_0x2655c7=0x0,_0x1fdf31=[_0x5e7826],_0x518681=[];for(var _0x2f9fc8=0x32;_0x2f9fc8<_0x30b725[_0x436024(0x1af)]-0x1;_0x2f9fc8++){var _0x5e1d50=_0x30b725[_0x436024(0x158)](0x0,_0x2f9fc8+0x1),_0xc404b7=_0x30b725[_0x2f9fc8]['c'],_0x41e2f1=_0x30b725[_0x2f9fc8+0x1],_0x5c76c7=_0x3273c6(_0x5e1d50,_0xc404b7);if(_0x139493){var _0x599b8d=_0x2d1b4b(_0x139493,_0xc404b7),_0x58187f=_0x5e7826+_0x599b8d;_0x1fdf31[_0x436024(0x18f)](_0x58187f);_0x58187f>_0x5daf11&&(_0x5daf11=_0x58187f);var _0x37f407=(_0x5daf11-_0x58187f)/_0x5daf11*0x64;_0x518681['push'](_0x37f407);}else{_0x1fdf31[_0x436024(0x18f)](_0x5e7826);_0x5e7826>_0x5daf11&&(_0x5daf11=_0x5e7826);var _0x37f407=(_0x5daf11-_0x5e7826)/_0x5daf11*0x64;_0x518681[_0x436024(0x18f)](_0x37f407);}if(_0x139493){var _0x4592f8=_0x4d6c33(_0x139493,_0x41e2f1,_0x5e7826);if(_0x4592f8[_0x436024(0x191)]){var _0x59fc68=_0x2e895c(_0x4592f8[_0x436024(0x188)],_0x139493[_0x436024(0x1ab)],![]),_0x2e9452=_0x2bbbda(_0x139493,_0x59fc68,_0x4592f8[_0x436024(0x1aa)]),_0x4ea5f1=_0x2e9452[_0x436024(0x1ba)]*_0x3fdfce['tradingFee'];_0x2655c7+=_0x4ea5f1;if(_0x4592f8[_0x436024(0x1aa)]){var _0x485373=_0x2e9452[_0x436024(0x177)]-_0x4ea5f1;_0x5e7826+=_0x485373,_0x139493[_0x436024(0x1a9)]=_0x59fc68,_0x139493[_0x436024(0x163)]=_0x485373,_0x139493['remainingSize']=_0x139493[_0x436024(0x168)]*(0x1-_0x3fdfce['tp1ClosePercent']/0x64),_0x139493['tp1Hit']=!![],_0x139493['sl']=_0x139493[_0x436024(0x148)];}else _0x139493[_0x436024(0x182)]=_0x59fc68,_0x139493[_0x436024(0x1a4)]=_0x2f9fc8+0x1,_0x139493['exitReason']=_0x4592f8[_0x436024(0x17e)],_0x139493['pnl']=_0x2e9452['pnl']-_0x4ea5f1,_0x139493[_0x436024(0x186)]=_0x139493[_0x436024(0x177)]/_0x139493['initialMargin']*0x64,_0x139493[_0x436024(0x197)]=_0x139493[_0x436024(0x15a)]+_0x4ea5f1,_0x139493[_0x436024(0x174)]=_0x2f9fc8+0x1-_0x139493[_0x436024(0x152)],_0x5e7826+=_0x139493[_0x436024(0x177)],_0x203fcc['push'](_0x139493),_0x139493=null;}}if(!_0x139493&&_0x5c76c7[_0x436024(0x195)]!==_0x436024(0x189)){if(!_0x34ecef(_0x5c76c7,_0x3fdfce[_0x436024(0x17a)]))continue;var _0x16f406=_0x41e2f1['o'],_0x532ad1=_0x2e895c(_0x16f406,_0x5c76c7[_0x436024(0x195)],!![]),_0x30b0e8=_0x5c76c7[_0x436024(0x1b9)];if(!_0x30b0e8||_0x30b0e8<_0x16f406*0.001)continue;var _0x28c971,_0x255b84,_0x228e81;_0x5c76c7[_0x436024(0x195)]===_0x436024(0x1b6)?(_0x28c971=_0x532ad1-_0x30b0e8*_0x3fdfce[_0x436024(0x19d)],_0x255b84=_0x532ad1+_0x30b0e8*_0x3fdfce[_0x436024(0x179)],_0x228e81=_0x532ad1+_0x30b0e8*_0x3fdfce[_0x436024(0x16f)]):(_0x28c971=_0x532ad1+_0x30b0e8*_0x3fdfce['slMultiplier'],_0x255b84=_0x532ad1-_0x30b0e8*_0x3fdfce['tp1Multiplier'],_0x228e81=_0x532ad1-_0x30b0e8*_0x3fdfce[_0x436024(0x16f)]);var _0x5df73c=_0x5e7826*(_0x3fdfce[_0x436024(0x164)]/0x64),_0x35742d=Math['abs'](_0x532ad1-_0x28c971),_0x2c9fa0=_0x35742d/_0x532ad1,_0x2f999c=_0x5df73c/_0x2c9fa0,_0x3f9385=_0x2f999c/_0x3fdfce[_0x436024(0x16a)];_0x3f9385>_0x5e7826*0.5&&(_0x3f9385=_0x5e7826*0.5,_0x2f999c=_0x3f9385*_0x3fdfce[_0x436024(0x16a)]);var _0x478ce5=_0x2f999c*_0x3fdfce[_0x436024(0x18d)];_0x2655c7+=_0x478ce5,_0x139493={'id':++_0x3b18b4,'type':_0x5c76c7[_0x436024(0x195)],'entryPrice':_0x532ad1,'entryIndex':_0x2f9fc8+0x1,'size':_0x2f999c,'initialMargin':_0x3f9385,'leverage':_0x3fdfce[_0x436024(0x16a)],'sl':_0x28c971,'tp1':_0x255b84,'tp2':_0x228e81,'tp1Hit':![],'remainingSize':_0x2f999c,'confidence':_0x5c76c7[_0x436024(0x1bc)],'entryFee':_0x478ce5,'riskAmount':_0x5df73c};}}if(_0x139493){var _0x58d3c3=_0x30b725[_0x30b725['length']-0x1]['c'],_0x59fc68=_0x2e895c(_0x58d3c3,_0x139493[_0x436024(0x1ab)],![]),_0x2e9452=_0x2bbbda(_0x139493,_0x59fc68,![]),_0x4ea5f1=_0x2e9452[_0x436024(0x1ba)]*_0x3fdfce['tradingFee'];_0x139493[_0x436024(0x182)]=_0x59fc68,_0x139493[_0x436024(0x1a4)]=_0x30b725[_0x436024(0x1af)]-0x1,_0x139493['exitReason']=_0x436024(0x1a8),_0x139493['pnl']=_0x2e9452[_0x436024(0x177)]-_0x4ea5f1,_0x139493[_0x436024(0x186)]=_0x139493['pnl']/_0x139493[_0x436024(0x185)]*0x64,_0x139493[_0x436024(0x197)]=_0x139493[_0x436024(0x15a)]+_0x4ea5f1,_0x139493[_0x436024(0x174)]=_0x30b725[_0x436024(0x1af)]-0x1-_0x139493[_0x436024(0x152)],_0x5e7826+=_0x139493[_0x436024(0x177)],_0x203fcc[_0x436024(0x18f)](_0x139493);}return _0x262706(_0x203fcc,_0x5e7826,_0x3fdfce[_0x436024(0x151)],_0x2655c7,_0x1fdf31,_0x518681);}function _0x2d1b4b(_0x225918,_0x5243f6){var _0x17506d=a0_0xc46e,_0x7876c6=_0x5243f6-_0x225918['entryPrice'];if(_0x225918[_0x17506d(0x1ab)]===_0x17506d(0x178))_0x7876c6=-_0x7876c6;var _0x1bb589=_0x225918['tp1Hit']?_0x225918['remainingSize']:_0x225918[_0x17506d(0x168)];return _0x7876c6/_0x225918[_0x17506d(0x148)]*_0x1bb589;}function _0x2e895c(_0x42e31b,_0x33a340,_0x526717){var _0x15ee58=a0_0xc46e,_0x12930d=_0x4ef774[_0x15ee58(0x147)];return _0x33a340===_0x15ee58(0x1b6)?_0x526717?_0x42e31b*(0x1+_0x12930d):_0x42e31b*(0x1-_0x12930d):_0x526717?_0x42e31b*(0x1-_0x12930d):_0x42e31b*(0x1+_0x12930d);}function _0x3273c6(_0x1abc08,_0x28913c){var _0x2323c4=a0_0xc46e,_0x442040={'signal':_0x2323c4(0x189),'confidence':0x0,'atr':0x0,'reasons':[]};if(!_0x1abc08||_0x1abc08[_0x2323c4(0x1af)]<0x32)return _0x442040;var _0x4fccac=_0x1abc08[_0x2323c4(0x169)](function(_0x37b6e0){return _0x37b6e0['c'];}),_0x83bd74=TradingCore[_0x2323c4(0x173)](_0x4fccac,0xe),_0x12c590=TradingCore[_0x2323c4(0x1bf)](_0x4fccac,0x15),_0x491ccd=TradingCore['calcEMA'](_0x4fccac,0x32),_0x5eceef=TradingCore['calcMACD'](_0x4fccac),_0xbe4281=TradingCore[_0x2323c4(0x17c)](_0x4fccac,0x14,0x2),_0x390496=TradingCore[_0x2323c4(0x14e)](_0x1abc08,0xe),_0xc69d5a=TradingCore[_0x2323c4(0x171)](_0x1abc08,0xe,_0x28913c);_0x442040[_0x2323c4(0x1b9)]=_0xc69d5a,_0x442040[_0x2323c4(0x15b)]=_0x390496;var _0x1838f4=0x0,_0x137c6d=0x0;if(_0x83bd74<=0x19)_0x1838f4+=0x4,_0x442040[_0x2323c4(0x183)][_0x2323c4(0x18f)](_0x2323c4(0x150));else{if(_0x83bd74<=0x23)_0x1838f4+=0x2,_0x442040[_0x2323c4(0x183)][_0x2323c4(0x18f)](_0x2323c4(0x180));else{if(_0x83bd74>=0x4b)_0x137c6d+=0x4,_0x442040[_0x2323c4(0x183)]['push']('RSI\x20Overbought');else _0x83bd74>=0x41&&(_0x137c6d+=0x2,_0x442040[_0x2323c4(0x183)][_0x2323c4(0x18f)](_0x2323c4(0x180)));}}var _0x3b2f6d=_0x2323c4(0x189);if(_0x28913c>_0x12c590&&_0x12c590>_0x491ccd)_0x3b2f6d='up',_0x1838f4+=0x2,_0x442040['reasons'][_0x2323c4(0x18f)](_0x2323c4(0x16e));else _0x28913c<_0x12c590&&_0x12c590<_0x491ccd&&(_0x3b2f6d=_0x2323c4(0x1bd),_0x137c6d+=0x2,_0x442040[_0x2323c4(0x183)]['push'](_0x2323c4(0x16e)));_0x442040['trend']=_0x3b2f6d;if(_0x5eceef[_0x2323c4(0x18c)]>0x0&&_0x5eceef['line']>_0x5eceef[_0x2323c4(0x195)])_0x1838f4+=0x2;else _0x5eceef[_0x2323c4(0x18c)]<0x0&&_0x5eceef[_0x2323c4(0x190)]<_0x5eceef[_0x2323c4(0x195)]&&(_0x137c6d+=0x2);var _0x34ae90=(_0x28913c-_0xbe4281[_0x2323c4(0x146)])/(_0xbe4281['upper']-_0xbe4281[_0x2323c4(0x146)]);if(_0x34ae90<=0.1)_0x1838f4+=0x3,_0x442040[_0x2323c4(0x183)]['push']('BB');else{if(_0x34ae90<=0.2)_0x1838f4+=0x1;else{if(_0x34ae90>=0.9)_0x137c6d+=0x3,_0x442040[_0x2323c4(0x183)]['push']('BB');else _0x34ae90>=0.8&&(_0x137c6d+=0x1);}}if(_0x390496[_0x2323c4(0x15b)]>=0x19){if(_0x390496[_0x2323c4(0x15f)]===_0x2323c4(0x15d))_0x1838f4+=0x2;else _0x390496[_0x2323c4(0x15f)]===_0x2323c4(0x1b4)&&(_0x137c6d+=0x2);}else _0x390496[_0x2323c4(0x15b)]<0x14&&(_0x1838f4=Math[_0x2323c4(0x142)](0x0,_0x1838f4-0x1),_0x137c6d=Math[_0x2323c4(0x142)](0x0,_0x137c6d-0x1));var _0xf493ac=TradingCore[_0x2323c4(0x1b1)]?TradingCore[_0x2323c4(0x1b1)](_0x1abc08,_0x1abc08[_0x1abc08['length']-0x1]['v']):null;if(_0xf493ac&&_0xf493ac[_0x2323c4(0x1b7)]>0x0){if(_0x1838f4>_0x137c6d)_0x1838f4+=_0xf493ac[_0x2323c4(0x1b7)];else{if(_0x137c6d>_0x1838f4)_0x137c6d+=_0xf493ac['strength'];}}var _0x16a544=0x4,_0x16a19f=0x2;if(_0x1838f4>=_0x16a544&&_0x1838f4>_0x137c6d+_0x16a19f)_0x442040[_0x2323c4(0x195)]=_0x2323c4(0x1b6),_0x442040['confidence']=Math[_0x2323c4(0x162)](0xa,Math['round'](_0x1838f4/1.5));else _0x137c6d>=_0x16a544&&_0x137c6d>_0x1838f4+_0x16a19f&&(_0x442040['signal']=_0x2323c4(0x178),_0x442040[_0x2323c4(0x1bc)]=Math[_0x2323c4(0x162)](0xa,Math['round'](_0x137c6d/1.5)));return _0x442040;}function _0x34ecef(_0xfbe2ff,_0x43c7d9){var _0x2badff=a0_0xc46e;if(_0x43c7d9==='conservative')return _0xfbe2ff[_0x2badff(0x1bc)]>=0x6;if(_0x43c7d9==='trend_following'){if(!_0xfbe2ff[_0x2badff(0x15b)]||_0xfbe2ff[_0x2badff(0x15b)]['adx']<0x19)return![];if(_0xfbe2ff[_0x2badff(0x195)]===_0x2badff(0x1b6)&&_0xfbe2ff['trend']!=='up')return![];if(_0xfbe2ff[_0x2badff(0x195)]===_0x2badff(0x178)&&_0xfbe2ff[_0x2badff(0x15f)]!==_0x2badff(0x1bd))return![];}return!![];}function _0x4d6c33(_0x99e98,_0x6b0370,_0x211a63){var _0x1ea5d7=a0_0xc46e,_0xe2d04e={'exit':![],'price':0x0,'reason':'','isPartial':![]},_0x11e0db=_0x99e98['tp1Hit']?_0x99e98[_0x1ea5d7(0x1a0)]:_0x99e98[_0x1ea5d7(0x168)];if(_0x99e98[_0x1ea5d7(0x1ab)]===_0x1ea5d7(0x1b6)){if(_0x6b0370['l']<=_0x99e98['sl'])return _0xe2d04e[_0x1ea5d7(0x191)]=!![],_0xe2d04e[_0x1ea5d7(0x188)]=_0x99e98['sl'],_0xe2d04e['reason']=_0x99e98[_0x1ea5d7(0x159)]?_0x1ea5d7(0x14b):_0x1ea5d7(0x155),_0xe2d04e;if(!_0x99e98['tp1Hit']&&_0x6b0370['h']>=_0x99e98[_0x1ea5d7(0x1be)])return _0xe2d04e[_0x1ea5d7(0x191)]=!![],_0xe2d04e[_0x1ea5d7(0x188)]=_0x99e98[_0x1ea5d7(0x1be)],_0xe2d04e['reason']='تارگت\x20۱',_0xe2d04e[_0x1ea5d7(0x1aa)]=!![],_0xe2d04e;if(_0x6b0370['h']>=_0x99e98[_0x1ea5d7(0x144)])return _0xe2d04e[_0x1ea5d7(0x191)]=!![],_0xe2d04e[_0x1ea5d7(0x188)]=_0x99e98[_0x1ea5d7(0x144)],_0xe2d04e[_0x1ea5d7(0x17e)]=_0x1ea5d7(0x181),_0xe2d04e;}else{if(_0x6b0370['h']>=_0x99e98['sl'])return _0xe2d04e[_0x1ea5d7(0x191)]=!![],_0xe2d04e[_0x1ea5d7(0x188)]=_0x99e98['sl'],_0xe2d04e['reason']=_0x99e98['tp1Hit']?_0x1ea5d7(0x14b):'استاپ‌لاس',_0xe2d04e;if(!_0x99e98[_0x1ea5d7(0x159)]&&_0x6b0370['l']<=_0x99e98[_0x1ea5d7(0x1be)])return _0xe2d04e[_0x1ea5d7(0x191)]=!![],_0xe2d04e[_0x1ea5d7(0x188)]=_0x99e98[_0x1ea5d7(0x1be)],_0xe2d04e['reason']=_0x1ea5d7(0x175),_0xe2d04e['isPartial']=!![],_0xe2d04e;if(_0x6b0370['l']<=_0x99e98[_0x1ea5d7(0x144)])return _0xe2d04e[_0x1ea5d7(0x191)]=!![],_0xe2d04e[_0x1ea5d7(0x188)]=_0x99e98['tp2'],_0xe2d04e[_0x1ea5d7(0x17e)]=_0x1ea5d7(0x181),_0xe2d04e;}return _0xe2d04e;}function _0x2bbbda(_0xff3bf5,_0x116809,_0x1992ce){var _0x28d2e3=a0_0xc46e,_0x1b086b=_0x4ef774,_0x4eaca5=_0x1992ce?_0xff3bf5[_0x28d2e3(0x168)]*(_0x1b086b[_0x28d2e3(0x1a2)]/0x64):_0xff3bf5[_0x28d2e3(0x159)]?_0xff3bf5[_0x28d2e3(0x1a0)]:_0xff3bf5[_0x28d2e3(0x168)],_0x3ac364=_0x116809-_0xff3bf5[_0x28d2e3(0x148)];if(_0xff3bf5[_0x28d2e3(0x1ab)]===_0x28d2e3(0x178))_0x3ac364=-_0x3ac364;var _0x111117=_0x3ac364/_0xff3bf5[_0x28d2e3(0x148)]*_0x4eaca5;return{'pnl':_0x111117,'exitValue':_0x4eaca5};}function _0x262706(_0x3fa6d4,_0x4c3346,_0x2d9037,_0x5e298f,_0x281805,_0x55a5dd){var _0x1f7d1d=a0_0xc46e;if(_0x3fa6d4[_0x1f7d1d(0x1af)]===0x0)return{'totalTrades':0x0,'winRate':0x0,'profitFactor':0x0,'netReturn':0x0,'maxDrawdown':0x0,'sharpeRatio':0x0,'avgHoldingPeriod':0x0,'avgWin':0x0,'avgLoss':0x0,'largestWin':0x0,'largestLoss':0x0,'consecutiveWins':0x0,'consecutiveLosses':0x0};var _0x5d0396=_0x3fa6d4[_0x1f7d1d(0x1a5)](function(_0x2c2e1a){return _0x2c2e1a['pnl']>0x0;}),_0x4043c0=_0x3fa6d4[_0x1f7d1d(0x1a5)](function(_0x33b80d){return _0x33b80d['pnl']<=0x0;}),_0x4a8266=_0x5d0396[_0x1f7d1d(0x14f)](function(_0x1fc058,_0x309622){var _0x12cb24=_0x1f7d1d;return _0x1fc058+_0x309622[_0x12cb24(0x177)];},0x0),_0x5ed3a6=Math[_0x1f7d1d(0x17f)](_0x4043c0[_0x1f7d1d(0x14f)](function(_0x33433c,_0x553cb8){return _0x33433c+_0x553cb8['pnl'];},0x0)),_0x471278=_0x5d0396['length']/_0x3fa6d4[_0x1f7d1d(0x1af)]*0x64,_0x5467a1=_0x5ed3a6>0x0?_0x4a8266/_0x5ed3a6:_0x4a8266>0x0?0x3e7:0x0,_0x5d8290=(_0x4c3346-_0x2d9037)/_0x2d9037*0x64,_0x2b8f8f=_0x55a5dd[_0x1f7d1d(0x1af)]>0x0?Math[_0x1f7d1d(0x142)][_0x1f7d1d(0x16c)](null,_0x55a5dd):0x0,_0x3d9df8=_0x5d0396[_0x1f7d1d(0x1af)]>0x0?_0x4a8266/_0x5d0396['length']:0x0,_0x4d6b2f=_0x4043c0[_0x1f7d1d(0x1af)]>0x0?_0x5ed3a6/_0x4043c0[_0x1f7d1d(0x1af)]:0x0,_0x33c6cd=_0x5d0396['length']>0x0?Math[_0x1f7d1d(0x142)][_0x1f7d1d(0x16c)](null,_0x5d0396[_0x1f7d1d(0x169)](function(_0x2ea544){var _0x3229b7=_0x1f7d1d;return _0x2ea544[_0x3229b7(0x177)];})):0x0,_0x23f866=_0x4043c0[_0x1f7d1d(0x1af)]>0x0?Math[_0x1f7d1d(0x162)][_0x1f7d1d(0x16c)](null,_0x4043c0[_0x1f7d1d(0x169)](function(_0x27f28b){var _0x14ffd1=_0x1f7d1d;return _0x27f28b[_0x14ffd1(0x177)];})):0x0,_0x555271=0x0,_0x687a7d=0x0,_0x5c2ea4=0x0,_0x4a3f2f=0x0;_0x3fa6d4['forEach'](function(_0xd548c2){var _0x3d7d4e=_0x1f7d1d;if(_0xd548c2[_0x3d7d4e(0x177)]>0x0){_0x5c2ea4++,_0x4a3f2f=0x0;if(_0x5c2ea4>_0x555271)_0x555271=_0x5c2ea4;}else{_0x4a3f2f++,_0x5c2ea4=0x0;if(_0x4a3f2f>_0x687a7d)_0x687a7d=_0x4a3f2f;}});var _0xb11b94=_0x3fa6d4[_0x1f7d1d(0x14f)](function(_0x5e0b05,_0x153b91){var _0x41c143=_0x1f7d1d;return _0x5e0b05+(_0x153b91[_0x41c143(0x174)]||0x0);},0x0)/_0x3fa6d4['length'],_0x2dc6ed=[];for(var _0x1d6c02=0x1;_0x1d6c02<_0x281805['length'];_0x1d6c02++){var _0x4c60bc=(_0x281805[_0x1d6c02]-_0x281805[_0x1d6c02-0x1])/_0x281805[_0x1d6c02-0x1];_0x2dc6ed[_0x1f7d1d(0x18f)](_0x4c60bc);}var _0x3f6acc=_0x2dc6ed[_0x1f7d1d(0x1af)]>0x0?_0x2dc6ed['reduce'](function(_0x1a48d7,_0x2cb1f5){return _0x1a48d7+_0x2cb1f5;},0x0)/_0x2dc6ed[_0x1f7d1d(0x1af)]:0x0,_0x592334=_0x48517e(_0x2dc6ed,_0x3f6acc),_0x131fe6=_0x3f6acc*0xfc,_0x119b8a=_0x592334*Math[_0x1f7d1d(0x194)](0xfc),_0x2e24c4=_0x119b8a>0x0?(_0x131fe6-_0x4ef774[_0x1f7d1d(0x153)])/_0x119b8a:0x0,_0x2415c5=_0x2dc6ed['filter'](function(_0x15d6b1){return _0x15d6b1<0x0;}),_0x5d0e8f=_0x48517e(_0x2415c5,0x0),_0x3aad30=_0x5d0e8f>0x0?(_0x131fe6-_0x4ef774[_0x1f7d1d(0x153)])/(_0x5d0e8f*Math[_0x1f7d1d(0x194)](0xfc)):0x0,_0xe6ff16=_0x2b8f8f>0x0?_0x5d8290/_0x2b8f8f:0x0;return{'totalTrades':_0x3fa6d4[_0x1f7d1d(0x1af)],'wins':_0x5d0396[_0x1f7d1d(0x1af)],'losses':_0x4043c0['length'],'winRate':_0x471278,'profitFactor':_0x5467a1,'netReturn':_0x5d8290,'finalCapital':_0x4c3346,'maxDrawdown':_0x2b8f8f,'sharpeRatio':_0x2e24c4,'sortinoRatio':_0x3aad30,'calmarRatio':_0xe6ff16,'avgWin':_0x3d9df8,'avgLoss':_0x4d6b2f,'avgWinPercent':_0x5d0396[_0x1f7d1d(0x1af)]>0x0?_0x5d0396[_0x1f7d1d(0x14f)](function(_0x277ba1,_0x4016cc){var _0xe2c5ce=_0x1f7d1d;return _0x277ba1+_0x4016cc[_0xe2c5ce(0x186)];},0x0)/_0x5d0396[_0x1f7d1d(0x1af)]:0x0,'avgLossPercent':_0x4043c0[_0x1f7d1d(0x1af)]>0x0?_0x4043c0[_0x1f7d1d(0x14f)](function(_0x5a738b,_0x5d1920){var _0x3f86d6=_0x1f7d1d;return _0x5a738b+Math[_0x3f86d6(0x17f)](_0x5d1920[_0x3f86d6(0x186)]);},0x0)/_0x4043c0[_0x1f7d1d(0x1af)]:0x0,'largestWin':_0x33c6cd,'largestLoss':_0x23f866,'consecutiveWins':_0x555271,'consecutiveLosses':_0x687a7d,'avgHoldingPeriod':_0xb11b94,'equityCurve':_0x281805,'trades':_0x3fa6d4};}function _0x395c2e(_0x4c556b,_0x53ac3d){var _0x20c88b=a0_0xc46e;if(!_0x4c556b||_0x4c556b[_0x20c88b(0x1af)]<0x64)return{'error':_0x20c88b(0x16b)};var _0x57be5a=Object[_0x20c88b(0x18e)]({},_0x4ef774,_0x53ac3d||{}),_0x42f01e=_0x4c556b['length'];console[_0x20c88b(0x18a)](_0x20c88b(0x14c)+_0x42f01e+_0x20c88b(0x16d));var _0x1af346=_0x57be5a[_0x20c88b(0x143)]||0x28,_0x20a6ec=_0x57be5a[_0x20c88b(0x15e)]||0xc,_0x2d8c05=Math[_0x20c88b(0x1a7)](_0x42f01e*(_0x1af346/0x64)),_0x1984cf=Math[_0x20c88b(0x1a7)](_0x42f01e*(_0x20a6ec/0x64));_0x2d8c05=Math['max'](_0x2d8c05,0x32),_0x1984cf=Math[_0x20c88b(0x142)](_0x1984cf,0xf);var _0x47afa3=Math['max'](Math['floor'](_0x1984cf/0x5),0x3);console[_0x20c88b(0x18a)](_0x20c88b(0x149),_0x2d8c05,_0x20c88b(0x192),_0x1984cf,'Step:',_0x47afa3);var _0x23180c=[],_0x4d8c06=[],_0x3a5c0f=_0x57be5a['maxPeriods']||0x28,_0x13aa10=0x0,_0x55ff8c=0x0,_0xc03257=0x64;while(_0x13aa10+_0x2d8c05+_0x1984cf<=_0x42f01e&&_0x23180c[_0x20c88b(0x1af)]<_0x3a5c0f&&_0x55ff8c<_0xc03257){_0x55ff8c++;var _0x16c33c=_0x13aa10+_0x2d8c05,_0x4527a1=Math[_0x20c88b(0x162)](_0x16c33c+_0x1984cf,_0x42f01e),_0xf933dd=_0x4c556b['slice'](_0x16c33c,_0x4527a1);if(_0xf933dd[_0x20c88b(0x1af)]>=0xf){var _0x5ee6af=_0x4873a9(_0xf933dd,_0x57be5a);!_0x5ee6af[_0x20c88b(0x14d)]&&_0x5ee6af[_0x20c88b(0x145)]>=0x1&&(_0x4d8c06[_0x20c88b(0x18f)](_0x5ee6af),_0x23180c['push']({'start':_0x13aa10,'trainEnd':_0x16c33c,'testEnd':_0x4527a1,'candlesInTest':_0xf933dd['length'],'result':_0x5ee6af}));}_0x13aa10+=_0x47afa3;}console[_0x20c88b(0x18a)](_0x20c88b(0x184)+_0x23180c[_0x20c88b(0x1af)]+_0x20c88b(0x154)+_0x55ff8c+'\x20attempts');if(_0x4d8c06[_0x20c88b(0x1af)]<0x3){console['log']('[Monte\x20Carlo]\x20Trying\x20sliding\x20window\x20approach');var _0x53d7f5=Math[_0x20c88b(0x1a7)](_0x42f01e/0x5);_0x53d7f5=Math[_0x20c88b(0x142)](_0x53d7f5,0x1e),_0x23180c=[],_0x4d8c06=[];for(var _0x179b32=0x0;_0x179b32<_0x42f01e-_0x53d7f5&&_0x4d8c06[_0x20c88b(0x1af)]<_0x3a5c0f;_0x179b32+=Math['floor'](_0x53d7f5/0x3)){var _0x456d2e=_0x4c556b[_0x20c88b(0x158)](_0x179b32,_0x179b32+_0x53d7f5),_0x138f5e=_0x4873a9(_0x456d2e,_0x57be5a);!_0x138f5e[_0x20c88b(0x14d)]&&_0x138f5e[_0x20c88b(0x145)]>=0x1&&(_0x4d8c06[_0x20c88b(0x18f)](_0x138f5e),_0x23180c[_0x20c88b(0x18f)]({'start':_0x179b32,'trainEnd':_0x179b32,'testEnd':_0x179b32+_0x53d7f5,'candlesInTest':_0x53d7f5,'result':_0x138f5e}));}}if(_0x4d8c06['length']===0x0){console[_0x20c88b(0x18a)](_0x20c88b(0x1b0));var _0xa446ce=_0x4873a9(_0x4c556b,_0x57be5a);if(_0xa446ce&&!_0xa446ce[_0x20c88b(0x14d)]&&_0xa446ce[_0x20c88b(0x145)]>=0x1)_0x4d8c06[_0x20c88b(0x18f)](_0xa446ce),_0x23180c[_0x20c88b(0x18f)]({'start':0x0,'trainEnd':0x0,'testEnd':_0x42f01e,'candlesInTest':_0x42f01e,'result':_0xa446ce});else return{'error':_0x20c88b(0x1a6)};}var _0x1e0288=_0x4d8c06[_0x20c88b(0x14f)](function(_0x5c94c9,_0x437693){var _0x2d0777=_0x20c88b;return _0x5c94c9+_0x437693[_0x2d0777(0x176)];},0x0)/_0x4d8c06[_0x20c88b(0x1af)],_0x3ce95d=_0x4d8c06[_0x20c88b(0x14f)](function(_0x2d4452,_0x926992){return _0x2d4452+Math['min'](_0x926992['profitFactor'],0xa);},0x0)/_0x4d8c06[_0x20c88b(0x1af)],_0x6b6c2f=_0x4d8c06['reduce'](function(_0xa48ee4,_0x54fa17){var _0xfb173=_0x20c88b;return _0xa48ee4+_0x54fa17[_0xfb173(0x1a1)];},0x0)/_0x4d8c06['length'],_0x2b3ae8=_0x4d8c06[_0x20c88b(0x14f)](function(_0x421413,_0x1fa1d9){var _0x2035e0=_0x20c88b;return _0x421413+_0x1fa1d9[_0x2035e0(0x19a)];},0x0)/_0x4d8c06['length'],_0x4ce07b=_0x4d8c06[_0x20c88b(0x14f)](function(_0x3915d0,_0x25c9a9){var _0x15e275=_0x20c88b;return _0x3915d0+_0x25c9a9[_0x15e275(0x167)];},0x0)/_0x4d8c06['length'],_0x30dbc4=_0x4d8c06[_0x20c88b(0x14f)](function(_0x5df558,_0x438b60){var _0x4a40b3=_0x20c88b;return _0x5df558+_0x438b60[_0x4a40b3(0x145)];},0x0)/_0x4d8c06['length'],_0x56eadd=_0x48517e(_0x4d8c06[_0x20c88b(0x169)](function(_0x20a62e){var _0x55bb4a=_0x20c88b;return _0x20a62e[_0x55bb4a(0x176)];}),_0x1e0288),_0x23eb1c=_0x48517e(_0x4d8c06[_0x20c88b(0x169)](function(_0x1e338e){var _0x2a3914=_0x20c88b;return Math[_0x2a3914(0x162)](_0x1e338e[_0x2a3914(0x196)],0xa);}),_0x3ce95d),_0x31460=_0x48517e(_0x4d8c06['map'](function(_0x247f6b){var _0x223427=_0x20c88b;return _0x247f6b[_0x223427(0x1a1)];}),_0x6b6c2f),_0x384d1f=_0x48517e(_0x4d8c06[_0x20c88b(0x169)](function(_0xa7a1a5){return _0xa7a1a5['maxDrawdown'];}),_0x2b3ae8),_0x14fc87=_0x4d8c06[_0x20c88b(0x158)]()[_0x20c88b(0x18b)](function(_0x27074d,_0x3f7f0c){var _0x3ad4ee=_0x20c88b;return _0x3f7f0c['netReturn']-_0x27074d[_0x3ad4ee(0x1a1)];}),_0x1b9a32=_0x14fc87[0x0],_0x5a60d0=_0x14fc87[_0x14fc87[_0x20c88b(0x1af)]-0x1],_0x1d8e6c=_0x4d8c06[_0x20c88b(0x1a5)](function(_0x13ec82){var _0x484fe9=_0x20c88b;return _0x13ec82[_0x484fe9(0x1a1)]>0x0;})[_0x20c88b(0x1af)],_0x1ed93c=_0x1d8e6c/_0x4d8c06[_0x20c88b(0x1af)]*0x64;return{'periods':_0x23180c,'periodResults':_0x4d8c06,'stats':{'numPeriods':_0x4d8c06['length'],'avgWinRate':_0x1e0288,'avgProfitFactor':_0x3ce95d,'avgReturn':_0x6b6c2f,'avgMaxDrawdown':_0x2b3ae8,'avgSharpe':_0x4ce07b,'avgTrades':_0x30dbc4,'winRateStdDev':_0x56eadd,'profitFactorStdDev':_0x23eb1c,'returnStdDev':_0x31460,'drawdownStdDev':_0x384d1f,'bestPeriodReturn':_0x1b9a32?_0x1b9a32[_0x20c88b(0x1a1)]:0x0,'worstPeriodReturn':_0x5a60d0?_0x5a60d0[_0x20c88b(0x1a1)]:0x0,'consistencyScore':_0x1ed93c,'profitablePeriods':_0x1d8e6c}};}function _0x44f14d(_0x4b86ba,_0x42fffa){var _0xef7e6a=a0_0xc46e;if(!_0x4b86ba||_0x4b86ba[_0xef7e6a(0x1af)]<0xc8)return{'error':'داده\x20کافی\x20نیست\x20برای\x20K-Fold'};var _0x4b51b6=Object[_0xef7e6a(0x18e)]({},_0x4ef774,_0x42fffa||{}),_0x541029=_0x4b51b6[_0xef7e6a(0x19f)]||0x5,_0x33e7c5=Math[_0xef7e6a(0x1a7)](_0x4b86ba[_0xef7e6a(0x1af)]/_0x541029),_0x26bd13=[];for(var _0x3d3a46=0x0;_0x3d3a46<_0x541029;_0x3d3a46++){var _0x203fd5=_0x3d3a46*_0x33e7c5,_0xb481d7=_0x3d3a46===_0x541029-0x1?_0x4b86ba[_0xef7e6a(0x1af)]:(_0x3d3a46+0x1)*_0x33e7c5,_0x28363c=_0x4b86ba['slice'](_0x203fd5,_0xb481d7),_0x5ae15a=_0x4873a9(_0x28363c,_0x4b51b6);!_0x5ae15a[_0xef7e6a(0x14d)]&&_0x5ae15a['totalTrades']>0x0&&_0x26bd13[_0xef7e6a(0x18f)]({'fold':_0x3d3a46+0x1,'startIndex':_0x203fd5,'endIndex':_0xb481d7,'result':_0x5ae15a});}if(_0x26bd13[_0xef7e6a(0x1af)]<0x3)return{'error':_0xef7e6a(0x19e)};var _0x1c49d7=_0x26bd13[_0xef7e6a(0x14f)](function(_0x228b8a,_0x5aa6ca){var _0x14b6eb=_0xef7e6a;return _0x228b8a+_0x5aa6ca[_0x14b6eb(0x19c)][_0x14b6eb(0x176)];},0x0)/_0x26bd13[_0xef7e6a(0x1af)],_0x349d60=_0x26bd13[_0xef7e6a(0x14f)](function(_0x543137,_0x338799){var _0x3ca5c7=_0xef7e6a;return _0x543137+_0x338799[_0x3ca5c7(0x19c)]['netReturn'];},0x0)/_0x26bd13[_0xef7e6a(0x1af)],_0x1de694=_0x26bd13[_0xef7e6a(0x14f)](function(_0x5128a3,_0x35d63b){var _0x422bf7=_0xef7e6a;return _0x5128a3+Math[_0x422bf7(0x162)](_0x35d63b['result'][_0x422bf7(0x196)],0xa);},0x0)/_0x26bd13[_0xef7e6a(0x1af)],_0x4319f5=_0x48517e(_0x26bd13[_0xef7e6a(0x169)](function(_0x3055de){var _0x68e37a=_0xef7e6a;return _0x3055de['result'][_0x68e37a(0x176)];}),_0x1c49d7),_0x11fc6a=_0x48517e(_0x26bd13['map'](function(_0x55311c){var _0x68019e=_0xef7e6a;return _0x55311c[_0x68019e(0x19c)][_0x68019e(0x1a1)];}),_0x349d60);return{'kFolds':_0x541029,'foldResults':_0x26bd13,'stats':{'avgWinRate':_0x1c49d7,'avgReturn':_0x349d60,'avgProfitFactor':_0x1de694,'winRateVariance':_0x4319f5,'returnVariance':_0x11fc6a,'robustnessScore':0x64-(_0x4319f5+_0x11fc6a)/0x2}};}function _0x48517e(_0x523f5e,_0x43f010){var _0x25a4c0=a0_0xc46e;if(_0x523f5e[_0x25a4c0(0x1af)]===0x0)return 0x0;var _0x40dc8a=_0x523f5e['reduce'](function(_0x236972,_0xc92225){var _0x457010=_0x25a4c0;return _0x236972+Math[_0x457010(0x161)](_0xc92225-_0x43f010,0x2);},0x0)/_0x523f5e[_0x25a4c0(0x1af)];return Math[_0x25a4c0(0x194)](_0x40dc8a);}function _0x1a290b(_0x348f15,_0x83e1b4){var _0x119880=a0_0xc46e;if(!_0x348f15||!_0x348f15[_0x119880(0x170)]||_0x348f15[_0x119880(0x170)][_0x119880(0x1af)]===0x0)return{'error':_0x119880(0x15c)};var _0x5f5c5c=Object[_0x119880(0x18e)]({},_0x4ef774,_0x83e1b4||{}),_0x4ee653=_0x348f15[_0x119880(0x170)],_0x1b73bf=_0x4ee653[_0x119880(0x169)](function(_0x471cb3){var _0x1a6270=_0x119880;return _0x471cb3[_0x1a6270(0x1a1)];}),_0x256d45=_0x4ee653['map'](function(_0x47da05){var _0x4444c5=_0x119880;return _0x47da05[_0x4444c5(0x176)]/0x64;}),_0x3c33b3=_0x4ee653[_0x119880(0x169)](function(_0x43d5bb){var _0x56f9c5=_0x119880;return _0x43d5bb[_0x56f9c5(0x19a)];}),_0x17f69b=_0x1b73bf[_0x119880(0x14f)](function(_0x5575e4,_0x28e832){return _0x5575e4+_0x28e832;},0x0)/_0x1b73bf[_0x119880(0x1af)],_0x1df4da=_0x48517e(_0x1b73bf,_0x17f69b),_0x19dddb=_0x256d45[_0x119880(0x14f)](function(_0xcd839d,_0x1ade3e){return _0xcd839d+_0x1ade3e;},0x0)/_0x256d45['length'],_0x4767ba=_0x3c33b3[_0x119880(0x14f)](function(_0x2cd703,_0x4fc667){return _0x2cd703+_0x4fc667;},0x0)/_0x3c33b3[_0x119880(0x1af)],_0xb1ff4b=_0x1b73bf['filter'](function(_0x2f2e17){return _0x2f2e17>0x0;}),_0x5ed47c=_0x1b73bf[_0x119880(0x1a5)](function(_0x428feb){return _0x428feb<=0x0;}),_0x1294b1=_0xb1ff4b[_0x119880(0x1af)]>0x0?_0xb1ff4b[_0x119880(0x14f)](function(_0x2f959f,_0x33d265){return _0x2f959f+_0x33d265;},0x0)/_0xb1ff4b[_0x119880(0x1af)]:_0x17f69b,_0xc774ee=_0x5ed47c[_0x119880(0x1af)]>0x0?_0x5ed47c[_0x119880(0x14f)](function(_0x438d10,_0x578206){return _0x438d10+_0x578206;},0x0)/_0x5ed47c['length']:-Math['abs'](_0x17f69b),_0x55938a=_0xb1ff4b[_0x119880(0x1af)]>0x1?_0x48517e(_0xb1ff4b,_0x1294b1):_0x1df4da,_0x1112f9=_0x5ed47c[_0x119880(0x1af)]>0x1?_0x48517e(_0x5ed47c,_0xc774ee):_0x1df4da,_0x268646=[],_0x56d34d=[],_0x449c6d=[],_0x88de47=_0x5f5c5c['initialCapital'],_0x33ce48=0x1;if(_0x5f5c5c[_0x119880(0x1b3)]==='conservative')_0x33ce48=0.7;else _0x5f5c5c[_0x119880(0x1b3)]===_0x119880(0x165)&&(_0x33ce48=1.3);for(var _0xffa19f=0x0;_0xffa19f<_0x5f5c5c[_0x119880(0x17d)];_0xffa19f++){var _0x4f1601=_0x88de47,_0x1173c6=_0x4f1601,_0x893a2f=0x0,_0x2a5c2b=[],_0x592998=_0x4ee653[_0x119880(0x1af)];for(var _0xed86df=0x0;_0xed86df<_0x592998;_0xed86df++){var _0x4feb17=Math[_0x119880(0x17b)]()<_0x19dddb,_0x3d35d3=Math[_0x119880(0x17b)](),_0x15d49f=Math[_0x119880(0x17b)](),_0x49a8ab=Math[_0x119880(0x194)](-0x2*Math[_0x119880(0x18a)](_0x3d35d3))*Math[_0x119880(0x14a)](0x2*Math['PI']*_0x15d49f),_0xf344a0;_0x4feb17?(_0xf344a0=_0x1294b1*_0x33ce48+_0x49a8ab*_0x55938a,_0xf344a0=Math['max'](0.1,_0xf344a0)):(_0xf344a0=_0xc774ee*_0x33ce48+_0x49a8ab*_0x1112f9,_0xf344a0=Math[_0x119880(0x162)](-0.1,_0xf344a0));_0x2a5c2b[_0x119880(0x18f)](_0xf344a0),_0x4f1601=_0x4f1601*(0x1+_0xf344a0/0x64);_0x4f1601>_0x1173c6&&(_0x1173c6=_0x4f1601);var _0x470aa9=(_0x1173c6-_0x4f1601)/_0x1173c6*0x64;_0x470aa9>_0x893a2f&&(_0x893a2f=_0x470aa9);}var _0x30b87a=(_0x4f1601-_0x88de47)/_0x88de47*0x64;_0x268646[_0x119880(0x18f)](_0x30b87a),_0x56d34d['push'](_0x893a2f);var _0x4e1dcb=_0x2a5c2b[_0x119880(0x14f)](function(_0x2c5be6,_0xf6a3f){return _0x2c5be6+_0xf6a3f;},0x0)/_0x2a5c2b[_0x119880(0x1af)],_0x48751f=_0x48517e(_0x2a5c2b,_0x4e1dcb),_0x3bb31d=_0x48751f>0x0?_0x4e1dcb/_0x48751f*Math['sqrt'](0xc):0x0;_0x449c6d[_0x119880(0x18f)](_0x3bb31d);}_0x268646['sort'](function(_0xe51e26,_0x3d5889){return _0xe51e26-_0x3d5889;}),_0x56d34d['sort'](function(_0x3cd015,_0x5e78b4){return _0x3cd015-_0x5e78b4;}),_0x449c6d['sort'](function(_0x2f48df,_0x300d8){return _0x2f48df-_0x300d8;});var _0x3cbcbc=Math[_0x119880(0x1a7)](_0x268646[_0x119880(0x1af)]/0x2),_0x4db913=Math[_0x119880(0x1a7)](_0x268646[_0x119880(0x1af)]*0.05),_0x23050d=Math['floor'](_0x268646[_0x119880(0x1af)]*0.1),_0x41f1ab=Math[_0x119880(0x1a7)](_0x268646[_0x119880(0x1af)]*0.25),_0x3569f2=Math[_0x119880(0x1a7)](_0x268646[_0x119880(0x1af)]*0.75),_0x325bad=Math[_0x119880(0x1a7)](_0x268646[_0x119880(0x1af)]*0.9),_0x486e35=Math[_0x119880(0x1a7)](_0x268646[_0x119880(0x1af)]*0.95),_0x3cb322=_0x268646[_0x3cbcbc],_0x8af9b1=_0x268646[_0x4db913],_0x4977a7=_0x268646[_0x486e35],_0x33dd11=_0x268646[_0x119880(0x1a5)](function(_0x1f67ef){return _0x1f67ef>0x0;})['length'],_0xb9060e=_0x33dd11/_0x268646[_0x119880(0x1af)]*0x64,_0x126a0d=_0x268646[_0x119880(0x1a5)](function(_0x5e6e1a){return _0x5e6e1a>=0xa;})[_0x119880(0x1af)]/_0x268646['length']*0x64,_0x25f90c=_0x268646['filter'](function(_0x260f2c){return _0x260f2c>=0x14;})[_0x119880(0x1af)]/_0x268646['length']*0x64,_0x3347f0=_0x268646['filter'](function(_0x44a612){return _0x44a612<=-0xa;})[_0x119880(0x1af)]/_0x268646['length']*0x64,_0x2eb131=Math['floor']((0x64-_0x5f5c5c[_0x119880(0x141)])/0x2/0x64*_0x268646['length']),_0xccbd86=_0x268646[_0x2eb131],_0x18254c=_0x268646[_0x268646[_0x119880(0x1af)]-_0x2eb131-0x1],_0x45be88=0x14,_0x471173=_0x268646[0x0],_0x4b5eca=_0x268646[_0x268646[_0x119880(0x1af)]-0x1],_0x40fdef=(_0x4b5eca-_0x471173)/_0x45be88,_0x2672a2=[];for(var _0x70037f=0x0;_0x70037f<_0x45be88;_0x70037f++){var _0x5a19ff=_0x471173+_0x70037f*_0x40fdef,_0x680d62=_0x5a19ff+_0x40fdef,_0x19e235=_0x268646['filter'](function(_0x5e5180){return _0x5e5180>=_0x5a19ff&&(_0x70037f===_0x45be88-0x1?_0x5e5180<=_0x680d62:_0x5e5180<_0x680d62);})[_0x119880(0x1af)];_0x2672a2[_0x119880(0x18f)]({'binStart':_0x5a19ff,'binEnd':_0x680d62,'binMid':(_0x5a19ff+_0x680d62)/0x2,'count':_0x19e235,'percentage':_0x19e235/_0x268646[_0x119880(0x1af)]*0x64});}var _0xdb5c5e=-0x32,_0x181ec4=_0x268646['filter'](function(_0x13415b){return _0x13415b<=_0xdb5c5e;})[_0x119880(0x1af)]/_0x268646[_0x119880(0x1af)]*0x64,_0x1001fd=_0x268646[_0x119880(0x158)](0x0,_0x4db913),_0x4435a8=_0x1001fd['length']>0x0?_0x1001fd['reduce'](function(_0x514d62,_0x19c8ab){return _0x514d62+_0x19c8ab;},0x0)/_0x1001fd[_0x119880(0x1af)]:_0x8af9b1;return{'simulations':_0x5f5c5c['simulations'],'probabilityOfProfit':_0xb9060e,'medianReturn':_0x3cb322,'meanReturn':_0x268646[_0x119880(0x14f)](function(_0x3a4b96,_0x3bae92){return _0x3a4b96+_0x3bae92;},0x0)/_0x268646[_0x119880(0x1af)],'bestCase':_0x4977a7,'worstCase':_0x8af9b1,'probReturn10Plus':_0x126a0d,'probReturn20Plus':_0x25f90c,'probLoss10Plus':_0x3347f0,'expectedShortfall':_0x4435a8,'riskOfRuin':_0x181ec4,'confidenceInterval':{'lower':_0xccbd86,'upper':_0x18254c,'level':_0x5f5c5c[_0x119880(0x141)]},'percentiles':{'p5':_0x268646[_0x4db913],'p10':_0x268646[_0x23050d],'p25':_0x268646[_0x41f1ab],'p50':_0x3cb322,'p75':_0x268646[_0x3569f2],'p90':_0x268646[_0x325bad],'p95':_0x268646[_0x486e35]},'drawdownStats':{'median':_0x56d34d[_0x3cbcbc],'p95':_0x56d34d[_0x486e35],'max':_0x56d34d[_0x56d34d[_0x119880(0x1af)]-0x1]},'sharpeStats':{'median':_0x449c6d[_0x3cbcbc],'p25':_0x449c6d[_0x41f1ab],'p75':_0x449c6d[_0x3569f2]},'histogram':_0x2672a2,'allResults':_0x268646};}function _0xac1b1d(_0x67309,_0x73a1c9){var _0x2360cb=a0_0xc46e,_0x2ed159=Object[_0x2360cb(0x18e)]({},_0x4ef774,_0x73a1c9||{}),_0x441e3c=_0x395c2e(_0x67309,_0x2ed159);if(_0x441e3c['error'])return{'error':_0x441e3c['error']};var _0xb7ba40=_0x44f14d(_0x67309,_0x2ed159),_0x41f0dc=_0x1a290b(_0x441e3c,_0x2ed159);if(_0x41f0dc[_0x2360cb(0x14d)])return{'error':_0x41f0dc[_0x2360cb(0x14d)]};var _0x1627f7=_0x441e3c['stats'],_0x2d7649=_0x41f0dc,_0x2a4dcc=0x0;if(_0x1627f7[_0x2360cb(0x193)]>=0x3c)_0x2a4dcc+=0x14;else{if(_0x1627f7['avgWinRate']>=0x37)_0x2a4dcc+=0xf;else{if(_0x1627f7[_0x2360cb(0x193)]>=0x32)_0x2a4dcc+=0xa;else{if(_0x1627f7[_0x2360cb(0x193)]>=0x2d)_0x2a4dcc+=0x5;}}}if(_0x1627f7['avgProfitFactor']>=0x2)_0x2a4dcc+=0x14;else{if(_0x1627f7[_0x2360cb(0x1b2)]>=1.5)_0x2a4dcc+=0xf;else{if(_0x1627f7['avgProfitFactor']>=1.2)_0x2a4dcc+=0xa;else{if(_0x1627f7[_0x2360cb(0x1b2)]>=0x1)_0x2a4dcc+=0x5;}}}if(_0x1627f7['avgReturn']>=0x1e)_0x2a4dcc+=0x14;else{if(_0x1627f7[_0x2360cb(0x1b8)]>=0x14)_0x2a4dcc+=0xf;else{if(_0x1627f7[_0x2360cb(0x1b8)]>=0xa)_0x2a4dcc+=0xa;else{if(_0x1627f7[_0x2360cb(0x1b8)]>=0x0)_0x2a4dcc+=0x5;}}}_0x2a4dcc+=Math[_0x2360cb(0x1a7)](_0x1627f7['consistencyScore']/0x5);if(_0x2d7649[_0x2360cb(0x199)]>=0x46)_0x2a4dcc+=0x14;else{if(_0x2d7649['probabilityOfProfit']>=0x3c)_0x2a4dcc+=0xf;else{if(_0x2d7649[_0x2360cb(0x199)]>=0x32)_0x2a4dcc+=0xa;else{if(_0x2d7649[_0x2360cb(0x199)]>=0x28)_0x2a4dcc+=0x5;}}}return{'walkForward':_0x441e3c,'kFold':_0xb7ba40,'monteCarlo':_0x41f0dc,'robustnessScore':Math['min'](0x64,_0x2a4dcc),'overallVerdict':_0x4ee795(_0x2a4dcc,_0x1627f7,_0x2d7649)};}function _0x4ee795(_0x27d1a0,_0x3e3b41,_0x18de3c){var _0x4c8b07=a0_0xc46e;if(_0x27d1a0>=0x50&&_0x3e3b41['avgProfitFactor']>=1.5&&_0x18de3c[_0x4c8b07(0x199)]>=0x3c)return _0x4c8b07(0x1ac);else{if(_0x27d1a0>=0x3c&&_0x3e3b41[_0x4c8b07(0x1b2)]>=1.2&&_0x18de3c[_0x4c8b07(0x199)]>=0x37)return'good';else{if(_0x27d1a0>=0x28&&_0x18de3c['probabilityOfProfit']>=0x32)return _0x4c8b07(0x157);else return _0x27d1a0>=0x19?'risky':'avoid';}}}return{'runBacktest':_0x4873a9,'runWalkForward':_0x395c2e,'runKFoldValidation':_0x44f14d,'runMonteCarlo':_0x1a290b,'runFullTest':_0xac1b1d};}());typeof window!=='undefined'&&(window[a0_0x2e743f(0x1a3)]=MonteCarlo); 
+// Trading Assistant PWA - Monte Carlo Module v2.0
+// Enhanced Walk-Forward Testing, K-Fold Cross-Validation, and Monte Carlo Simulation
+
+var MonteCarlo = (function() {
+  
+  var config = {
+    initialCapital: 1000,
+    riskPercent: 2,
+    strategy: 'default',
+    slMultiplier: 1.5,
+    tp1Multiplier: 2,
+    tp2Multiplier: 3.5,
+    tp1ClosePercent: 50,
+    leverage: 3,
+    tradingFee: 0.001,
+    slippage: 0.0005,
+    // Walk-Forward parameters - Enhanced for more periods
+    trainPercent: 50,      // کاهش درصد آموزش برای دوره‌های تست بیشتر
+    testPercent: 15,       // دوره تست کوچکتر برای تعداد بیشتر
+    minPeriods: 8,         // حداقل دوره بیشتر
+    maxPeriods: 30,        // حداکثر دوره برای دقت بالاتر
+    // K-Fold parameters
+    kFolds: 5,             // تعداد فولد برای cross-validation
+    // Monte Carlo parameters
+    simulations: 1000,
+    confidenceLevel: 95,
+    // Risk-free rate for Sharpe ratio (annualized)
+    riskFreeRate: 0.05
+  };
+
+  // ==================== Backtest Engine ====================
+  function runBacktest(klines, settings) {
+    if (!klines || klines.length < 50) {
+      return { error: 'داده کافی نیست' };
+    }
+    
+    var cfg = Object.assign({}, config, settings || {});
+    var capital = cfg.initialCapital;
+    var peakCapital = capital;
+    var position = null;
+    var trades = [];
+    var tradeId = 0;
+    var totalFees = 0;
+    var equityCurve = [capital];
+    var drawdowns = [];
+    
+    for (var i = 50; i < klines.length - 1; i++) {
+      var currentKlines = klines.slice(0, i + 1);
+      var currentPrice = klines[i].c;
+      var nextCandle = klines[i + 1];
+      
+      var analysis = analyzeForBacktest(currentKlines, currentPrice);
+      
+      // Track equity curve and drawdown
+      if (position) {
+        var unrealizedPnL = calculateUnrealizedPnL(position, currentPrice);
+        var currentEquity = capital + unrealizedPnL;
+        equityCurve.push(currentEquity);
+        
+        if (currentEquity > peakCapital) {
+          peakCapital = currentEquity;
+        }
+        var currentDrawdown = ((peakCapital - currentEquity) / peakCapital) * 100;
+        drawdowns.push(currentDrawdown);
+      } else {
+        equityCurve.push(capital);
+        if (capital > peakCapital) {
+          peakCapital = capital;
+        }
+        var currentDrawdown = ((peakCapital - capital) / peakCapital) * 100;
+        drawdowns.push(currentDrawdown);
+      }
+      
+      if (position) {
+        var exitResult = checkExit(position, nextCandle, capital);
+        
+        if (exitResult.exit) {
+          var exitPrice = applySlippage(exitResult.price, position.type, false);
+          var pnlResult = calculatePnL(position, exitPrice, exitResult.isPartial);
+          
+          var exitFee = pnlResult.exitValue * cfg.tradingFee;
+          totalFees += exitFee;
+          
+          if (exitResult.isPartial) {
+            var partialPnl = pnlResult.pnl - exitFee;
+            capital += partialPnl;
+            
+            position.partialExitPrice = exitPrice;
+            position.partialPnl = partialPnl;
+            position.remainingSize = position.size * (1 - cfg.tp1ClosePercent / 100);
+            position.tp1Hit = true;
+            position.sl = position.entryPrice;
+          } else {
+            position.exitPrice = exitPrice;
+            position.exitIndex = i + 1;
+            position.exitReason = exitResult.reason;
+            position.pnl = pnlResult.pnl - exitFee;
+            position.pnlPercent = (position.pnl / position.initialMargin) * 100;
+            position.fees = position.entryFee + exitFee;
+            position.holdingPeriod = i + 1 - position.entryIndex;
+            
+            capital += position.pnl;
+            trades.push(position);
+            
+            position = null;
+          }
+        }
+      }
+      
+      if (!position && analysis.signal !== 'neutral') {
+        if (!passesStrategyFilter(analysis, cfg.strategy)) {
+          continue;
+        }
+        
+        var rawEntryPrice = nextCandle.o;
+        var entryPrice = applySlippage(rawEntryPrice, analysis.signal, true);
+        var atr = analysis.atr;
+        
+        if (!atr || atr < rawEntryPrice * 0.001) {
+          continue;
+        }
+        
+        var sl, tp1, tp2;
+        if (analysis.signal === 'long') {
+          sl = entryPrice - atr * cfg.slMultiplier;
+          tp1 = entryPrice + atr * cfg.tp1Multiplier;
+          tp2 = entryPrice + atr * cfg.tp2Multiplier;
+        } else {
+          sl = entryPrice + atr * cfg.slMultiplier;
+          tp1 = entryPrice - atr * cfg.tp1Multiplier;
+          tp2 = entryPrice - atr * cfg.tp2Multiplier;
+        }
+        
+        var riskPerTrade = capital * (cfg.riskPercent / 100);
+        var slDistance = Math.abs(entryPrice - sl);
+        var slPercent = slDistance / entryPrice;
+        
+        var positionSize = riskPerTrade / slPercent;
+        var margin = positionSize / cfg.leverage;
+        
+        if (margin > capital * 0.5) {
+          margin = capital * 0.5;
+          positionSize = margin * cfg.leverage;
+        }
+        
+        var entryFee = positionSize * cfg.tradingFee;
+        totalFees += entryFee;
+        
+        position = {
+          id: ++tradeId,
+          type: analysis.signal,
+          entryPrice: entryPrice,
+          entryIndex: i + 1,
+          size: positionSize,
+          initialMargin: margin,
+          leverage: cfg.leverage,
+          sl: sl,
+          tp1: tp1,
+          tp2: tp2,
+          tp1Hit: false,
+          remainingSize: positionSize,
+          confidence: analysis.confidence,
+          entryFee: entryFee,
+          riskAmount: riskPerTrade
+        };
+      }
+    }
+    
+    if (position) {
+      var lastPrice = klines[klines.length - 1].c;
+      var exitPrice = applySlippage(lastPrice, position.type, false);
+      var pnlResult = calculatePnL(position, exitPrice, false);
+      var exitFee = pnlResult.exitValue * cfg.tradingFee;
+      
+      position.exitPrice = exitPrice;
+      position.exitIndex = klines.length - 1;
+      position.exitReason = 'پایان دوره';
+      position.pnl = pnlResult.pnl - exitFee;
+      position.pnlPercent = (position.pnl / position.initialMargin) * 100;
+      position.fees = position.entryFee + exitFee;
+      position.holdingPeriod = klines.length - 1 - position.entryIndex;
+      
+      capital += position.pnl;
+      trades.push(position);
+    }
+    
+    return calculateTestStats(trades, capital, cfg.initialCapital, totalFees, equityCurve, drawdowns);
+  }
+
+  function calculateUnrealizedPnL(position, currentPrice) {
+    var diff = currentPrice - position.entryPrice;
+    if (position.type === 'short') diff = -diff;
+    var size = position.tp1Hit ? position.remainingSize : position.size;
+    return (diff / position.entryPrice) * size;
+  }
+
+  function applySlippage(price, positionType, isEntry) {
+    var slippageFactor = config.slippage;
+    
+    if (positionType === 'long') {
+      return isEntry ? price * (1 + slippageFactor) : price * (1 - slippageFactor);
+    } else {
+      return isEntry ? price * (1 - slippageFactor) : price * (1 + slippageFactor);
+    }
+  }
+
+  function analyzeForBacktest(klines, price) {
+    var result = {
+      signal: 'neutral',
+      confidence: 0,
+      atr: 0,
+      reasons: []
+    };
+    
+    if (!klines || klines.length < 50) return result;
+    
+    var closes = klines.map(function(k) { return k.c; });
+    
+    var rsi = TradingCore.calcRSI(closes, 14);
+    var ema21 = TradingCore.calcEMA(closes, 21);
+    var ema50 = TradingCore.calcEMA(closes, 50);
+    var macd = TradingCore.calcMACD(closes);
+    var bb = TradingCore.calcBB(closes, 20, 2);
+    var adx = TradingCore.calcADX(klines, 14);
+    var atr = TradingCore.calcATR(klines, 14, price);
+    
+    result.atr = atr;
+    result.adx = adx;
+    
+    var longPts = 0, shortPts = 0;
+    
+    // RSI Analysis - Enhanced
+    if (rsi <= 25) { longPts += 4; result.reasons.push('RSI Oversold'); }
+    else if (rsi <= 35) { longPts += 2; result.reasons.push('RSI'); }
+    else if (rsi >= 75) { shortPts += 4; result.reasons.push('RSI Overbought'); }
+    else if (rsi >= 65) { shortPts += 2; result.reasons.push('RSI'); }
+    
+    // Trend Analysis
+    var trend = 'neutral';
+    if (price > ema21 && ema21 > ema50) {
+      trend = 'up';
+      longPts += 2;
+      result.reasons.push('Trend');
+    } else if (price < ema21 && ema21 < ema50) {
+      trend = 'down';
+      shortPts += 2;
+      result.reasons.push('Trend');
+    }
+    result.trend = trend;
+    
+    // MACD Analysis
+    if (macd.histogram > 0 && macd.line > macd.signal) { 
+      longPts += 2; 
+    } else if (macd.histogram < 0 && macd.line < macd.signal) { 
+      shortPts += 2; 
+    }
+    
+    // Bollinger Bands Analysis
+    var bbPos = (price - bb.lower) / (bb.upper - bb.lower);
+    if (bbPos <= 0.1) { longPts += 3; result.reasons.push('BB'); }
+    else if (bbPos <= 0.2) { longPts += 1; }
+    else if (bbPos >= 0.9) { shortPts += 3; result.reasons.push('BB'); }
+    else if (bbPos >= 0.8) { shortPts += 1; }
+    
+    // ADX Analysis - Trend Strength
+    if (adx.adx >= 25) {
+      if (adx.trend === 'strong_up') { longPts += 2; }
+      else if (adx.trend === 'strong_down') { shortPts += 2; }
+    } else if (adx.adx < 20) {
+      // Ranging market - reduce confidence
+      longPts = Math.max(0, longPts - 1);
+      shortPts = Math.max(0, shortPts - 1);
+    }
+    
+    // Volume confirmation
+    var volumeAnalysis = TradingCore.analyzeVolume ? TradingCore.analyzeVolume(klines, klines[klines.length - 1].v) : null;
+    if (volumeAnalysis && volumeAnalysis.strength > 0) {
+      if (longPts > shortPts) longPts += volumeAnalysis.strength;
+      else if (shortPts > longPts) shortPts += volumeAnalysis.strength;
+    }
+    
+    var minScore = 4;
+    var minDiff = 2;
+    
+    if (longPts >= minScore && longPts > shortPts + minDiff) {
+      result.signal = 'long';
+      result.confidence = Math.min(10, Math.round(longPts / 1.5));
+    } else if (shortPts >= minScore && shortPts > longPts + minDiff) {
+      result.signal = 'short';
+      result.confidence = Math.min(10, Math.round(shortPts / 1.5));
+    }
+    
+    return result;
+  }
+
+  function passesStrategyFilter(analysis, strategy) {
+    if (strategy === 'conservative') {
+      return analysis.confidence >= 6;
+    }
+    
+    if (strategy === 'trend_following') {
+      if (!analysis.adx || analysis.adx.adx < 25) return false;
+      if (analysis.signal === 'long' && analysis.trend !== 'up') return false;
+      if (analysis.signal === 'short' && analysis.trend !== 'down') return false;
+    }
+    
+    return true;
+  }
+
+  function checkExit(position, candle, capital) {
+    var result = { exit: false, price: 0, reason: '', isPartial: false };
+    var size = position.tp1Hit ? position.remainingSize : position.size;
+    
+    if (position.type === 'long') {
+      if (candle.l <= position.sl) {
+        result.exit = true;
+        result.price = position.sl;
+        result.reason = position.tp1Hit ? 'برک‌ایون' : 'استاپ‌لاس';
+        return result;
+      }
+      
+      if (!position.tp1Hit && candle.h >= position.tp1) {
+        result.exit = true;
+        result.price = position.tp1;
+        result.reason = 'تارگت ۱';
+        result.isPartial = true;
+        return result;
+      }
+      
+      if (candle.h >= position.tp2) {
+        result.exit = true;
+        result.price = position.tp2;
+        result.reason = 'تارگت ۲';
+        return result;
+      }
+    } else {
+      if (candle.h >= position.sl) {
+        result.exit = true;
+        result.price = position.sl;
+        result.reason = position.tp1Hit ? 'برک‌ایون' : 'استاپ‌لاس';
+        return result;
+      }
+      
+      if (!position.tp1Hit && candle.l <= position.tp1) {
+        result.exit = true;
+        result.price = position.tp1;
+        result.reason = 'تارگت ۱';
+        result.isPartial = true;
+        return result;
+      }
+      
+      if (candle.l <= position.tp2) {
+        result.exit = true;
+        result.price = position.tp2;
+        result.reason = 'تارگت ۲';
+        return result;
+      }
+    }
+    
+    return result;
+  }
+
+  function calculatePnL(position, exitPrice, isPartial) {
+    var cfg = config;
+    var size = isPartial ? 
+      position.size * (cfg.tp1ClosePercent / 100) : 
+      (position.tp1Hit ? position.remainingSize : position.size);
+    
+    var diff = exitPrice - position.entryPrice;
+    if (position.type === 'short') diff = -diff;
+    
+    var pnl = (diff / position.entryPrice) * size;
+    
+    return {
+      pnl: pnl,
+      exitValue: size
+    };
+  }
+
+  function calculateTestStats(trades, finalCapital, initialCapital, totalFees, equityCurve, drawdowns) {
+    if (trades.length === 0) {
+      return {
+        totalTrades: 0,
+        winRate: 0,
+        profitFactor: 0,
+        netReturn: 0,
+        maxDrawdown: 0,
+        sharpeRatio: 0,
+        avgHoldingPeriod: 0,
+        avgWin: 0,
+        avgLoss: 0,
+        largestWin: 0,
+        largestLoss: 0,
+        consecutiveWins: 0,
+        consecutiveLosses: 0
+      };
+    }
+    
+    var wins = trades.filter(function(t) { return t.pnl > 0; });
+    var losses = trades.filter(function(t) { return t.pnl <= 0; });
+    
+    var totalWins = wins.reduce(function(sum, t) { return sum + t.pnl; }, 0);
+    var totalLosses = Math.abs(losses.reduce(function(sum, t) { return sum + t.pnl; }, 0));
+    
+    var winRate = (wins.length / trades.length * 100);
+    var profitFactor = totalLosses > 0 ? (totalWins / totalLosses) : (totalWins > 0 ? 999 : 0);
+    var netReturn = ((finalCapital - initialCapital) / initialCapital * 100);
+    
+    // Maximum Drawdown
+    var maxDrawdown = drawdowns.length > 0 ? Math.max.apply(null, drawdowns) : 0;
+    
+    // Average Win/Loss
+    var avgWin = wins.length > 0 ? (totalWins / wins.length) : 0;
+    var avgLoss = losses.length > 0 ? (totalLosses / losses.length) : 0;
+    
+    // Largest Win/Loss
+    var largestWin = wins.length > 0 ? Math.max.apply(null, wins.map(function(t) { return t.pnl; })) : 0;
+    var largestLoss = losses.length > 0 ? Math.min.apply(null, losses.map(function(t) { return t.pnl; })) : 0;
+    
+    // Consecutive Wins/Losses
+    var consecutiveWins = 0, consecutiveLosses = 0;
+    var currentWinStreak = 0, currentLossStreak = 0;
+    
+    trades.forEach(function(t) {
+      if (t.pnl > 0) {
+        currentWinStreak++;
+        currentLossStreak = 0;
+        if (currentWinStreak > consecutiveWins) consecutiveWins = currentWinStreak;
+      } else {
+        currentLossStreak++;
+        currentWinStreak = 0;
+        if (currentLossStreak > consecutiveLosses) consecutiveLosses = currentLossStreak;
+      }
+    });
+    
+    // Average Holding Period
+    var avgHoldingPeriod = trades.reduce(function(sum, t) { 
+      return sum + (t.holdingPeriod || 0); 
+    }, 0) / trades.length;
+    
+    // Sharpe Ratio calculation
+    var returns = [];
+    for (var i = 1; i < equityCurve.length; i++) {
+      var periodReturn = (equityCurve[i] - equityCurve[i-1]) / equityCurve[i-1];
+      returns.push(periodReturn);
+    }
+    
+    var avgReturn = returns.length > 0 ? 
+      returns.reduce(function(a, b) { return a + b; }, 0) / returns.length : 0;
+    var returnStdDev = calculateStdDev(returns, avgReturn);
+    
+    // Annualized Sharpe (assuming daily returns, ~252 trading days)
+    var annualizedReturn = avgReturn * 252;
+    var annualizedStdDev = returnStdDev * Math.sqrt(252);
+    var sharpeRatio = annualizedStdDev > 0 ? 
+      (annualizedReturn - config.riskFreeRate) / annualizedStdDev : 0;
+    
+    // Sortino Ratio (only downside deviation)
+    var negativeReturns = returns.filter(function(r) { return r < 0; });
+    var downsideDeviation = calculateStdDev(negativeReturns, 0);
+    var sortinoRatio = downsideDeviation > 0 ?
+      (annualizedReturn - config.riskFreeRate) / (downsideDeviation * Math.sqrt(252)) : 0;
+    
+    // Calmar Ratio
+    var calmarRatio = maxDrawdown > 0 ? (netReturn / maxDrawdown) : 0;
+    
+    return {
+      totalTrades: trades.length,
+      wins: wins.length,
+      losses: losses.length,
+      winRate: winRate,
+      profitFactor: profitFactor,
+      netReturn: netReturn,
+      finalCapital: finalCapital,
+      maxDrawdown: maxDrawdown,
+      sharpeRatio: sharpeRatio,
+      sortinoRatio: sortinoRatio,
+      calmarRatio: calmarRatio,
+      avgWin: avgWin,
+      avgLoss: avgLoss,
+      avgWinPercent: wins.length > 0 ? 
+        wins.reduce(function(sum, t) { return sum + t.pnlPercent; }, 0) / wins.length : 0,
+      avgLossPercent: losses.length > 0 ?
+        losses.reduce(function(sum, t) { return sum + Math.abs(t.pnlPercent); }, 0) / losses.length : 0,
+      largestWin: largestWin,
+      largestLoss: largestLoss,
+      consecutiveWins: consecutiveWins,
+      consecutiveLosses: consecutiveLosses,
+      avgHoldingPeriod: avgHoldingPeriod,
+      equityCurve: equityCurve,
+      trades: trades
+    };
+  }
+
+  // ==================== Walk-Forward Testing - Enhanced ====================
+  function runWalkForward(klines, settings) {
+    if (!klines || klines.length < 100) {
+      return { error: 'داده کافی نیست (حداقل 100 کندل لازم است)' };
+    }
+    
+    var cfg = Object.assign({}, config, settings || {});
+    var totalLength = klines.length;
+    
+    console.log('[Monte Carlo] Starting Walk-Forward with ' + totalLength + ' candles');
+    
+    // Adaptive period calculation based on data size
+    var trainPercent = cfg.trainPercent || 40;
+    var testPercent = cfg.testPercent || 12;
+    
+    // Calculate sizes
+    var trainSize = Math.floor(totalLength * (trainPercent / 100));
+    var testSize = Math.floor(totalLength * (testPercent / 100));
+    
+    // Minimum sizes - be more lenient
+    trainSize = Math.max(trainSize, 50);
+    testSize = Math.max(testSize, 15);
+    
+    // Very small step for maximum periods with overlap
+    var stepSize = Math.max(Math.floor(testSize / 5), 3);
+    
+    console.log('[Monte Carlo] Train size:', trainSize, 'Test size:', testSize, 'Step:', stepSize);
+    
+    var periods = [];
+    var periodResults = [];
+    var maxPeriods = cfg.maxPeriods || 40;
+    
+    var startIdx = 0;
+    var attempts = 0;
+    var maxAttempts = 100;
+    
+    while (startIdx + trainSize + testSize <= totalLength && periods.length < maxPeriods && attempts < maxAttempts) {
+      attempts++;
+      var trainEnd = startIdx + trainSize;
+      var testEnd = Math.min(trainEnd + testSize, totalLength);
+      
+      var testKlines = klines.slice(trainEnd, testEnd);
+      
+      // Run backtest on test period with lower requirements
+      if (testKlines.length >= 15) {
+        var testResult = runBacktest(testKlines, cfg);
+        
+        // Accept periods even with just 1 trade
+        if (!testResult.error && testResult.totalTrades >= 1) {
+          periodResults.push(testResult);
+          periods.push({
+            start: startIdx,
+            trainEnd: trainEnd,
+            testEnd: testEnd,
+            candlesInTest: testKlines.length,
+            result: testResult
+          });
+        }
+      }
+      
+      startIdx += stepSize;
+    }
+    
+    console.log('[Monte Carlo] Found ' + periods.length + ' periods after ' + attempts + ' attempts');
+    
+    // If still not enough periods, try single-period approach with sliding window
+    if (periodResults.length < 3) {
+      console.log('[Monte Carlo] Trying sliding window approach');
+      var windowSize = Math.floor(totalLength / 5);
+      windowSize = Math.max(windowSize, 30);
+      
+      periods = [];
+      periodResults = [];
+      
+      for (var w = 0; w < totalLength - windowSize && periodResults.length < maxPeriods; w += Math.floor(windowSize / 3)) {
+        var windowKlines = klines.slice(w, w + windowSize);
+        var windowResult = runBacktest(windowKlines, cfg);
+        
+        if (!windowResult.error && windowResult.totalTrades >= 1) {
+          periodResults.push(windowResult);
+          periods.push({
+            start: w,
+            trainEnd: w,
+            testEnd: w + windowSize,
+            candlesInTest: windowSize,
+            result: windowResult
+          });
+        }
+      }
+    }
+    
+    // Last resort: single full backtest
+    if (periodResults.length === 0) {
+      console.log('[Monte Carlo] Fallback: single period backtest');
+      var fallbackResult = runBacktest(klines, cfg);
+      if (fallbackResult && !fallbackResult.error && fallbackResult.totalTrades >= 1) {
+        periodResults.push(fallbackResult);
+        periods.push({
+          start: 0,
+          trainEnd: 0,
+          testEnd: totalLength,
+          candlesInTest: totalLength,
+          result: fallbackResult
+        });
+      } else {
+        return { error: 'هیچ معامله‌ای در داده‌های موجود یافت نشد. سیگنال‌های کمی وجود دارد.' };
+      }
+    }
+    
+    // Calculate aggregate statistics
+    var avgWinRate = periodResults.reduce(function(sum, r) { return sum + r.winRate; }, 0) / periodResults.length;
+    var avgProfitFactor = periodResults.reduce(function(sum, r) { return sum + Math.min(r.profitFactor, 10); }, 0) / periodResults.length;
+    var avgReturn = periodResults.reduce(function(sum, r) { return sum + r.netReturn; }, 0) / periodResults.length;
+    var avgMaxDrawdown = periodResults.reduce(function(sum, r) { return sum + r.maxDrawdown; }, 0) / periodResults.length;
+    var avgSharpe = periodResults.reduce(function(sum, r) { return sum + r.sharpeRatio; }, 0) / periodResults.length;
+    var avgTrades = periodResults.reduce(function(sum, r) { return sum + r.totalTrades; }, 0) / periodResults.length;
+    
+    var winRateStdDev = calculateStdDev(periodResults.map(function(r) { return r.winRate; }), avgWinRate);
+    var profitFactorStdDev = calculateStdDev(periodResults.map(function(r) { return Math.min(r.profitFactor, 10); }), avgProfitFactor);
+    var returnStdDev = calculateStdDev(periodResults.map(function(r) { return r.netReturn; }), avgReturn);
+    var drawdownStdDev = calculateStdDev(periodResults.map(function(r) { return r.maxDrawdown; }), avgMaxDrawdown);
+    
+    // Best and worst periods
+    var sortedByReturn = periodResults.slice().sort(function(a, b) { return b.netReturn - a.netReturn; });
+    var bestPeriod = sortedByReturn[0];
+    var worstPeriod = sortedByReturn[sortedByReturn.length - 1];
+    
+    // Consistency score
+    var profitablePeriods = periodResults.filter(function(r) { return r.netReturn > 0; }).length;
+    var consistencyScore = (profitablePeriods / periodResults.length) * 100;
+    
+    return {
+      periods: periods,
+      periodResults: periodResults,
+      stats: {
+        numPeriods: periodResults.length,
+        avgWinRate: avgWinRate,
+        avgProfitFactor: avgProfitFactor,
+        avgReturn: avgReturn,
+        avgMaxDrawdown: avgMaxDrawdown,
+        avgSharpe: avgSharpe,
+        avgTrades: avgTrades,
+        winRateStdDev: winRateStdDev,
+        profitFactorStdDev: profitFactorStdDev,
+        returnStdDev: returnStdDev,
+        drawdownStdDev: drawdownStdDev,
+        bestPeriodReturn: bestPeriod ? bestPeriod.netReturn : 0,
+        worstPeriodReturn: worstPeriod ? worstPeriod.netReturn : 0,
+        consistencyScore: consistencyScore,
+        profitablePeriods: profitablePeriods
+      }
+    };
+  }
+
+  // ==================== K-Fold Cross-Validation ====================
+  function runKFoldValidation(klines, settings) {
+    if (!klines || klines.length < 200) {
+      return { error: 'داده کافی نیست برای K-Fold' };
+    }
+    
+    var cfg = Object.assign({}, config, settings || {});
+    var k = cfg.kFolds || 5;
+    var foldSize = Math.floor(klines.length / k);
+    var foldResults = [];
+    
+    for (var i = 0; i < k; i++) {
+      // Test fold
+      var testStart = i * foldSize;
+      var testEnd = (i === k - 1) ? klines.length : (i + 1) * foldSize;
+      var testKlines = klines.slice(testStart, testEnd);
+      
+      // Run backtest on test fold
+      var result = runBacktest(testKlines, cfg);
+      
+      if (!result.error && result.totalTrades > 0) {
+        foldResults.push({
+          fold: i + 1,
+          startIndex: testStart,
+          endIndex: testEnd,
+          result: result
+        });
+      }
+    }
+    
+    if (foldResults.length < 3) {
+      return { error: 'نتایج K-Fold کافی نیست' };
+    }
+    
+    // Aggregate K-Fold statistics
+    var avgWinRate = foldResults.reduce(function(sum, f) { return sum + f.result.winRate; }, 0) / foldResults.length;
+    var avgReturn = foldResults.reduce(function(sum, f) { return sum + f.result.netReturn; }, 0) / foldResults.length;
+    var avgProfitFactor = foldResults.reduce(function(sum, f) { return sum + Math.min(f.result.profitFactor, 10); }, 0) / foldResults.length;
+    
+    var winRateVariance = calculateStdDev(foldResults.map(function(f) { return f.result.winRate; }), avgWinRate);
+    var returnVariance = calculateStdDev(foldResults.map(function(f) { return f.result.netReturn; }), avgReturn);
+    
+    return {
+      kFolds: k,
+      foldResults: foldResults,
+      stats: {
+        avgWinRate: avgWinRate,
+        avgReturn: avgReturn,
+        avgProfitFactor: avgProfitFactor,
+        winRateVariance: winRateVariance,
+        returnVariance: returnVariance,
+        robustnessScore: 100 - (winRateVariance + returnVariance) / 2
+      }
+    };
+  }
+
+  function calculateStdDev(values, mean) {
+    if (values.length === 0) return 0;
+    var variance = values.reduce(function(sum, val) {
+      return sum + Math.pow(val - mean, 2);
+    }, 0) / values.length;
+    return Math.sqrt(variance);
+  }
+
+  // ==================== Monte Carlo Simulation - Enhanced ====================
+  function runMonteCarlo(walkForwardResults, settings) {
+    if (!walkForwardResults || !walkForwardResults.periodResults || walkForwardResults.periodResults.length === 0) {
+      return { error: 'نتایج Walk-Forward کافی نیست' };
+    }
+    
+    var cfg = Object.assign({}, config, settings || {});
+    var periodResults = walkForwardResults.periodResults;
+    
+    // Extract statistics from periods
+    var returns = periodResults.map(function(r) { return r.netReturn; });
+    var winRates = periodResults.map(function(r) { return r.winRate / 100; });
+    var drawdowns = periodResults.map(function(r) { return r.maxDrawdown; });
+    
+    // Calculate distribution parameters
+    var meanReturn = returns.reduce(function(sum, r) { return sum + r; }, 0) / returns.length;
+    var stdDevReturn = calculateStdDev(returns, meanReturn);
+    var meanWinRate = winRates.reduce(function(sum, r) { return sum + r; }, 0) / winRates.length;
+    var meanDrawdown = drawdowns.reduce(function(sum, d) { return sum + d; }, 0) / drawdowns.length;
+    
+    // Separate positive and negative returns for better simulation
+    var positiveReturns = returns.filter(function(r) { return r > 0; });
+    var negativeReturns = returns.filter(function(r) { return r <= 0; });
+    
+    var avgPositive = positiveReturns.length > 0 ?
+      positiveReturns.reduce(function(sum, r) { return sum + r; }, 0) / positiveReturns.length : meanReturn;
+    var avgNegative = negativeReturns.length > 0 ?
+      negativeReturns.reduce(function(sum, r) { return sum + r; }, 0) / negativeReturns.length : -Math.abs(meanReturn);
+    
+    var stdPositive = positiveReturns.length > 1 ? calculateStdDev(positiveReturns, avgPositive) : stdDevReturn;
+    var stdNegative = negativeReturns.length > 1 ? calculateStdDev(negativeReturns, avgNegative) : stdDevReturn;
+    
+    // Run Monte Carlo simulations
+    var simulationResults = [];
+    var simulationDrawdowns = [];
+    var simulationSharpes = [];
+    var initialCapital = cfg.initialCapital;
+    
+    // Apply scenario modifier
+    var scenarioMultiplier = 1;
+    if (cfg.scenario === 'conservative') {
+      scenarioMultiplier = 0.7; // Reduce expected returns
+    } else if (cfg.scenario === 'aggressive') {
+      scenarioMultiplier = 1.3; // Increase expected returns
+    }
+    
+    for (var sim = 0; sim < cfg.simulations; sim++) {
+      var capital = initialCapital;
+      var peakCapital = capital;
+      var maxDrawdown = 0;
+      var periodReturns = [];
+      
+      // Simulate based on number of periods
+      var numPeriods = periodResults.length;
+      
+      for (var p = 0; p < numPeriods; p++) {
+        // Random win/loss based on win rate
+        var isWin = Math.random() < meanWinRate;
+        
+        // Generate return using Box-Muller transform for normal distribution
+        var u1 = Math.random();
+        var u2 = Math.random();
+        var z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+        
+        var periodReturn;
+        if (isWin) {
+          periodReturn = avgPositive * scenarioMultiplier + z * stdPositive;
+          periodReturn = Math.max(0.1, periodReturn); // Ensure positive
+        } else {
+          periodReturn = avgNegative * scenarioMultiplier + z * stdNegative;
+          periodReturn = Math.min(-0.1, periodReturn); // Ensure negative
+        }
+        
+        periodReturns.push(periodReturn);
+        
+        // Apply return to capital
+        capital = capital * (1 + periodReturn / 100);
+        
+        // Track drawdown
+        if (capital > peakCapital) {
+          peakCapital = capital;
+        }
+        var currentDrawdown = ((peakCapital - capital) / peakCapital) * 100;
+        if (currentDrawdown > maxDrawdown) {
+          maxDrawdown = currentDrawdown;
+        }
+      }
+      
+      var finalReturn = ((capital - initialCapital) / initialCapital) * 100;
+      simulationResults.push(finalReturn);
+      simulationDrawdowns.push(maxDrawdown);
+      
+      // Calculate Sharpe for this simulation
+      var simAvgReturn = periodReturns.reduce(function(a, b) { return a + b; }, 0) / periodReturns.length;
+      var simStdDev = calculateStdDev(periodReturns, simAvgReturn);
+      var simSharpe = simStdDev > 0 ? (simAvgReturn / simStdDev) * Math.sqrt(12) : 0; // Annualized
+      simulationSharpes.push(simSharpe);
+    }
+    
+    // Sort results for percentile calculation
+    simulationResults.sort(function(a, b) { return a - b; });
+    simulationDrawdowns.sort(function(a, b) { return a - b; });
+    simulationSharpes.sort(function(a, b) { return a - b; });
+    
+    // Calculate percentiles
+    var medianIdx = Math.floor(simulationResults.length / 2);
+    var percentile5Idx = Math.floor(simulationResults.length * 0.05);
+    var percentile10Idx = Math.floor(simulationResults.length * 0.10);
+    var percentile25Idx = Math.floor(simulationResults.length * 0.25);
+    var percentile75Idx = Math.floor(simulationResults.length * 0.75);
+    var percentile90Idx = Math.floor(simulationResults.length * 0.90);
+    var percentile95Idx = Math.floor(simulationResults.length * 0.95);
+    
+    var medianReturn = simulationResults[medianIdx];
+    var worstCase = simulationResults[percentile5Idx];
+    var bestCase = simulationResults[percentile95Idx];
+    
+    // Calculate probability of profit
+    var profitableSims = simulationResults.filter(function(r) { return r > 0; }).length;
+    var probabilityOfProfit = (profitableSims / simulationResults.length) * 100;
+    
+    // Calculate probability of specific returns
+    var probReturn10Plus = simulationResults.filter(function(r) { return r >= 10; }).length / simulationResults.length * 100;
+    var probReturn20Plus = simulationResults.filter(function(r) { return r >= 20; }).length / simulationResults.length * 100;
+    var probLoss10Plus = simulationResults.filter(function(r) { return r <= -10; }).length / simulationResults.length * 100;
+    
+    // Calculate confidence interval
+    var confidenceIdx = Math.floor((100 - cfg.confidenceLevel) / 2 / 100 * simulationResults.length);
+    var confidenceLower = simulationResults[confidenceIdx];
+    var confidenceUpper = simulationResults[simulationResults.length - confidenceIdx - 1];
+    
+    // Distribution histogram data
+    var histogramBins = 20;
+    var minReturn = simulationResults[0];
+    var maxReturn = simulationResults[simulationResults.length - 1];
+    var binWidth = (maxReturn - minReturn) / histogramBins;
+    var histogram = [];
+    
+    for (var b = 0; b < histogramBins; b++) {
+      var binStart = minReturn + b * binWidth;
+      var binEnd = binStart + binWidth;
+      var count = simulationResults.filter(function(r) {
+        return r >= binStart && (b === histogramBins - 1 ? r <= binEnd : r < binEnd);
+      }).length;
+      histogram.push({
+        binStart: binStart,
+        binEnd: binEnd,
+        binMid: (binStart + binEnd) / 2,
+        count: count,
+        percentage: (count / simulationResults.length) * 100
+      });
+    }
+    
+    // Risk of Ruin calculation
+    var ruinThreshold = -50; // 50% loss considered ruin
+    var ruinProb = simulationResults.filter(function(r) { return r <= ruinThreshold; }).length / simulationResults.length * 100;
+    
+    // Expected Shortfall (CVaR at 5%)
+    var worstReturns = simulationResults.slice(0, percentile5Idx);
+    var expectedShortfall = worstReturns.length > 0 ?
+      worstReturns.reduce(function(a, b) { return a + b; }, 0) / worstReturns.length : worstCase;
+    
+    return {
+      simulations: cfg.simulations,
+      probabilityOfProfit: probabilityOfProfit,
+      medianReturn: medianReturn,
+      meanReturn: simulationResults.reduce(function(a, b) { return a + b; }, 0) / simulationResults.length,
+      bestCase: bestCase,
+      worstCase: worstCase,
+      probReturn10Plus: probReturn10Plus,
+      probReturn20Plus: probReturn20Plus,
+      probLoss10Plus: probLoss10Plus,
+      expectedShortfall: expectedShortfall,
+      riskOfRuin: ruinProb,
+      confidenceInterval: {
+        lower: confidenceLower,
+        upper: confidenceUpper,
+        level: cfg.confidenceLevel
+      },
+      percentiles: {
+        p5: simulationResults[percentile5Idx],
+        p10: simulationResults[percentile10Idx],
+        p25: simulationResults[percentile25Idx],
+        p50: medianReturn,
+        p75: simulationResults[percentile75Idx],
+        p90: simulationResults[percentile90Idx],
+        p95: simulationResults[percentile95Idx]
+      },
+      drawdownStats: {
+        median: simulationDrawdowns[medianIdx],
+        p95: simulationDrawdowns[percentile95Idx],
+        max: simulationDrawdowns[simulationDrawdowns.length - 1]
+      },
+      sharpeStats: {
+        median: simulationSharpes[medianIdx],
+        p25: simulationSharpes[percentile25Idx],
+        p75: simulationSharpes[percentile75Idx]
+      },
+      histogram: histogram,
+      allResults: simulationResults
+    };
+  }
+
+  // ==================== Full Test Runner ====================
+  function runFullTest(klines, settings) {
+    var cfg = Object.assign({}, config, settings || {});
+    
+    // Step 1: Walk-Forward
+    var walkForwardResults = runWalkForward(klines, cfg);
+    if (walkForwardResults.error) {
+      return { error: walkForwardResults.error };
+    }
+    
+    // Step 2: K-Fold Cross-Validation
+    var kFoldResults = runKFoldValidation(klines, cfg);
+    
+    // Step 3: Monte Carlo
+    var monteCarloResults = runMonteCarlo(walkForwardResults, cfg);
+    if (monteCarloResults.error) {
+      return { error: monteCarloResults.error };
+    }
+    
+    // Step 4: Calculate overall robustness score
+    var wfStats = walkForwardResults.stats;
+    var mcStats = monteCarloResults;
+    
+    var robustnessScore = 0;
+    
+    // Win rate contribution (0-20 points)
+    if (wfStats.avgWinRate >= 60) robustnessScore += 20;
+    else if (wfStats.avgWinRate >= 55) robustnessScore += 15;
+    else if (wfStats.avgWinRate >= 50) robustnessScore += 10;
+    else if (wfStats.avgWinRate >= 45) robustnessScore += 5;
+    
+    // Profit factor contribution (0-20 points)
+    if (wfStats.avgProfitFactor >= 2) robustnessScore += 20;
+    else if (wfStats.avgProfitFactor >= 1.5) robustnessScore += 15;
+    else if (wfStats.avgProfitFactor >= 1.2) robustnessScore += 10;
+    else if (wfStats.avgProfitFactor >= 1) robustnessScore += 5;
+    
+    // Return contribution (0-20 points)
+    if (wfStats.avgReturn >= 30) robustnessScore += 20;
+    else if (wfStats.avgReturn >= 20) robustnessScore += 15;
+    else if (wfStats.avgReturn >= 10) robustnessScore += 10;
+    else if (wfStats.avgReturn >= 0) robustnessScore += 5;
+    
+    // Consistency contribution (0-20 points)
+    robustnessScore += Math.floor(wfStats.consistencyScore / 5);
+    
+    // Monte Carlo probability contribution (0-20 points)
+    if (mcStats.probabilityOfProfit >= 70) robustnessScore += 20;
+    else if (mcStats.probabilityOfProfit >= 60) robustnessScore += 15;
+    else if (mcStats.probabilityOfProfit >= 50) robustnessScore += 10;
+    else if (mcStats.probabilityOfProfit >= 40) robustnessScore += 5;
+    
+    return {
+      walkForward: walkForwardResults,
+      kFold: kFoldResults,
+      monteCarlo: monteCarloResults,
+      robustnessScore: Math.min(100, robustnessScore),
+      overallVerdict: getOverallVerdict(robustnessScore, wfStats, mcStats)
+    };
+  }
+  
+  function getOverallVerdict(score, wfStats, mcStats) {
+    if (score >= 80 && wfStats.avgProfitFactor >= 1.5 && mcStats.probabilityOfProfit >= 60) {
+      return 'excellent';
+    } else if (score >= 60 && wfStats.avgProfitFactor >= 1.2 && mcStats.probabilityOfProfit >= 55) {
+      return 'good';
+    } else if (score >= 40 && mcStats.probabilityOfProfit >= 50) {
+      return 'moderate';
+    } else if (score >= 25) {
+      return 'risky';
+    } else {
+      return 'avoid';
+    }
+  }
+
+  return {
+    runBacktest: runBacktest,
+    runWalkForward: runWalkForward,
+    runKFoldValidation: runKFoldValidation,
+    runMonteCarlo: runMonteCarlo,
+    runFullTest: runFullTest
+  };
+})();
+
+// Export
+if (typeof window !== 'undefined') {
+  window.MonteCarlo = MonteCarlo;
+}
