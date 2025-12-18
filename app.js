@@ -1,1 +1,3469 @@
-var a0_0x4859bd=a0_0x1aae;(function(_0x17e5fd,_0x5a7cb0){var _0x5df53d=a0_0x1aae,_0x68eeea=_0x17e5fd();while(!![]){try{var _0x4c2c1e=-parseInt(_0x5df53d(0x438))/0x1+parseInt(_0x5df53d(0x27d))/0x2*(parseInt(_0x5df53d(0x41e))/0x3)+parseInt(_0x5df53d(0x302))/0x4+parseInt(_0x5df53d(0x293))/0x5*(parseInt(_0x5df53d(0x253))/0x6)+parseInt(_0x5df53d(0x14b))/0x7+-parseInt(_0x5df53d(0x3fa))/0x8+-parseInt(_0x5df53d(0x2a4))/0x9*(-parseInt(_0x5df53d(0x107))/0xa);if(_0x4c2c1e===_0x5a7cb0)break;else _0x68eeea['push'](_0x68eeea['shift']());}catch(_0x46ae8c){_0x68eeea['push'](_0x68eeea['shift']());}}}(a0_0x5e0d,0x2d267));var ICONS={'excellent':a0_0x4859bd(0x37d),'good':a0_0x4859bd(0x182),'moderate':'<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22/><line\x20x1=\x2212\x22\x20y1=\x228\x22\x20x2=\x2212\x22\x20y2=\x2212\x22/><line\x20x1=\x2212\x22\x20y1=\x2216\x22\x20x2=\x2212.01\x22\x20y2=\x2216\x22/></svg>','risky':a0_0x4859bd(0x341),'avoid':a0_0x4859bd(0x2e8),'trendingUp':a0_0x4859bd(0x287),'checkCircle':a0_0x4859bd(0x37d),'coins':a0_0x4859bd(0x227),'alertTriangle':a0_0x4859bd(0x341),'dollarSign':a0_0x4859bd(0x4c3),'barChart':a0_0x4859bd(0x11a),'target':a0_0x4859bd(0x379),'x':a0_0x4859bd(0x25c),'calendar':a0_0x4859bd(0x322),'zap':'<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><polygon\x20points=\x2213\x202\x203\x2014\x2012\x2014\x2011\x2022\x2021\x2010\x2012\x2010\x2013\x202\x22/></svg>','btc':a0_0x4859bd(0x372),'eth':a0_0x4859bd(0x385),'sol':a0_0x4859bd(0x4ae),'gold':a0_0x4859bd(0x316),'coin':a0_0x4859bd(0x23c),'trendUp':'<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><polyline\x20points=\x2223\x206\x2013.5\x2015.5\x208.5\x2010.5\x201\x2018\x22></polyline><polyline\x20points=\x2217\x206\x2023\x206\x2023\x2012\x22></polyline></svg>','trendDown':a0_0x4859bd(0x396),'clock':'<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22></circle><polyline\x20points=\x2212\x206\x2012\x2012\x2016\x2014\x22></polyline></svg>','crosshair':a0_0x4859bd(0x259),'stopCircle':'<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22></circle><rect\x20x=\x229\x22\x20y=\x229\x22\x20width=\x226\x22\x20height=\x226\x22></rect></svg>','layers':'<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><polygon\x20points=\x2212\x202\x202\x207\x2012\x2012\x2022\x207\x2012\x202\x22></polygon><polyline\x20points=\x222\x2017\x2012\x2022\x2022\x2017\x22></polyline><polyline\x20points=\x222\x2012\x2012\x2017\x2022\x2012\x22></polyline></svg>','refresh':a0_0x4859bd(0x30f),'trash':a0_0x4859bd(0x208),'rocket':a0_0x4859bd(0x3b4),'x':a0_0x4859bd(0x3d4),'check':a0_0x4859bd(0x443),'circle':a0_0x4859bd(0x4ee),'arrowRight':a0_0x4859bd(0x123),'clipboard':'<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2216\x22\x20height=\x2216\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><g\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22><path\x20stroke-linejoin=\x22round\x22\x20d=\x22M15.5\x204H18a2\x202\x200\x200\x201\x202\x202v13a2\x202\x200\x200\x201-2\x202H6a2\x202\x200\x200\x201-2-2V6a2\x202\x200\x200\x201\x202-2h2.5\x22/><path\x20stroke-linejoin=\x22round\x22\x20d=\x22M8.621\x203.515A2\x202\x200\x200\x201\x2010.561\x202h2.877a2\x202\x200\x200\x201\x201.94\x201.515L16\x206H8l.621-2.485Z\x22/><path\x20d=\x22M9\x2012h6m-6\x204h6\x22/></g></svg>','star':a0_0x4859bd(0x309),'list':a0_0x4859bd(0xf3),'pauseCircle':'<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2214\x22\x20height=\x2214\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22/><line\x20x1=\x2210\x22\x20y1=\x229\x22\x20x2=\x2210\x22\x20y2=\x2215\x22/><line\x20x1=\x2214\x22\x20y1=\x229\x22\x20x2=\x2214\x22\x20y2=\x2215\x22/></svg>'},STATE={'prices':{},'klines':{},'signals':{},'positions':{},'settings':{'capital':0x3e8,'riskPercent':0xa,'strategy':a0_0x4859bd(0x43b),'leverage':a0_0x4859bd(0x235),'notificationEnabled':!![]},'lastUpdate':null,'allSymbols':[],'watchlist':[],'activeAsset':null,'scannerActive':![],'scannerCallback':null,'scannerResults':[],'scannerScannedSymbols':[],'scannerConfig':{'maxSymbols':0x32,'minConfidence':0x7,'direction':a0_0x4859bd(0x4dc)},'searchHistory':[]},TIMEFRAMES=[a0_0x4859bd(0x176),'1h','4h','1d'],ASSET_INFO={},BINANCE_API=a0_0x4859bd(0x33d),CMC_API_KEY=a0_0x4859bd(0x49b),CMC_API='https://pro-api.coinmarketcap.com',COINGECKO_API='https://api.coingecko.com/api/v3',CRYPTOCOMPARE_API=a0_0x4859bd(0x1b3),BINANCE_WS=null,BINANCE_WS_CONNECTED=![],BINANCE_WS_RECONNECT_TIMEOUT=null;function startRealtimePrices(){var _0x5369b6=a0_0x4859bd;if(typeof WebSocket===_0x5369b6(0x25e))return;if(BINANCE_WS&&(BINANCE_WS['readyState']===WebSocket[_0x5369b6(0x3ea)]||BINANCE_WS['readyState']===WebSocket[_0x5369b6(0x4d2)]))return;try{BINANCE_WS=new WebSocket(_0x5369b6(0x39d)),BINANCE_WS['onopen']=function(){var _0xce4c07=_0x5369b6;console['log'](_0xce4c07(0x2af)),BINANCE_WS_CONNECTED=!![],checkAPIStatus(_0xce4c07(0x473),!![]),BINANCE_WS_RECONNECT_TIMEOUT&&(clearTimeout(BINANCE_WS_RECONNECT_TIMEOUT),BINANCE_WS_RECONNECT_TIMEOUT=null);},BINANCE_WS[_0x5369b6(0x3a4)]=function(_0x4c1583){var _0x46898b=_0x5369b6;console['log']('Binance\x20WS\x20closed:',_0x4c1583['code'],_0x4c1583[_0x46898b(0x48e)]||''),BINANCE_WS_CONNECTED=![],BINANCE_WS=null,!BINANCE_WS_RECONNECT_TIMEOUT&&(BINANCE_WS_RECONNECT_TIMEOUT=setTimeout(function(){BINANCE_WS_RECONNECT_TIMEOUT=null,startRealtimePrices();},0x2710));},BINANCE_WS[_0x5369b6(0x4f1)]=function(_0xb62f02){var _0x1de3f9=_0x5369b6;console[_0x1de3f9(0x442)](_0x1de3f9(0x122),_0xb62f02&&_0xb62f02[_0x1de3f9(0x45c)]?_0xb62f02[_0x1de3f9(0x45c)]:_0xb62f02);},BINANCE_WS[_0x5369b6(0x1c5)]=function(_0x19b625){var _0x46cd5d=_0x5369b6;try{var _0x431748=JSON[_0x46cd5d(0x34b)](_0x19b625[_0x46cd5d(0x1b7)]),_0x3b4d67=Array[_0x46cd5d(0x274)](_0x431748)?_0x431748:[_0x431748],_0x21cb70={};STATE['watchlist'][_0x46cd5d(0x3c1)](function(_0x46add6){_0x21cb70[_0x46add6]=!![];});var _0x41b926=![];_0x3b4d67[_0x46cd5d(0x3c1)](function(_0x20ce94){var _0x14c620=_0x46cd5d,_0xe4d8d5=_0x20ce94['s'];if(!_0xe4d8d5||!_0x21cb70[_0xe4d8d5])return;var _0x86828=parseFloat(_0x20ce94['c']);if(!isFinite(_0x86828)||_0x86828<=0x0)return;var _0x1263f7=parseFloat(_0x20ce94['P']);STATE['prices'][_0xe4d8d5]={'price':_0x86828,'change':isFinite(_0x1263f7)?_0x1263f7:0x0,'high':parseFloat(_0x20ce94['h'])||_0x86828,'low':parseFloat(_0x20ce94['l'])||_0x86828,'volume':parseFloat(_0x20ce94['v'])||0x0,'source':_0x14c620(0x48d)},_0x41b926=!![],_0xe4d8d5===STATE[_0x14c620(0x1cd)]&&renderAssetPanel(_0xe4d8d5);}),_0x41b926&&(STATE[_0x46cd5d(0x14d)]=Date[_0x46cd5d(0x273)](),updateLastUpdateTime());}catch(_0x3d93fe){console[_0x46cd5d(0x442)]('Binance\x20WS\x20parse\x20error:',_0x3d93fe[_0x46cd5d(0x45c)]);}};}catch(_0x1ee32c){console[_0x5369b6(0x442)](_0x5369b6(0x4b0),_0x1ee32c[_0x5369b6(0x45c)]);}}var API_STATUS={'binance':{'available':!![],'lastCheck':0x0,'errorCount':0x0},'coingecko':{'available':!![],'lastCheck':0x0,'errorCount':0x0},'cryptocompare':{'available':!![],'lastCheck':0x0,'errorCount':0x0}},CMC_API_EXHAUSTED=![],CMC_PRICE_CACHE={},KLINES_CACHE={},STABLECOINS=['USDT',a0_0x4859bd(0x1ce),'BUSD',a0_0x4859bd(0x15a),'TUSD','USDP','GUSD','FRAX',a0_0x4859bd(0x298),a0_0x4859bd(0x184)];function checkAPIStatus(_0x4f5d98,_0xac900d){var _0x1c7622=a0_0x4859bd,_0x34089e=API_STATUS[_0x4f5d98];_0xac900d?(_0x34089e[_0x1c7622(0x1f3)]=!![],_0x34089e[_0x1c7622(0x38c)]=0x0):(_0x34089e['errorCount']++,_0x34089e['errorCount']>=0x3&&(_0x34089e['available']=![],console['log'](_0x4f5d98+_0x1c7622(0x4dd)))),_0x34089e['lastCheck']=Date[_0x1c7622(0x273)]();}setInterval(function(){var _0x5e75a6=a0_0x4859bd;Object[_0x5e75a6(0x35d)](API_STATUS)[_0x5e75a6(0x3c1)](function(_0x46acb7){var _0x3b3390=_0x5e75a6;!API_STATUS[_0x46acb7][_0x3b3390(0x1f3)]&&Date[_0x3b3390(0x273)]()-API_STATUS[_0x46acb7][_0x3b3390(0x20a)]>0x493e0&&(API_STATUS[_0x46acb7][_0x3b3390(0x1f3)]=!![],API_STATUS[_0x46acb7][_0x3b3390(0x38c)]=0x0,console[_0x3b3390(0x442)](_0x46acb7+_0x3b3390(0x264)));});},0xea60);var COIN_ICON_CACHE={},CMC_IDS={'BTC':0x1,'ETH':0x403,'USDT':0x339,'BNB':0x72f,'XRP':0x34,'USDC':0xd50,'ADA':0x7da,'DOGE':0x4a,'SOL':0x1532,'TRX':0x7a6,'DOT':0x19ec,'MATIC':0xf32,'LTC':0x2,'SHIB':0x176a,'AVAX':0x16ad,'LINK':0x7b7,'ATOM':0xed2,'XMR':0x148,'ETC':0x529,'BCH':0x727,'XLM':0x200,'ALGO':0xfbe,'VET':0xc05,'HBAR':0x1222,'ICP':0x22d4,'FIL':0x8e8,'APT':0x5522,'NEAR':0x1987,'QNT':0xc53,'ARB':0x2e41,'OP':0x2e40,'MKR':0x5ee,'AAVE':0x1c6e,'GRT':0x1a3f,'STX':0x12ef,'EGLD':0x1aec,'XTZ':0x7db,'THETA':0x970,'EOS':0x6e5,'AXS':0x1a7f,'SAND':0x1842,'MANA':0x7ae,'NEO':0x560,'KCS':0x827,'FLOW':0x11ce,'CHZ':0xfe2,'XEC':0x2a27,'KLAY':0x10a0,'CRV':0x198a,'FTM':0xdb9,'LUNC':0x104c,'TUSD':0xa03,'XDC':0xa4a,'MINA':0x21c6,'SNX':0xa1a,'ENJ':0x852,'ZEC':0x59d,'DASH':0x83,'BAT':0x6a1,'LRC':0x78e,'ZIL':0x9a5,'ONE':0xf69,'WAVES':0x4fa,'KSM':0x13aa,'HOT':0xa7a,'IOTA':0x6b8,'CAKE':0x1c12,'RUNE':0x103d,'COMP':0x163c,'GALA':0x1ba8,'AR':0x1600,'ROSE':0x1de5,'GMT':0x4695,'CELO':0x15bf,'ENS':0x361f,'FXS':0x1b29,'ANKR':0xec7,'JST':0x1570,'LDO':0x1f40,'IMX':0x296b,'DYDX':0x2b94,'INJ':0x1c3a,'MASK':0x2158,'YFI':0x16e8,'OCEAN':0xf47,'AUDIO':0x1d1f,'BAND':0x1247,'REN':0x9eb,'UMA':0x15f1,'SXP':0x10b7,'STORJ':0x6ec,'SKL':0x1685,'CELR':0xee6,'COTI':0xf98,'CTSI':0x1544,'DENT':0x75e,'VTHO':0xbc4,'WIN':0x106e,'SUN':0x2921,'TROY':0x10c5,'DREP':0x10bf,'STMX':0x8f9,'NKN':0xadc,'KEY':0x95e,'DOCK':0xa73,'VITE':0xb79,'OGN':0x13fd,'PERL':0x10c5,'IRIS':0xf22,'COS':0xfc4,'MBL':0xfc6,'ARDR':0x528,'IOTX':0xad9,'FUN':0x6dd,'LOOM':0xa1c,'RLC':0x665,'LSK':0x4be,'MTL':0x6fc,'KNC':0x7be,'REP':0x450,'BNT':0x6bf,'POWR':0x854,'DNT':0x740,'NMR':0x6c4,'ANT':0x690,'GNO':0x67b,'MLN':0x610,'CVC':0x718,'AST':0x80a,'REQ':0x817,'MITH':0xe89,'STPT':0xfa6,'WRX':0x1429,'HARD':0x1d98,'DODO':0x1c38,'ALPHA':0x1c40,'LINA':0x1bbe,'PERP':0x1b26,'SUPER':0x2062,'TLM':0x20b8,'POND':0x1d49,'ALICE':0x223e,'SFP':0x1fb7,'BETA':0x2201,'RARE':0x2c1e,'GHST':0x1b86,'AUCTION':0x219a,'PHA':0x1ab9,'BADGER':0x1eb3,'OM':0x1988,'ALCX':0x21a5,'C98':0x2a97,'CLV':0x20c0,'QI':0x2448,'RAD':0x1abb,'XVS':0x1c78,'TVK':0x1f65,'FORTH':0x22a9,'BAKE':0x1b98,'BURGER':0x1bf6,'SLP':0x1685,'TKO':0x233c,'UNFI':0x1df8,'MDX':0x208f,'AGLD':0x2d30,'RAY':0x214e,'FIDA':0x1f2a,'MNGO':0x2ba3,'BICO':0x2547,'HIGH':0x2af1,'CVX':0x26af,'PEOPLE':0x39d6,'SPELL':0x2c19,'JOE':0x2c84,'ACH':0x1b2e,'JASMY':0x20e9,'AMP':0x1b21,'PLA':0xe4b,'DAR':0x2c6e,'XNO':0x61f,'MOVR':0x2445,'GLMR':0x1ab4,'ASTR':0x3255,'API3':0x1e39,'WOO':0x1d4d,'FLUX':0xbd5,'SCRT':0x15e4,'T':0x92c,'RNDR':0x163a,'HFT':0x57bd,'MAGIC':0x39bf,'SSV':0x32c7,'HOOK':0x58ec,'EDU':0x65ff,'ID':0x6cc3,'SUI':0x51d3,'PEPE':0x5f9e,'FLOKI':0x2a34,'WLD':0x34be,'SEI':0x5a6d,'TIA':0x594d,'BLUR':0x5a51,'CFX':0x1ca6,'CYBER':0x70c7,'ARKM':0x6c40,'PENDLE':0x2509,'RDNT':0x5272,'MAV':0x7037,'WBT':0x55a5,'ORDI':0x61c4,'INJ':0x1c3a,'TWT':0x174c,'FET':0xebd,'AGIX':0x978,'RNDR':0x163a,'ROSE':0x1de5,'GMX':0x2e51,'LPT':0xe38,'RPL':0xb7f,'FLR':0x1f0e,'CORE':0x5ad6,'MEME':0x6e8d,'PYTH':0x6e11,'JTO':0x6f7d,'BONK':0x5a37,'SATS':0x700b,'RATS':0x6f22,'1000SATS':0x700b,'XAUT':0x1438,'PAXG':0x1261,'XAU':0x1438,'DAI':0x134f,'BUSD':0x124f,'FRAX':0x1b28,'USDP':0xd02,'GUSD':0xcea,'LUSD':0x255e,'FDUSD':0x65e1,'PYUSD':0x7065,'EURC':0x697b,'APE':0x49bc,'LUNA':0x4f5a,'CRO':0xe33,'OKB':0xf39,'LEO':0xf75,'TON':0x2c9b,'NEXO':0xa86,'HT':0x9c6,'GT':0x10ad,'HUSD':0x12ab,'CEL':0xa8c,'PROM':0x1018,'RSR':0xf7c,'LOOKS':0x42b9,'X2Y2':0x46ba,'BLUR':0x5a51,'DEXE':0x1c9e,'1INCH':0x1fa8,'SUSHI':0x1a66,'QUICK':0x200e,'VELO':0x1685,'UOS':0x105d,'DPI':0x1b8f,'YGG':0x29c0,'GODS':0x2987,'ILV':0x220f,'REVV':0x1b4d,'SPS':0x2cbe,'GTC':0x2744,'BTRST':0x2d40,'RGT':0x1d3e,'TRIBE':0x233f,'AERGO':0xe35,'ARPA':0xfc7,'BEL':0x1685,'BLZ':0x9c9,'COCOS':0x10b3,'CREAM':0x1831,'DATA':0x85f,'DEGO':0x1baf,'DIA':0x17fa,'FARM':0x1acb,'FOR':0x1016,'FIRO':0x586,'GAS':0x6f9,'GTO':0x8f1,'HEGIC':0x1b11,'IDEX':0xf58,'KMD':0x5f1,'MFT':0xd25,'MIR':0x1eb1,'NULS':0x82c,'NXM':0x16c6,'ORN':0x1685,'OXT':0x1685,'POND':0x1d49,'REEF':0x1b27,'RAMP':0x1d27,'SRM':0x182b,'TCT':0xb94,'TORN':0x1f71,'WING':0x1b88,'XVG':0x2b5,'YFII':0x1685,'ZEN':0x6a2,'LUNC':0x104c,'USTC':0x1bd9,'WBTC':0xe85,'WETH':0x95c,'STETH':0x1f95,'LEO':0xf75,'OKB':0xf39,'CRO':0xe33,'TUSD':0xa03,'USDP':0xd02,'WBNB':0x1c18,'WMATIC':0x49c1,'WSOL':0x3ef4,'FTT':0x1063,'HNT':0x1621,'BTT':0x3ed6,'JST':0x1570,'NFT':0x2658,'BTTC':0x3ed6,'SAFEMOON':0x2235,'BUSD':0x124f,'FRAX':0x1b28,'GUSD':0xcea,'LUSD':0x255e,'MIM':0x259a,'OUSD':0x1c15,'TRIBE':0x233f,'CVP':0x1b7d,'CREAM':0x1831,'ALPHA':0x1c40,'PERP':0x1b26,'LINA':0x1bbe,'DODO':0x1c38,'HARD':0x1d98,'AUTO':0x20c3,'EPS':0x22ea,'NBS':0x2697,'POLS':0x1c28,'DF':0x1f8a,'DEGO':0x1baf,'KEEP':0x1685,'NU':0x1299,'BOR':0x1c79,'POND':0x1d49,'WING':0x1b88};document[a0_0x4859bd(0x164)](a0_0x4859bd(0x469),function(){var _0x2f0fd2=a0_0x4859bd;console[_0x2f0fd2(0x442)]('signight\x20PWA\x20Loading...'),setupUpdateUI(),registerSW(),loadSettings(),initUI(),setupEvents(),loadAllSymbols(),startDataLoop(),console[_0x2f0fd2(0x442)](_0x2f0fd2(0x11c));});var SW_UPDATE_STATE={'waitingWorker':null,'bannerShown':![],'dismissed':![],'reloading':![]};function setupUpdateUI(){var _0x5d91c5=a0_0x4859bd,_0x59f062=document[_0x5d91c5(0x27b)](_0x5d91c5(0x24d)),_0x445182=document[_0x5d91c5(0x27b)](_0x5d91c5(0x306));_0x59f062&&_0x59f062['addEventListener'](_0x5d91c5(0x1fd),applyPendingUpdate),_0x445182&&_0x445182[_0x5d91c5(0x164)](_0x5d91c5(0x1fd),function(){hideUpdateBanner(!![]);});}function setWaitingWorker(_0x3fb8cd){var _0x2798d3=a0_0x4859bd;SW_UPDATE_STATE[_0x2798d3(0x17f)]=_0x3fb8cd,SW_UPDATE_STATE[_0x2798d3(0x26b)]=![],SW_UPDATE_STATE[_0x2798d3(0x23f)]=![],showUpdateBanner();}function showUpdateBanner(){var _0x338d1c=a0_0x4859bd;if(SW_UPDATE_STATE[_0x338d1c(0x26b)]||SW_UPDATE_STATE[_0x338d1c(0x23f)])return;var _0x20745b=document['getElementById'](_0x338d1c(0x3b9));if(!_0x20745b)return;_0x20745b[_0x338d1c(0x1a1)][_0x338d1c(0x2cd)](_0x338d1c(0x129)),SW_UPDATE_STATE['bannerShown']=!![];}function hideUpdateBanner(_0x121e19){var _0x188e40=a0_0x4859bd,_0x503a34=document[_0x188e40(0x27b)]('updateBanner');if(!_0x503a34)return;_0x503a34['classList'][_0x188e40(0x2d8)](_0x188e40(0x129)),_0x121e19&&(SW_UPDATE_STATE[_0x188e40(0x23f)]=!![]);}function applyPendingUpdate(){var _0x5bbde8=a0_0x4859bd;SW_UPDATE_STATE[_0x5bbde8(0x17f)]?(SW_UPDATE_STATE['waitingWorker'][_0x5bbde8(0x173)]({'type':_0x5bbde8(0x3d7)}),showToast(_0x5bbde8(0x1a2),_0x5bbde8(0x270))):hideUpdateBanner();}function registerSW(){var _0x3fa146=a0_0x4859bd;_0x3fa146(0x4ca)in navigator&&(navigator[_0x3fa146(0x4ca)]['register'](_0x3fa146(0x38e))[_0x3fa146(0x3c7)](function(_0x3269c6){var _0x138a73=_0x3fa146;console[_0x138a73(0x442)](_0x138a73(0x3c4)),attachSWUpdateHandlers(_0x3269c6),setInterval(function(){var _0x4de8ec=_0x138a73;_0x3269c6[_0x4de8ec(0x4fa)]();},0x1e*0x3c*0x3e8);})[_0x3fa146(0x2d1)](function(_0x1a01d3){var _0x4a33e6=_0x3fa146;console[_0x4a33e6(0x442)]('SW\x20registration\x20failed:',_0x1a01d3);}),navigator[_0x3fa146(0x4ca)][_0x3fa146(0x164)](_0x3fa146(0x451),function(){var _0x2e082c=_0x3fa146;if(SW_UPDATE_STATE[_0x2e082c(0x4df)])return;SW_UPDATE_STATE[_0x2e082c(0x4df)]=!![],window[_0x2e082c(0x1e0)][_0x2e082c(0x225)]();}));}function attachSWUpdateHandlers(_0x45af02){var _0x685022=a0_0x4859bd;if(!_0x45af02)return;_0x45af02[_0x685022(0x486)]&&setWaitingWorker(_0x45af02[_0x685022(0x486)]),_0x45af02[_0x685022(0x164)]('updatefound',function(){var _0x3e0ac6=_0x685022,_0x1c1695=_0x45af02['installing'];if(!_0x1c1695)return;_0x1c1695[_0x3e0ac6(0x164)](_0x3e0ac6(0x210),function(){var _0x35325e=_0x3e0ac6;_0x1c1695[_0x35325e(0x3a1)]===_0x35325e(0x1e5)&&navigator[_0x35325e(0x4ca)][_0x35325e(0x328)]&&setWaitingWorker(_0x1c1695);});});}function loadSettings(){var _0x1d199c=a0_0x4859bd;try{var _0xaea5f=localStorage[_0x1d199c(0x16d)](_0x1d199c(0xf5));if(_0xaea5f)STATE[_0x1d199c(0x1ee)]=Object[_0x1d199c(0x4ff)](STATE[_0x1d199c(0x1ee)],JSON[_0x1d199c(0x34b)](_0xaea5f));var _0x54a94d=localStorage['getItem'](_0x1d199c(0x4bc));if(_0x54a94d)STATE['watchlist']=JSON['parse'](_0x54a94d);var _0x32ed38=localStorage[_0x1d199c(0x16d)]('positions');if(_0x32ed38)STATE[_0x1d199c(0x1d4)]=JSON[_0x1d199c(0x34b)](_0x32ed38);var _0x4ad09f=localStorage[_0x1d199c(0x16d)]('searchHistory');if(_0x4ad09f)try{STATE[_0x1d199c(0x19a)]=JSON[_0x1d199c(0x34b)](_0x4ad09f),STATE[_0x1d199c(0x19a)][_0x1d199c(0x41d)]>0xa&&(STATE[_0x1d199c(0x19a)]=STATE['searchHistory']['slice'](0x0,0xa));}catch(_0x25ebf6){console['log'](_0x1d199c(0x296),_0x25ebf6),STATE['searchHistory']=[];}var _0x283b9b=localStorage[_0x1d199c(0x16d)](_0x1d199c(0x2f1));if(_0x283b9b)try{COIN_ICON_CACHE=JSON[_0x1d199c(0x34b)](_0x283b9b);for(var _0x4775e9 in COIN_ICON_CACHE){ASSET_INFO[_0x4775e9]=COIN_ICON_CACHE[_0x4775e9];}}catch(_0x556b85){console[_0x1d199c(0x442)](_0x1d199c(0x4f4),_0x556b85);}}catch(_0xc5bb85){console['log']('Error\x20loading\x20settings:',_0xc5bb85);}}function saveSettings(){var _0x444df7=a0_0x4859bd;try{localStorage[_0x444df7(0x269)](_0x444df7(0xf5),JSON[_0x444df7(0x1b8)](STATE['settings'])),localStorage[_0x444df7(0x269)](_0x444df7(0x4bc),JSON[_0x444df7(0x1b8)](STATE[_0x444df7(0x4bc)])),localStorage[_0x444df7(0x269)](_0x444df7(0x1d4),JSON[_0x444df7(0x1b8)](STATE['positions'])),localStorage['setItem']('searchHistory',JSON[_0x444df7(0x1b8)](STATE[_0x444df7(0x19a)]));try{localStorage[_0x444df7(0x269)](_0x444df7(0x2f1),JSON[_0x444df7(0x1b8)](COIN_ICON_CACHE));}catch(_0x19d3db){console['log']('Error\x20saving\x20icon\x20cache\x20(may\x20be\x20too\x20large):',_0x19d3db);}}catch(_0x5bfa9d){console['log']('Error\x20saving\x20settings:',_0x5bfa9d);}}function a0_0x1aae(_0x1de93f,_0x4da259){_0x1de93f=_0x1de93f-0xee;var _0x5e0d41=a0_0x5e0d();var _0x1aaefe=_0x5e0d41[_0x1de93f];return _0x1aaefe;}function initUI(){var _0x1048fb=a0_0x4859bd;document[_0x1048fb(0x27b)](_0x1048fb(0x361))['value']=STATE[_0x1048fb(0x1ee)][_0x1048fb(0x4d8)],document[_0x1048fb(0x27b)](_0x1048fb(0x34c))[_0x1048fb(0x38b)]=STATE[_0x1048fb(0x1ee)]['riskPercent'],document['getElementById'](_0x1048fb(0x268))['value']=STATE[_0x1048fb(0x1ee)][_0x1048fb(0x352)],document[_0x1048fb(0x27b)](_0x1048fb(0x24f))[_0x1048fb(0x38b)]=STATE['settings'][_0x1048fb(0x290)]||_0x1048fb(0x235),document[_0x1048fb(0x27b)]('notificationToggle')[_0x1048fb(0x33b)]=STATE[_0x1048fb(0x1ee)][_0x1048fb(0x1d3)],updateEntryAmount(),renderWatchlistTabs(),STATE[_0x1048fb(0x1cd)]?renderAssetPanel(STATE[_0x1048fb(0x1cd)]):renderEmptyWatchlist();}function setupEvents(){var _0x459f82=a0_0x4859bd;document[_0x459f82(0x27b)](_0x459f82(0x448))[_0x459f82(0x164)]('click',function(){var _0x53be00=_0x459f82;STATE['settings'][_0x53be00(0x4d8)]=parseFloat(document[_0x53be00(0x27b)](_0x53be00(0x361))[_0x53be00(0x38b)])||0x3e8,STATE['settings'][_0x53be00(0x34c)]=parseInt(document[_0x53be00(0x27b)](_0x53be00(0x34c))[_0x53be00(0x38b)])||0xa,STATE[_0x53be00(0x1ee)]['strategy']=document[_0x53be00(0x27b)]('strategySelect')['value'],STATE['settings'][_0x53be00(0x290)]=document['getElementById'](_0x53be00(0x24f))[_0x53be00(0x38b)],STATE[_0x53be00(0x1ee)][_0x53be00(0x1d3)]=document[_0x53be00(0x27b)]('notificationToggle')[_0x53be00(0x33b)],saveSettings(),updateEntryAmount(),STATE[_0x53be00(0x4bc)][_0x53be00(0x3c1)](function(_0x462ced){var _0x16f5b7=_0x53be00;STATE[_0x16f5b7(0x4d6)][_0x462ced]&&analyzeAsset(_0x462ced);});var _0x3fab19=STATE['settings'][_0x53be00(0x290)]===_0x53be00(0x235)?'خودکار':STATE['settings']['leverage']+'x';showToast(_0x53be00(0x10b)+_0x3fab19,_0x53be00(0x4f5));}),document['getElementById']('leverageSelect')[_0x459f82(0x164)](_0x459f82(0x498),function(){var _0x246bb1=_0x459f82;STATE[_0x246bb1(0x1ee)]['leverage']=this[_0x246bb1(0x38b)],saveSettings();var _0x4ccb2d=this[_0x246bb1(0x38b)]===_0x246bb1(0x235)?'خودکار':this[_0x246bb1(0x38b)]+'x';showToast('اهرم\x20تغییر\x20کرد:\x20'+_0x4ccb2d,'info'),STATE['activeAsset']&&renderAssetPanel(STATE[_0x246bb1(0x1cd)]);}),document[_0x459f82(0x27b)]('strategySelect')[_0x459f82(0x164)]('change',function(){var _0x1c1786=_0x459f82;STATE[_0x1c1786(0x1ee)][_0x1c1786(0x352)]=this['value'],saveSettings(),STATE[_0x1c1786(0x4bc)]['forEach'](function(_0xe25edc){var _0x48bb89=_0x1c1786;STATE[_0x48bb89(0x4d6)][_0xe25edc]&&analyzeAsset(_0xe25edc);}),showToast(_0x1c1786(0x1a4)+getStrategyName(STATE[_0x1c1786(0x1ee)][_0x1c1786(0x352)]),'info');}),document['getElementById'](_0x459f82(0x361))[_0x459f82(0x164)](_0x459f82(0x1be),updateEntryAmount),document['getElementById'](_0x459f82(0x34c))['addEventListener'](_0x459f82(0x498),updateEntryAmount);var _0x8d7888=document[_0x459f82(0x27b)](_0x459f82(0x376)),_0x3e84af=document[_0x459f82(0x27b)](_0x459f82(0x40c));_0x8d7888[_0x459f82(0x164)](_0x459f82(0x252),function(){var _0xa2c5c=_0x459f82;this[_0xa2c5c(0x38b)][_0xa2c5c(0x324)]()['length']===0x0&&renderSearchHistory();}),_0x8d7888['addEventListener'](_0x459f82(0x1be),function(){var _0x25fb81=_0x459f82,_0xff5ec1=this[_0x25fb81(0x38b)]['toUpperCase']()[_0x25fb81(0x324)]();if(_0xff5ec1[_0x25fb81(0x41d)]<0x1){renderSearchHistory();return;}_0x3e84af['classList'][_0x25fb81(0x2d8)](_0x25fb81(0x30d));var _0x43638c=STATE[_0x25fb81(0x26c)][_0x25fb81(0x382)](function(_0x3bafca){var _0x2ad765=_0x25fb81;if(STABLECOINS[_0x2ad765(0x136)](_0x3bafca[_0x2ad765(0x153)]))return![];return _0x3bafca[_0x2ad765(0x3d3)]['includes'](_0xff5ec1)||_0x3bafca[_0x2ad765(0x153)][_0x2ad765(0x136)](_0xff5ec1);});_0x43638c[_0x25fb81(0x4ec)](function(_0x3548bf,_0x2686fb){var _0x6e818e=_0x25fb81,_0x4cf779=_0x3548bf[_0x6e818e(0x153)]===_0xff5ec1||_0x3548bf['symbol']===_0xff5ec1,_0x3700dc=_0x2686fb[_0x6e818e(0x153)]===_0xff5ec1||_0x2686fb['symbol']===_0xff5ec1;if(_0x4cf779&&!_0x3700dc)return-0x1;if(!_0x4cf779&&_0x3700dc)return 0x1;var _0x82c60e=_0x3548bf[_0x6e818e(0x153)][_0x6e818e(0x206)](_0xff5ec1),_0xb2e2f4=_0x2686fb[_0x6e818e(0x153)]['startsWith'](_0xff5ec1);if(_0x82c60e&&!_0xb2e2f4)return-0x1;if(!_0x82c60e&&_0xb2e2f4)return 0x1;return _0x3548bf['baseAsset'][_0x6e818e(0x2a0)](_0x2686fb[_0x6e818e(0x153)]);}),_0x43638c=_0x43638c['slice'](0x0,0x14),_0x43638c['length']>0x0?(_0x3e84af[_0x25fb81(0x4a1)]=_0x43638c['map'](function(_0x17a3ef){var _0x44bda4=_0x25fb81,_0x3fabc9=getCMCIconUrl(_0x17a3ef[_0x44bda4(0x3d3)]),_0x5aef25=_0x3fabc9?_0x44bda4(0x32e)+_0x3fabc9+_0x44bda4(0x135)+_0x17a3ef[_0x44bda4(0x153)]+'\x22\x20style=\x22width:20px;height:20px;border-radius:50%;margin-left:8px;background:#222;\x22\x20loading=\x22lazy\x22\x20decoding=\x22async\x22\x20onerror=\x22this.style.display=\x27none\x27\x22>':_0x44bda4(0x35f);return _0x44bda4(0x436)+_0x17a3ef[_0x44bda4(0x3d3)]+'\x22>'+_0x5aef25+'<span\x20class=\x22search-symbol\x22>'+_0x17a3ef['baseAsset']+_0x44bda4(0x4f0)+_0x44bda4(0xfe)+_0x17a3ef[_0x44bda4(0x1b1)]+_0x44bda4(0x4f0)+'</div>';})[_0x25fb81(0x3f2)](''),_0x3e84af['style'][_0x25fb81(0x30b)]=_0x25fb81(0x204)):(_0x3e84af[_0x25fb81(0x4a1)]=_0x25fb81(0x3ef)+_0x25fb81(0x3e7)+_0x25fb81(0x118),_0x3e84af['style'][_0x25fb81(0x30b)]='block');}),_0x3e84af[_0x459f82(0x164)](_0x459f82(0x1fd),function(_0x17397e){var _0x3426b4=_0x459f82,_0x1e0292=_0x17397e[_0x3426b4(0x358)]['closest'](_0x3426b4(0x3fd));if(_0x1e0292&&_0x1e0292[_0x3426b4(0x388)]['symbol']&&!_0x1e0292[_0x3426b4(0x1a1)][_0x3426b4(0x4f8)](_0x3426b4(0x330))){var _0x351fa0=_0x1e0292['dataset']['symbol'];addToSearchHistory(_0x351fa0),selectAsset(_0x351fa0),_0x8d7888[_0x3426b4(0x38b)]='',_0x3e84af['style'][_0x3426b4(0x30b)]=_0x3426b4(0x27f);}}),document[_0x459f82(0x164)](_0x459f82(0x1fd),function(_0x1a7bcf){var _0x1cb2e4=_0x459f82;if(!_0x1a7bcf[_0x1cb2e4(0x358)]['closest'](_0x1cb2e4(0x4c1)))_0x3e84af[_0x1cb2e4(0x3ff)][_0x1cb2e4(0x30b)]=_0x1cb2e4(0x27f);});var _0x5449fa=document[_0x459f82(0x27b)]('installBtn'),_0x9a77ac=null;window[_0x459f82(0x164)](_0x459f82(0x3e0),function(_0xca347b){var _0x430e8e=_0x459f82;_0xca347b['preventDefault'](),_0x9a77ac=_0xca347b,_0x5449fa[_0x430e8e(0x3ff)][_0x430e8e(0x30b)]=_0x430e8e(0x1fb);}),_0x5449fa['addEventListener'](_0x459f82(0x1fd),function(){var _0x2961e1=_0x459f82;_0x9a77ac&&(_0x9a77ac[_0x2961e1(0x3cb)](),_0x9a77ac[_0x2961e1(0x326)]['then'](function(_0x164432){var _0x20c479=_0x2961e1;if(_0x164432[_0x20c479(0x444)]===_0x20c479(0x141))showToast('اپلیکیشن\x20نصب\x20شد',_0x20c479(0x4f5));_0x9a77ac=null,_0x5449fa[_0x20c479(0x3ff)][_0x20c479(0x30b)]='none';}));});}function updateEntryAmount(){var _0x18ace3=a0_0x4859bd,_0x3edd45=parseFloat(document['getElementById'](_0x18ace3(0x361))['value'])||0x3e8,_0x36751c=parseInt(document[_0x18ace3(0x27b)]('riskPercent')[_0x18ace3(0x38b)])||0xa;document[_0x18ace3(0x27b)](_0x18ace3(0x496))[_0x18ace3(0x3a9)]='$'+(_0x3edd45*_0x36751c/0x64)[_0x18ace3(0x1a5)]();}function renderWatchlistTabs(){var _0x28810c=a0_0x4859bd,_0x2edb65=document[_0x28810c(0x27b)](_0x28810c(0x13f));_0x2edb65[_0x28810c(0x4a1)]='';var _0xe27b70={};STATE['watchlist'][_0x28810c(0x3c1)](function(_0x5e41d1){_0xe27b70[_0x5e41d1]=!![];}),STATE[_0x28810c(0x4bc)][_0x28810c(0x3c1)](function(_0x180a46){var _0x3bb2ec=_0x28810c,_0x146d21=ASSET_INFO[_0x180a46]||COIN_ICON_CACHE[_0x180a46]||{'name':_0x180a46[_0x3bb2ec(0x232)]('USDT',''),'symbol':_0x180a46[_0x3bb2ec(0x232)]('USDT',''),'icon':ICONS[_0x3bb2ec(0x13c)],'color':_0x3bb2ec(0x44a),'hasIcon':![]};COIN_ICON_CACHE[_0x180a46]&&!ASSET_INFO[_0x180a46]&&(ASSET_INFO[_0x180a46]=COIN_ICON_CACHE[_0x180a46],_0x146d21=ASSET_INFO[_0x180a46]);var _0x2348eb=document[_0x3bb2ec(0x3ec)]('button');_0x2348eb['className']=_0x3bb2ec(0x246)+(_0x180a46===STATE[_0x3bb2ec(0x1cd)]?_0x3bb2ec(0x46c):''),_0x2348eb[_0x3bb2ec(0x388)][_0x3bb2ec(0x3d3)]=_0x180a46;var _0x71c2b7='';_0x146d21[_0x3bb2ec(0x16a)]&&_0x146d21[_0x3bb2ec(0x281)]?_0x71c2b7=_0x3bb2ec(0x32e)+_0x146d21[_0x3bb2ec(0x281)]+_0x3bb2ec(0x135)+_0x146d21['symbol']+'\x22\x20style=\x22width:18px;height:18px;border-radius:50%;object-fit:cover;\x22\x20loading=\x22lazy\x22\x20decoding=\x22async\x22\x20onerror=\x22this.style.display=\x27none\x27\x22>':_0x71c2b7=_0x3bb2ec(0x37b)+_0x146d21[_0x3bb2ec(0x1cc)]+'\x22>'+(_0x146d21['icon']||ICONS['coin'])+_0x3bb2ec(0x4f0);var _0x41c614=STATE['prices'][_0x180a46],_0x5c68ec=_0x41c614&&_0x41c614[_0x3bb2ec(0x24c)];_0x2348eb[_0x3bb2ec(0x4a1)]=_0x71c2b7+_0x3bb2ec(0x46b)+_0x146d21[_0x3bb2ec(0x3d3)]+'</span>'+(_0x5c68ec?_0x3bb2ec(0x2f0)+ICONS[_0x3bb2ec(0x3cc)]['replace'](_0x3bb2ec(0x32f),_0x3bb2ec(0x1b9))[_0x3bb2ec(0x232)](_0x3bb2ec(0x192),_0x3bb2ec(0x138))+_0x3bb2ec(0x4f0):''),_0x2348eb[_0x3bb2ec(0x164)](_0x3bb2ec(0x1fd),function(){selectAsset(_0x180a46);}),_0x2edb65[_0x3bb2ec(0x158)](_0x2348eb);});if(STATE[_0x28810c(0x1cd)]&&!_0xe27b70[STATE[_0x28810c(0x1cd)]]){var _0x1fa174=STATE[_0x28810c(0x1cd)],_0x6d7fc2=ASSET_INFO[_0x1fa174]||COIN_ICON_CACHE[_0x1fa174]||{'name':_0x1fa174[_0x28810c(0x232)]('USDT',''),'symbol':_0x1fa174[_0x28810c(0x232)](_0x28810c(0x2b0),''),'icon':ICONS[_0x28810c(0x13c)],'color':_0x28810c(0x44a),'hasIcon':![]};COIN_ICON_CACHE[_0x1fa174]&&!ASSET_INFO[_0x1fa174]&&(ASSET_INFO[_0x1fa174]=COIN_ICON_CACHE[_0x1fa174],_0x6d7fc2=ASSET_INFO[_0x1fa174]);var _0x2b2ba3=document[_0x28810c(0x3ec)](_0x28810c(0x2e1));_0x2b2ba3[_0x28810c(0x44c)]=_0x28810c(0x4fe),_0x2b2ba3[_0x28810c(0x388)][_0x28810c(0x3d3)]=_0x1fa174,_0x2b2ba3[_0x28810c(0x3ff)][_0x28810c(0x437)]='dashed',_0x2b2ba3['style']['opacity']='0.8';var _0x2b884f='';_0x6d7fc2['hasIcon']&&_0x6d7fc2[_0x28810c(0x281)]?_0x2b884f=_0x28810c(0x32e)+_0x6d7fc2[_0x28810c(0x281)]+_0x28810c(0x135)+_0x6d7fc2['symbol']+'\x22\x20style=\x22width:18px;height:18px;border-radius:50%;object-fit:cover;\x22\x20loading=\x22lazy\x22\x20decoding=\x22async\x22\x20onerror=\x22this.style.display=\x27none\x27\x22>':_0x2b884f=_0x28810c(0x37b)+_0x6d7fc2[_0x28810c(0x1cc)]+'\x22>'+(_0x6d7fc2[_0x28810c(0x1db)]||ICONS[_0x28810c(0x13c)])+_0x28810c(0x4f0);var _0x19d88e=STATE['prices'][_0x1fa174],_0x24c6dd=_0x19d88e&&_0x19d88e['error'];_0x2b2ba3[_0x28810c(0x4a1)]=_0x2b884f+_0x28810c(0x46b)+_0x6d7fc2['symbol']+_0x28810c(0x4f0)+(_0x24c6dd?_0x28810c(0x2f0)+ICONS['alertTriangle'][_0x28810c(0x232)](_0x28810c(0x32f),'width=\x2212\x22')[_0x28810c(0x232)](_0x28810c(0x192),_0x28810c(0x138))+'</span>':''),_0x2b2ba3['addEventListener'](_0x28810c(0x1fd),function(){selectAsset(_0x1fa174);}),_0x2edb65[_0x28810c(0x158)](_0x2b2ba3);}}function selectAsset(_0x5b8bc9){var _0x47331e=a0_0x4859bd;STATE[_0x47331e(0x1cd)]=_0x5b8bc9,renderWatchlistTabs(),document['querySelectorAll']('.tab')[_0x47331e(0x3c1)](function(_0x113b77){var _0x2fbb92=_0x47331e;_0x113b77[_0x2fbb92(0x1a1)][_0x2fbb92(0x325)](_0x2fbb92(0x384),_0x113b77['dataset'][_0x2fbb92(0x3d3)]===_0x5b8bc9);}),renderAssetPanel(_0x5b8bc9);if(!STATE[_0x47331e(0x4d6)][_0x5b8bc9])fetchAssetData(_0x5b8bc9);typeof resetMonteCarloView===_0x47331e(0x1bb)&&resetMonteCarloView();}function renderEmptyWatchlist(){var _0x217b61=a0_0x4859bd,_0x28cbb7=document[_0x217b61(0x27b)]('assetPanel');_0x28cbb7[_0x217b61(0x4a1)]=_0x217b61(0x1af)+'<svg\x20width=\x2264\x22\x20height=\x2264\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x221.5\x22\x20style=\x22margin:0\x20auto\x2020px;opacity:0.5;\x22>'+_0x217b61(0x155)+'<line\x20x1=\x2221\x22\x20y1=\x2221\x22\x20x2=\x2216.65\x22\x20y2=\x2216.65\x22></line>'+_0x217b61(0x229)+'<h3\x20style=\x22margin:0\x200\x2010px;color:var(--text1);\x22>لیست\x20شما\x20خالی\x20است</h3>'+_0x217b61(0x42b)+_0x217b61(0x118);}function addToSearchHistory(_0x2a150c){var _0x108769=a0_0x4859bd,_0x295bbf=STATE['searchHistory'][_0x108769(0x34d)](_0x2a150c);_0x295bbf>-0x1&&STATE[_0x108769(0x19a)][_0x108769(0x455)](_0x295bbf,0x1);STATE['searchHistory']['unshift'](_0x2a150c);STATE[_0x108769(0x19a)][_0x108769(0x41d)]>0xa&&(STATE['searchHistory']=STATE[_0x108769(0x19a)][_0x108769(0x461)](0x0,0xa));try{localStorage[_0x108769(0x269)](_0x108769(0x19a),JSON['stringify'](STATE[_0x108769(0x19a)]));}catch(_0x553567){console[_0x108769(0x442)](_0x108769(0x4e1),_0x553567);}}function renderSearchHistory(){var _0x3dbb29=a0_0x4859bd,_0x318ce6=document['getElementById'](_0x3dbb29(0x40c));if(!_0x318ce6)return;if(STATE['searchHistory'][_0x3dbb29(0x41d)]===0x0){_0x318ce6[_0x3dbb29(0x3ff)][_0x3dbb29(0x30b)]=_0x3dbb29(0x27f);return;}_0x318ce6[_0x3dbb29(0x1a1)][_0x3dbb29(0x2cd)]('search-history'),_0x318ce6[_0x3dbb29(0x4a1)]=STATE[_0x3dbb29(0x19a)]['map'](function(_0x5b5b80){var _0x51d417=_0x3dbb29,_0x91217d=_0x5b5b80['replace'](_0x51d417(0x2b0),''),_0x58fd4e=ASSET_INFO[_0x5b5b80]||COIN_ICON_CACHE[_0x5b5b80]||{'name':_0x91217d,'symbol':_0x91217d},_0x5dc0c0=_0x58fd4e[_0x51d417(0x281)]||getCMCIconUrl(_0x5b5b80),_0x29d4f8=_0x5dc0c0?_0x51d417(0x32e)+_0x5dc0c0+_0x51d417(0x135)+_0x91217d+_0x51d417(0xef):_0x51d417(0x35f);return'<div\x20class=\x22search-item\x20search-history-item\x22\x20data-symbol=\x22'+_0x5b5b80+'\x22>'+_0x29d4f8+_0x51d417(0x49c)+_0x91217d+_0x51d417(0x4f0)+_0x51d417(0x118);})['join'](''),_0x318ce6['style'][_0x3dbb29(0x30b)]=_0x3dbb29(0x204);}function addToWatchlist(_0xa4f871){var _0x55320c=a0_0x4859bd,_0x170ba6=_0xa4f871['replace'](_0x55320c(0x2b0),'');if(STABLECOINS['includes'](_0x170ba6))return;if(STATE[_0x55320c(0x4bc)][_0x55320c(0x136)](_0xa4f871)){showToast(_0x55320c(0x410),_0x55320c(0x24c));return;}STATE[_0x55320c(0x4bc)][_0x55320c(0x233)](_0xa4f871),!STATE[_0x55320c(0x1cd)]&&(STATE['activeAsset']=_0xa4f871),saveSettings(),renderWatchlistTabs(),selectAsset(_0xa4f871),fetchAssetData(_0xa4f871),fetchCoinIcon(_0xa4f871),showToast(_0xa4f871+_0x55320c(0x46f),'success');}function removeFromWatchlist(_0x3fdfca){var _0x4ce7b4=a0_0x4859bd;if(STATE['watchlist'][_0x4ce7b4(0x41d)]<=0x1){showToast(_0x4ce7b4(0x2ae),'error');return;}STATE[_0x4ce7b4(0x4bc)]=STATE[_0x4ce7b4(0x4bc)][_0x4ce7b4(0x382)](function(_0x50635c){return _0x50635c!==_0x3fdfca;}),saveSettings(),renderWatchlistTabs(),STATE[_0x4ce7b4(0x1cd)]?renderAssetPanel(STATE[_0x4ce7b4(0x1cd)]):renderEmptyWatchlist(),showToast(_0x3fdfca+_0x4ce7b4(0x300),_0x4ce7b4(0x4f5));}function renderAssetPanel(_0x412b19){var _0x1fb906=a0_0x4859bd,_0x214857=ASSET_INFO[_0x412b19]||COIN_ICON_CACHE[_0x412b19]||{'name':_0x412b19[_0x1fb906(0x232)]('USDT',''),'symbol':_0x412b19[_0x1fb906(0x232)]('USDT',''),'icon':ICONS[_0x1fb906(0x13c)],'color':_0x1fb906(0x44a),'hasIcon':![]};COIN_ICON_CACHE[_0x412b19]&&!ASSET_INFO[_0x412b19]&&(ASSET_INFO[_0x412b19]=COIN_ICON_CACHE[_0x412b19],_0x214857=ASSET_INFO[_0x412b19]);var _0xa6b2e9=STATE[_0x1fb906(0x2ce)][_0x412b19],_0x2b3e1e=STATE[_0x1fb906(0x26d)][_0x412b19],_0x5f01ea=STATE['positions'][_0x412b19],_0x234d7f=document['getElementById'](_0x1fb906(0x102)),_0x44e508='';_0x214857['hasIcon']&&_0x214857[_0x1fb906(0x281)]?_0x44e508=_0x1fb906(0x32e)+_0x214857[_0x1fb906(0x281)]+_0x1fb906(0x135)+_0x214857[_0x1fb906(0x3d3)]+'\x22\x20style=\x22width:48px;height:48px;border-radius:50%;object-fit:cover;background:'+_0x214857['color']+'20;\x22\x20loading=\x22lazy\x22\x20decoding=\x22async\x22>':_0x44e508='<div\x20class=\x22asset-icon\x22\x20style=\x22background:'+_0x214857[_0x1fb906(0x1cc)]+_0x1fb906(0x4a6)+_0x214857[_0x1fb906(0x1cc)]+'\x22>'+(_0x214857[_0x1fb906(0x1db)]||ICONS['coin'])+_0x1fb906(0x118);var _0x4edb7b='--',_0x2fde95='--',_0x58caf0='',_0x8a1f7d='';if(_0xa6b2e9&&!_0xa6b2e9['error']&&_0xa6b2e9[_0x1fb906(0x327)]>0x0)_0x4edb7b=formatPrice(_0xa6b2e9[_0x1fb906(0x327)]),_0x2fde95=(_0xa6b2e9[_0x1fb906(0x498)]>=0x0?'+':'')+_0xa6b2e9[_0x1fb906(0x498)][_0x1fb906(0x335)](0x2)+'%',_0x58caf0=_0xa6b2e9['change']>=0x0?'up':_0x1fb906(0x4b1),_0xa6b2e9[_0x1fb906(0x412)]===_0x1fb906(0x234)&&(_0x8a1f7d=_0x1fb906(0x3f3));else _0xa6b2e9&&_0xa6b2e9[_0x1fb906(0x24c)]&&(_0x4edb7b=_0x1fb906(0xfa)+(_0xa6b2e9['errorMsg']||_0x1fb906(0x1c1))+'</span>',_0x2fde95='');var _0x3e91e8='<div\x20class=\x22price-box\x22>'+_0x1fb906(0x1f4)+_0x44e508+_0x1fb906(0x4e4)+_0x1fb906(0x211)+_0x214857[_0x1fb906(0x25d)]+_0x1fb906(0x432)+'<span\x20class=\x22asset-symbol\x22>'+_0x412b19+_0x1fb906(0x4f0)+_0x1fb906(0x118)+_0x1fb906(0x118)+_0x1fb906(0x2d9)+_0x1fb906(0x2a2)+_0x4edb7b+_0x1fb906(0x4f0)+(_0x2fde95?_0x1fb906(0x124)+_0x58caf0+'\x22>'+_0x2fde95+_0x1fb906(0x4f0):'')+_0x8a1f7d+_0x1fb906(0x118)+'</div>',_0x2af1f7=_0x2b3e1e?_0x2b3e1e[_0x1fb906(0x45f)]:_0x1fb906(0x277),_0x415562=_0x2af1f7===_0x1fb906(0x28a)?ICONS[_0x1fb906(0x295)]:_0x2af1f7===_0x1fb906(0x3c6)?ICONS[_0x1fb906(0x428)]:ICONS['clock'],_0x210db7=_0x2af1f7===_0x1fb906(0x28a)?_0x1fb906(0x2d0):_0x2af1f7===_0x1fb906(0x3c6)?_0x1fb906(0x10c):_0x1fb906(0xf6),_0x31fee7=_0x1fb906(0xfd)+_0x2af1f7+'\x22>'+'<div\x20class=\x22signal-header\x22>'+'<span\x20class=\x22signal-badge\x22>'+_0x415562+'\x20'+_0x210db7+_0x1fb906(0x4f0)+'<span\x20class=\x22signal-confidence\x22>قدرت:\x20'+(_0x2b3e1e?_0x2b3e1e[_0x1fb906(0x4a0)]||0x0:0x0)+_0x1fb906(0x26f)+_0x1fb906(0x118)+'<div\x20class=\x22signal-reasons\x22>'+(_0x2b3e1e&&_0x2b3e1e['reasons']?_0x2b3e1e[_0x1fb906(0x29b)][_0x1fb906(0x461)](0x0,0x4)['join'](_0x1fb906(0x4db)):_0x1fb906(0x1f1))+_0x1fb906(0x118)+_0x1fb906(0x118),_0x2768ad='';if(_0x2b3e1e&&_0x2b3e1e[_0x1fb906(0x45f)]!=='wait'&&_0x2b3e1e[_0x1fb906(0x406)]){var _0x118cfe=_0x2b3e1e[_0x1fb906(0x406)],_0x31fb8c={};if(_0x118cfe['mode']===_0x1fb906(0x34e))_0x31fb8c={'icon':ICONS['rocket'],'text':'پیشنهاد:\x20فیوچر','color':_0x1fb906(0x2ca),'bg':'rgba(59,\x20130,\x20246,\x200.15)','border':_0x1fb906(0x2ca)};else _0x118cfe[_0x1fb906(0x31b)]===_0x1fb906(0x28d)?_0x31fb8c={'icon':ICONS[_0x1fb906(0x13c)],'text':_0x1fb906(0x3ac),'color':_0x1fb906(0x1aa),'bg':_0x1fb906(0x3fe),'border':_0x1fb906(0x1aa)}:_0x31fb8c={'icon':ICONS['layers'],'text':'پیشنهاد:\x20هر\x20دو\x20(فیوچر\x20و\x20اسپات)','color':_0x1fb906(0x22b),'bg':_0x1fb906(0x17c),'border':_0x1fb906(0x22b)};_0x2768ad='<div\x20class=\x22trading-mode-card\x22\x20style=\x22background:'+_0x31fb8c['bg']+_0x1fb906(0x3cd)+_0x31fb8c[_0x1fb906(0x1dd)]+_0x1fb906(0x43f)+'<div\x20style=\x22display:flex;align-items:center;gap:10px;\x22>'+_0x1fb906(0x12e)+_0x31fb8c['color']+_0x1fb906(0x4e3)+_0x31fb8c[_0x1fb906(0x1db)]+'</span>'+_0x1fb906(0x4c0)+_0x31fb8c[_0x1fb906(0x1cc)]+';\x22>'+_0x31fb8c[_0x1fb906(0x4fd)]+'</span>'+_0x1fb906(0x118)+'<div\x20style=\x22display:flex;align-items:center;gap:8px;flex-wrap:wrap;\x22>'+(_0x118cfe[_0x1fb906(0x29b)]&&_0x118cfe[_0x1fb906(0x29b)][_0x1fb906(0x41d)]>0x0?_0x1fb906(0x4a7)+_0x118cfe['reasons'][_0x1fb906(0x3f2)](_0x1fb906(0x4db))+_0x1fb906(0x4f0):'')+_0x1fb906(0x118)+_0x1fb906(0x118);}var _0x2aec3d='';if(_0x2b3e1e&&_0x2b3e1e[_0x1fb906(0x45f)]!==_0x1fb906(0x277)){var _0x342c8a=_0x2b3e1e[_0x1fb906(0x2e5)]===_0x1fb906(0x42a)?ICONS[_0x1fb906(0x358)]:_0x2b3e1e[_0x1fb906(0x2e5)]===_0x1fb906(0x349)?ICONS[_0x1fb906(0x3a5)]:ICONS['circle'],_0x40e748=_0x2b3e1e[_0x1fb906(0x2e5)]===_0x1fb906(0x42a)?_0x1fb906(0x464):_0x2b3e1e['entryQuality']===_0x1fb906(0x349)?_0x1fb906(0x263):_0x1fb906(0x2dc),_0x5de57b=getEffectiveLeverage(_0x2b3e1e[_0x1fb906(0x290)]),_0xd74ef2=parseInt(_0x5de57b)||0x5,_0x3dcf78=TradingCore[_0x1fb906(0x117)]?TradingCore[_0x1fb906(0x117)](_0x2b3e1e[_0x1fb906(0x408)],_0xd74ef2,_0x2b3e1e[_0x1fb906(0x45f)]):null,_0x39e7c6=TradingCore['getSmartLeverage']?TradingCore[_0x1fb906(0x422)](_0x2b3e1e[_0x1fb906(0x408)],_0x2b3e1e['sl'],_0x2b3e1e['atr'],STATE[_0x1fb906(0x1ee)][_0x1fb906(0x4d8)],0x2):null;_0x2aec3d=_0x1fb906(0x491)+_0x1fb906(0x3aa)+'<span\x20class=\x22entry-quality\x20'+(_0x2b3e1e['entryQuality']||_0x1fb906(0x349))+'\x22>'+_0x342c8a+'\x20'+_0x40e748+_0x1fb906(0x4f0)+_0x1fb906(0x244)+(_0x2b3e1e['confluenceScore']||0x0)+_0x1fb906(0x4f0)+_0x1fb906(0x118)+_0x1fb906(0x414)+(_0x2b3e1e[_0x1fb906(0x450)]?_0x2b3e1e[_0x1fb906(0x450)][_0x1fb906(0x3f2)](_0x1fb906(0x41a)):'')+_0x1fb906(0x118)+'<div\x20class=\x22entry-details\x22>'+_0x1fb906(0x14c)+ICONS[_0x1fb906(0x31a)]+_0x1fb906(0x338)+formatPrice(_0x2b3e1e[_0x1fb906(0x408)])+'</span></div>'+_0x1fb906(0x14c)+ICONS[_0x1fb906(0x42d)]+'\x20استاپ‌لاس</span><span\x20class=\x22detail-value\x20sl\x22>'+formatPrice(_0x2b3e1e['sl'])+'</span></div>'+'<div\x20class=\x22detail-row\x22><span\x20class=\x22detail-label\x22>'+ICONS[_0x1fb906(0x358)]+_0x1fb906(0x162)+formatPrice(_0x2b3e1e[_0x1fb906(0x2b2)])+'</span></div>'+_0x1fb906(0x14c)+ICONS[_0x1fb906(0x358)]+_0x1fb906(0x207)+formatPrice(_0x2b3e1e[_0x1fb906(0x19e)])+_0x1fb906(0x289)+_0x1fb906(0x14c)+ICONS[_0x1fb906(0x3f8)]+_0x1fb906(0x4e6)+_0x5de57b+_0x1fb906(0x289)+_0x1fb906(0x14c)+ICONS[_0x1fb906(0x36b)]+_0x1fb906(0x364)+(STATE[_0x1fb906(0x1ee)]['capital']*STATE[_0x1fb906(0x1ee)][_0x1fb906(0x34c)]/0x64)['toLocaleString']()+'</span></div>'+_0x1fb906(0x118)+_0x1fb906(0x118);if(_0x3dcf78){var _0x43dee0=_0x3dcf78[_0x1fb906(0x390)]?_0x1fb906(0x390):_0x3dcf78['warning']?_0x1fb906(0x1cf):_0x1fb906(0x413),_0x2fde7b=_0x3dcf78['danger']?ICONS[_0x1fb906(0x3cc)]:_0x3dcf78[_0x1fb906(0x1cf)]?ICONS[_0x1fb906(0x198)]:ICONS[_0x1fb906(0x3a5)],_0x50cd4a=_0x3dcf78['danger']?'خطر\x20لیکویید!':_0x3dcf78[_0x1fb906(0x1cf)]?'احتیاط':_0x1fb906(0xf2),_0x4443b2=_0x3dcf78['danger']?'#ef4444':_0x3dcf78['warning']?_0x1fb906(0x22b):_0x1fb906(0x1aa);_0x2aec3d+='<div\x20class=\x22futures-warning\x22\x20style=\x22background:'+_0x4443b2+_0x1fb906(0x202)+_0x4443b2+_0x1fb906(0x221)+_0x1fb906(0x261)+_0x1fb906(0x378)+_0x1fb906(0x37b)+_0x4443b2+_0x1fb906(0x429)+_0x2fde7b+_0x1fb906(0x4f0)+_0x1fb906(0x203)+_0x4443b2+_0x1fb906(0x15f)+formatPrice(_0x3dcf78[_0x1fb906(0x327)])+_0x1fb906(0x4f0)+_0x1fb906(0x118)+'<span\x20style=\x22font-size:12px;color:var(--text2);\x22>فاصله:\x20'+_0x3dcf78['distancePercent']['toFixed'](0x1)+'%\x20|\x20'+_0x50cd4a+'</span>'+_0x1fb906(0x118)+_0x1fb906(0x118);}if(_0x39e7c6&&_0x39e7c6[_0x1fb906(0x290)]!==_0xd74ef2){var _0x3ed520=_0x39e7c6[_0x1fb906(0x441)]==='low'?_0x1fb906(0x1aa):_0x39e7c6[_0x1fb906(0x441)]===_0x1fb906(0x213)?'#3b82f6':_0x39e7c6['riskLevel']===_0x1fb906(0x174)?_0x1fb906(0x22b):_0x1fb906(0x423);_0x2aec3d+=_0x1fb906(0x3f1)+_0x1fb906(0x24a)+_0x1fb906(0x421)+_0x1fb906(0x37b)+_0x3ed520+';font-weight:600;\x22>'+_0x39e7c6[_0x1fb906(0x290)]+'x\x20('+_0x39e7c6[_0x1fb906(0x48e)]+_0x1fb906(0x1e1)+_0x1fb906(0x118)+_0x1fb906(0x118);}_0x2b3e1e[_0x1fb906(0x2ef)]&&_0x2b3e1e[_0x1fb906(0x2ef)][_0x1fb906(0x41d)]>0x0&&(_0x2aec3d+='<div\x20class=\x22scaling-section\x22>'+_0x1fb906(0x140)+ICONS[_0x1fb906(0x398)]+_0x1fb906(0x200)+_0x1fb906(0x340),_0x2b3e1e[_0x1fb906(0x2ef)]['forEach'](function(_0x20c898){var _0x54a8ec=_0x1fb906;_0x2aec3d+=_0x54a8ec(0x267)+_0x54a8ec(0x15b)+_0x20c898[_0x54a8ec(0x48e)]+_0x54a8ec(0x4f0)+_0x54a8ec(0x4b6)+formatPrice(_0x20c898[_0x54a8ec(0x327)])+_0x54a8ec(0x4f0)+'<span\x20class=\x22scaling-pct\x22>('+_0x20c898[_0x54a8ec(0x3a8)]+_0x54a8ec(0x20c)+_0x54a8ec(0x118);}),_0x2aec3d+=_0x1fb906(0xf9));}var _0x9580c9=_0x2b3e1e&&_0x2b3e1e[_0x1fb906(0x101)]?_0x2b3e1e[_0x1fb906(0x101)]:null,_0x320e3e=_0x2b3e1e&&_0x2b3e1e[_0x1fb906(0x339)]?_0x2b3e1e['marketStructure']:null,_0x109d71=_0x1fb906(0x404)+'<div\x20class=\x22indicators-title\x22>'+ICONS[_0x1fb906(0x427)]+_0x1fb906(0x497)+_0x1fb906(0x19b)+_0x1fb906(0x2e7)+getRsiClass(_0x2b3e1e?_0x2b3e1e[_0x1fb906(0x371)]:0x32)+'\x22>'+(_0x2b3e1e&&_0x2b3e1e['rsi']?_0x2b3e1e[_0x1fb906(0x371)][_0x1fb906(0x335)](0x1):'--')+'</span></div>'+_0x1fb906(0x142)+getStochRSIClass(_0x9580c9)+'\x22>'+(_0x9580c9?_0x9580c9['k']['toFixed'](0x0)+'/'+_0x9580c9['d'][_0x1fb906(0x335)](0x0):'--')+_0x1fb906(0x289)+'<div\x20class=\x22ind-item\x22><span\x20class=\x22ind-label\x22>روند</span><span\x20class=\x22ind-value\x20'+getTrendClass(_0x2b3e1e?_0x2b3e1e['trend']:_0x1fb906(0x4be))+'\x22>'+getTrendLabel(_0x2b3e1e?_0x2b3e1e[_0x1fb906(0x231)]:_0x1fb906(0x4be))+_0x1fb906(0x289)+_0x1fb906(0x240)+getStructureClass(_0x320e3e)+'\x22>'+getStructureLabel(_0x320e3e)+_0x1fb906(0x289)+_0x1fb906(0x430)+(_0x2b3e1e&&_0x2b3e1e['adx']?_0x2b3e1e[_0x1fb906(0x37a)][_0x1fb906(0x37a)][_0x1fb906(0x335)](0x0):'--')+'</span></div>'+_0x1fb906(0x2f3)+(_0x2b3e1e&&_0x2b3e1e[_0x1fb906(0x3df)]&&_0x2b3e1e[_0x1fb906(0x3df)][_0x1fb906(0x2ff)]>0x0?'bullish':_0x1fb906(0x347))+'\x22>'+(_0x2b3e1e&&_0x2b3e1e[_0x1fb906(0x3df)]?_0x2b3e1e[_0x1fb906(0x3df)]['histogram']>0x0?_0x1fb906(0x2f4):'نزولی':'--')+'</span></div>'+_0x1fb906(0x118)+_0x1fb906(0x118),_0x28c093='';if(_0x5f01ea){var _0x1c73a6=calculatePnL(_0x5f01ea,_0xa6b2e9?_0xa6b2e9[_0x1fb906(0x327)]:0x0);_0x28c093=_0x1fb906(0x3bd)+_0x5f01ea[_0x1fb906(0x45f)]+'\x22>'+_0x1fb906(0x31e)+ICONS['clipboard']+_0x1fb906(0x4ed)+_0x1fb906(0x2c5)+_0x1fb906(0x2bc)+(_0x5f01ea[_0x1fb906(0x45f)]===_0x1fb906(0x28a)?_0x1fb906(0x18a):_0x1fb906(0x370))+_0x1fb906(0x289)+'<div\x20class=\x22pos-row\x22><span>ورود:</span><span>'+formatPrice(_0x5f01ea[_0x1fb906(0x408)])+_0x1fb906(0x289)+'<div\x20class=\x22pos-row\x22><span>حجم:</span><span>$'+_0x5f01ea[_0x1fb906(0x2e4)][_0x1fb906(0x1a5)]()+_0x1fb906(0x289)+'<div\x20class=\x22pos-row\x22><span>اهرم:</span><span>'+_0x5f01ea[_0x1fb906(0x290)]+_0x1fb906(0x2f7)+_0x1fb906(0x380)+(_0x1c73a6>=0x0?_0x1fb906(0x224):_0x1fb906(0x2a6))+'\x22>'+(_0x1c73a6>=0x0?'+':'')+_0x1c73a6[_0x1fb906(0x335)](0x2)+_0x1fb906(0x33e)+_0x1fb906(0x118)+'<button\x20class=\x22btn-close-pos\x22\x20onclick=\x22closePosition(\x27'+_0x412b19+_0x1fb906(0x222)+ICONS['x']+_0x1fb906(0x402)+_0x1fb906(0x118);}var _0x5b5061=_0x1fb906(0x2cc);!_0x5f01ea&&_0x2b3e1e&&_0x2b3e1e[_0x1fb906(0x45f)]!==_0x1fb906(0x277)&&(_0x5b5061+=_0x1fb906(0x47b)+_0x2b3e1e[_0x1fb906(0x45f)]+_0x1fb906(0x465)+_0x412b19+_0x1fb906(0x222)+ICONS['rocket']+'\x20ورود\x20به\x20معامله</button>');_0x5b5061+=_0x1fb906(0x191)+_0x412b19+'\x27)\x22>'+ICONS[_0x1fb906(0x243)]+_0x1fb906(0x3ba);var _0x506539=STATE[_0x1fb906(0x4bc)][_0x1fb906(0x136)](_0x412b19);if(_0x506539)_0x5b5061+=_0x1fb906(0x2c0)+_0x412b19+'\x27)\x22>'+ICONS[_0x1fb906(0x1ba)]+'</button>';else{var _0x54a403=_0x1fb906(0x22a);_0x5b5061+=_0x1fb906(0x49d)+_0x412b19+'\x27)\x22>'+_0x54a403+_0x1fb906(0x3ba);}_0x5b5061+=_0x1fb906(0x118),_0x234d7f[_0x1fb906(0x4a1)]=_0x3e91e8+_0x31fee7+_0x2768ad+_0x2aec3d+_0x109d71+_0x28c093+_0x5b5061,updateStickyAIAdvisor(_0x412b19,_0x2b3e1e);}function updateStickyAIAdvisor(_0x171638,_0x1ed868){var _0x1d5ae1=a0_0x4859bd,_0x32a079=document[_0x1d5ae1(0x27b)](_0x1d5ae1(0x308)),_0x348efc=document[_0x1d5ae1(0x27b)]('aiAdvisorButton');if(!_0x32a079||!_0x348efc)return;_0x1ed868&&_0x1ed868[_0x1d5ae1(0x45f)]!==_0x1d5ae1(0x277)?(_0x32a079[_0x1d5ae1(0x3ff)][_0x1d5ae1(0x30b)]=_0x1d5ae1(0x204),_0x348efc[_0x1d5ae1(0x452)](_0x1d5ae1(0x166),_0x1d5ae1(0x453)+_0x171638+'\x27)')):_0x32a079[_0x1d5ae1(0x3ff)][_0x1d5ae1(0x30b)]=_0x1d5ae1(0x27f);}function getCMCIconUrl(_0x3fd21){var _0x58fe79=a0_0x4859bd,_0x109e84=_0x3fd21[_0x58fe79(0x232)]('USDT','')[_0x58fe79(0x488)](),_0x89bfeb=CMC_IDS[_0x109e84];if(_0x89bfeb)return _0x58fe79(0x266)+_0x89bfeb+_0x58fe79(0x216);return null;}function fetchCoinIcon(_0x4eb3c0){var _0x109950=a0_0x4859bd;if(COIN_ICON_CACHE[_0x4eb3c0]&&COIN_ICON_CACHE[_0x4eb3c0]['hasIcon'])return Promise['resolve'](COIN_ICON_CACHE[_0x4eb3c0]);var _0x6762a7=_0x4eb3c0[_0x109950(0x232)](_0x109950(0x2b0),''),_0x1cf28f=getCMCIconUrl(_0x4eb3c0);if(_0x1cf28f){COIN_ICON_CACHE[_0x4eb3c0]={'name':_0x6762a7,'symbol':_0x6762a7,'iconUrl':_0x1cf28f,'color':_0x109950(0x44a),'hasIcon':!![]},ASSET_INFO[_0x4eb3c0]=COIN_ICON_CACHE[_0x4eb3c0];try{localStorage[_0x109950(0x269)](_0x109950(0x2f1),JSON[_0x109950(0x1b8)](COIN_ICON_CACHE));}catch(_0x163225){console[_0x109950(0x442)]('Error\x20saving\x20icon\x20cache:',_0x163225);}return renderWatchlistTabs(),_0x4eb3c0===STATE[_0x109950(0x1cd)]&&renderAssetPanel(_0x4eb3c0),Promise[_0x109950(0x28c)](COIN_ICON_CACHE[_0x4eb3c0]);}if(!CMC_API_EXHAUSTED)return fetchCoinInfoFromCMC(_0x4eb3c0,_0x6762a7);return createFallbackIcon(_0x4eb3c0,_0x6762a7);}function fetchCoinInfoFromCMC(_0x289caa,_0x433e1b){var _0x56e237=a0_0x4859bd;return fetch(_0x56e237(0x4b8)+_0x433e1b,{'headers':{'X-CMC_PRO_API_KEY':CMC_API_KEY,'Accept':_0x56e237(0x2a3)}})[_0x56e237(0x3c7)](function(_0x59c986){var _0x382aeb=_0x56e237;if(_0x59c986['status']===0x1ad||_0x59c986['status']===0x192){CMC_API_EXHAUSTED=!![];throw new Error('CMC\x20API\x20limit\x20reached');}if(!_0x59c986['ok'])throw new Error(_0x382aeb(0x1ec));return _0x59c986[_0x382aeb(0x456)]();})[_0x56e237(0x3c7)](function(_0x5b9e1e){var _0xf97190=_0x56e237;if(_0x5b9e1e[_0xf97190(0x1b7)]&&_0x5b9e1e[_0xf97190(0x1b7)][_0xf97190(0x41d)]>0x0){var _0x26d691=_0x5b9e1e['data'][0x0],_0x25ca60=_0xf97190(0x266)+_0x26d691['id']+_0xf97190(0x216);COIN_ICON_CACHE[_0x289caa]={'name':_0x26d691[_0xf97190(0x25d)],'symbol':_0x433e1b,'iconUrl':_0x25ca60,'color':_0xf97190(0x44a),'hasIcon':!![]},ASSET_INFO[_0x289caa]=COIN_ICON_CACHE[_0x289caa],CMC_IDS[_0x433e1b]=_0x26d691['id'];try{localStorage[_0xf97190(0x269)](_0xf97190(0x2f1),JSON[_0xf97190(0x1b8)](COIN_ICON_CACHE));}catch(_0x5d6352){}return renderWatchlistTabs(),_0x289caa===STATE[_0xf97190(0x1cd)]&&renderAssetPanel(_0x289caa),COIN_ICON_CACHE[_0x289caa];}throw new Error('Coin\x20not\x20found\x20in\x20CMC');})[_0x56e237(0x2d1)](function(_0x2d9f42){var _0x1469a1=_0x56e237;return console[_0x1469a1(0x442)](_0x1469a1(0x36c)+_0x289caa+':',_0x2d9f42['message']),createFallbackIcon(_0x289caa,_0x433e1b);});}function createFallbackIcon(_0x56e62f,_0x202891){var _0x4ca919=a0_0x4859bd;COIN_ICON_CACHE[_0x56e62f]={'name':_0x202891,'symbol':_0x202891,'icon':ICONS[_0x4ca919(0x13c)],'color':_0x4ca919(0x44a),'hasIcon':![]},ASSET_INFO[_0x56e62f]=COIN_ICON_CACHE[_0x56e62f];try{localStorage[_0x4ca919(0x269)](_0x4ca919(0x2f1),JSON['stringify'](COIN_ICON_CACHE));}catch(_0x2b8d20){}return Promise[_0x4ca919(0x28c)](COIN_ICON_CACHE[_0x56e62f]);}var DEFAULT_SYMBOLS=[a0_0x4859bd(0x2f5),a0_0x4859bd(0x3ad),a0_0x4859bd(0x44b),a0_0x4859bd(0x1ac),a0_0x4859bd(0x47e),a0_0x4859bd(0x2ab),a0_0x4859bd(0x1e7),a0_0x4859bd(0x375),a0_0x4859bd(0x2f6),'MATIC',a0_0x4859bd(0x4ab),'SHIB',a0_0x4859bd(0x4e5),a0_0x4859bd(0x1e4),a0_0x4859bd(0x28f),a0_0x4859bd(0x377),a0_0x4859bd(0x186),a0_0x4859bd(0x31f),'XLM','ALGO','VET',a0_0x4859bd(0x4cc),a0_0x4859bd(0x38d),a0_0x4859bd(0x170),a0_0x4859bd(0x2d7),'NEAR',a0_0x4859bd(0x215),'OP',a0_0x4859bd(0x49f),a0_0x4859bd(0x45e),a0_0x4859bd(0x116),'STX',a0_0x4859bd(0x262),a0_0x4859bd(0x161),a0_0x4859bd(0x2b6),a0_0x4859bd(0x260),a0_0x4859bd(0x148),a0_0x4859bd(0x2bf),a0_0x4859bd(0x147),a0_0x4859bd(0x13d),a0_0x4859bd(0x23d),a0_0x4859bd(0x342),a0_0x4859bd(0xfc),a0_0x4859bd(0x420),a0_0x4859bd(0x1a6),'SNX',a0_0x4859bd(0x1e3),a0_0x4859bd(0x1de),a0_0x4859bd(0x4cd),a0_0x4859bd(0x2fe),a0_0x4859bd(0x2da),'ZIL',a0_0x4859bd(0x357),a0_0x4859bd(0x288),'KSM',a0_0x4859bd(0x1b6),a0_0x4859bd(0x16c),a0_0x4859bd(0x459),a0_0x4859bd(0x115),a0_0x4859bd(0x18f),'GALA','AR','ROSE','GMT',a0_0x4859bd(0x110),'ENS','ANKR',a0_0x4859bd(0x2c9),'IMX',a0_0x4859bd(0x4d4),a0_0x4859bd(0x40d),a0_0x4859bd(0x271),'YFI','OCEAN','AUDIO','BAND','REN',a0_0x4859bd(0x3e9),a0_0x4859bd(0x2cb),a0_0x4859bd(0xf8),'CELR',a0_0x4859bd(0x3a0),a0_0x4859bd(0x478),'DENT',a0_0x4859bd(0x4d7),a0_0x4859bd(0x1fc),a0_0x4859bd(0x411),'NKN',a0_0x4859bd(0x415),a0_0x4859bd(0x1d9),a0_0x4859bd(0x301),'RLC',a0_0x4859bd(0x1f2),a0_0x4859bd(0x426),a0_0x4859bd(0xfb),a0_0x4859bd(0x3d1),a0_0x4859bd(0x1d6),a0_0x4859bd(0x1e8),a0_0x4859bd(0x336),a0_0x4859bd(0x4e9),a0_0x4859bd(0x2ed),'GHST',a0_0x4859bd(0x476),'BADGER','OM',a0_0x4859bd(0x439),a0_0x4859bd(0x100),'RAD','XVS',a0_0x4859bd(0x197),a0_0x4859bd(0x3c3),a0_0x4859bd(0x2f8),a0_0x4859bd(0x457),a0_0x4859bd(0x1d2),a0_0x4859bd(0x163),'UNFI','AGLD',a0_0x4859bd(0x185),a0_0x4859bd(0x39b),'CVX',a0_0x4859bd(0x20f),a0_0x4859bd(0x2b4),a0_0x4859bd(0x14e),'ACH',a0_0x4859bd(0x27c),a0_0x4859bd(0x1a8),'DAR',a0_0x4859bd(0x30c),a0_0x4859bd(0x360),a0_0x4859bd(0x495),a0_0x4859bd(0x2aa),a0_0x4859bd(0x228),'RNDR',a0_0x4859bd(0x279),'MAGIC','SSV','HOOK',a0_0x4859bd(0x3b2),'ID',a0_0x4859bd(0x3bf),'PEPE',a0_0x4859bd(0x468),a0_0x4859bd(0x44e),a0_0x4859bd(0x1ae),a0_0x4859bd(0x119),a0_0x4859bd(0x149),a0_0x4859bd(0x3ce),a0_0x4859bd(0xf1),a0_0x4859bd(0x3a2),'PENDLE',a0_0x4859bd(0x242),a0_0x4859bd(0x329),a0_0x4859bd(0x492),'TWT',a0_0x4859bd(0x33a),a0_0x4859bd(0x3f6),a0_0x4859bd(0x1c7),'LPT','RPL',a0_0x4859bd(0x3e4),a0_0x4859bd(0x363),a0_0x4859bd(0x1f9),'BONK',a0_0x4859bd(0x33f),a0_0x4859bd(0x241),a0_0x4859bd(0x3b5),a0_0x4859bd(0xf7),a0_0x4859bd(0x2c6),a0_0x4859bd(0x1eb),a0_0x4859bd(0x483),a0_0x4859bd(0x472),a0_0x4859bd(0x392),'BLZ','DIA',a0_0x4859bd(0x4bf),a0_0x4859bd(0x3ae),'ORN',a0_0x4859bd(0x40b),a0_0x4859bd(0x4c2),a0_0x4859bd(0x4b9),a0_0x4859bd(0x331),'UMA',a0_0x4859bd(0x3b7),a0_0x4859bd(0x4a4),a0_0x4859bd(0x19f)];function loadAllSymbols(){var _0x1af720=a0_0x4859bd;STATE[_0x1af720(0x26c)]=DEFAULT_SYMBOLS[_0x1af720(0x382)](function(_0x1f1da8){var _0x577eb5=_0x1af720;return!STABLECOINS[_0x577eb5(0x136)](_0x1f1da8);})[_0x1af720(0x42c)](function(_0xabf733){var _0x432c68=_0x1af720;return{'symbol':_0xabf733+'USDT','baseAsset':_0xabf733,'quoteAsset':_0x432c68(0x2b0)};}),console[_0x1af720(0x442)]('Loaded\x20'+STATE['allSymbols'][_0x1af720(0x41d)]+_0x1af720(0x12f)),fetch(BINANCE_API+_0x1af720(0x1a3))[_0x1af720(0x3c7)](function(_0x4b10ab){var _0x1f9f51=_0x1af720;if(!_0x4b10ab['ok'])throw new Error(_0x1f9f51(0x23a));return _0x4b10ab[_0x1f9f51(0x456)]();})[_0x1af720(0x3c7)](function(_0x57d151){var _0x38a138=_0x1af720,_0x1ee03e=_0x57d151['symbols'][_0x38a138(0x382)](function(_0x5f3c27){var _0x21ea70=_0x38a138;return _0x5f3c27[_0x21ea70(0x1b1)]===_0x21ea70(0x2b0)&&_0x5f3c27[_0x21ea70(0x44d)]===_0x21ea70(0x3f4)&&!STABLECOINS[_0x21ea70(0x136)](_0x5f3c27['baseAsset']);})[_0x38a138(0x42c)](function(_0x1d6a31){var _0x471973=_0x38a138;return{'symbol':_0x1d6a31[_0x471973(0x3d3)],'baseAsset':_0x1d6a31[_0x471973(0x153)],'quoteAsset':_0x1d6a31['quoteAsset']};}),_0x346d8f={};STATE[_0x38a138(0x26c)][_0x38a138(0x3c1)](function(_0x5dfa4c){var _0x2a03df=_0x38a138;_0x346d8f[_0x5dfa4c[_0x2a03df(0x3d3)]]=!![];}),_0x1ee03e[_0x38a138(0x3c1)](function(_0x5aed5e){var _0x12f2ce=_0x38a138;!_0x346d8f[_0x5aed5e['symbol']]&&STATE[_0x12f2ce(0x26c)][_0x12f2ce(0x233)](_0x5aed5e);}),console['log'](_0x38a138(0xee)+STATE[_0x38a138(0x26c)][_0x38a138(0x41d)]+_0x38a138(0x2c4));})[_0x1af720(0x2d1)](function(_0x9ef890){var _0x4e99f8=_0x1af720;console[_0x4e99f8(0x442)](_0x4e99f8(0x199),_0x9ef890['message']),showToast(_0x4e99f8(0x3a3),'info');});}function startDataLoop(){var _0x2cb1c6=a0_0x4859bd;STATE[_0x2cb1c6(0x4bc)][_0x2cb1c6(0x3c1)](function(_0x47d274){var _0x5d5fda=_0x2cb1c6;fetchAssetData(_0x47d274),(!COIN_ICON_CACHE[_0x47d274]||!COIN_ICON_CACHE[_0x47d274][_0x5d5fda(0x16a)])&&fetchCoinIcon(_0x47d274);}),startRealtimePrices(),setInterval(function(){STATE['watchlist']['forEach'](function(_0x313e7a){fetchAssetData(_0x313e7a),checkPositionNotifications(_0x313e7a);});},0x1388),setInterval(function(){updateLastUpdateTime();},0x3e8);}function fetchAssetData(_0x51ef22){var _0x56bd32=a0_0x4859bd,_0x1780d0=_0x51ef22['replace'](_0x56bd32(0x2b0),''),_0x3636d6=STATE['watchlist'][_0x56bd32(0x136)](_0x51ef22);(!BINANCE_WS_CONNECTED||!_0x3636d6||!STATE[_0x56bd32(0x2ce)][_0x51ef22]||!STATE[_0x56bd32(0x2ce)][_0x51ef22][_0x56bd32(0x327)])&&(API_STATUS[_0x56bd32(0x473)][_0x56bd32(0x1f3)]?fetchPriceFromBinance(_0x51ef22,_0x1780d0):fetchPriceFromCMC(_0x51ef22,_0x1780d0)),TIMEFRAMES[_0x56bd32(0x3c1)](function(_0x8da770){var _0x2e75ac=_0x56bd32;API_STATUS[_0x2e75ac(0x473)][_0x2e75ac(0x1f3)]?fetchKlinesFromBinance(_0x51ef22,_0x8da770,_0x1780d0):fetchKlinesFromCryptoCompare(_0x51ef22,_0x8da770,_0x1780d0);});}function fetchPriceFromBinance(_0x2b2576,_0x3e26f7){var _0xa30bd4=a0_0x4859bd;fetch(BINANCE_API+'/api/v3/ticker/24hr?symbol='+_0x2b2576)[_0xa30bd4(0x3c7)](function(_0x552c48){var _0x393454=_0xa30bd4;if(!_0x552c48['ok'])throw new Error(_0x393454(0x460));return _0x552c48[_0x393454(0x456)]();})[_0xa30bd4(0x3c7)](function(_0x429dde){var _0x165e18=_0xa30bd4;if(_0x429dde[_0x165e18(0x365)]||!_0x429dde['lastPrice'])throw new Error(_0x429dde[_0x165e18(0x34a)]||'Invalid\x20data');var _0x19ece5=parseFloat(_0x429dde[_0x165e18(0x2a8)]),_0xb094cd=parseFloat(_0x429dde[_0x165e18(0x41c)]);if(isFinite(_0x19ece5)&&_0x19ece5>0x0)checkAPIStatus(_0x165e18(0x473),!![]),STATE['prices'][_0x2b2576]={'price':_0x19ece5,'change':isFinite(_0xb094cd)?_0xb094cd:0x0,'high':parseFloat(_0x429dde[_0x165e18(0x440)])||_0x19ece5,'low':parseFloat(_0x429dde[_0x165e18(0x30a)])||_0x19ece5,'volume':parseFloat(_0x429dde[_0x165e18(0x108)])||0x0,'source':'binance'},_0x2b2576===STATE[_0x165e18(0x1cd)]&&renderAssetPanel(_0x2b2576),STATE[_0x165e18(0x14d)]=Date[_0x165e18(0x273)](),updateLastUpdateTime();else throw new Error(_0x165e18(0x2d6));})[_0xa30bd4(0x2d1)](function(_0x1c46ab){var _0x4c5634=_0xa30bd4;console[_0x4c5634(0x442)]('Binance\x20price\x20error\x20for\x20'+_0x2b2576+':',_0x1c46ab[_0x4c5634(0x45c)]),checkAPIStatus(_0x4c5634(0x473),![]),fetchPriceFromCMC(_0x2b2576,_0x3e26f7);});}function fetchPriceFromCMC(_0x53123d,_0x334766){var _0x59f652=a0_0x4859bd;if(CMC_PRICE_CACHE[_0x334766]&&Date[_0x59f652(0x273)]()-CMC_PRICE_CACHE[_0x334766]['timestamp']<0xea60){applyPriceFromCMC(_0x53123d,CMC_PRICE_CACHE[_0x334766]);return;}if(CMC_API_EXHAUSTED){setErrorPrice(_0x53123d,_0x59f652(0x285));return;}fetchPriceFromCoinGecko(_0x53123d,_0x334766)[_0x59f652(0x2d1)](function(){return fetchPriceFromCMCProxy(_0x53123d,_0x334766);});}function fetchPriceFromCoinGecko(_0x2f0500,_0x4736eb){var _0x2f3e12=a0_0x4859bd,_0x278f66=getCoinGeckoId(_0x4736eb);return fetch(_0x2f3e12(0x177)+_0x278f66+'&vs_currencies=usd&include_24hr_change=true')[_0x2f3e12(0x3c7)](function(_0x85c1ab){if(!_0x85c1ab['ok'])throw new Error('CoinGecko\x20API\x20error');return _0x85c1ab['json']();})[_0x2f3e12(0x3c7)](function(_0x3b6bb2){var _0x40c076=_0x2f3e12;if(_0x3b6bb2[_0x278f66]){var _0x50868a=_0x3b6bb2[_0x278f66],_0x151455={'price':_0x50868a['usd'],'change':_0x50868a[_0x40c076(0x35c)]||0x0,'high':_0x50868a[_0x40c076(0x21c)]*1.01,'low':_0x50868a['usd']*0.99,'volume':0x0,'timestamp':Date[_0x40c076(0x273)]()};return CMC_PRICE_CACHE[_0x4736eb]=_0x151455,applyPriceFromCMC(_0x2f0500,_0x151455),console[_0x40c076(0x442)](_0x40c076(0x47d)+_0x2f0500+':',_0x151455[_0x40c076(0x327)]),_0x151455;}throw new Error('Coin\x20not\x20found');});}function getCoinGeckoId(_0xdaf74a){var _0x840cc2=a0_0x4859bd,_0x35ac52={'BTC':_0x840cc2(0x4e7),'ETH':_0x840cc2(0x1ea),'BNB':'binancecoin','XRP':_0x840cc2(0x4cf),'ADA':_0x840cc2(0x425),'DOGE':_0x840cc2(0x4f3),'SOL':_0x840cc2(0x2b9),'DOT':_0x840cc2(0x2fd),'MATIC':'matic-network','LTC':_0x840cc2(0x21e),'SHIB':_0x840cc2(0x407),'AVAX':'avalanche-2','LINK':'chainlink','ATOM':_0x840cc2(0x46d),'XMR':_0x840cc2(0x10f),'ETC':_0x840cc2(0x48f),'BCH':_0x840cc2(0x3be),'XLM':_0x840cc2(0x409),'ALGO':_0x840cc2(0x1f0),'VET':_0x840cc2(0x49a),'HBAR':'hedera-hashgraph','ICP':_0x840cc2(0x1e2),'FIL':_0x840cc2(0x4ad),'APT':_0x840cc2(0x2e2),'NEAR':_0x840cc2(0x1a0),'ARB':'arbitrum','OP':_0x840cc2(0x214),'MKR':_0x840cc2(0x112),'AAVE':'aave','GRT':_0x840cc2(0x4c7),'STX':_0x840cc2(0x332),'XAUT':_0x840cc2(0x2ee),'PAXG':_0x840cc2(0x3b6),'XAU':_0x840cc2(0x2ee),'TRX':_0x840cc2(0x43a),'UNI':_0x840cc2(0x475),'SAND':'the-sandbox','MANA':_0x840cc2(0x24b),'AXS':_0x840cc2(0x2c8),'GALA':_0x840cc2(0x1c9),'ENJ':_0x840cc2(0x2b8),'CHZ':_0x840cc2(0x449),'FTM':_0x840cc2(0x318),'THETA':_0x840cc2(0x2a5),'EOS':_0x840cc2(0x17e),'NEO':'neo','FLOW':'flow','KLAY':_0x840cc2(0x46e),'CRV':'curve-dao-token','INJ':'injective-protocol','LDO':_0x840cc2(0x494),'IMX':_0x840cc2(0x4eb),'RNDR':_0x840cc2(0x1bf),'FET':_0x840cc2(0x4a9),'AGIX':_0x840cc2(0x3c9),'WLD':_0x840cc2(0x3af),'SEI':'sei-network','SUI':_0x840cc2(0x256),'TIA':_0x840cc2(0x467),'PEPE':_0x840cc2(0x337),'BONK':_0x840cc2(0x1b4),'FLOKI':_0x840cc2(0x1c4),'TON':_0x840cc2(0x367)};return _0x35ac52[_0xdaf74a[_0x840cc2(0x488)]()]||_0xdaf74a['toLowerCase']();}function fetchPriceFromCMCProxy(_0x45850e,_0x28e47e){var _0x38a6a4=a0_0x4859bd,_0x4dca2c=CMC_API+_0x38a6a4(0x46a)+_0x28e47e,_0x5c7dfb=_0x38a6a4(0xf4)+encodeURIComponent(_0x4dca2c);return fetch(_0x5c7dfb,{'headers':{'X-CMC_PRO_API_KEY':CMC_API_KEY}})['then'](function(_0xa74c9){var _0x157214=_0x38a6a4;if(_0xa74c9['status']===0x1ad||_0xa74c9[_0x157214(0x44d)]===0x192){CMC_API_EXHAUSTED=!![];throw new Error(_0x157214(0x1bd));}if(!_0xa74c9['ok'])throw new Error(_0x157214(0x1ec));return _0xa74c9[_0x157214(0x456)]();})[_0x38a6a4(0x3c7)](function(_0x405e9b){var _0x3d5bda=_0x38a6a4;if(_0x405e9b[_0x3d5bda(0x44d)]&&_0x405e9b[_0x3d5bda(0x44d)][_0x3d5bda(0x1c2)]===0x0&&_0x405e9b[_0x3d5bda(0x1b7)]&&_0x405e9b[_0x3d5bda(0x1b7)][_0x28e47e]){var _0x48fdd4=_0x405e9b['data'][_0x28e47e],_0x15b09e=_0x48fdd4[_0x3d5bda(0x196)]&&_0x48fdd4[_0x3d5bda(0x196)][_0x3d5bda(0x188)];if(_0x15b09e){var _0x1579f2={'price':_0x15b09e['price'],'change':_0x15b09e['percent_change_24h']||0x0,'high':_0x15b09e[_0x3d5bda(0x327)]*1.01,'low':_0x15b09e[_0x3d5bda(0x327)]*0.99,'volume':_0x15b09e[_0x3d5bda(0x3bc)]||0x0,'timestamp':Date['now']()};return CMC_PRICE_CACHE[_0x28e47e]=_0x1579f2,applyPriceFromCMC(_0x45850e,_0x1579f2),console['log']('Price\x20from\x20CMC\x20for\x20'+_0x45850e+':',_0x1579f2[_0x3d5bda(0x327)]),_0x1579f2;}throw new Error(_0x3d5bda(0x2ec));}throw new Error(_0x3d5bda(0x4c9));})[_0x38a6a4(0x2d1)](function(_0x56a0af){var _0x31ca9d=_0x38a6a4;console['log'](_0x31ca9d(0x419)+_0x45850e+':',_0x56a0af[_0x31ca9d(0x45c)]),setErrorPrice(_0x45850e,_0x31ca9d(0x47f));throw _0x56a0af;});}function applyPriceFromCMC(_0x31961b,_0x4a8c42){var _0x3c2824=a0_0x4859bd;STATE['prices'][_0x31961b]={'price':_0x4a8c42[_0x3c2824(0x327)],'change':_0x4a8c42[_0x3c2824(0x498)],'high':_0x4a8c42['high'],'low':_0x4a8c42[_0x3c2824(0x3b0)],'volume':_0x4a8c42['volume'],'source':'coinmarketcap'},_0x31961b===STATE['activeAsset']&&renderAssetPanel(_0x31961b),STATE[_0x3c2824(0x14d)]=Date[_0x3c2824(0x273)](),updateLastUpdateTime();}function setErrorPrice(_0x535e05,_0xb5a9e1){var _0x4b55cb=a0_0x4859bd;(!STATE[_0x4b55cb(0x2ce)][_0x535e05]||STATE[_0x4b55cb(0x2ce)][_0x535e05][_0x4b55cb(0x24c)])&&(STATE[_0x4b55cb(0x2ce)][_0x535e05]={'price':0x0,'change':0x0,'error':!![],'errorMsg':_0xb5a9e1},_0x535e05===STATE[_0x4b55cb(0x1cd)]&&renderAssetPanel(_0x535e05));}function fetchKlinesFromBinance(_0x1245a6,_0x2b758f,_0x5aaad9){var _0x58e92f=a0_0x4859bd,_0x3b751a;if(_0x2b758f==='1d')_0x3b751a=0x16d;else _0x2b758f==='4h'||_0x2b758f==='1h'?_0x3b751a=0x3e8:_0x3b751a=0x1f4;fetch(BINANCE_API+'/api/v3/klines?symbol='+_0x1245a6+'&interval='+_0x2b758f+_0x58e92f(0x1e6)+_0x3b751a)[_0x58e92f(0x3c7)](function(_0x30623e){var _0x58bcd2=_0x58e92f;if(!_0x30623e['ok'])throw new Error('Klines\x20not\x20available');return _0x30623e[_0x58bcd2(0x456)]();})['then'](function(_0x6571f5){var _0x10d95a=_0x58e92f;if(_0x6571f5[_0x10d95a(0x365)])throw new Error(_0x6571f5[_0x10d95a(0x34a)]||'Invalid\x20klines');checkAPIStatus(_0x10d95a(0x473),!![]);if(!STATE['klines'][_0x1245a6])STATE[_0x10d95a(0x4d6)][_0x1245a6]={};STATE[_0x10d95a(0x4d6)][_0x1245a6][_0x2b758f]=_0x6571f5[_0x10d95a(0x42c)](function(_0x37201f){return{'t':_0x37201f[0x0],'o':parseFloat(_0x37201f[0x1]),'h':parseFloat(_0x37201f[0x2]),'l':parseFloat(_0x37201f[0x3]),'c':parseFloat(_0x37201f[0x4]),'v':parseFloat(_0x37201f[0x5])};}),checkAndAnalyze(_0x1245a6);})[_0x58e92f(0x2d1)](function(_0x382072){var _0x5f1926=_0x58e92f;console[_0x5f1926(0x442)](_0x5f1926(0x4cb)+_0x1245a6+':',_0x382072['message']),checkAPIStatus(_0x5f1926(0x473),![]),fetchKlinesFromCryptoCompare(_0x1245a6,_0x2b758f,_0x5aaad9);});}function fetchKlinesFromCryptoCompare(_0x39ee12,_0x4cbb0b,_0x435ef1){var _0x4d83f2=a0_0x4859bd,_0x16c0da,_0xe0ace8;switch(_0x4cbb0b){case'30m':_0x16c0da='histominute',_0xe0ace8=0x7d0;break;case'1h':_0x16c0da=_0x4d83f2(0x4fc),_0xe0ace8=0x7d0;break;case'4h':_0x16c0da=_0x4d83f2(0x4fc),_0xe0ace8=0x7d0;break;case'1d':_0x16c0da=_0x4d83f2(0x175),_0xe0ace8=0x7d0;break;default:_0x16c0da=_0x4d83f2(0x4fc),_0xe0ace8=0x7d0;}fetch(CRYPTOCOMPARE_API+'/'+_0x16c0da+'?fsym='+_0x435ef1+_0x4d83f2(0x487)+Math['min'](_0xe0ace8,0x7d0))[_0x4d83f2(0x3c7)](function(_0x5c3cbd){var _0x27de2c=_0x4d83f2;if(!_0x5c3cbd['ok'])throw new Error('CryptoCompare\x20error');return _0x5c3cbd[_0x27de2c(0x456)]();})['then'](function(_0xa790e0){var _0x1ab6f8=_0x4d83f2;if(_0xa790e0[_0x1ab6f8(0x395)]===_0x1ab6f8(0x3d6))throw new Error(_0xa790e0[_0x1ab6f8(0x4a2)]||_0x1ab6f8(0x39f));checkAPIStatus(_0x1ab6f8(0x113),!![]);if(!STATE[_0x1ab6f8(0x4d6)][_0x39ee12])STATE[_0x1ab6f8(0x4d6)][_0x39ee12]={};var _0x12ff8e=_0xa790e0['Data']&&_0xa790e0[_0x1ab6f8(0x40a)][_0x1ab6f8(0x40a)]?_0xa790e0[_0x1ab6f8(0x40a)][_0x1ab6f8(0x40a)]:_0xa790e0['Data']||[],_0x267cb6=aggregateKlines(_0x12ff8e,_0x4cbb0b);STATE[_0x1ab6f8(0x4d6)][_0x39ee12][_0x4cbb0b]=_0x267cb6[_0x1ab6f8(0x42c)](function(_0x1364b5){var _0x1b07f1=_0x1ab6f8;return{'t':_0x1364b5[_0x1b07f1(0x2c2)]*0x3e8,'o':_0x1364b5[_0x1b07f1(0x4ce)],'h':_0x1364b5[_0x1b07f1(0x174)],'l':_0x1364b5[_0x1b07f1(0x3b0)],'c':_0x1364b5[_0x1b07f1(0x315)],'v':_0x1364b5[_0x1b07f1(0x485)]||0x0};}),console[_0x1ab6f8(0x442)](_0x1ab6f8(0x2eb)+_0x39ee12+'\x20'+_0x4cbb0b+':',STATE[_0x1ab6f8(0x4d6)][_0x39ee12][_0x4cbb0b][_0x1ab6f8(0x41d)]+'\x20candles'),checkAndAnalyze(_0x39ee12);})[_0x4d83f2(0x2d1)](function(_0x10081d){var _0x5640f6=_0x4d83f2;console['log'](_0x5640f6(0x11e)+_0x39ee12+':',_0x10081d['message']),checkAPIStatus(_0x5640f6(0x113),![]),fetchKlinesFromCoinGecko(_0x39ee12,_0x4cbb0b,_0x435ef1);});}function aggregateKlines(_0x12a431,_0x512666){var _0x319c60=a0_0x4859bd;if(!_0x12a431||_0x12a431[_0x319c60(0x41d)]===0x0)return[];var _0x38db5d;switch(_0x512666){case'30m':_0x38db5d=0x1e;break;case'4h':_0x38db5d=0x4;break;default:return _0x12a431;}var _0x5bb1a6=[];for(var _0x3612e8=0x0;_0x3612e8<_0x12a431[_0x319c60(0x41d)];_0x3612e8+=_0x38db5d){var _0x16e350=_0x12a431[_0x319c60(0x461)](_0x3612e8,_0x3612e8+_0x38db5d);if(_0x16e350[_0x319c60(0x41d)]===0x0)continue;_0x5bb1a6[_0x319c60(0x233)]({'time':_0x16e350[0x0][_0x319c60(0x2c2)],'open':_0x16e350[0x0][_0x319c60(0x4ce)],'high':Math[_0x319c60(0x18c)]['apply'](null,_0x16e350[_0x319c60(0x42c)](function(_0xcb0b24){var _0xf5c5ce=_0x319c60;return _0xcb0b24[_0xf5c5ce(0x174)];})),'low':Math[_0x319c60(0x1d0)][_0x319c60(0x1d8)](null,_0x16e350[_0x319c60(0x42c)](function(_0x17a0e7){var _0x5528c4=_0x319c60;return _0x17a0e7[_0x5528c4(0x3b0)];})),'close':_0x16e350[_0x16e350[_0x319c60(0x41d)]-0x1][_0x319c60(0x315)],'volumefrom':_0x16e350[_0x319c60(0x15e)](function(_0x2f547f,_0x627570){var _0x387198=_0x319c60;return _0x2f547f+(_0x627570[_0x387198(0x485)]||0x0);},0x0)});}return _0x5bb1a6;}function fetchKlinesFromCoinGecko(_0x84b235,_0x10c284,_0x50b545){var _0x51667f=a0_0x4859bd,_0x4d5d0a=getCoinGeckoId(_0x50b545),_0x43102d=_0x10c284==='1d'?0xc8:_0x10c284==='4h'?0x5a:0x1e;fetch(COINGECKO_API+'/coins/'+_0x4d5d0a+'/ohlc?vs_currency=usd&days='+_0x43102d)[_0x51667f(0x3c7)](function(_0x5a15d0){var _0x27564d=_0x51667f;if(!_0x5a15d0['ok'])throw new Error(_0x27564d(0x17d));return _0x5a15d0[_0x27564d(0x456)]();})[_0x51667f(0x3c7)](function(_0x1f7702){var _0x2fdf98=_0x51667f;if(!Array[_0x2fdf98(0x274)](_0x1f7702))throw new Error('Invalid\x20OHLC\x20data');checkAPIStatus('coingecko',!![]);if(!STATE[_0x2fdf98(0x4d6)][_0x84b235])STATE['klines'][_0x84b235]={};STATE[_0x2fdf98(0x4d6)][_0x84b235][_0x10c284]=_0x1f7702[_0x2fdf98(0x42c)](function(_0x216b6d){return{'t':_0x216b6d[0x0],'o':_0x216b6d[0x1],'h':_0x216b6d[0x2],'l':_0x216b6d[0x3],'c':_0x216b6d[0x4],'v':0x0};}),console[_0x2fdf98(0x442)](_0x2fdf98(0x21b)+_0x84b235+'\x20'+_0x10c284+':',STATE[_0x2fdf98(0x4d6)][_0x84b235][_0x10c284][_0x2fdf98(0x41d)]+_0x2fdf98(0x3ed)),checkAndAnalyze(_0x84b235);})[_0x51667f(0x2d1)](function(_0x15280c){var _0x1082bb=_0x51667f;console['log'](_0x1082bb(0x169)+_0x84b235+':',_0x15280c['message']),checkAPIStatus(_0x1082bb(0x3fb),![]);});}function checkAndAnalyze(_0xe3d2a2){var _0x303534=TIMEFRAMES['every'](function(_0x452dd7){var _0x73ccd9=a0_0x1aae;return STATE[_0x73ccd9(0x4d6)][_0xe3d2a2]&&STATE[_0x73ccd9(0x4d6)][_0xe3d2a2][_0x452dd7]&&STATE[_0x73ccd9(0x4d6)][_0xe3d2a2][_0x452dd7][_0x73ccd9(0x41d)]>0x0;});if(_0x303534)analyzeAsset(_0xe3d2a2);}function refreshAnalysis(_0x54e038){var _0x293907=a0_0x4859bd;showToast('در\x20حال\x20تحلیل\x20مجدد...',_0x293907(0x270)),fetchAssetData(_0x54e038);}function determineTradingMode(_0x14f18d){var _0x3e4fb4=a0_0x4859bd;if(!_0x14f18d||_0x14f18d[_0x3e4fb4(0x45f)]==='wait')return{'mode':_0x3e4fb4(0x4dc),'reasons':[_0x3e4fb4(0x3a6)]};var _0x503d81=_0x14f18d['leverage']||0x3,_0x41d79a=_0x14f18d[_0x3e4fb4(0x37a)]?_0x14f18d[_0x3e4fb4(0x37a)][_0x3e4fb4(0x37a)]:0x19,_0x147c62=_0x14f18d[_0x3e4fb4(0x4a0)]||0x0,_0x4af4ed=_0x14f18d['entryQuality']||_0x3e4fb4(0x349),_0x11fff2=0x0,_0x242a33=0x0;if(_0x503d81>=0x4)_0x11fff2+=0x3;else _0x503d81>=0x3&&(_0x11fff2+=0x1);if(_0x41d79a>=0x19&&_0x147c62>=0x7)_0x11fff2+=0x3;else _0x41d79a>=0x19&&(_0x11fff2+=0x2);_0x503d81>=0x3&&_0x4af4ed===_0x3e4fb4(0x42a)&&_0x147c62>=0x6&&(_0x11fff2+=0x2);_0x147c62>=0x8&&(_0x11fff2+=0x1);if(_0x503d81<=0x2)_0x242a33+=0x3;else _0x503d81<=0x3&&(_0x242a33+=0x1);_0x41d79a<0x14&&_0x147c62<0x6&&(_0x242a33+=0x2);_0x147c62<0x5&&(_0x242a33+=0x2);_0x4af4ed===_0x3e4fb4(0x282)&&_0x147c62<0x6&&(_0x242a33+=0x1);var _0x350165,_0x54e02f=[];if(_0x11fff2>_0x242a33+0x2){_0x350165='futures';if(_0x503d81>=0x4)_0x54e02f['push'](_0x3e4fb4(0x144));if(_0x41d79a>=0x19&&_0x147c62>=0x7)_0x54e02f['push']('روند\x20قوی');if(_0x503d81>=0x3&&_0x4af4ed==='excellent')_0x54e02f[_0x3e4fb4(0x233)](_0x3e4fb4(0x3d5));if(_0x54e02f[_0x3e4fb4(0x41d)]===0x0)_0x54e02f[_0x3e4fb4(0x233)](_0x3e4fb4(0x37e));}else{if(_0x242a33>_0x11fff2+0x2){_0x350165='spot';if(_0x503d81<=0x2)_0x54e02f['push']('اهرم\x20پایین');if(_0x41d79a<0x14&&_0x147c62<0x6)_0x54e02f[_0x3e4fb4(0x233)]('روند\x20ضعیف');if(_0x147c62<0x5)_0x54e02f['push'](_0x3e4fb4(0x22d));if(_0x54e02f[_0x3e4fb4(0x41d)]===0x0)_0x54e02f[_0x3e4fb4(0x233)]('مناسب\x20برای\x20اسپات');}else _0x350165='both',_0x54e02f['push']('مناسب\x20برای\x20هر\x20دو');}return{'mode':_0x350165,'reasons':_0x54e02f};}function generateAIPrompt(_0x549076){var _0x594df8=a0_0x4859bd,_0x3ec251=STATE[_0x594df8(0x26d)][_0x549076],_0x364f59=STATE[_0x594df8(0x2ce)][_0x549076];if(!_0x3ec251||!_0x364f59)return null;var _0x127e5c=ASSET_INFO[_0x549076]||{'name':_0x549076[_0x594df8(0x232)](_0x594df8(0x2b0),''),'symbol':_0x549076[_0x594df8(0x232)](_0x594df8(0x2b0),'')},_0xb95ad1=Math['abs'](_0x3ec251['entry']-_0x3ec251['sl']),_0x503ebe=Math[_0x594df8(0x1dc)](_0x3ec251[_0x594df8(0x2b2)]-_0x3ec251[_0x594df8(0x408)]),_0x54018e=Math[_0x594df8(0x1dc)](_0x3ec251['tp2']-_0x3ec251['entry']),_0x40a8ad=_0xb95ad1>0x0?_0x503ebe/_0xb95ad1:0x0,_0x3e7a81=_0xb95ad1>0x0?_0x54018e/_0xb95ad1:0x0,_0x4b82fe=typeof _0x3ec251[_0x594df8(0x371)]===_0x594df8(0x2ac)?_0x3ec251[_0x594df8(0x371)]:null,_0x93ed3a=_0x594df8(0x4be);if(_0x4b82fe!==null){if(_0x4b82fe>=0x46)_0x93ed3a='overbought';else{if(_0x4b82fe<=0x1e)_0x93ed3a=_0x594df8(0x4d0);}}var _0x25cebb=_0x3ec251[_0x594df8(0x37a)]&&typeof _0x3ec251[_0x594df8(0x37a)][_0x594df8(0x37a)]==='number'?_0x3ec251[_0x594df8(0x37a)][_0x594df8(0x37a)]:null,_0x3f6fa9='unknown';if(_0x25cebb!==null){if(_0x25cebb>=0x19)_0x3f6fa9=_0x594df8(0x489);else{if(_0x25cebb>=0xf)_0x3f6fa9=_0x594df8(0x462);else _0x3f6fa9=_0x594df8(0x181);}}var _0x2aafe7=_0x594df8(0x4be);_0x3ec251['macd']&&typeof _0x3ec251[_0x594df8(0x3df)]['histogram']===_0x594df8(0x2ac)&&(_0x2aafe7=_0x3ec251['macd'][_0x594df8(0x2ff)]>0x0?'bullish':_0x3ec251[_0x594df8(0x3df)]['histogram']<0x0?_0x594df8(0x347):_0x594df8(0x4be));var _0x4cd88c=[],_0x499731=_0x3ec251[_0x594df8(0x45f)]===_0x594df8(0x28a)?_0x594df8(0x18a):_0x594df8(0x370);_0x499731==='SHORT'&&_0x2aafe7==='bullish'&&_0x4cd88c[_0x594df8(0x233)]('MACD\x20is\x20bullish\x20but\x20signal\x20is\x20SHORT\x20-\x20contradiction');_0x499731===_0x594df8(0x18a)&&_0x2aafe7===_0x594df8(0x347)&&_0x4cd88c[_0x594df8(0x233)](_0x594df8(0x3f9));var _0x31ee28={'system_role':{'expertise':'Senior\x20Crypto\x20Trading\x20Analyst\x20with\x2010+\x20years\x20experience\x20in\x20technical\x20analysis\x20and\x20risk\x20management','task':'Evaluate\x20trading\x20signals\x20objectively\x20and\x20identify\x20weaknesses','approach':_0x594df8(0x183)},'signal_data':{'symbol':{'pair':_0x549076,'current_price':_0x364f59['price'],'change_24h':_0x364f59['change']},'signal':{'direction':_0x499731,'strength':(_0x3ec251[_0x594df8(0x4a0)]||0x0)+_0x594df8(0x2fa),'entry':_0x3ec251[_0x594df8(0x408)],'stop_loss':_0x3ec251['sl'],'take_profit_1':_0x3ec251[_0x594df8(0x2b2)],'take_profit_2':_0x3ec251[_0x594df8(0x19e)],'leverage':(_0x3ec251[_0x594df8(0x290)]||0x3)+'x','risk_reward':{'tp1':'1:'+_0x40a8ad[_0x594df8(0x335)](0x2),'tp2':'1:'+_0x3e7a81['toFixed'](0x2)}},'indicators':{'rsi_14':{'value':_0x4b82fe,'zone':_0x93ed3a},'adx':{'value':_0x25cebb,'interpretation':_0x3f6fa9},'macd':_0x2aafe7,'ema_21':_0x3ec251[_0x594df8(0x4e8)],'ema_50':_0x3ec251[_0x594df8(0x313)],'trend_tf':_0x3ec251[_0x594df8(0x231)]||_0x594df8(0x4be)},'conflicts':_0x4cd88c},'analysis_instructions':{'evaluate':[_0x594df8(0x3b3),_0x594df8(0x1d7),'Entry\x20point\x20precision\x20(30%\x20weight)'],'identify':['Min\x202\x20strengths',_0x594df8(0x4bd),_0x594df8(0x3ca)],'scoring':_0x594df8(0x250),'note':_0x594df8(0x275)},'output_requirements':{'language':_0x594df8(0x2a9),'max_words':0x50,'format':{'score':_0x594df8(0x2a7),'entry_decision':_0x594df8(0x137),'main_risk':_0x594df8(0x30e),'beginner_advice':'one\x20sentence','summary':_0x594df8(0x29d)},'restrictions':[_0x594df8(0x383),_0x594df8(0x3e1),_0x594df8(0x245),_0x594df8(0x362),'Mention\x20conflicts\x20if\x20critical']}};return JSON[_0x594df8(0x1b8)](_0x31ee28,null,0x2);}function handleAIPromptClick(_0x4c93a9){var _0x2720a6=a0_0x4859bd;!_0x4c93a9&&(_0x4c93a9=STATE[_0x2720a6(0x1cd)]);var _0x13b0ec=generateAIPrompt(_0x4c93a9);if(!_0x13b0ec){showToast(_0x2720a6(0x474),_0x2720a6(0x24c));return;}navigator[_0x2720a6(0x4e0)]&&navigator['clipboard'][_0x2720a6(0x3c0)]?navigator['clipboard'][_0x2720a6(0x3c0)](_0x13b0ec)['then'](function(){var _0x44245a=_0x2720a6;showToast(_0x44245a(0x11d),_0x44245a(0x4f5));})[_0x2720a6(0x2d1)](function(){fallbackCopyToClipboard(_0x13b0ec);}):fallbackCopyToClipboard(_0x13b0ec);}function fallbackCopyToClipboard(_0x175a0c){var _0x4f1001=a0_0x4859bd;try{var _0x820d6=document[_0x4f1001(0x3ec)]('textarea');_0x820d6[_0x4f1001(0x38b)]=_0x175a0c,_0x820d6[_0x4f1001(0x3ff)][_0x4f1001(0x1f8)]=_0x4f1001(0x3a7),_0x820d6[_0x4f1001(0x3ff)][_0x4f1001(0x353)]='0',_0x820d6[_0x4f1001(0x3ff)]['left']=_0x4f1001(0x42f),document[_0x4f1001(0x368)][_0x4f1001(0x158)](_0x820d6),_0x820d6[_0x4f1001(0x255)](),_0x820d6[_0x4f1001(0x18b)](0x0,0x1869f);var _0x18cfd9=document[_0x4f1001(0x359)](_0x4f1001(0x195));document[_0x4f1001(0x368)]['removeChild'](_0x820d6),_0x18cfd9?showToast(_0x4f1001(0x11d),_0x4f1001(0x4f5)):showToast(_0x4f1001(0x12b),_0x4f1001(0x24c));}catch(_0x448008){showToast(_0x4f1001(0x12b),_0x4f1001(0x24c));}}function resetScannerView(){var _0x51f224=a0_0x4859bd,_0x98feac=document['getElementById']('scannerPlaceholder'),_0x151e6c=document[_0x51f224(0x27b)](_0x51f224(0x49e)),_0x509164=document[_0x51f224(0x27b)]('scannerResults'),_0x2225e1=document[_0x51f224(0x27b)]('scannerResultsList'),_0x832e56=document[_0x51f224(0x27b)](_0x51f224(0x36a));if(STATE['scannerActive']){if(_0x98feac)_0x98feac[_0x51f224(0x3ff)][_0x51f224(0x30b)]=_0x51f224(0x27f);if(_0x151e6c)_0x151e6c[_0x51f224(0x3ff)][_0x51f224(0x30b)]=_0x51f224(0x204);if(_0x509164)_0x509164[_0x51f224(0x3ff)]['display']=_0x51f224(0x27f);if(_0x832e56)_0x832e56[_0x51f224(0x350)]=!![];return;}var _0x43c0ef=STATE['scannerResults']&&STATE[_0x51f224(0x3d0)]['length']>0x0||STATE[_0x51f224(0x4f9)]&&STATE[_0x51f224(0x4f9)][_0x51f224(0x41d)]>0x0;if(_0x151e6c)_0x151e6c[_0x51f224(0x3ff)]['display']='none';if(_0x832e56)_0x832e56['disabled']=![];if(_0x43c0ef){if(_0x98feac)_0x98feac[_0x51f224(0x3ff)]['display']=_0x51f224(0x27f);renderScannerResults();}else{if(_0x98feac)_0x98feac[_0x51f224(0x3ff)][_0x51f224(0x30b)]=_0x51f224(0x204);if(_0x509164)_0x509164[_0x51f224(0x3ff)][_0x51f224(0x30b)]=_0x51f224(0x27f);if(_0x2225e1)_0x2225e1['innerHTML']='';}}function startScanner(){var _0x2f0f70=a0_0x4859bd;if(STATE[_0x2f0f70(0x320)]){showToast('اسکن\x20در\x20حال\x20انجام\x20است...',_0x2f0f70(0x24c));return;}var _0x1f26e4=document[_0x2f0f70(0x27b)]('scannerSymbolCount'),_0x35cece=document['getElementById'](_0x2f0f70(0x4d9)),_0x177fcd=document[_0x2f0f70(0x27b)](_0x2f0f70(0x172)),_0x27efa5=0x32;_0x1f26e4&&_0x1f26e4[_0x2f0f70(0x38b)]&&(_0x27efa5=parseInt(_0x1f26e4['value'],0xa)||0x32);_0x27efa5=Math['max'](0xa,Math[_0x2f0f70(0x1d0)](0xc8,_0x27efa5));var _0x5bb884=0x7;_0x35cece&&_0x35cece[_0x2f0f70(0x38b)]&&(_0x5bb884=parseInt(_0x35cece[_0x2f0f70(0x38b)],0xa)||0x7);_0x5bb884=Math[_0x2f0f70(0x18c)](0x1,Math[_0x2f0f70(0x1d0)](0x9,_0x5bb884));var _0x2f65bf=_0x177fcd&&_0x177fcd[_0x2f0f70(0x38b)]||_0x2f0f70(0x4dc);_0x2f65bf!==_0x2f0f70(0x28a)&&_0x2f65bf!==_0x2f0f70(0x3c6)&&(_0x2f65bf=_0x2f0f70(0x4dc)),STATE['scannerConfig']={'maxSymbols':_0x27efa5,'minConfidence':_0x5bb884,'direction':_0x2f65bf},document['getElementById'](_0x2f0f70(0x45a))[_0x2f0f70(0x3ff)][_0x2f0f70(0x30b)]='none',document[_0x2f0f70(0x27b)](_0x2f0f70(0x49e))[_0x2f0f70(0x3ff)][_0x2f0f70(0x30b)]=_0x2f0f70(0x204),document['getElementById'](_0x2f0f70(0x3d0))[_0x2f0f70(0x3ff)]['display']='none',document[_0x2f0f70(0x27b)]('startScannerBtn')[_0x2f0f70(0x350)]=!![],document['getElementById'](_0x2f0f70(0x1ab))[_0x2f0f70(0x3ff)][_0x2f0f70(0x2ea)]='0%',document[_0x2f0f70(0x27b)](_0x2f0f70(0x387))['textContent']=_0x2f0f70(0x458),STATE[_0x2f0f70(0x320)]=!![],STATE[_0x2f0f70(0x3d0)]=[],STATE[_0x2f0f70(0x4f9)]=[],STATE[_0x2f0f70(0x3e2)]=null,fetch(BINANCE_API+_0x2f0f70(0x447))[_0x2f0f70(0x3c7)](function(_0x2b2e18){var _0x4d685c=_0x2f0f70;if(!_0x2b2e18['ok'])throw new Error(_0x4d685c(0x23a));return _0x2b2e18[_0x4d685c(0x456)]();})['then'](function(_0x479cb5){var _0x2876d1=_0x2f0f70,_0x4cd755=STATE[_0x2876d1(0x2bd)]||{},_0x20c54c=_0x4cd755[_0x2876d1(0x3eb)]||0x32,_0x239d78=_0x479cb5[_0x2876d1(0x382)](function(_0x1ead7c){var _0x4fa71=_0x2876d1;return _0x1ead7c['symbol'][_0x4fa71(0x38a)](_0x4fa71(0x2b0));})[_0x2876d1(0x42c)](function(_0x79692b){var _0x3f2860=_0x2876d1;return{'symbol':_0x79692b[_0x3f2860(0x3d3)],'volume':parseFloat(_0x79692b[_0x3f2860(0x29e)]||0x0)};})[_0x2876d1(0x382)](function(_0x30f34b){return _0x30f34b['volume']>0x0;})[_0x2876d1(0x4ec)](function(_0x4fa27e,_0x2cc9ee){var _0x2fd54d=_0x2876d1;return _0x2cc9ee[_0x2fd54d(0x108)]-_0x4fa27e['volume'];})[_0x2876d1(0x461)](0x0,_0x20c54c)[_0x2876d1(0x42c)](function(_0x2364cf){var _0x387419=_0x2876d1;return _0x2364cf[_0x387419(0x3d3)];});if(_0x239d78[_0x2876d1(0x41d)]===0x0){showToast('لیست\x20نمادها\x20خالی\x20است.\x20لطفاً\x20دوباره\x20تلاش\x20کنید...','error'),STATE[_0x2876d1(0x320)]=![],document[_0x2876d1(0x27b)](_0x2876d1(0x49e))[_0x2876d1(0x3ff)][_0x2876d1(0x30b)]=_0x2876d1(0x27f),document[_0x2876d1(0x27b)]('startScannerBtn')['disabled']=![],document[_0x2876d1(0x27b)](_0x2876d1(0x45a))['style'][_0x2876d1(0x30b)]=_0x2876d1(0x204);return;}startScanningWithSymbols(_0x239d78);})['catch'](function(_0x10dc6f){var _0x1a404b=_0x2f0f70;console['log'](_0x1a404b(0x305),_0x10dc6f[_0x1a404b(0x45c)]),showToast(_0x1a404b(0x265),_0x1a404b(0x24c)),STATE['scannerActive']=![],document[_0x1a404b(0x27b)](_0x1a404b(0x49e))['style'][_0x1a404b(0x30b)]=_0x1a404b(0x27f),document[_0x1a404b(0x27b)](_0x1a404b(0x36a))[_0x1a404b(0x350)]=![],document[_0x1a404b(0x27b)](_0x1a404b(0x45a))['style']['display']='block';});}function a0_0x5e0d(){var _0x110953=['/icons/icon-72.png','HIGH','parentNode','wss://stream.binance.com:9443/ws/!ticker@arr','واگرایی\x20نزولی','Invalid\x20data','COTI','state','ARKM','استفاده\x20از\x20لیست\x20پیش‌فرض\x20نمادها','onclose','check','سیگنال\x20در\x20حال\x20انتظار','fixed','percent','textContent','<div\x20class=\x22entry-header\x22>','profitablePeriods','پیشنهاد:\x20اسپات','ETH','NULS','worldcoin-wld','low','/icons/icon-192.png','EDU','Indicator\x20alignment\x20(40%\x20weight)','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><path\x20d=\x22M4.5\x2016.5c-1.5\x201.26-2\x205-2\x205s3.74-.5\x205-2c.71-.84.7-2.13-.09-2.91a2.18\x202.18\x200\x200\x200-2.91-.09z\x22></path><path\x20d=\x22m12\x2015-3-3a22\x2022\x200\x200\x201\x202-3.95A12.88\x2012.88\x200\x200\x201\x2022\x202c0\x202.72-.78\x207.5-6\x2011a22.35\x2022.35\x200\x200\x201-4\x202z\x22></path><path\x20d=\x22M9\x2012H4s.55-3.03\x202-4c1.62-1.08\x205\x200\x205\x200\x22></path><path\x20d=\x22M12\x2015v5s3.03-.55\x204-2c1.08-1.62\x200-5\x200-5\x22></path></svg>','RSR','pax-gold','QNT','<div\x20style=\x22font-size:12px;color:var(--text2);line-height:1.6;\x22>','updateBanner','</button>','score','volume_24h','<div\x20class=\x22position-section\x20','bitcoin-cash','SUI','writeText','forEach','view','FORTH','Service\x20Worker\x20registered','<div\x20style=\x22background:var(--bg2);border-radius:12px;padding:16px;margin-top:16px;\x22>','short','then','\x20(نیاز\x20به\x20حداقل\x2025)','singularitynet','Main\x20risk\x20factor','prompt','alertTriangle',';border:2px\x20solid\x20','CFX','monteCarloRiskMetrics','scannerResults','CVC','normal','symbol','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><line\x20x1=\x2218\x22\x20y1=\x226\x22\x20x2=\x226\x22\x20y2=\x2218\x22></line><line\x20x1=\x226\x22\x20y1=\x226\x22\x20x2=\x2218\x22\x20y2=\x2218\x22></line></svg>','ورود\x20عالی','Error','SKIP_WAITING','onload','فروش','scanner','در\x20حال\x20دریافت\x20داده...','p25','منبع\x20نامشخص','tp_approaching','macd','beforeinstallprompt','No\x20greetings\x20or\x20closings','scannerCallback','100%','MEME','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22#3b82f6\x22\x20stroke-width=\x222\x22\x20style=\x22width:18px;height:18px;\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22/><line\x20x1=\x2212\x22\x20y1=\x228\x22\x20x2=\x2212\x22\x20y2=\x2212\x22/><line\x20x1=\x2212\x22\x20y1=\x2216\x22\x20x2=\x2212.01\x22\x20y2=\x2216\x22/></svg>','signal','<span\x20style=\x22color:var(--text3);\x22>نمادی\x20با\x20این\x20نام\x20یافت\x20نشد</span>','<div\x20style=\x22display:flex;align-items:center;gap:20px;font-size:13px;color:var(--text1);\x22>','SXP','OPEN','maxSymbols','createElement','\x20candles','subtitle','<div\x20class=\x22search-item\x20search-not-found\x22\x20style=\x22opacity:0.6;cursor:default;\x22>','permission','<div\x20class=\x22leverage-rec\x22\x20style=\x22background:var(--bg2);border-radius:8px;padding:10px\x2012px;margin-top:8px;font-size:12px;\x22>','join','<span\x20style=\x22font-size:9px;color:var(--text3);margin-top:2px;\x22>CMC</span>','TRADING','stats','AGIX','insertBefore','zap','MACD\x20is\x20bearish\x20but\x20signal\x20is\x20LONG\x20-\x20contradiction','2789656UGjKMg','coingecko','%\x20از\x20سناریوها،\x20بازده\x20کل\x20استراتژی\x20بین\x20<strong\x20style=\x22color:','.search-item','rgba(16,\x20185,\x20129,\x200.15)','style','findSmartEntry','strategyBlocked','\x20بستن\x20پوزیشن</button>','<div\x20style=\x22flex:1;background:','<div\x20class=\x22indicators-section\x22>','0.6','tradingMode','shiba-inu','entry','stellar','Data','REEF','searchResults','INJ','winRate','استراتژی\x20روند:\x20قدرت\x20روند\x20','این\x20نماد\x20قبلاً\x20اضافه\x20شده','SUN','source','safe','<div\x20class=\x22entry-reasons\x22>','OGN','CVaR\x20(5%)','متوسط\x20-\x20با\x20احتیاط','سیگنال\x20قوی','CMC\x20proxy\x20error\x20for\x20','\x20+\x20','monteCarloStatusText','priceChangePercent','length','114TSjWDx','x\x20(دستی)','CRV','<span\x20style=\x22color:var(--text2);\x22>لوریج\x20پیشنهادی:</span>','getSmartLeverage','#ef4444','<div><h5\x20style=\x22color:var(--text1);font-size:16px;font-weight:600;margin-bottom:12px;\x22>','cardano','BNT','barChart','trendDown',';width:20px;height:20px;\x22>','excellent','<p\x20style=\x22margin:0;font-size:14px;\x22>برای\x20شروع،\x20یک\x20نماد\x20را\x20جستجو\x20و\x20اضافه\x20کنید</p>','map','stopCircle','\x20کندل\x20لازم\x20است.\x20(فعلی:\x20','-999999px','<div\x20class=\x22ind-item\x22><span\x20class=\x22ind-label\x22>ADX</span><span\x20class=\x22ind-value\x22>','Notification','</h2>','احتمال\x20بالا','walkForwardStats','count','<div\x20class=\x22search-item\x22\x20data-symbol=\x22','borderStyle','354086uHBjnz','C98','tron','default','عملکرد\x20خوب','توزیع\x20نتایج\x20شبیه‌سازی','شکست\x20نزولی',';border-radius:12px;padding:12px\x2016px;margin:16px\x200;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;\x22>','highPrice','riskLevel','log','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><polyline\x20points=\x2220\x206\x209\x2017\x204\x2012\x22></polyline></svg>','outcome','Binance','اسکن\x20کامل\x20شد.\x20','/api/v3/ticker/24hr','saveSettings','chiliz','#00E5B0','BNB','className','status','WLD','%</strong>\x20و\x20<strong\x20style=\x22color:','entryReasons','controllerchange','setAttribute','handleAIPromptClick(\x27','entries','splice','json','BURGER','در\x20حال\x20دریافت\x20لیست\x20نمادها...','CAKE','scannerPlaceholder','monteCarloHistogram','message','P50\x20(میانه)','AAVE','type','Symbol\x20not\x20found','slice','moderate_trend','binMid','نقطه\x20ورود\x20عالی','\x22\x20onclick=\x22enterPosition(\x27','در\x20حال\x20اجرای\x20تست‌ها\x20با\x20','celestia','FLOKI','DOMContentLoaded','/v1/cryptocurrency/quotes/latest?symbol=','<span>','\x20active','cosmos','klay-token','\x20اضافه\x20شد','percentiles','has','GTC','binance','سیگنال\x20موجود\x20نیست','uniswap','PHA','p75','CTSI','نزولی\x20↘','x\x20باز\x20شد','<button\x20class=\x22btn-enter\x20','0.8','Price\x20from\x20CoinGecko\x20for\x20','ADA','قیمت\x20در\x20دسترس\x20نیست','سیگنال\x20ضعیف','result','<div\x20style=\x22flex:1;\x22>','ILV',';opacity:','volumefrom','waiting','&tsym=USDT&limit=','toUpperCase','strong_trend','در\x20حال\x20اجرای\x20تست\x20Walk-Forward...','structure','bestCase','binance_ws','reason','ethereum-classic','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22\x20style=\x22width:20px;height:20px;\x22>','<div\x20class=\x22entry-section\x22>','ORDI','rgba(16,185,129,0.15)','lido-dao','API3','entryAmount','\x20اندیکاتورها</div>','change','<path\x20d=\x22m21.73\x2018-8-14a2\x202\x200\x200\x200-3.48\x200l-8\x2014A2\x202\x200\x200\x200\x204\x2021h16a2\x202\x200\x200\x200\x201.73-3Z\x22/><line\x20x1=\x2212\x22\x20y1=\x229\x22\x20x2=\x2212\x22\x20y2=\x2213\x22/><line\x20x1=\x2212\x22\x20y1=\x2217\x22\x20x2=\x2212.01\x22\x20y2=\x2217\x22/>','vechain','7d3a7b427ee144eabbcdd9c2b78c07ab','<span\x20class=\x22search-symbol\x22>','<button\x20class=\x22btn-add\x22\x20onclick=\x22addToWatchlist(\x27','scannerProgress','MKR','confidence','innerHTML','Message','label','XAUT','runFullTest','20;color:','<span\x20style=\x22font-size:12px;color:var(--text1);\x22>','median','fetch-ai','originalType','LTC','trend_following','filecoin','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22currentColor\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22/></svg>','قیمت\x20فعلی:\x20','Failed\x20to\x20start\x20Binance\x20WS:','down','5th\x20Percentile',')</h5>','calcATR','expectedShortfall','<span\x20class=\x22scaling-price\x22>','95th\x20Percentile','https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?symbol=','MINA','risky','\x20error','watchlist','Min\x202\x20weaknesses','neutral','IDEX','<span\x20style=\x22font-size:15px;font-weight:bold;color:','.search-box','ZEN','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><line\x20x1=\x2212\x22\x20y1=\x222\x22\x20x2=\x2212\x22\x20y2=\x2222\x22/><path\x20d=\x22M17\x205H9.5a3.5\x203.5\x200\x200\x200\x200\x207h5a3.5\x203.5\x200\x200\x201\x200\x207H6\x22/></svg>','Expected\x20Shortfall','runMonteCarloBtn','محافظه‌کارانه','the-graph','avoid','Invalid\x20CMC\x20response','serviceWorker','Binance\x20klines\x20error\x20for\x20','HBAR','DASH','open','ripple','oversold','دوره‌های\x20تست','CONNECTING','level','DYDX','</span>\x20<strong>امتیاز\x20استحکام:\x20','klines','VTHO','capital','scannerMinConfidence','<div\x20style=\x22text-align:center;padding:8px;background:var(--card);border-radius:6px;\x22>','\x20•\x20','both','\x20API\x20marked\x20as\x20unavailable','خنثی','reloading','clipboard','Error\x20saving\x20search\x20history:','در\x20حال\x20اجرای\x20تست\x20Monte\x20Carlo...',';\x22>','<div\x20class=\x22asset-name\x22>','AVAX','\x20لوریج</span><span\x20class=\x22detail-value\x22>','bitcoin','ema21','SFP','uptrend','immutable-x','sort','\x20پوزیشن\x20فعال</div>','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22></circle></svg>','/100</strong></span>','</span>','onerror','Binance\x20(REST)','dogecoin','Error\x20loading\x20icon\x20cache:','success','%:\x20','<div\x20style=\x22width:32px;height:32px;border-radius:50%;background:var(--teal-glow);color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;\x22>','contains','scannerScannedSymbols','update','سیگنال‌های\x20متضاد','histohour','text','tab\x20active\x20temporary-tab','assign','Updated\x20to\x20','\x22\x20style=\x22width:20px;height:20px;border-radius:50%;margin-left:8px;background:#222;\x22\x20loading=\x22lazy\x22\x20decoding=\x22async\x22\x20onerror=\x22this.style.display=\x27none\x27\x22>','<span\x20style=\x22font-size:12px;color:var(--text2);\x22>/10</span></div>','CYBER','فاصله\x20امن','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2216\x22\x20height=\x2216\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22\x20style=\x22margin-left:6px;vertical-align:middle;\x22><line\x20x1=\x228\x22\x20y1=\x226\x22\x20x2=\x2221\x22\x20y2=\x226\x22/><line\x20x1=\x228\x22\x20y1=\x2212\x22\x20x2=\x2221\x22\x20y2=\x2212\x22/><line\x20x1=\x228\x22\x20y1=\x2218\x22\x20x2=\x2221\x22\x20y2=\x2218\x22/><circle\x20cx=\x224\x22\x20cy=\x226\x22\x20r=\x221\x22/><circle\x20cx=\x224\x22\x20cy=\x2212\x22\x20r=\x221\x22/><circle\x20cx=\x224\x22\x20cy=\x2218\x22\x20r=\x221\x22/></svg>','https://api.allorigins.win/raw?url=','tradingSettings','صبر\x20کنید','1INCH','SKL','</div></div>','<span\x20style=\x22color:var(--red);font-size:12px;\x22>','POWR','KLAY','<div\x20class=\x22signal-card\x20','<span\x20class=\x22search-pair\x22>/','\x22\x20style=\x22width:28px;height:28px;border-radius:50%;object-fit:cover;\x22>','CLV','stochRSI','assetPanel','<span\x20style=\x22display:flex;align-items:center;gap:4px;\x22><span\x20style=\x22width:16px;height:16px;display:flex;align-items:center;justify-content:center;opacity:0.7;\x22>','init','<h4\x20style=\x22margin:24px\x200\x2016px;color:var(--text1);font-size:18px;display:flex;align-items:center;gap:8px;\x22>','isStrong','20OZDIgr','volume','</h4>','<div\x20style=\x22font-size:11px;color:var(--text3);\x22>','تنظیمات\x20ذخیره\x20شد\x20-\x20اهرم:\x20','فروش\x20(Short)','<div\x20style=\x22font-size:20px;font-weight:700;color:var(--teal);\x22>','صعودی\x20↗','monero','CELO','<strong\x20style=\x22color:var(--text1);\x22>دلایل:</strong>\x20','maker','cryptocompare','داده\x20کافی\x20نیست.\x20حداقل\x20','RUNE','GRT','calcLiquidationPrice','</div>','TIA','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><line\x20x1=\x2212\x22\x20y1=\x2220\x22\x20x2=\x2212\x22\x20y2=\x2210\x22/><line\x20x1=\x2218\x22\x20y1=\x2220\x22\x20x2=\x2218\x22\x20y2=\x224\x22/><line\x20x1=\x226\x22\x20y1=\x2220\x22\x20x2=\x226\x22\x20y2=\x2216\x22/></svg>','monteConfidence','PWA\x20Ready','پرامپت\x20با\x20موفقیت\x20کپی\x20شد','CryptoCompare\x20klines\x20error\x20for\x20','cssText','confluenceScore','overbought','Binance\x20WS\x20error:','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><line\x20x1=\x225\x22\x20y1=\x2212\x22\x20x2=\x2219\x22\x20y2=\x2212\x22></line><polyline\x20points=\x2212\x205\x2019\x2012\x2012\x2019\x22></polyline></svg>','<span\x20class=\x22price-change\x20','<div\x20class=\x22stats-grid\x22>','سناریوی\x20متوسط','\x20نتیجه\x22></div>','.view-content','show','avgMaxDrawdown','خطا\x20در\x20کپی\x20پرامپت','پرریسک\x20-\x20توصیه\x20نمیشه','monteCarloResults','<span\x20style=\x22width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:','\x20default\x20symbols','\x20با\x20موفقیت\x20به\x20حد\x20سود\x20رسید.','en-US',';\x22>PF:\x20','\x20-\x20',').\x20لطفا\x20چند\x20ثانیه\x20صبر\x20کنید\x20و\x20دوباره\x20تست\x20کنید.','\x22\x20alt=\x22','includes','suitable\x20|\x20not_suitable\x20|\x20caution','height=\x2212\x22','پرامپت\x20تحلیل\x20','monteCarloPercentiles','walkForward','coin','NEO','\x27\x22>','watchlistTabs','<div\x20class=\x22scaling-title\x22>','accepted','<div\x20class=\x22ind-item\x22><span\x20class=\x22ind-label\x22>StochRSI</span><span\x20class=\x22ind-value\x20','تعداد\x20کندل:\x20','اهرم\x20بالا','binStart','upper','MANA','AXS','BLUR','<span\x20style=\x22color:var(--text3);\x22>معاملات:\x20','46802swIiED','<div\x20class=\x22detail-row\x22><span\x20class=\x22detail-label\x22>','lastUpdate','JOE','Monte\x20Carlo\x20test\x20error:','سود:\x20+','<div\x20style=\x22font-size:11px;color:var(--text2);margin-bottom:4px;\x22>امتیاز\x20ورود</div>','ضررده','baseAsset','🛑\x20signight:\x20پوزیشن\x20','<circle\x20cx=\x2211\x22\x20cy=\x2211\x22\x20r=\x228\x22></circle>','avgWinRate','پیش‌فرض','appendChild','confidenceInterval','DAI','<span\x20class=\x22scaling-step\x22>','جزئیات\x20دوره‌های\x20تست\x20(','<div\x20style=\x22display:flex;align-items:center;gap:10px;\x22>','reduce',';\x22>قیمت\x20لیکویید:\x20','worstCase','XTZ','\x20تارگت\x20۱</span><span\x20class=\x22detail-value\x20tp\x22>','TKO','addEventListener','strong_down','onclick','handleAIPromptClick','drawdownStats','CoinGecko\x20OHLC\x20error\x20for\x20','hasIcon','downtrend','IOTA','getItem',';font-weight:600;display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;\x22>','netReturn','FIL','monteCarloProgress','scannerDirection','postMessage','high','histoday','30m','https://api.coingecko.com/api/v3/simple/price?ids=','_tp2','overallVerdict','CoinGecko','تعداد\x20شبیه‌سازی\x20باید\x20بین\x20۲۰۰\x20تا\x20۵۰۰۰\x20باشد.','rgba(245,\x20158,\x2011,\x200.15)','CoinGecko\x20OHLC\x20error','eos','waitingWorker','\x20/\x20','weak_trend','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22/><line\x20x1=\x2212\x22\x20y1=\x2216\x22\x20x2=\x2212\x22\x20y2=\x2212\x22/><line\x20x1=\x2212\x22\x20y1=\x228\x22\x20x2=\x2212.01\x22\x20y2=\x228\x22/></svg>','Critical,\x20unbiased,\x20risk-focused','FDUSD','BICO','ETC','nextSibling','USD','removeFromWatchlist','LONG','setSelectionRange','max','kFold','consistencyScore','COMP','consolidation','<button\x20class=\x22btn-refresh\x22\x20onclick=\x22refreshAnalysis(\x27','height=\x2224\x22','\x20با\x20اصابت\x20به\x20حد\x20ضرر\x20بسته\x20شد.','div','copy','quote','TVK','moderate','Binance\x20API\x20not\x20available,\x20using\x20default\x20symbols:','searchHistory','<div\x20class=\x22ind-grid\x22>','تعداد\x20دوره‌ها','p95','tp2','PAXG','near','classList','در\x20حال\x20بروزرسانی...','/api/v3/exchangeInfo','استراتژی\x20تغییر\x20کرد:\x20','toLocaleString','FTM',';transition:opacity\x200.2s;\x22\x20onmouseover=\x22this.style.opacity=\x271\x27\x22\x20onmouseout=\x22this.style.opacity=\x27','PLA','\x20با\x20اهرم\x20','#10b981','scannerProgressBar','XRP','margin-top:16px;padding:12px\x2016px;background:var(--bg2);border-radius:10px;font-size:13px;color:var(--text2);line-height:1.6;border:1px\x20solid\x20var(--border);','SEI','<div\x20class=\x22empty-watchlist\x22\x20style=\x22text-align:center;padding:60px\x2020px;color:var(--text2);\x22>','</div></details>','quoteAsset','var(--yellow)','https://min-api.cryptocompare.com/data/v2','bonk','var(--red)','HOT','data','stringify','width=\x2212\x22','trash','function','%;min-height:2px;border-radius:2px\x202px\x200\x200;transition:height\x200.3s;\x22\x20title=\x22','CMC\x20API\x20limit\x20reached','input','render-token','rsiDivergence','خطا','error_code','medianReturn','floki','onmessage','No\x20klines\x20for\x20chart','GMX','strong_up','gala','خرید','rgba(59,130,246,0.15)','color','activeAsset','USDC','warning','min','میانگین\x20Return','SLP','notificationEnabled','positions','getViewState','SUPER','Risk/Reward\x20quality\x20(30%\x20weight)','apply','IOTX','avgProfitFactor','icon','abs','border','ZEC','سود\x20قابل\x20توجه','location',')</span>','internet-computer','ENJ','LINK','installed','&limit=','SOL','TLM','واگرایی\x20صعودی','ethereum','YGG','CMC\x20API\x20error','signalContext','settings','robustnessScore','algorand','در\x20حال\x20تحلیل...','KNC','available','<div\x20class=\x22price-info\x22>','<span\x20style=\x22font-size:17px;font-weight:bold;color:','%</strong>\x20خواهد\x20بود.</div>','<div\x20style=\x22font-size:14px;font-weight:600;color:var(--text1);display:flex;align-items:center;gap:4px;\x22>','position','JTO','امتیاز:\x20','flex','WIN','click','substring','\x20به\x20حد\x20ضرر\x20(Stop\x20Loss)\x20شما\x20نزدیک\x20شده\x20است!','\x20ورود\x20پله‌ای</div>','<line\x20x1=\x2218\x22\x20y1=\x2220\x22\x20x2=\x2218\x22\x20y2=\x2210\x22/><line\x20x1=\x2212\x22\x20y1=\x2220\x22\x20x2=\x2212\x22\x20y2=\x224\x22/><line\x20x1=\x226\x22\x20y1=\x2220\x22\x20x2=\x226\x22\x20y2=\x2214\x22/>','15;border:1px\x20solid\x20','<span\x20style=\x22font-weight:600;color:','block','.tf-btn','startsWith','\x20تارگت\x20۲</span><span\x20class=\x22detail-value\x20tp\x22>','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><polyline\x20points=\x223\x206\x205\x206\x2021\x206\x22></polyline><path\x20d=\x22M19\x206v14a2\x202\x200\x200\x201-2\x202H7a2\x202\x200\x200\x201-2-2V6m3\x200V4a2\x202\x200\x200\x201\x202-2h4a2\x202\x200\x200\x201\x202\x202v2\x22></path></svg>','priceChart','lastCheck','toggleIndicator','%)</span>','bos_bearish','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20style=\x22width:18px;height:18px;\x22><polyline\x20points=\x2222\x2012\x2018\x2012\x2015\x2021\x209\x203\x206\x2012\x202\x2012\x22/></svg>','PEOPLE','statechange','<h2>','getLeverage','medium','optimism','ARB','.png','tp_hit','P95\x20(بهترین)','\x20کندل...','toast\x20show','Klines\x20from\x20CoinGecko\x20for\x20','usd','<div\x20class=\x22signal-badge\x20','litecoin','<div\x20style=\x22color:var(--text2);margin-bottom:4px;\x22>','closePosition','40;border-radius:10px;padding:12px;margin-top:12px;\x22>','\x27)\x22>','پیروی\x20از\x20روند','profit','reload','ضرر:\x20','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x228\x22\x20cy=\x228\x22\x20r=\x226\x22/><path\x20d=\x22M18.09\x2010.37A6\x206\x200\x201\x201\x2010.34\x2018\x22/><path\x20d=\x22M7\x206h1v4\x22/><path\x20d=\x22M16\x2014h1v4\x22/></svg>','FLUX','</svg>','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2216\x22\x20height=\x2216\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><line\x20x1=\x2212\x22\x20y1=\x225\x22\x20x2=\x2212\x22\x20y2=\x2219\x22></line><line\x20x1=\x225\x22\x20y1=\x2212\x22\x20x2=\x2219\x22\x20y2=\x2212\x22></line></svg>','#f59e0b','granted','قدرت\x20پایین','sl_approaching','Median\x20(P50)','%</span>','trend','replace','push','coinmarketcap','auto','نزولی','querySelectorAll','resetView','\x20کلیک\x20کنید\x20تا\x20پرامپت\x20تحلیل\x20کپی\x20شود','API\x20Error','round','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22currentColor\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20fill=\x22none\x22/><path\x20d=\x22M12\x206v12M8\x208.5h6c1\x200\x202\x20.5\x202\x202s-1\x202-2\x202h-4c-1\x200-2\x20.5-2\x202s1\x202\x202\x202h6\x22/></svg>','FLOW','\x20در\x20حال\x20نزدیک\x20شدن\x20به\x20تارگت\x20سود\x20شماست.','dismissed','<div\x20class=\x22ind-item\x22><span\x20class=\x22ind-label\x22>ساختار</span><span\x20class=\x22ind-value\x20','LUNC','RDNT','refresh','<span\x20class=\x22entry-score\x22>امتیاز:\x20','No\x20markdown\x20headers','tab','قیمت:\x20','بدترین\x20حالت','میانگین\x20Win\x20Rate','<div\x20style=\x22display:flex;align-items:center;justify-content:space-between;\x22>','decentraland','error','updateRefreshBtn','resetChartView','leverageSelect','Rate\x201-10\x20based\x20on\x20weighted\x20criteria\x20above','_sl','focus','58860IgTJjG','monteCarloVerdict','select','sui','_tp1','<h5\x20style=\x22margin:0\x200\x2012px;color:var(--text1);font-size:14px;\x22>صدک‌های\x20بازده</h5>','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22></circle><line\x20x1=\x2222\x22\x20y1=\x2212\x22\x20x2=\x2218\x22\x20y2=\x2212\x22></line><line\x20x1=\x226\x22\x20y1=\x2212\x22\x20x2=\x222\x22\x20y2=\x2212\x22></line><line\x20x1=\x2212\x22\x20y1=\x226\x22\x20x2=\x2212\x22\x20y2=\x222\x22></line><line\x20x1=\x2212\x22\x20y1=\x2222\x22\x20x2=\x2212\x22\x20y2=\x2218\x22></line></svg>','حجم\x20بالا','\x20دوره)','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><line\x20x1=\x2218\x22\x20y1=\x226\x22\x20x2=\x226\x22\x20y2=\x2218\x22/><line\x20x1=\x226\x22\x20y1=\x226\x22\x20x2=\x2218\x22\x20y2=\x2218\x22/></svg>','name','undefined','setData','EOS','<div\x20style=\x22display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;\x22>','EGLD','نقطه\x20ورود\x20خوب','\x20API\x20reset\x20to\x20available','خطا\x20در\x20دریافت\x20لیست\x20نمادها\x20از\x20بایننس','https://s2.coinmarketcap.com/static/img/coins/64x64/','<div\x20class=\x22scaling-entry\x22>','strategySelect','setItem','signight:\x20پوزیشن\x20','bannerShown','allSymbols','signals','probReturn10Plus','/10</span>','info','MASK','calculateIndicators','now','isArray','In\x20addition\x20to\x20evaluating\x20this\x20signal,\x20provide\x20your\x20own\x20independent\x20trading\x20view\x20based\x20on\x20these\x20indicators,\x20even\x20if\x20it\x20disagrees\x20with\x20the\x20signal\x20direction.','خوب\x20-\x20قابل\x20استفاده','wait','70%','HFT','addToWatchlist','getElementById','JASMY','16006XFYUtP',';color:#fff;\x22>','none','متوسط','iconUrl','fair','<span\x20style=\x22color:var(--text2);font-weight:600;\x22>دوره\x20','لطفا\x20ابتدا\x20یک\x20نماد\x20انتخاب\x20کنید','API\x20محدود\x20شده','<div\x20style=\x22display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;\x22>','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><polyline\x20points=\x2222\x207\x2013.5\x2015.5\x208.5\x2010.5\x202\x2017\x22/><polyline\x20points=\x2216\x207\x2022\x207\x2022\x2013\x22/></svg>','WAVES','</span></div>','long','اجرای\x20Walk-Forward...','resolve','spot','استفاده\x20از\x20تایم‌فریم\x20روزانه','ATOM','leverage','chart','binEnd','150STQuJx','lower','trendUp','Error\x20loading\x20search\x20history:','/10\x20(نیاز\x20به\x20حداقل\x207)','LUSD','نیاز\x20به\x20بهبود','viewMonteCarlo','reasons','<div\x20style=\x22display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:12px;\x22>','2\x20sentences\x20max','quoteVolume','denied','localeCompare','chartTitle','<span\x20class=\x22price-value\x22>','application/json','1118727fdzXKR','theta-token','loss','X/10','lastPrice','Persian\x20(Farsi)\x20only','WOO','DOGE','number','ثبات\x20عملکرد','حداقل\x20یک\x20نماد\x20باید\x20باشد','Binance\x20WS\x20connected\x20(realtime\x20prices)','USDT','btnVolume','tp1','<div\x20class=\x22stat-card\x22\x20style=\x22background:var(--bg2);border:1px\x20solid\x20rgba(255,255,255,0.05);border-radius:12px;padding:18px;text-align:center;transition:all\x200.2s;\x22>','SPELL','بهترین\x20حالت','THETA','<div\x20style=\x22width:28px;height:28px;border-radius:50%;background:var(--bg2);color:var(--text2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;\x22>','enjincoin','solana','تثبیت','\x20سیگنال\x20قوی\x20پیدا\x20شد','<div\x20class=\x22pos-row\x22><span>نوع:</span><span\x20class=\x22pos-type\x22>','scannerConfig','periods','SAND','<button\x20class=\x22btn-remove\x22\x20onclick=\x22removeFromWatchlist(\x27','avgReturn','time','conservative','\x20symbols\x20from\x20Binance','<div\x20class=\x22position-details\x22>','SUSHI','monteCarloPeriods','axie-infinity','LDO','#3b82f6','STORJ','<div\x20class=\x22actions-section\x22>','add','prices','احتمال\x20سود\x20+10%','خرید\x20(Long)','catch','riskOfRuin','monteCarloCI','میانگین\x20Profit\x20Factor','N/A','Invalid\x20price\x20data','APT','remove','<div\x20class=\x22price-data\x22>','LRC','btnBB','نقطه\x20ورود\x20قابل\x20قبول','عالی\x20-\x20قابل\x20اعتماد','<div\x20style=\x22background:var(--bg2);border-radius:8px;padding:10px;\x22>','toggleChartIndicator','.view-tab','button','aptos','\x0aحد\x20ضرر:\x20','size','entryQuality','30%','<div\x20class=\x22ind-item\x22><span\x20class=\x22ind-label\x22>RSI\x20(14)</span><span\x20class=\x22ind-value\x20','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22/><line\x20x1=\x2215\x22\x20y1=\x229\x22\x20x2=\x229\x22\x20y2=\x2215\x22/><line\x20x1=\x229\x22\x20y1=\x229\x22\x20x2=\x2215\x22\x20y2=\x2215\x22/></svg>','Binance\x20(Realtime)','width','Klines\x20from\x20CryptoCompare\x20for\x20','No\x20quote\x20data','BETA','tether-gold','smartEntries','<span\x20style=\x22color:var(--red);font-size:8px;margin-right:4px;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;\x22>','coinIconCache','نتایج\x20ناقص\x20است','<div\x20class=\x22ind-item\x22><span\x20class=\x22ind-label\x22>MACD</span><span\x20class=\x22ind-value\x20','صعودی','BTC','DOT','x</span></div>','BAKE','<span\x20style=\x22width:18px;height:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;\x22>','/10','trendingUp','<div\x20class=\x22verdict-box\x22\x20style=\x22background:','polkadot','BAT','histogram','\x20از\x20لیست\x20حذف\x20شد','LOOM','136088KHZpXJ','bos_bullish','removeChild','Error\x20fetching\x20top\x20symbols:','updateDismissBtn','monteCarloProgressText','aiAdvisorSticky','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2216\x22\x20height=\x2216\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22\x20style=\x22margin-left:6px;vertical-align:middle;\x22><polygon\x20points=\x2212\x202\x2015.09\x208.26\x2022\x209.27\x2017\x2014.14\x2018.18\x2021.02\x2012\x2017.77\x205.82\x2021.02\x207\x2014.14\x202\x209.27\x208.91\x208.26\x2012\x202\x22/></svg>','lowPrice','display','GLMR','search-history','one\x20sentence','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><polyline\x20points=\x2223\x204\x2023\x2010\x2017\x2010\x22></polyline><polyline\x20points=\x221\x2020\x201\x2014\x207\x2014\x22></polyline><path\x20d=\x22M3.51\x209a9\x209\x200\x200\x201\x2014.85-3.36L23\x2010M1\x2014l4.64\x204.36A9\x209\x200\x200\x200\x2020.49\x2015\x22></path></svg>','btnEMA','سیگنال\x20معتبر\x20نیست','<div\x20style=\x22font-size:11px;color:var(--text2);margin-top:4px;\x22>','ema50','bullish_cross','close','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22currentColor\x22><path\x20d=\x22M12\x202L4\x207v10l8\x205\x208-5V7l-8-5zm0\x202.18l6\x203.72v7.2l-6\x203.72-6-3.72V7.9l6-3.72z\x22/></svg>','bullish','fantom','<div\x20style=\x22font-size:20px;font-weight:700;color:#8b5cf6;\x22>','crosshair','mode','#f97316','P75','<div\x20class=\x22position-title\x22>','BCH','scannerActive','_sl_approaching','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><rect\x20x=\x223\x22\x20y=\x224\x22\x20width=\x2218\x22\x20height=\x2218\x22\x20rx=\x222\x22\x20ry=\x222\x22/><line\x20x1=\x2216\x22\x20y1=\x222\x22\x20x2=\x2216\x22\x20y2=\x226\x22/><line\x20x1=\x228\x22\x20y1=\x222\x22\x20x2=\x228\x22\x20y2=\x226\x22/><line\x20x1=\x223\x22\x20y1=\x2210\x22\x20x2=\x2221\x22\x20y2=\x2210\x22/></svg>','<div\x20class=\x22scanner-item\x22\x20onclick=\x22handleScannerItemClick(\x27','trim','toggle','userChoice','price','controller','MAV','0\x20/\x20',';margin-bottom:4px;\x22>','monteCarloStats','بازار\x20خنثی','<img\x20src=\x22','width=\x2224\x22','search-not-found','FXS','stacks','sl_hit','toLocaleTimeString','toFixed','ALICE','pepe','\x20نقطه\x20ورود</span><span\x20class=\x22detail-value\x22>','marketStructure','FET','checked','روند\x20قوی','https://api.binance.com','%</span></div>','APE','<div\x20class=\x22scaling-entries\x22>','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><path\x20d=\x22m21.73\x2018-8-14a2\x202\x200\x200\x200-3.48\x200l-8\x2014A2\x202\x200\x200\x200\x204\x2021h16a2\x202\x200\x200\x200\x201.73-3Z\x22/><line\x20x1=\x2212\x22\x20y1=\x229\x22\x20x2=\x2212\x22\x20y2=\x2213\x22/><line\x20x1=\x2212\x22\x20y1=\x2217\x22\x20x2=\x2212.01\x22\x20y2=\x2217\x22/></svg>','CHZ','var(--text3)','bearish_cross','quality','numPeriods','bearish','toast','good','msg','parse','riskPercent','indexOf','futures','میانگین\x20Max\x20Drawdown','disabled','<div\x20class=\x22histogram-bars\x22\x20style=\x22display:flex;align-items:flex-end;gap:2px;height:120px;margin-bottom:8px;\x22>','strategy','opacity','checkCircle','profitFactor','coins','ONE','target','execCommand','0.7','\x22\x20style=\x22display:inline-flex;align-items:center;gap:6px;padding:6px\x2012px;border-radius:20px;font-size:13px;font-weight:600;background:','usd_24h_change','keys','var(--teal)','<span\x20style=\x22width:20px;height:20px;display:inline-block;text-align:center;margin-left:8px;color:var(--teal);font-size:12px;\x22>◎</span>','ASTR','capitalInput','Be\x20honest,\x20no\x20flattery','PYTH','\x20حجم\x20ورود</span><span\x20class=\x22detail-value\x22>$','code','خطا\x20در\x20ساخت\x20پرامپت','the-open-network','body','قابل\x20قبول','startScannerBtn','dollarSign','CMC\x20API\x20error\x20for\x20','_tp1_approaching','<div\x20style=\x22margin-top:12px;max-height:300px;overflow-y:auto;\x22>','معیارهای\x20ریسک','SHORT','rsi','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22currentColor\x22><path\x20d=\x22M12\x202C6.48\x202\x202\x206.48\x202\x2012s4.48\x2010\x2010\x2010\x2010-4.48\x2010-10S17.52\x202\x2012\x202zm0\x2018c-4.41\x200-8-3.59-8-8s3.59-8\x208-8\x208\x203.59\x208\x208-3.59\x208-8\x208zm-1-4h2v-2h1c1.1\x200\x202-.9\x202-2v-2c0-1.1-.9-2-2-2h-3V6h-2v2H8v8h3zm0-6h2v2h-2z\x22/></svg>','<div\x20style=\x22font-size:26px;font-weight:bold;color:','strong','TRX','searchInput','XMR','<div\x20style=\x22display:flex;align-items:center;gap:8px;\x22>','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x2210\x22/><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x226\x22/><circle\x20cx=\x2212\x22\x20cy=\x2212\x22\x20r=\x222\x22/></svg>','adx','<span\x20style=\x22color:','<div\x20class=\x22histogram-container\x22\x20style=\x22background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px;\x22>','<svg\x20xmlns=\x22http://www.w3.org/2000/svg\x22\x20width=\x2224\x22\x20height=\x2224\x22\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><path\x20d=\x22M22\x2011.08V12a10\x2010\x200\x201\x201-5.93-9.14\x22/><polyline\x20points=\x2222\x204\x2012\x2014.01\x209\x2011.01\x22/></svg>','مناسب\x20برای\x20فیوچر','pauseCircle','<div\x20class=\x22pos-row\x22><span>P&L:</span><span\x20class=\x22','<div\x20style=\x22font-size:11px;color:','filter','No\x20indicator\x20explanations','active','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22currentColor\x22><path\x20d=\x22M12\x201.75l-6.25\x2010.5L12\x2016l6.25-3.75L12\x201.75zM5.75\x2013.5L12\x2022.25l6.25-8.75L12\x2017.25\x205.75\x2013.5z\x22/></svg>','monteCarloPlaceholder','scannerStatusText','dataset','کاهش\x20سرمایه\x20معمول','endsWith','value','errorCount','ICP','/sw.js','probabilityOfProfit','danger','<summary\x20style=\x22cursor:pointer;padding:12px\x2016px;background:var(--bg2);border-radius:10px;color:var(--text1);font-weight:600;display:flex;align-items:center;gap:8px;\x22>','ARPA','<div\x20style=\x22margin-bottom:24px;\x22><h5\x20style=\x22color:var(--teal);font-size:16px;font-weight:600;margin-bottom:12px;\x22>','P25','Response','<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22><polyline\x20points=\x2223\x2018\x2013.5\x208.5\x208.5\x2013.5\x201\x206\x22></polyline><polyline\x20points=\x2217\x2018\x2023\x2018\x2023\x2012\x22></polyline></svg>','monteCarlo','layers','rgba(245,158,11,0.15)'];a0_0x5e0d=function(){return _0x110953;};return a0_0x5e0d();}function startScanningWithSymbols(_0x5f0554){var _0x2cc1ef=a0_0x4859bd,_0x4b8108=STATE[_0x2cc1ef(0x2bd)]||{},_0x291d29=typeof _0x4b8108['minConfidence']==='number'?_0x4b8108['minConfidence']:0x7,_0x44b6b5=_0x4b8108['direction']||'both';document[_0x2cc1ef(0x27b)](_0x2cc1ef(0x45a))['style'][_0x2cc1ef(0x30b)]=_0x2cc1ef(0x27f),document[_0x2cc1ef(0x27b)](_0x2cc1ef(0x49e))['style'][_0x2cc1ef(0x30b)]=_0x2cc1ef(0x204),document[_0x2cc1ef(0x27b)](_0x2cc1ef(0x3d0))[_0x2cc1ef(0x3ff)][_0x2cc1ef(0x30b)]=_0x2cc1ef(0x27f),document['getElementById']('startScannerBtn')[_0x2cc1ef(0x350)]=!![],document[_0x2cc1ef(0x27b)](_0x2cc1ef(0x1ab))[_0x2cc1ef(0x3ff)]['width']='0%',document['getElementById'](_0x2cc1ef(0x387))[_0x2cc1ef(0x3a9)]=_0x2cc1ef(0x32a)+_0x5f0554[_0x2cc1ef(0x41d)];var _0x124264=new Set(),_0x1a74c3=0x0,_0x4a9502=0x0,_0x4560b6=0x3,_0x5b4a81=0x1388,_0x531ffa={};STATE['scannerCallback']=function(_0x18ccc3,_0x1d60a5){var _0x6daf32=_0x2cc1ef;if(_0x124264[_0x6daf32(0x471)](_0x18ccc3))return;_0x531ffa[_0x18ccc3]&&(clearTimeout(_0x531ffa[_0x18ccc3]),delete _0x531ffa[_0x18ccc3]);_0x124264[_0x6daf32(0x2cd)](_0x18ccc3),_0x1a74c3++;var _0x22f73c=ASSET_INFO[_0x18ccc3]||COIN_ICON_CACHE[_0x18ccc3]||{'name':_0x18ccc3[_0x6daf32(0x232)](_0x6daf32(0x2b0),''),'symbol':_0x18ccc3['replace'](_0x6daf32(0x2b0),'')},_0x33f30b={'symbol':_0x18ccc3,'name':_0x22f73c[_0x6daf32(0x25d)]||_0x22f73c['symbol'],'signal':_0x1d60a5,'iconUrl':_0x22f73c[_0x6daf32(0x281)]||null,'isStrong':![]},_0x4a6ef4=_0x44b6b5===_0x6daf32(0x4dc)||_0x1d60a5&&_0x1d60a5['type']===_0x44b6b5;_0x1d60a5&&_0x1d60a5['type']!==_0x6daf32(0x277)&&_0x1d60a5[_0x6daf32(0x4a0)]>=_0x291d29&&_0x1d60a5[_0x6daf32(0x2e5)]==='excellent'&&_0x4a6ef4&&(_0x33f30b[_0x6daf32(0x106)]=!![],STATE['scannerResults'][_0x6daf32(0x233)]({'symbol':_0x18ccc3,'name':_0x22f73c[_0x6daf32(0x25d)]||_0x22f73c['symbol'],'signal':_0x1d60a5,'iconUrl':_0x22f73c['iconUrl']||null}),STATE[_0x6daf32(0x3d0)][_0x6daf32(0x4ec)](function(_0x180824,_0x3a10bd){var _0x4fbe53=_0x6daf32;return _0x3a10bd[_0x4fbe53(0x3e6)][_0x4fbe53(0x4a0)]-_0x180824[_0x4fbe53(0x3e6)][_0x4fbe53(0x4a0)];})),STATE['scannerScannedSymbols'][_0x6daf32(0x233)](_0x33f30b),_0x26fb1e(),_0x1a74c3>=_0x5f0554[_0x6daf32(0x41d)]&&_0x60691d();};function _0x26fb1e(){var _0x9d0a03=_0x2cc1ef,_0x5e216e=_0x1a74c3/_0x5f0554[_0x9d0a03(0x41d)]*0x64;document['getElementById'](_0x9d0a03(0x1ab))['style']['width']=_0x5e216e+'%',document['getElementById']('scannerStatusText')[_0x9d0a03(0x3a9)]=_0x1a74c3+_0x9d0a03(0x180)+_0x5f0554[_0x9d0a03(0x41d)];}function _0x60691d(){var _0x59c54d=_0x2cc1ef;for(var _0x5c5ca4 in _0x531ffa){clearTimeout(_0x531ffa[_0x5c5ca4]);}_0x531ffa={},STATE[_0x59c54d(0x320)]=![],STATE['scannerCallback']=null,document[_0x59c54d(0x27b)](_0x59c54d(0x49e))[_0x59c54d(0x3ff)]['display']=_0x59c54d(0x27f),document['getElementById'](_0x59c54d(0x36a))[_0x59c54d(0x350)]=![],renderScannerResults(),showToast(_0x59c54d(0x446)+STATE[_0x59c54d(0x3d0)]['length']+_0x59c54d(0x2bb),'success');}function _0xd13d52(){var _0x32cbfe=_0x2cc1ef;if(_0x4a9502>=_0x5f0554[_0x32cbfe(0x41d)]||_0x1a74c3>=_0x5f0554[_0x32cbfe(0x41d)]){(_0x1a74c3>=_0x5f0554[_0x32cbfe(0x41d)]||!STATE[_0x32cbfe(0x320)])&&_0x60691d();return;}var _0x228792=_0x5f0554[_0x32cbfe(0x461)](_0x4a9502,_0x4a9502+_0x4560b6);_0x4a9502+=_0x4560b6,_0x228792[_0x32cbfe(0x3c1)](function(_0x3965dd){var _0x375e9b=_0x32cbfe;_0x531ffa[_0x3965dd]=setTimeout(function(){var _0x450e8b=a0_0x1aae;!_0x124264['has'](_0x3965dd)&&STATE[_0x450e8b(0x3e2)]&&(_0x124264[_0x450e8b(0x2cd)](_0x3965dd),_0x1a74c3++,_0x26fb1e(),_0x1a74c3>=_0x5f0554[_0x450e8b(0x41d)]&&_0x60691d());},0x7530),STATE['klines'][_0x3965dd]&&Object[_0x375e9b(0x35d)](STATE[_0x375e9b(0x4d6)][_0x3965dd])[_0x375e9b(0x41d)]===TIMEFRAMES['length']?STATE[_0x375e9b(0x26d)][_0x3965dd]?STATE['scannerCallback']&&STATE[_0x375e9b(0x3e2)](_0x3965dd,STATE['signals'][_0x3965dd]):analyzeAsset(_0x3965dd):fetchAssetData(_0x3965dd);});if(_0x4a9502<_0x5f0554[_0x32cbfe(0x41d)]&&_0x1a74c3<_0x5f0554[_0x32cbfe(0x41d)]&&STATE['scannerActive'])setTimeout(_0xd13d52,_0x5b4a81);else _0x1a74c3>=_0x5f0554[_0x32cbfe(0x41d)]&&_0x60691d();}_0xd13d52(),setTimeout(function(){STATE['scannerActive']&&_0x60691d();},0x2bf20);}function renderScannerResults(){var _0x16e637=a0_0x4859bd,_0x3f29b0=document[_0x16e637(0x27b)]('scannerResultsList');if(!_0x3f29b0)return;var _0x16a86f='';STATE[_0x16e637(0x3d0)][_0x16e637(0x41d)]>0x0&&(_0x16a86f+=_0x16e637(0x393)+ICONS['star']+'سیگنال‌های\x20قوی\x20('+STATE[_0x16e637(0x3d0)]['length']+_0x16e637(0x4b3),STATE[_0x16e637(0x3d0)]['forEach'](function(_0x446bbc){var _0x3fb6ad=_0x16e637,_0xf83c77=_0x446bbc[_0x3fb6ad(0x3e6)],_0x2b9c2d='';_0x446bbc[_0x3fb6ad(0x281)]?_0x2b9c2d=_0x3fb6ad(0x32e)+_0x446bbc[_0x3fb6ad(0x281)]+_0x3fb6ad(0x135)+_0x446bbc[_0x3fb6ad(0x25d)]+'\x22\x20style=\x22width:32px;height:32px;border-radius:50%;object-fit:cover;\x22>':_0x2b9c2d=_0x3fb6ad(0x4f7)+_0x446bbc[_0x3fb6ad(0x25d)][_0x3fb6ad(0x1fe)](0x0,0x2)+_0x3fb6ad(0x118);var _0x3e7a5c=_0xf83c77['type']===_0x3fb6ad(0x28a)?'long':_0x3fb6ad(0x3c6),_0x254087=_0xf83c77['type']===_0x3fb6ad(0x28a)?_0x3fb6ad(0x2d0):'فروش\x20(Short)',_0x314411=_0xf83c77['type']===_0x3fb6ad(0x28a)?ICONS[_0x3fb6ad(0x295)]:ICONS['trendDown'];_0x16a86f+=_0x3fb6ad(0x323)+_0x446bbc[_0x3fb6ad(0x3d3)]+'\x27)\x22\x20style=\x22background:var(--card);border:1px\x20solid\x20var(--border);border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer;\x22>'+'<div\x20style=\x22display:flex;align-items:center;gap:12px;margin-bottom:12px;\x22>'+_0x2b9c2d+_0x3fb6ad(0x482)+'<div\x20style=\x22font-size:16px;font-weight:600;color:var(--text1);margin-bottom:4px;\x22>'+_0x446bbc[_0x3fb6ad(0x25d)]+_0x3fb6ad(0x118)+'<div\x20style=\x22font-size:12px;color:var(--text2);\x22>'+_0x446bbc[_0x3fb6ad(0x3d3)]+_0x3fb6ad(0x118)+_0x3fb6ad(0x118)+_0x3fb6ad(0x21d)+_0x3e7a5c+_0x3fb6ad(0x35b)+(_0xf83c77[_0x3fb6ad(0x45f)]===_0x3fb6ad(0x28a)?_0x3fb6ad(0x35e):_0x3fb6ad(0x1b5))+_0x3fb6ad(0x27e)+_0x314411+'\x20'+_0x254087+_0x3fb6ad(0x118)+_0x3fb6ad(0x118)+_0x3fb6ad(0x29c)+_0x3fb6ad(0x2de)+'<div\x20style=\x22font-size:11px;color:var(--text2);margin-bottom:4px;\x22>قدرت\x20سیگنال</div>'+_0x3fb6ad(0x10d)+_0xf83c77[_0x3fb6ad(0x4a0)]+_0x3fb6ad(0xf0)+'</div>'+_0x3fb6ad(0x2de)+_0x3fb6ad(0x151)+_0x3fb6ad(0x319)+(_0xf83c77['confluenceScore']||0x0)+_0x3fb6ad(0x118)+_0x3fb6ad(0x118)+_0x3fb6ad(0x118)+_0x3fb6ad(0x3b8)+_0x3fb6ad(0x111)+(_0xf83c77[_0x3fb6ad(0x29b)]?_0xf83c77['reasons'][_0x3fb6ad(0x461)](0x0,0x3)[_0x3fb6ad(0x3f2)](_0x3fb6ad(0x4db)):'')+_0x3fb6ad(0x118)+'<div\x20style=\x22margin-top:12px;padding-top:12px;border-top:1px\x20solid\x20var(--border);font-size:11px;color:var(--teal);display:flex;align-items:center;gap:6px;\x22>'+ICONS[_0x3fb6ad(0x4e0)]+_0x3fb6ad(0x239)+'</div>'+_0x3fb6ad(0x118);}),_0x16a86f+=_0x16e637(0x118)),STATE[_0x16e637(0x4f9)]['length']>0x0&&(_0x16a86f+=_0x16e637(0x424)+ICONS['list']+'لیست\x20کامل\x20نمادهای\x20اسکن\x20شده\x20('+STATE[_0x16e637(0x4f9)]['length']+_0x16e637(0x4b3),STATE['scannerScannedSymbols'][_0x16e637(0x3c1)](function(_0x3301ea){var _0x13af7e=_0x16e637,_0x2ebe0d='';_0x3301ea['iconUrl']?_0x2ebe0d=_0x13af7e(0x32e)+_0x3301ea[_0x13af7e(0x281)]+_0x13af7e(0x135)+_0x3301ea[_0x13af7e(0x25d)]+_0x13af7e(0xff):_0x2ebe0d=_0x13af7e(0x2b7)+_0x3301ea[_0x13af7e(0x25d)][_0x13af7e(0x1fe)](0x0,0x2)+_0x13af7e(0x118);var _0x33fa5a,_0x31d98d,_0x4b15e3;if(_0x3301ea[_0x13af7e(0x106)])_0x33fa5a=_0x13af7e(0x35e),_0x31d98d=_0x13af7e(0x418),_0x4b15e3=ICONS[_0x13af7e(0x3a5)];else _0x3301ea[_0x13af7e(0x3e6)]&&_0x3301ea[_0x13af7e(0x3e6)]['type']!==_0x13af7e(0x277)?(_0x33fa5a=_0x13af7e(0x1b2),_0x31d98d=_0x13af7e(0x480),_0x4b15e3=ICONS['alertTriangle']):(_0x33fa5a=_0x13af7e(0x343),_0x31d98d='بدون\x20سیگنال',_0x4b15e3=ICONS[_0x13af7e(0x37f)]);var _0x10cf38='';_0x3301ea['signal']&&_0x3301ea['signal'][_0x13af7e(0x45f)]!=='wait'&&(_0x10cf38=_0x13af7e(0x312)+_0x13af7e(0x1fa)+_0x3301ea['signal']['confidence']+'/10\x20•\x20'+(_0x3301ea[_0x13af7e(0x3e6)]['type']===_0x13af7e(0x28a)?_0x13af7e(0x1ca):_0x13af7e(0x3d9))+_0x13af7e(0x118)),_0x16a86f+=_0x13af7e(0x323)+_0x3301ea['symbol']+'\x27)\x22\x20style=\x22background:var(--card);border:1px\x20solid\x20var(--border);border-radius:8px;padding:12px;margin-bottom:8px;cursor:pointer;opacity:'+(_0x3301ea[_0x13af7e(0x106)]?'1':_0x13af7e(0x35a))+_0x13af7e(0x1a7)+(_0x3301ea[_0x13af7e(0x106)]?'1':_0x13af7e(0x35a))+_0x13af7e(0x13e)+'<div\x20style=\x22display:flex;align-items:center;gap:10px;\x22>'+_0x2ebe0d+_0x13af7e(0x482)+_0x13af7e(0x1f7)+(_0x3301ea[_0x13af7e(0x106)]?ICONS['checkCircle']:'')+'<span>'+_0x3301ea[_0x13af7e(0x25d)]+_0x13af7e(0x4f0)+_0x13af7e(0x118)+'<div\x20style=\x22font-size:11px;color:var(--text2);\x22>'+_0x3301ea['symbol']+_0x13af7e(0x118)+_0x10cf38+_0x13af7e(0x118)+_0x13af7e(0x381)+_0x33fa5a+_0x13af7e(0x16e)+_0x4b15e3+'<span>'+_0x31d98d+'</span>'+_0x13af7e(0x118)+_0x13af7e(0x118)+_0x13af7e(0x118);}),_0x16a86f+=_0x16e637(0x118)),_0x16a86f===''&&(_0x16a86f='<div\x20style=\x22text-align:center;padding:40px;color:var(--text2);\x22>هیچ\x20نتیجه‌ای\x20یافت\x20نشد</div>'),_0x3f29b0['innerHTML']=_0x16a86f,document['getElementById'](_0x16e637(0x3d0))['style'][_0x16e637(0x30b)]=_0x16e637(0x204);}function handleScannerItemClick(_0x225c8c){var _0x3fe12d=a0_0x4859bd,_0x5ba978=generateAIPrompt(_0x225c8c);if(!_0x5ba978){showToast(_0x3fe12d(0x366),_0x3fe12d(0x24c));return;}navigator[_0x3fe12d(0x4e0)]&&navigator['clipboard'][_0x3fe12d(0x3c0)]?navigator[_0x3fe12d(0x4e0)]['writeText'](_0x5ba978)[_0x3fe12d(0x3c7)](function(){var _0x27b85b=_0x3fe12d;showToast(_0x27b85b(0x139)+_0x225c8c+'\x20کپی\x20شد',_0x27b85b(0x4f5));})['catch'](function(){fallbackCopyToClipboard(_0x5ba978);}):fallbackCopyToClipboard(_0x5ba978);}function analyzeAsset(_0xa6b242){var _0x337f1a=a0_0x4859bd,_0x5179ff=STATE['prices'][_0xa6b242]?STATE[_0x337f1a(0x2ce)][_0xa6b242][_0x337f1a(0x327)]:0x0;if(!_0x5179ff)return;var _0x3456f8={},_0x1bbae2=0x0,_0x2a512f=0x0,_0x44c4d3={'30m':0x1,'1h':0x2,'4h':0x3,'1d':0x4},_0x2ab1c1=0x0;TIMEFRAMES['forEach'](function(_0xb39fa3){var _0x3951b1=_0x337f1a,_0x20cbe4=STATE[_0x3951b1(0x4d6)][_0xa6b242][_0xb39fa3];if(_0x20cbe4&&_0x20cbe4[_0x3951b1(0x41d)]>=0x1e){var _0x4d55ec=TradingCore['analyzeTF'](_0x20cbe4,_0x5179ff);_0x3456f8[_0xb39fa3]=_0x4d55ec,_0x2ab1c1++;var _0x5308d0=_0x44c4d3[_0xb39fa3];if(_0x4d55ec['signal']==='long')_0x1bbae2+=_0x4d55ec[_0x3951b1(0x3bb)]*_0x5308d0;else{if(_0x4d55ec[_0x3951b1(0x3e6)]==='short')_0x2a512f+=_0x4d55ec['score']*_0x5308d0;}}});var _0x4eae4a={'type':'wait','entry':_0x5179ff,'sl':0x0,'tp1':0x0,'tp2':0x0,'leverage':0x3,'confidence':0x0,'reasons':[],'rsi':0x32,'ema21':_0x5179ff,'ema50':_0x5179ff,'trend':'neutral','tfAnalysis':_0x3456f8},_0x5b7a68=_0x3456f8['1h']||_0x3456f8[_0x337f1a(0x176)]||_0x3456f8['4h'];_0x5b7a68&&(_0x4eae4a[_0x337f1a(0x371)]=_0x5b7a68[_0x337f1a(0x371)],_0x4eae4a['ema21']=_0x5b7a68[_0x337f1a(0x4e8)],_0x4eae4a['ema50']=_0x5b7a68[_0x337f1a(0x313)],_0x4eae4a[_0x337f1a(0x231)]=_0x5b7a68['trend'],_0x4eae4a['adx']=_0x5b7a68[_0x337f1a(0x37a)],_0x4eae4a[_0x337f1a(0x3df)]=_0x5b7a68['macd'],_0x4eae4a[_0x337f1a(0x108)]=_0x5b7a68[_0x337f1a(0x108)],_0x4eae4a[_0x337f1a(0x1c0)]=_0x5b7a68['rsiDivergence']);var _0x483cef=0x4,_0x5442a6=0x2;if(_0x2ab1c1===0x0){_0x4eae4a[_0x337f1a(0x29b)]=[_0x337f1a(0x3db)],STATE[_0x337f1a(0x26d)][_0xa6b242]=_0x4eae4a;if(_0xa6b242===STATE[_0x337f1a(0x1cd)])renderAssetPanel(_0xa6b242);return;}var _0x2009b8=TradingCore[_0x337f1a(0x4b4)](STATE['klines'][_0xa6b242]['4h']||STATE['klines'][_0xa6b242]['1h']||[],0xe,_0x5179ff);if(!isFinite(_0x2009b8)||_0x2009b8<=0x0)_0x2009b8=_0x5179ff*0.015;var _0x2776e5=STATE['settings'][_0x337f1a(0x4d8)]*(STATE[_0x337f1a(0x1ee)][_0x337f1a(0x34c)]/0x64);if(_0x1bbae2>=_0x483cef&&_0x1bbae2>_0x2a512f+_0x5442a6){_0x4eae4a[_0x337f1a(0x45f)]=_0x337f1a(0x28a),_0x4eae4a[_0x337f1a(0x4a0)]=Math['min'](Math[_0x337f1a(0x23b)](_0x1bbae2/0x3),0xa);var _0x10ab6d=TradingCore[_0x337f1a(0x400)](STATE['klines'][_0xa6b242]['1h']||STATE[_0x337f1a(0x4d6)][_0xa6b242]['4h']||[],STATE[_0x337f1a(0x4d6)][_0xa6b242]['4h']||null,_0x5179ff,_0x337f1a(0x28a),_0x5b7a68?_0x5b7a68[_0x337f1a(0x4e8)]:_0x5179ff,_0x5b7a68?_0x5b7a68[_0x337f1a(0x313)]:_0x5179ff,_0x2009b8,_0x2776e5);_0x4eae4a[_0x337f1a(0x408)]=_0x10ab6d[_0x337f1a(0x408)],_0x4eae4a[_0x337f1a(0x450)]=_0x10ab6d['reasons'],_0x4eae4a[_0x337f1a(0x2e5)]=_0x10ab6d[_0x337f1a(0x345)],_0x4eae4a[_0x337f1a(0x120)]=_0x10ab6d[_0x337f1a(0x120)],_0x4eae4a[_0x337f1a(0x2ef)]=_0x10ab6d[_0x337f1a(0x454)],_0x4eae4a['sl']=_0x4eae4a[_0x337f1a(0x408)]-_0x2009b8*1.5,_0x4eae4a[_0x337f1a(0x2b2)]=_0x4eae4a[_0x337f1a(0x408)]+_0x2009b8*0x2,_0x4eae4a[_0x337f1a(0x19e)]=_0x4eae4a[_0x337f1a(0x408)]+_0x2009b8*3.5,_0x4eae4a[_0x337f1a(0x290)]=TradingCore[_0x337f1a(0x212)](_0x4eae4a[_0x337f1a(0x408)],_0x4eae4a['sl']),TIMEFRAMES[_0x337f1a(0x3c1)](function(_0x1e8ab4){var _0x425357=_0x337f1a;if(_0x3456f8[_0x1e8ab4]&&_0x3456f8[_0x1e8ab4][_0x425357(0x3e6)]===_0x425357(0x28a))_0x4eae4a[_0x425357(0x29b)][_0x425357(0x233)](_0x1e8ab4[_0x425357(0x488)]()+'\x20صعودی');});if(_0x5b7a68&&_0x5b7a68[_0x337f1a(0x108)]&&_0x5b7a68[_0x337f1a(0x108)]['signal']===_0x337f1a(0x374))_0x4eae4a[_0x337f1a(0x29b)]['push']('حجم\x20بالا');if(_0x5b7a68&&_0x5b7a68[_0x337f1a(0x1c0)]&&_0x5b7a68[_0x337f1a(0x1c0)]['type']===_0x337f1a(0x317))_0x4eae4a['reasons'][_0x337f1a(0x233)](_0x337f1a(0x1e9));if(_0x5b7a68&&_0x5b7a68[_0x337f1a(0x37a)]&&_0x5b7a68['adx'][_0x337f1a(0x37a)]>=0x19)_0x4eae4a['reasons'][_0x337f1a(0x233)]('روند\x20قوی');}else{if(_0x2a512f>=_0x483cef&&_0x2a512f>_0x1bbae2+_0x5442a6){_0x4eae4a[_0x337f1a(0x45f)]=_0x337f1a(0x3c6),_0x4eae4a[_0x337f1a(0x4a0)]=Math['min'](Math[_0x337f1a(0x23b)](_0x2a512f/0x3),0xa);var _0x10ab6d=TradingCore[_0x337f1a(0x400)](STATE[_0x337f1a(0x4d6)][_0xa6b242]['1h']||STATE[_0x337f1a(0x4d6)][_0xa6b242]['4h']||[],STATE[_0x337f1a(0x4d6)][_0xa6b242]['4h']||null,_0x5179ff,_0x337f1a(0x3c6),_0x5b7a68?_0x5b7a68['ema21']:_0x5179ff,_0x5b7a68?_0x5b7a68[_0x337f1a(0x313)]:_0x5179ff,_0x2009b8,_0x2776e5);_0x4eae4a[_0x337f1a(0x408)]=_0x10ab6d[_0x337f1a(0x408)],_0x4eae4a['entryReasons']=_0x10ab6d[_0x337f1a(0x29b)],_0x4eae4a[_0x337f1a(0x2e5)]=_0x10ab6d[_0x337f1a(0x345)],_0x4eae4a['confluenceScore']=_0x10ab6d[_0x337f1a(0x120)],_0x4eae4a[_0x337f1a(0x2ef)]=_0x10ab6d[_0x337f1a(0x454)],_0x4eae4a['sl']=_0x4eae4a[_0x337f1a(0x408)]+_0x2009b8*1.5,_0x4eae4a['tp1']=_0x4eae4a['entry']-_0x2009b8*0x2,_0x4eae4a['tp2']=_0x4eae4a[_0x337f1a(0x408)]-_0x2009b8*3.5,_0x4eae4a[_0x337f1a(0x290)]=TradingCore[_0x337f1a(0x212)](_0x4eae4a[_0x337f1a(0x408)],_0x4eae4a['sl']),TIMEFRAMES['forEach'](function(_0x48010b){var _0x49457f=_0x337f1a;if(_0x3456f8[_0x48010b]&&_0x3456f8[_0x48010b]['signal']==='short')_0x4eae4a['reasons'][_0x49457f(0x233)](_0x48010b['toUpperCase']()+'\x20نزولی');});if(_0x5b7a68&&_0x5b7a68[_0x337f1a(0x108)]&&_0x5b7a68[_0x337f1a(0x108)][_0x337f1a(0x3e6)]===_0x337f1a(0x374))_0x4eae4a['reasons']['push'](_0x337f1a(0x25a));if(_0x5b7a68&&_0x5b7a68[_0x337f1a(0x1c0)]&&_0x5b7a68['rsiDivergence'][_0x337f1a(0x45f)]===_0x337f1a(0x347))_0x4eae4a[_0x337f1a(0x29b)][_0x337f1a(0x233)](_0x337f1a(0x39e));if(_0x5b7a68&&_0x5b7a68[_0x337f1a(0x37a)]&&_0x5b7a68[_0x337f1a(0x37a)][_0x337f1a(0x37a)]>=0x19)_0x4eae4a[_0x337f1a(0x29b)][_0x337f1a(0x233)](_0x337f1a(0x33c));}else{if(_0x1bbae2===0x0&&_0x2a512f===0x0)_0x4eae4a[_0x337f1a(0x29b)]=[_0x337f1a(0x32d)];else{if(Math[_0x337f1a(0x1dc)](_0x1bbae2-_0x2a512f)<_0x5442a6)_0x4eae4a['reasons']=[_0x337f1a(0x4fb)];else _0x4eae4a[_0x337f1a(0x29b)]=['قدرت\x20سیگنال\x20کافی\x20نیست'];}}}_0x4eae4a=applyStrategy(_0x4eae4a);var _0x4e9126=determineTradingMode(_0x4eae4a);_0x4eae4a[_0x337f1a(0x406)]=_0x4e9126,STATE[_0x337f1a(0x26d)][_0xa6b242]=_0x4eae4a;if(_0xa6b242===STATE[_0x337f1a(0x1cd)])renderAssetPanel(_0xa6b242);STATE['scannerActive']&&STATE['scannerCallback']&&STATE[_0x337f1a(0x3e2)](_0xa6b242,_0x4eae4a);}function applyStrategy(_0x322de1){var _0x1f9bee=a0_0x4859bd,_0x23487c=STATE[_0x1f9bee(0x1ee)][_0x1f9bee(0x352)];_0x322de1[_0x1f9bee(0x4aa)]=_0x322de1[_0x1f9bee(0x45f)],_0x322de1['strategyApplied']=_0x23487c;if(_0x322de1['type']===_0x1f9bee(0x277))return _0x322de1;_0x23487c===_0x1f9bee(0x2c3)&&(_0x322de1[_0x1f9bee(0x4a0)]<0x7&&(_0x322de1[_0x1f9bee(0x45f)]=_0x1f9bee(0x277),_0x322de1[_0x1f9bee(0x29b)]=['استراتژی\x20محافظه‌کارانه:\x20قدرت\x20سیگنال\x20'+_0x322de1[_0x1f9bee(0x4a0)]+_0x1f9bee(0x297)],_0x322de1[_0x1f9bee(0x401)]=!![]));if(_0x23487c==='trend_following'){var _0x1c1bc4=_0x322de1['adx']?_0x322de1[_0x1f9bee(0x37a)][_0x1f9bee(0x37a)]:0x0;_0x1c1bc4<0x19&&(_0x322de1[_0x1f9bee(0x45f)]=_0x1f9bee(0x277),_0x322de1['reasons']=[_0x1f9bee(0x40f)+_0x1c1bc4[_0x1f9bee(0x335)](0x0)+_0x1f9bee(0x3c8)],_0x322de1['strategyBlocked']=!![]);}return _0x322de1;}function enterPosition(_0x96f24a){var _0x4a2744=a0_0x4859bd,_0x1ab33f=STATE['signals'][_0x96f24a],_0xc5e7ec=STATE[_0x4a2744(0x2ce)][_0x96f24a]?STATE[_0x4a2744(0x2ce)][_0x96f24a][_0x4a2744(0x327)]:0x0;if(!_0x1ab33f||_0x1ab33f[_0x4a2744(0x45f)]===_0x4a2744(0x277)||!_0xc5e7ec){showToast(_0x4a2744(0x311),_0x4a2744(0x24c));return;}var _0x3830bf=STATE[_0x4a2744(0x1ee)][_0x4a2744(0x290)]===_0x4a2744(0x235)?_0x1ab33f['leverage']:parseInt(STATE['settings'][_0x4a2744(0x290)]);STATE[_0x4a2744(0x1d4)][_0x96f24a]={'type':_0x1ab33f['type'],'entry':_0xc5e7ec,'size':STATE[_0x4a2744(0x1ee)]['capital']*STATE['settings'][_0x4a2744(0x34c)]/0x64,'leverage':_0x3830bf,'sl':_0x1ab33f['sl'],'tp1':_0x1ab33f[_0x4a2744(0x2b2)],'tp2':_0x1ab33f[_0x4a2744(0x19e)],'openTime':Date[_0x4a2744(0x273)]()},NOTIFICATION_STATE[_0x96f24a+_0x4a2744(0x257)]=![],NOTIFICATION_STATE[_0x96f24a+_0x4a2744(0x178)]=![],NOTIFICATION_STATE[_0x96f24a+_0x4a2744(0x251)]=![],NOTIFICATION_STATE[_0x96f24a+_0x4a2744(0x36d)]=![],NOTIFICATION_STATE[_0x96f24a+_0x4a2744(0x321)]=![],saveSettings(),renderAssetPanel(_0x96f24a),showToast('پوزیشن\x20'+_0x1ab33f['type'][_0x4a2744(0x488)]()+_0x4a2744(0x1a9)+_0x3830bf+_0x4a2744(0x47a),_0x4a2744(0x4f5));}function closePosition(_0x1d61fc){var _0x9284c8=a0_0x4859bd;if(STATE[_0x9284c8(0x1d4)][_0x1d61fc]){var _0x9b064f=STATE[_0x9284c8(0x1d4)][_0x1d61fc],_0x52ffba=STATE[_0x9284c8(0x2ce)][_0x1d61fc]?STATE['prices'][_0x1d61fc][_0x9284c8(0x327)]:_0x9b064f['entry'],_0x56a0cd=calculatePnL(_0x9b064f,_0x52ffba);delete STATE[_0x9284c8(0x1d4)][_0x1d61fc],delete NOTIFICATION_STATE[_0x1d61fc+_0x9284c8(0x257)],delete NOTIFICATION_STATE[_0x1d61fc+_0x9284c8(0x178)],delete NOTIFICATION_STATE[_0x1d61fc+_0x9284c8(0x251)],delete NOTIFICATION_STATE[_0x1d61fc+_0x9284c8(0x36d)],delete NOTIFICATION_STATE[_0x1d61fc+_0x9284c8(0x321)],saveSettings(),renderAssetPanel(_0x1d61fc),showToast((_0x56a0cd>=0x0?_0x9284c8(0x150):_0x9284c8(0x226))+_0x56a0cd[_0x9284c8(0x335)](0x2)+'%',_0x56a0cd>=0x0?_0x9284c8(0x4f5):_0x9284c8(0x24c));}}function calculatePnL(_0xa98836,_0x272c05){var _0x2111ee=a0_0x4859bd;if(!_0xa98836||!_0x272c05)return 0x0;var _0x60393f=_0x272c05-_0xa98836[_0x2111ee(0x408)];if(_0xa98836[_0x2111ee(0x45f)]===_0x2111ee(0x3c6))_0x60393f=-_0x60393f;return _0x60393f/_0xa98836[_0x2111ee(0x408)]*0x64*_0xa98836['leverage'];}var NOTIFICATION_STATE={};function checkPositionNotifications(_0x55aab6){var _0x53aa8c=a0_0x4859bd;if(!STATE['settings'][_0x53aa8c(0x1d3)])return;var _0x451db9=STATE['positions'][_0x55aab6];if(!_0x451db9)return;var _0x48c4ac=STATE['prices'][_0x55aab6];if(!_0x48c4ac||!_0x48c4ac[_0x53aa8c(0x327)])return;var _0x5dc4af=_0x48c4ac[_0x53aa8c(0x327)],_0x40cfcf=_0x451db9[_0x53aa8c(0x408)],_0x51bba9=_0x451db9['sl'],_0x1d7d69=_0x451db9['tp1'],_0x342fa4=_0x451db9[_0x53aa8c(0x19e)];if(_0x451db9[_0x53aa8c(0x45f)]===_0x53aa8c(0x28a)){_0x5dc4af>=_0x1d7d69&&!NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x257)]&&(sendPositionNotification(_0x55aab6,_0x53aa8c(0x217),_0x1d7d69),NOTIFICATION_STATE[_0x55aab6+'_tp1']=!![]);_0x5dc4af>=_0x342fa4&&!NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x178)]&&(sendPositionNotification(_0x55aab6,_0x53aa8c(0x217),_0x342fa4),NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x178)]=!![]);_0x5dc4af<=_0x51bba9&&!NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x251)]&&(sendPositionNotification(_0x55aab6,_0x53aa8c(0x333),_0x51bba9),NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x251)]=!![]);var _0x45df02=_0x1d7d69-_0x40cfcf,_0xdd1121=_0x40cfcf+_0x45df02*0.5;_0x5dc4af>=_0xdd1121&&!NOTIFICATION_STATE[_0x55aab6+'_tp1_approaching']&&(sendPositionNotification(_0x55aab6,_0x53aa8c(0x3de),_0x1d7d69),NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x36d)]=!![]);var _0x57a3c9=_0x40cfcf-_0x51bba9,_0x59b3e8=_0x40cfcf-_0x57a3c9*0.5;_0x5dc4af<=_0x59b3e8&&!NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x321)]&&(sendPositionNotification(_0x55aab6,_0x53aa8c(0x22e),_0x51bba9),NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x321)]=!![]);}else{_0x5dc4af<=_0x1d7d69&&!NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x257)]&&(sendPositionNotification(_0x55aab6,_0x53aa8c(0x217),_0x1d7d69),NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x257)]=!![]);_0x5dc4af<=_0x342fa4&&!NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x178)]&&(sendPositionNotification(_0x55aab6,_0x53aa8c(0x217),_0x342fa4),NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x178)]=!![]);_0x5dc4af>=_0x51bba9&&!NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x251)]&&(sendPositionNotification(_0x55aab6,_0x53aa8c(0x333),_0x51bba9),NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x251)]=!![]);var _0x45df02=_0x40cfcf-_0x1d7d69,_0xdd1121=_0x40cfcf-_0x45df02*0.5;_0x5dc4af<=_0xdd1121&&!NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x36d)]&&(sendPositionNotification(_0x55aab6,_0x53aa8c(0x3de),_0x1d7d69),NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x36d)]=!![]);var _0x57a3c9=_0x51bba9-_0x40cfcf,_0x59b3e8=_0x40cfcf+_0x57a3c9*0.5;_0x5dc4af>=_0x59b3e8&&!NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x321)]&&(sendPositionNotification(_0x55aab6,'sl_approaching',_0x51bba9),NOTIFICATION_STATE[_0x55aab6+_0x53aa8c(0x321)]=!![]);}}function sendPositionNotification(_0x47261f,_0x46bb2e,_0x26367b){var _0x14a8f4=a0_0x4859bd;if(!(_0x14a8f4(0x431)in window))return;var _0x4c1d6f=function(){var _0x42fa09=_0x14a8f4;if(Notification[_0x42fa09(0x3f0)]===_0x42fa09(0x22c))showPositionNotification(_0x47261f,_0x46bb2e,_0x26367b);else Notification[_0x42fa09(0x3f0)]!==_0x42fa09(0x29f)&&Notification['requestPermission']()[_0x42fa09(0x3c7)](function(_0x58313d){var _0x46d243=_0x42fa09;_0x58313d===_0x46d243(0x22c)&&showPositionNotification(_0x47261f,_0x46bb2e,_0x26367b);});};_0x4c1d6f();}function showPositionNotification(_0x47879e,_0x7ba2c2,_0x1b60f1){var _0x2c88a8=a0_0x4859bd,_0x3a0174=ASSET_INFO[_0x47879e]||{'name':_0x47879e[_0x2c88a8(0x232)](_0x2c88a8(0x2b0),''),'symbol':_0x47879e[_0x2c88a8(0x232)](_0x2c88a8(0x2b0),'')},_0x3745db='',_0x6a43fa='';switch(_0x7ba2c2){case _0x2c88a8(0x3de):_0x3745db='🔔\x20signight:\x20'+_0x3a0174[_0x2c88a8(0x25d)]+_0x2c88a8(0x23e),_0x6a43fa='قیمت\x20فعلی:\x20'+formatPrice(STATE[_0x2c88a8(0x2ce)][_0x47879e][_0x2c88a8(0x327)])+'\x0aتارگت:\x20'+formatPrice(_0x1b60f1);break;case'sl_approaching':_0x3745db='signight:\x20'+_0x3a0174[_0x2c88a8(0x25d)]+_0x2c88a8(0x1ff),_0x6a43fa=_0x2c88a8(0x4af)+formatPrice(STATE['prices'][_0x47879e][_0x2c88a8(0x327)])+_0x2c88a8(0x2e3)+formatPrice(_0x1b60f1);break;case'tp_hit':_0x3745db=_0x2c88a8(0x26a)+_0x3a0174[_0x2c88a8(0x25d)]+_0x2c88a8(0x130),_0x6a43fa=_0x2c88a8(0x247)+formatPrice(_0x1b60f1);break;case _0x2c88a8(0x333):_0x3745db=_0x2c88a8(0x154)+_0x3a0174[_0x2c88a8(0x25d)]+_0x2c88a8(0x193),_0x6a43fa=_0x2c88a8(0x247)+formatPrice(_0x1b60f1);break;}new Notification(_0x3745db,{'body':_0x6a43fa,'icon':_0x2c88a8(0x3b1),'badge':_0x2c88a8(0x39a),'vibrate':[0xc8,0x64,0xc8],'tag':_0x47879e+'_'+_0x7ba2c2});}function formatPrice(_0x26d264){var _0x554196=a0_0x4859bd;if(!_0x26d264||!isFinite(_0x26d264))return'--';if(_0x26d264>=0x3e8)return _0x26d264['toLocaleString'](_0x554196(0x131),{'maximumFractionDigits':0x2});if(_0x26d264>=0x1)return _0x26d264[_0x554196(0x335)](0x4);return _0x26d264[_0x554196(0x335)](0x8);}function updatePriceDisplay(_0x3c7763){}function updateLastUpdateTime(){var _0x4a26e2=a0_0x4859bd,_0x34b120=document[_0x4a26e2(0x27b)](_0x4a26e2(0x14d));if(!_0x34b120)return;var _0x5eb702=new Date(),_0x11cb24=_0x5eb702[_0x4a26e2(0x334)]('fa-IR'),_0x5c0c06='',_0x334f92=STATE[_0x4a26e2(0x1cd)];if(_0x334f92&&STATE[_0x4a26e2(0x2ce)][_0x334f92]){var _0x3e433e=STATE['prices'][_0x334f92]['source']||'';if(_0x3e433e===_0x4a26e2(0x48d))_0x5c0c06=_0x4a26e2(0x2e9);else{if(_0x3e433e==='binance')_0x5c0c06=_0x4a26e2(0x4f2);else{if(_0x3e433e===_0x4a26e2(0x234))_0x5c0c06='CoinMarketCap';else{if(_0x3e433e===_0x4a26e2(0x3fb))_0x5c0c06='CoinGecko';else _0x3e433e&&(_0x5c0c06=_0x3e433e);}}}}!_0x5c0c06&&(_0x5c0c06=getAPIStatusText()||_0x4a26e2(0x3dd)),_0x34b120['textContent']=_0x11cb24+_0x4a26e2(0x4db)+_0x5c0c06;}function getAPIStatusText(){var _0x42d323=a0_0x4859bd,_0x452ed7=[];if(API_STATUS[_0x42d323(0x473)][_0x42d323(0x1f3)])_0x452ed7[_0x42d323(0x233)](_0x42d323(0x445));if(API_STATUS['coingecko'][_0x42d323(0x1f3)])_0x452ed7['push'](_0x42d323(0x17a));if(API_STATUS[_0x42d323(0x113)][_0x42d323(0x1f3)])_0x452ed7[_0x42d323(0x233)]('CryptoCompare');return _0x452ed7[_0x42d323(0x3f2)](',\x20');}function getRsiClass(_0x270087){var _0xe4206b=a0_0x4859bd;if(!_0x270087)return _0xe4206b(0x4be);if(_0x270087<=0x1e)return _0xe4206b(0x317);if(_0x270087>=0x46)return _0xe4206b(0x347);return _0xe4206b(0x4be);}function getTrendClass(_0x40b613){var _0x3c4a60=a0_0x4859bd;if(_0x40b613==='up'||_0x40b613==='strong_up')return _0x3c4a60(0x317);if(_0x40b613===_0x3c4a60(0x4b1)||_0x40b613==='strong_down')return _0x3c4a60(0x347);return _0x3c4a60(0x4be);}function getTrendLabel(_0x57f08e){var _0x4cf4ff=a0_0x4859bd;if(_0x57f08e==='up'||_0x57f08e===_0x4cf4ff(0x1c8))return _0x4cf4ff(0x2f4);if(_0x57f08e==='down'||_0x57f08e===_0x4cf4ff(0x165))return _0x4cf4ff(0x236);return _0x4cf4ff(0x4de);}function getStochRSIClass(_0x792645){var _0x12c2dd=a0_0x4859bd;if(!_0x792645)return'neutral';if(_0x792645[_0x12c2dd(0x3e6)]==='oversold'||_0x792645[_0x12c2dd(0x3e6)]===_0x12c2dd(0x314))return _0x12c2dd(0x317);if(_0x792645[_0x12c2dd(0x3e6)]===_0x12c2dd(0x121)||_0x792645[_0x12c2dd(0x3e6)]===_0x12c2dd(0x344))return _0x12c2dd(0x347);return _0x12c2dd(0x4be);}function getStructureClass(_0x3241f3){var _0x54183f=a0_0x4859bd;if(!_0x3241f3)return _0x54183f(0x4be);if(_0x3241f3[_0x54183f(0x48b)]===_0x54183f(0x4ea)||_0x3241f3['structure']==='bos_bullish')return _0x54183f(0x317);if(_0x3241f3[_0x54183f(0x48b)]===_0x54183f(0x16b)||_0x3241f3['structure']===_0x54183f(0x20d))return _0x54183f(0x347);return _0x54183f(0x4be);}function getStructureLabel(_0x4bbce0){var _0xe43ba0=a0_0x4859bd;if(!_0x4bbce0)return'--';switch(_0x4bbce0[_0xe43ba0(0x48b)]){case _0xe43ba0(0x4ea):return _0xe43ba0(0x10e);case _0xe43ba0(0x16b):return _0xe43ba0(0x479);case _0xe43ba0(0x303):return'شکست\x20صعودی';case _0xe43ba0(0x20d):return _0xe43ba0(0x43e);case _0xe43ba0(0x190):return _0xe43ba0(0x2ba);default:return'نامشخص';}}function getStrategyName(_0x2e1d37){var _0x4a6163=a0_0x4859bd;switch(_0x2e1d37){case _0x4a6163(0x2c3):return _0x4a6163(0x4c6);case _0x4a6163(0x4ac):return _0x4a6163(0x223);default:return _0x4a6163(0x157);}}function getEffectiveLeverage(_0x432615){var _0x3359d3=a0_0x4859bd;return STATE['settings'][_0x3359d3(0x290)]===_0x3359d3(0x235)?(_0x432615||0x3)+'x':STATE[_0x3359d3(0x1ee)][_0x3359d3(0x290)]+_0x3359d3(0x41f);}function showToast(_0x5d9822,_0x2ff9f2){var _0x2bcc26=a0_0x4859bd,_0x32a16f=document[_0x2bcc26(0x27b)](_0x2bcc26(0x348));_0x32a16f[_0x2bcc26(0x3a9)]=_0x5d9822,_0x32a16f[_0x2bcc26(0x44c)]=_0x2bcc26(0x21a)+(_0x2ff9f2===_0x2bcc26(0x24c)?_0x2bcc26(0x4bb):''),setTimeout(function(){var _0x34be2a=_0x2bcc26;_0x32a16f[_0x34be2a(0x1a1)][_0x34be2a(0x2d8)](_0x34be2a(0x129));},0xbb8);}var currentView=a0_0x4859bd(0x3e6),chartTF='1h';function initViewTabs(){var _0x2e410f=a0_0x4859bd;document['querySelectorAll'](_0x2e410f(0x2e0))[_0x2e410f(0x3c1)](function(_0x313353){var _0x34593f=_0x2e410f;_0x313353[_0x34593f(0x164)](_0x34593f(0x1fd),function(){var _0x52799a=_0x34593f,_0x3c7b9b=this['dataset'][_0x52799a(0x3c2)];switchView(_0x3c7b9b);});}),document[_0x2e410f(0x237)](_0x2e410f(0x205))[_0x2e410f(0x3c1)](function(_0x4e4886){var _0x25858e=_0x2e410f;_0x4e4886['addEventListener'](_0x25858e(0x1fd),function(){var _0x3537e1=_0x25858e;document[_0x3537e1(0x237)]('.tf-btn')[_0x3537e1(0x3c1)](function(_0x114789){var _0x2257cb=_0x3537e1;_0x114789[_0x2257cb(0x1a1)][_0x2257cb(0x2d8)](_0x2257cb(0x384));}),this[_0x3537e1(0x1a1)][_0x3537e1(0x2cd)]('active'),chartTF=this[_0x3537e1(0x388)]['tf'],updateChart();});});}function switchView(_0x1fa42d){var _0x4864d7=a0_0x4859bd;currentView=_0x1fa42d,document['querySelectorAll']('.view-tab')[_0x4864d7(0x3c1)](function(_0x2f8ebd){var _0x1a356d=_0x4864d7;_0x2f8ebd['classList']['toggle'](_0x1a356d(0x384),_0x2f8ebd[_0x1a356d(0x388)][_0x1a356d(0x3c2)]===_0x1fa42d);}),document['querySelectorAll'](_0x4864d7(0x128))[_0x4864d7(0x3c1)](function(_0x2d120a){var _0x1ce55b=_0x4864d7;_0x2d120a[_0x1ce55b(0x1a1)][_0x1ce55b(0x2d8)](_0x1ce55b(0x384));});var _0x34de4c=_0x1fa42d===_0x4864d7(0x397)?_0x4864d7(0x29a):'view'+capitalizeFirst(_0x1fa42d);document[_0x4864d7(0x27b)](_0x34de4c)[_0x4864d7(0x1a1)][_0x4864d7(0x2cd)]('active');if(_0x1fa42d===_0x4864d7(0x291))initChart();else{if(_0x1fa42d==='monteCarlo')resetMonteCarloView();else _0x1fa42d===_0x4864d7(0x3da)&&resetScannerView();}}function capitalizeFirst(_0x533b48){var _0x3d9f6b=a0_0x4859bd;return _0x533b48['charAt'](0x0)['toUpperCase']()+_0x533b48[_0x3d9f6b(0x461)](0x1);}var chartInitialized=![];function initChart(){var _0x54e862=a0_0x4859bd;!chartInitialized&&(Chart[_0x54e862(0x104)](_0x54e862(0x209))&&(chartInitialized=!![])),updateChart();}function updateChart(){var _0x578372=a0_0x4859bd,_0x5bcd7b=STATE[_0x578372(0x1cd)],_0x3d7125=STATE['klines'][_0x5bcd7b]?STATE[_0x578372(0x4d6)][_0x5bcd7b][chartTF]:null;if(!_0x3d7125||_0x3d7125[_0x578372(0x41d)]===0x0){console[_0x578372(0x442)](_0x578372(0x1c6));return;}var _0x2b971d=ASSET_INFO[_0x5bcd7b]||{'name':_0x5bcd7b};document[_0x578372(0x27b)](_0x578372(0x2a1))[_0x578372(0x3a9)]=_0x2b971d[_0x578372(0x25d)]+_0x578372(0x133)+chartTF[_0x578372(0x488)](),Chart[_0x578372(0x272)](_0x3d7125),Chart[_0x578372(0x25f)](_0x3d7125,{'ema21':Chart[_0x578372(0x1d5)]?[]:[],'ema50':[],'signals':[]});}function toggleChartIndicator(_0x231e97){var _0x4c080d=a0_0x4859bd;Chart[_0x4c080d(0x20b)](_0x231e97);var _0x476ce9='btn'+_0x231e97[_0x4c080d(0x488)]();if(_0x231e97==='ema')_0x476ce9=_0x4c080d(0x310);if(_0x231e97==='bb')_0x476ce9=_0x4c080d(0x2db);if(_0x231e97===_0x4c080d(0x108))_0x476ce9=_0x4c080d(0x2b1);var _0x2fb272=document[_0x4c080d(0x27b)](_0x476ce9);if(_0x2fb272)_0x2fb272['classList'][_0x4c080d(0x325)]('active');}function resetChartView(){var _0x4dc2c5=a0_0x4859bd;Chart[_0x4dc2c5(0x238)]();}function resetMonteCarloView(){var _0x3e31de=a0_0x4859bd,_0x594ed6=document['getElementById'](_0x3e31de(0x386)),_0x328f10=document[_0x3e31de(0x27b)]('monteCarloProgress'),_0x52bf1d=document[_0x3e31de(0x27b)]('monteCarloResults'),_0x2fb321=document[_0x3e31de(0x27b)](_0x3e31de(0x4c5));if(_0x594ed6)_0x594ed6['style'][_0x3e31de(0x30b)]=_0x3e31de(0x204);if(_0x328f10)_0x328f10[_0x3e31de(0x3ff)][_0x3e31de(0x30b)]='none';if(_0x52bf1d)_0x52bf1d[_0x3e31de(0x3ff)][_0x3e31de(0x30b)]=_0x3e31de(0x27f);if(_0x2fb321)_0x2fb321[_0x3e31de(0x350)]=![];}function runMonteCarloTest(){var _0x17cfad=a0_0x4859bd,_0x5af53d=STATE['activeAsset'],_0x47b9ea=document[_0x17cfad(0x27b)]('monteCarloError');_0x47b9ea&&(_0x47b9ea[_0x17cfad(0x3ff)]['display']=_0x17cfad(0x27f),_0x47b9ea[_0x17cfad(0x3a9)]='');if(!_0x5af53d){showToast(_0x17cfad(0x284),_0x17cfad(0x24c));return;}var _0x319487=STATE[_0x17cfad(0x4d6)][_0x5af53d]?STATE[_0x17cfad(0x4d6)][_0x5af53d]['1h']:null,_0xb81521=STATE[_0x17cfad(0x4d6)][_0x5af53d]?STATE[_0x17cfad(0x4d6)][_0x5af53d]['4h']:null,_0x34755f=STATE['klines'][_0x5af53d]?STATE[_0x17cfad(0x4d6)][_0x5af53d]['1d']:null,_0x407b3c=_0x319487,_0x4240d4=0x96;if(!_0x407b3c||_0x407b3c[_0x17cfad(0x41d)]<_0x4240d4){if(_0xb81521&&_0xb81521[_0x17cfad(0x41d)]>=_0x4240d4)_0x407b3c=_0xb81521,showToast('استفاده\x20از\x20تایم‌فریم\x204\x20ساعته\x20به\x20دلیل\x20کمبود\x20داده',_0x17cfad(0x270));else _0x34755f&&_0x34755f[_0x17cfad(0x41d)]>=0x64&&(_0x407b3c=_0x34755f,_0x4240d4=0x64,showToast(_0x17cfad(0x28e),_0x17cfad(0x270)));}if(!_0x407b3c||_0x407b3c['length']<_0x4240d4){var _0x5a629b=_0x407b3c?_0x407b3c[_0x17cfad(0x41d)]:0x0;showToast(_0x17cfad(0x114)+_0x4240d4+_0x17cfad(0x42e)+_0x5a629b+_0x17cfad(0x134),'error');return;}var _0x28130e=STATE[_0x17cfad(0x26d)][_0x5af53d],_0x24045a=_0x28130e?_0x28130e[_0x17cfad(0x45f)]:'both',_0x5b5b45=document['getElementById']('monteSimulations'),_0xf986f7=document['getElementById'](_0x17cfad(0x11b)),_0x17a3c4=document['getElementById']('monteScenario'),_0x38a44e=_0x5b5b45?parseInt(_0x5b5b45[_0x17cfad(0x38b)],0xa):0x3e8,_0x2c3a22=_0xf986f7?parseInt(_0xf986f7['value'],0xa):0x5f,_0x4491f4=_0x17a3c4?_0x17a3c4[_0x17cfad(0x38b)]:_0x17cfad(0x3d2);if(!_0x38a44e||_0x38a44e<0xc8||_0x38a44e>0x1388){var _0x1ab111=_0x17cfad(0x17b);_0x47b9ea&&(_0x47b9ea[_0x17cfad(0x3a9)]=_0x1ab111,_0x47b9ea[_0x17cfad(0x3ff)]['display']=_0x17cfad(0x204));showToast(_0x1ab111,'error');if(_0x5b5b45)_0x5b5b45['focus']();return;}var _0x3006f2=document['getElementById']('monteCarloPlaceholder'),_0xd65a4f=document['getElementById'](_0x17cfad(0x171)),_0x3db38b=document['getElementById'](_0x17cfad(0x12d)),_0x55c32b=document[_0x17cfad(0x27b)](_0x17cfad(0x307)),_0x332e20=document['getElementById']('monteCarloProgressBar'),_0x1cc553=document[_0x17cfad(0x27b)](_0x17cfad(0x41b)),_0xc707c9=document['getElementById'](_0x17cfad(0x4c5));if(_0x3006f2)_0x3006f2[_0x17cfad(0x3ff)]['display']=_0x17cfad(0x27f);if(_0xd65a4f)_0xd65a4f[_0x17cfad(0x3ff)][_0x17cfad(0x30b)]='block';if(_0x3db38b)_0x3db38b[_0x17cfad(0x3ff)][_0x17cfad(0x30b)]=_0x17cfad(0x27f);if(_0xc707c9)_0xc707c9[_0x17cfad(0x350)]=!![];if(_0x55c32b)_0x55c32b[_0x17cfad(0x3a9)]=_0x17cfad(0x48a);if(_0x332e20)_0x332e20['style']['width']='20%';if(_0x1cc553)_0x1cc553[_0x17cfad(0x3a9)]=_0x17cfad(0x143)+_0x407b3c[_0x17cfad(0x41d)];showToast(_0x17cfad(0x466)+_0x407b3c[_0x17cfad(0x41d)]+_0x17cfad(0x219)),setTimeout(function(){var _0x1a8731=_0x17cfad;try{if(_0x1cc553)_0x1cc553[_0x1a8731(0x3a9)]=_0x1a8731(0x28b);if(_0x332e20)_0x332e20[_0x1a8731(0x3ff)][_0x1a8731(0x2ea)]=_0x1a8731(0x2e6);var _0x222a2e={'capital':STATE[_0x1a8731(0x1ee)][_0x1a8731(0x4d8)],'riskPercent':0x2,'strategy':STATE[_0x1a8731(0x1ee)][_0x1a8731(0x352)]||_0x1a8731(0x43b),'leverage':STATE[_0x1a8731(0x1ee)][_0x1a8731(0x290)]===_0x1a8731(0x235)?0x5:parseInt(STATE[_0x1a8731(0x1ee)]['leverage'])||0x5,'simulations':_0x38a44e,'confidenceLevel':_0x2c3a22,'scenario':_0x4491f4,'signalFilter':_0x24045a,'trainPercent':0x28,'testPercent':0xc,'minPeriods':0x5,'maxPeriods':0x28},_0x4738d4=MonteCarlo[_0x1a8731(0x4a5)](_0x407b3c,_0x222a2e);if(_0x4738d4[_0x1a8731(0x24c)]){showToast(_0x4738d4['error'],_0x1a8731(0x24c)),resetMonteCarloView();return;}_0x4738d4[_0x1a8731(0x3d3)]=_0x5af53d,_0x4738d4[_0x1a8731(0x1ed)]=_0x24045a,_0x4738d4['dataPoints']=_0x407b3c[_0x1a8731(0x41d)];if(_0x55c32b)_0x55c32b[_0x1a8731(0x3a9)]=_0x1a8731(0x4e2);if(_0x332e20)_0x332e20['style'][_0x1a8731(0x2ea)]=_0x1a8731(0x278);if(_0x1cc553)_0x1cc553['textContent']=_0x4738d4[_0x1a8731(0x13b)][_0x1a8731(0x3f5)][_0x1a8731(0x346)]+'\x20دوره\x20تست\x20یافت\x20شد';setTimeout(function(){var _0x551762=_0x1a8731;if(_0x332e20)_0x332e20[_0x551762(0x3ff)][_0x551762(0x2ea)]=_0x551762(0x3e3);if(_0x1cc553)_0x1cc553[_0x551762(0x3a9)]='در\x20حال\x20آماده‌سازی\x20نتایج...';setTimeout(function(){var _0x130c71=_0x551762;displayMonteCarloResults(_0x4738d4);if(_0xd65a4f)_0xd65a4f[_0x130c71(0x3ff)][_0x130c71(0x30b)]='none';if(_0x3db38b)_0x3db38b[_0x130c71(0x3ff)][_0x130c71(0x30b)]=_0x130c71(0x204);if(_0xc707c9)_0xc707c9['disabled']=![];showToast('تست‌ها\x20با\x20موفقیت\x20انجام\x20شد\x20('+_0x4738d4[_0x130c71(0x13b)][_0x130c71(0x3f5)][_0x130c71(0x346)]+_0x130c71(0x25b),_0x130c71(0x4f5));},0xc8);},0x64);}catch(_0x52b376){console[_0x1a8731(0x24c)](_0x1a8731(0x14f),_0x52b376),showToast('خطا\x20در\x20اجرای\x20تست:\x20'+_0x52b376['message'],'error'),resetMonteCarloView();}},0x64);}function displayMonteCarloResults(_0x193362){var _0x49da45=a0_0x4859bd,_0xc04e47=_0x193362['walkForward'],_0x4b5533=_0x193362['monteCarlo'],_0x1a336a=_0x193362[_0x49da45(0x18d)];if(!_0xc04e47||!_0x4b5533){showToast(_0x49da45(0x2f2),_0x49da45(0x24c));return;}var _0x117441=_0xc04e47['stats'],_0x24b984=_0x4b5533,_0x47ea35=_0x193362[_0x49da45(0x179)]||'moderate',_0x2d1e87=_0x193362[_0x49da45(0x1ef)]||0x32,_0x3a6a82={'excellent':{'icon':ICONS[_0x49da45(0x42a)],'text':_0x49da45(0x2dd),'color':_0x49da45(0x1aa),'bg':_0x49da45(0x493)},'good':{'icon':ICONS[_0x49da45(0x349)],'text':_0x49da45(0x276),'color':_0x49da45(0x2ca),'bg':_0x49da45(0x1cb)},'moderate':{'icon':ICONS[_0x49da45(0x198)],'text':_0x49da45(0x417),'color':_0x49da45(0x22b),'bg':_0x49da45(0x399)},'risky':{'icon':ICONS[_0x49da45(0x4ba)],'text':_0x49da45(0x12c),'color':_0x49da45(0x31c),'bg':'rgba(249,115,22,0.15)'},'avoid':{'icon':ICONS[_0x49da45(0x4c8)],'text':'ضعیف\x20-\x20استفاده\x20نکن','color':_0x49da45(0x423),'bg':'rgba(239,68,68,0.15)'}},_0x3a8a57=_0x3a6a82[_0x47ea35],_0x1ff76d=_0x49da45(0x2fc)+_0x3a8a57['bg']+_0x49da45(0x3cd)+_0x3a8a57[_0x49da45(0x1cc)]+';border-radius:12px;padding:14px\x2018px;margin-bottom:20px;width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-sizing:border-box;\x22>'+_0x49da45(0x15d)+_0x49da45(0x12e)+_0x3a8a57[_0x49da45(0x1cc)]+';\x22>'+_0x3a8a57[_0x49da45(0x1db)]+_0x49da45(0x4f0)+_0x49da45(0x1f5)+_0x3a8a57[_0x49da45(0x1cc)]+';\x22>'+_0x3a8a57[_0x49da45(0x4fd)]+_0x49da45(0x4f0)+'</div>'+_0x49da45(0x3e8)+'<span\x20style=\x22display:flex;align-items:center;gap:4px;\x22><span\x20style=\x22width:16px;height:16px;display:flex;align-items:center;justify-content:center;opacity:0.7;\x22>'+ICONS[_0x49da45(0x358)]+_0x49da45(0x4d5)+_0x2d1e87[_0x49da45(0x335)](0x0)+_0x49da45(0x4ef)+_0x49da45(0x103)+ICONS['barChart']+'</span>\x20<strong>'+_0x117441['numPeriods']+'\x20دوره\x20تست</strong></span>'+_0x49da45(0x118)+_0x49da45(0x118);document[_0x49da45(0x27b)](_0x49da45(0x254))[_0x49da45(0x4a1)]=_0x1ff76d;var _0x2601d2=function(_0xf20eea,_0x4514ed,_0x54f64d,_0x3fc0ec,_0x4023e2){var _0x17f351=_0x49da45;return _0x17f351(0x2b3)+'<div\x20style=\x22font-size:14px;margin-bottom:8px;color:var(--text2);display:flex;align-items:center;justify-content:center;gap:6px;\x22>'+_0x17f351(0x2f9)+_0x54f64d+'</span>'+_0x17f351(0x46b)+_0x4514ed+_0x17f351(0x4f0)+_0x17f351(0x118)+_0x17f351(0x373)+_0x3fc0ec+_0x17f351(0x32b)+_0xf20eea+_0x17f351(0x118)+(_0x4023e2?_0x17f351(0x10a)+_0x4023e2+_0x17f351(0x118):'')+_0x17f351(0x118);},_0x15dcf4=[{'value':_0x117441['avgWinRate'][_0x49da45(0x335)](0x1)+'%','label':_0x49da45(0x249),'icon':ICONS[_0x49da45(0x354)],'color':_0x117441[_0x49da45(0x156)]>=0x32?_0x49da45(0x1aa):'#ef4444','subtitle':_0x117441[_0x49da45(0x156)]>=0x32?_0x49da45(0x43c):_0x49da45(0x299)},{'value':_0x117441[_0x49da45(0x1da)][_0x49da45(0x335)](0x2),'label':_0x49da45(0x2d4),'icon':ICONS[_0x49da45(0x356)],'color':_0x117441['avgProfitFactor']>=1.5?_0x49da45(0x1aa):_0x117441[_0x49da45(0x1da)]>=0x1?'#f59e0b':_0x49da45(0x423),'subtitle':_0x117441['avgProfitFactor']>=1.5?'عالی':_0x49da45(0x280)},{'value':(_0x117441['avgReturn']>=0x0?'+':'')+_0x117441[_0x49da45(0x2c1)][_0x49da45(0x335)](0x1)+'%','label':_0x49da45(0x1d1),'icon':ICONS[_0x49da45(0x2fb)],'color':_0x117441[_0x49da45(0x2c1)]>=0x0?_0x49da45(0x1aa):'#ef4444','subtitle':_0x117441[_0x49da45(0x2c1)]>=0x0?'سودده':_0x49da45(0x152)},{'value':_0x117441[_0x49da45(0x346)],'label':_0x49da45(0x19c),'icon':ICONS['barChart'],'color':'#3b82f6','subtitle':_0x49da45(0x4d1)},{'value':_0x117441[_0x49da45(0x12a)]?_0x117441[_0x49da45(0x12a)][_0x49da45(0x335)](0x1)+'%':'N/A','label':_0x49da45(0x34f),'icon':ICONS[_0x49da45(0x3cc)],'color':_0x117441[_0x49da45(0x12a)]&&_0x117441['avgMaxDrawdown']<0xf?_0x49da45(0x1aa):_0x49da45(0x423),'subtitle':_0x117441['avgMaxDrawdown']&&_0x117441[_0x49da45(0x12a)]<0xf?_0x49da45(0x369):'بالا'},{'value':_0x117441['consistencyScore']?_0x117441[_0x49da45(0x18e)][_0x49da45(0x335)](0x0)+'%':_0x49da45(0x2d5),'label':_0x49da45(0x2ad),'icon':ICONS[_0x49da45(0x358)],'color':_0x117441[_0x49da45(0x18e)]>=0x3c?_0x49da45(0x1aa):_0x117441['consistencyScore']>=0x28?_0x49da45(0x22b):_0x49da45(0x423),'subtitle':_0x117441[_0x49da45(0x3ab)]+'/'+_0x117441[_0x49da45(0x346)]+'\x20سودده'}],_0x45cf5c=_0x15dcf4[_0x49da45(0x42c)](function(_0x3b7f35){var _0x183857=_0x49da45;return _0x2601d2(_0x3b7f35[_0x183857(0x38b)],_0x3b7f35[_0x183857(0x4a3)],_0x3b7f35[_0x183857(0x1db)],_0x3b7f35[_0x183857(0x1cc)],_0x3b7f35[_0x183857(0x3ee)]);})[_0x49da45(0x3f2)]('');document[_0x49da45(0x27b)](_0x49da45(0x434))[_0x49da45(0x4a1)]=_0x45cf5c;var _0x38fab1=[{'value':_0x24b984[_0x49da45(0x38f)][_0x49da45(0x335)](0x1)+'%','label':'احتمال\x20سود','icon':ICONS['target'],'color':_0x24b984[_0x49da45(0x38f)]>=0x3c?_0x49da45(0x1aa):_0x24b984[_0x49da45(0x38f)]>=0x32?'#f59e0b':_0x49da45(0x423),'subtitle':_0x24b984[_0x49da45(0x38f)]>=0x3c?_0x49da45(0x433):_0x49da45(0x280)},{'value':(_0x24b984[_0x49da45(0x1c3)]>=0x0?'+':'')+_0x24b984[_0x49da45(0x1c3)][_0x49da45(0x335)](0x1)+'%','label':_0x49da45(0x126),'icon':ICONS['barChart'],'color':_0x24b984[_0x49da45(0x1c3)]>=0x0?_0x49da45(0x1aa):'#ef4444','subtitle':_0x49da45(0x22f)},{'value':(_0x24b984[_0x49da45(0x48c)]>=0x0?'+':'')+_0x24b984[_0x49da45(0x48c)][_0x49da45(0x335)](0x1)+'%','label':_0x49da45(0x2b5),'icon':ICONS['trendingUp'],'color':_0x49da45(0x1aa),'subtitle':_0x49da45(0x4b7)},{'value':(_0x24b984[_0x49da45(0x160)]>=0x0?'+':'')+_0x24b984[_0x49da45(0x160)][_0x49da45(0x335)](0x1)+'%','label':_0x49da45(0x248),'icon':ICONS[_0x49da45(0x3cc)],'color':_0x49da45(0x423),'subtitle':_0x49da45(0x4b2)}],_0x2b5e48=_0x38fab1[_0x49da45(0x42c)](function(_0x224cf4){var _0x594e43=_0x49da45;return _0x2601d2(_0x224cf4['value'],_0x224cf4[_0x594e43(0x4a3)],_0x224cf4[_0x594e43(0x1db)],_0x224cf4[_0x594e43(0x1cc)],_0x224cf4[_0x594e43(0x3ee)]);})[_0x49da45(0x3f2)]('');document[_0x49da45(0x27b)](_0x49da45(0x32c))['innerHTML']=_0x2b5e48;var _0x5d1260=_0x49da45(0x105)+_0x49da45(0x490)+_0x49da45(0x499)+'</svg>'+_0x49da45(0x36f)+_0x49da45(0x109),_0x228f01=[{'value':_0x24b984[_0x49da45(0x168)]?_0x24b984[_0x49da45(0x168)][_0x49da45(0x4a8)][_0x49da45(0x335)](0x1)+'%':_0x49da45(0x2d5),'label':'Median\x20Drawdown','icon':ICONS['alertTriangle'],'color':'#f59e0b','subtitle':_0x49da45(0x389)},{'value':_0x24b984[_0x49da45(0x4b5)]?_0x24b984[_0x49da45(0x4b5)]['toFixed'](0x1)+'%':_0x49da45(0x2d5),'label':_0x49da45(0x4c4),'icon':ICONS['alertTriangle'],'color':_0x49da45(0x423),'subtitle':_0x49da45(0x416)},{'value':_0x24b984['riskOfRuin']!==undefined?_0x24b984[_0x49da45(0x2d2)][_0x49da45(0x335)](0x1)+'%':_0x49da45(0x2d5),'label':'ریسک\x20ورشکستگی','icon':ICONS['x'],'color':_0x24b984[_0x49da45(0x2d2)]<0x5?'#10b981':_0x49da45(0x423),'subtitle':'احتمال\x20ضرر\x20>50%'},{'value':_0x24b984[_0x49da45(0x26e)]?_0x24b984['probReturn10Plus'][_0x49da45(0x335)](0x1)+'%':_0x49da45(0x2d5),'label':_0x49da45(0x2cf),'icon':ICONS[_0x49da45(0x2fb)],'color':_0x24b984[_0x49da45(0x26e)]>=0x32?_0x49da45(0x1aa):_0x49da45(0x22b),'subtitle':_0x49da45(0x1df)}],_0x435556=_0x228f01[_0x49da45(0x42c)](function(_0x5f4cfa){var _0x4c7844=_0x49da45;return _0x2601d2(_0x5f4cfa[_0x4c7844(0x38b)],_0x5f4cfa['label'],_0x5f4cfa[_0x4c7844(0x1db)],_0x5f4cfa[_0x4c7844(0x1cc)],_0x5f4cfa[_0x4c7844(0x3ee)]);})[_0x49da45(0x3f2)]('');_0x5d1260+=_0x49da45(0x125)+_0x435556+'</div>';var _0x34088a=document[_0x49da45(0x27b)]('monteCarloStats');if(_0x34088a&&_0x34088a[_0x49da45(0x39c)]){var _0x30daeb=document[_0x49da45(0x27b)](_0x49da45(0x3cf));_0x30daeb&&_0x30daeb[_0x49da45(0x39c)]&&_0x30daeb[_0x49da45(0x39c)]['removeChild'](_0x30daeb);var _0x317f95=document[_0x49da45(0x3ec)](_0x49da45(0x194));_0x317f95['id']=_0x49da45(0x3cf),_0x317f95[_0x49da45(0x4a1)]=_0x5d1260,_0x34088a[_0x49da45(0x39c)][_0x49da45(0x3f7)](_0x317f95,_0x34088a[_0x49da45(0x187)]);}if(_0x24b984[_0x49da45(0x2ff)]&&_0x24b984[_0x49da45(0x2ff)][_0x49da45(0x41d)]>0x0){var _0x5290f7='<h4\x20style=\x22margin:24px\x200\x2016px;color:var(--text1);font-size:18px;display:flex;align-items:center;gap:8px;\x22>'+'<svg\x20viewBox=\x220\x200\x2024\x2024\x22\x20fill=\x22none\x22\x20stroke=\x22currentColor\x22\x20stroke-width=\x222\x22\x20stroke-linecap=\x22round\x22\x20stroke-linejoin=\x22round\x22\x20style=\x22width:20px;height:20px;\x22>'+_0x49da45(0x201)+'</svg>'+_0x49da45(0x43d)+_0x49da45(0x109),_0x28fdff=Math[_0x49da45(0x18c)][_0x49da45(0x1d8)](null,_0x24b984[_0x49da45(0x2ff)][_0x49da45(0x42c)](function(_0x4c6cc2){var _0xa3b522=_0x49da45;return _0x4c6cc2[_0xa3b522(0x435)];}));_0x5290f7+=_0x49da45(0x37c),_0x5290f7+=_0x49da45(0x351),_0x24b984[_0x49da45(0x2ff)][_0x49da45(0x3c1)](function(_0x4b9113){var _0x512d6c=_0x49da45,_0x5d7ef3=_0x28fdff>0x0?_0x4b9113[_0x512d6c(0x435)]/_0x28fdff*0x64:0x0,_0x304773=_0x4b9113['binMid']>=0x0?_0x512d6c(0x1aa):_0x512d6c(0x423),_0x75b42a=_0x4b9113[_0x512d6c(0x463)]>=0x0?_0x512d6c(0x47c):_0x512d6c(0x405);_0x5290f7+=_0x512d6c(0x403)+_0x304773+_0x512d6c(0x484)+_0x75b42a+';height:'+_0x5d7ef3+_0x512d6c(0x1bc)+_0x4b9113['binMid'][_0x512d6c(0x335)](0x1)+_0x512d6c(0x4f6)+_0x4b9113['count']+_0x512d6c(0x127);}),_0x5290f7+=_0x49da45(0x118),_0x5290f7+='<div\x20style=\x22display:flex;justify-content:space-between;font-size:10px;color:var(--text3);\x22>',_0x5290f7+=_0x49da45(0x46b)+_0x24b984[_0x49da45(0x2ff)][0x0][_0x49da45(0x145)]['toFixed'](0x0)+'%</span>',_0x5290f7+='<span>0%</span>',_0x5290f7+='<span>'+_0x24b984['histogram'][_0x24b984[_0x49da45(0x2ff)]['length']-0x1][_0x49da45(0x292)][_0x49da45(0x335)](0x0)+'%</span>',_0x5290f7+=_0x49da45(0x118),_0x5290f7+=_0x49da45(0x118);if(_0x34088a&&_0x34088a['parentNode']){var _0x1b4516=document['getElementById'](_0x49da45(0x45b));_0x1b4516&&_0x1b4516[_0x49da45(0x39c)]&&_0x1b4516[_0x49da45(0x39c)][_0x49da45(0x304)](_0x1b4516);var _0x4e454d=document[_0x49da45(0x3ec)]('div');_0x4e454d['id']=_0x49da45(0x45b),_0x4e454d['innerHTML']=_0x5290f7,_0x34088a[_0x49da45(0x39c)]['appendChild'](_0x4e454d);}}if(_0x24b984[_0x49da45(0x470)]){var _0x3ae108=_0x49da45(0x3c5);_0x3ae108+=_0x49da45(0x258),_0x3ae108+=_0x49da45(0x286);var _0x3e8f89=[{'key':'p5','label':'P5\x20(بدترین)'},{'key':_0x49da45(0x3dc),'label':_0x49da45(0x394)},{'key':'p50','label':_0x49da45(0x45d)},{'key':_0x49da45(0x477),'label':_0x49da45(0x31d)},{'key':'p90','label':'P90'},{'key':_0x49da45(0x19d),'label':_0x49da45(0x218)}];_0x3e8f89[_0x49da45(0x3c1)](function(_0x359f87){var _0x1d45d9=_0x49da45,_0x183dfa=_0x24b984['percentiles'][_0x359f87['key']],_0x53519e=_0x183dfa>=0x0?_0x1d45d9(0x1aa):_0x1d45d9(0x423);_0x3ae108+=_0x1d45d9(0x4da),_0x3ae108+=_0x1d45d9(0x21f)+_0x359f87[_0x1d45d9(0x4a3)]+_0x1d45d9(0x118),_0x3ae108+='<div\x20style=\x22color:'+_0x53519e+';font-weight:bold;\x22>'+(_0x183dfa>=0x0?'+':'')+_0x183dfa[_0x1d45d9(0x335)](0x1)+'%</div>',_0x3ae108+='</div>';}),_0x3ae108+=_0x49da45(0xf9);if(_0x34088a&&_0x34088a[_0x49da45(0x39c)]){var _0x166e48=document[_0x49da45(0x27b)](_0x49da45(0x13a));_0x166e48&&_0x166e48[_0x49da45(0x39c)]&&_0x166e48[_0x49da45(0x39c)][_0x49da45(0x304)](_0x166e48);var _0x2ccc93=document['createElement']('div');_0x2ccc93['id']=_0x49da45(0x13a),_0x2ccc93[_0x49da45(0x4a1)]=_0x3ae108,_0x34088a[_0x49da45(0x39c)][_0x49da45(0x158)](_0x2ccc93);}}if(_0x24b984['confidenceInterval']&&_0x24b984[_0x49da45(0x159)]['level']){var _0x5456eb=_0x24b984[_0x49da45(0x159)],_0x449fc5=document[_0x49da45(0x3ec)](_0x49da45(0x194));_0x449fc5['style'][_0x49da45(0x11f)]=_0x49da45(0x1ad),_0x449fc5[_0x49da45(0x4a1)]='<div\x20style=\x22display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--text1);font-weight:600;\x22>'+_0x49da45(0x3e5)+'بازه\x20اطمینان\x20'+_0x5456eb['level']+'%'+_0x49da45(0x118)+'<div>در\x20'+_0x5456eb[_0x49da45(0x4d3)]+_0x49da45(0x3fc)+(_0x5456eb[_0x49da45(0x294)]>=0x0?_0x49da45(0x1aa):_0x49da45(0x423))+'\x22>'+(_0x5456eb['lower']>=0x0?'+':'')+_0x5456eb['lower'][_0x49da45(0x335)](0x1)+_0x49da45(0x44f)+(_0x5456eb[_0x49da45(0x146)]>=0x0?_0x49da45(0x1aa):'#ef4444')+'\x22>'+(_0x5456eb['upper']>=0x0?'+':'')+_0x5456eb[_0x49da45(0x146)][_0x49da45(0x335)](0x1)+_0x49da45(0x1f6);if(_0x34088a&&_0x34088a['parentNode']){var _0x22d2fb=document['getElementById'](_0x49da45(0x2d3));_0x22d2fb&&_0x22d2fb[_0x49da45(0x39c)]&&_0x22d2fb[_0x49da45(0x39c)][_0x49da45(0x304)](_0x22d2fb),_0x449fc5['id']=_0x49da45(0x2d3),_0x34088a[_0x49da45(0x39c)][_0x49da45(0x158)](_0x449fc5);}}if(_0xc04e47[_0x49da45(0x2be)]&&_0xc04e47[_0x49da45(0x2be)][_0x49da45(0x41d)]>0x0){var _0x173a9b='<details\x20style=\x22margin-top:20px;\x22>';_0x173a9b+=_0x49da45(0x391)+_0x49da45(0x20e)+_0x49da45(0x15c)+_0xc04e47[_0x49da45(0x2be)][_0x49da45(0x41d)]+_0x49da45(0x25b)+'</summary>',_0x173a9b+=_0x49da45(0x36e),_0xc04e47[_0x49da45(0x2be)][_0x49da45(0x3c1)](function(_0x147210,_0x34d63e){var _0x463a39=_0x49da45,_0x57d538=_0x147210[_0x463a39(0x481)],_0x4f75a4=_0x57d538[_0x463a39(0x16f)]>=0x0?_0x463a39(0x1aa):_0x463a39(0x423);_0x173a9b+='<div\x20style=\x22padding:10px\x2012px;background:var(--card);border-radius:8px;margin-bottom:8px;display:grid;grid-template-columns:auto\x201fr\x20repeat(3,auto);gap:12px;align-items:center;font-size:12px;\x22>',_0x173a9b+=_0x463a39(0x283)+(_0x34d63e+0x1)+_0x463a39(0x4f0),_0x173a9b+=_0x463a39(0x14a)+_0x57d538['totalTrades']+_0x463a39(0x4f0),_0x173a9b+=_0x463a39(0x37b)+(_0x57d538[_0x463a39(0x40e)]>=0x32?'#10b981':'#ef4444')+';\x22>WR:\x20'+_0x57d538[_0x463a39(0x40e)]['toFixed'](0x0)+_0x463a39(0x230),_0x173a9b+=_0x463a39(0x37b)+(_0x57d538['profitFactor']>=0x1?_0x463a39(0x1aa):_0x463a39(0x423))+_0x463a39(0x132)+Math['min'](_0x57d538[_0x463a39(0x355)],9.99)['toFixed'](0x2)+'</span>',_0x173a9b+=_0x463a39(0x37b)+_0x4f75a4+';font-weight:600;\x22>'+(_0x57d538['netReturn']>=0x0?'+':'')+_0x57d538['netReturn'][_0x463a39(0x335)](0x1)+_0x463a39(0x230),_0x173a9b+=_0x463a39(0x118);}),_0x173a9b+=_0x49da45(0x1b0);if(_0x34088a&&_0x34088a[_0x49da45(0x39c)]){var _0x1eb15c=document['getElementById'](_0x49da45(0x2c7));_0x1eb15c&&_0x1eb15c[_0x49da45(0x39c)]&&_0x1eb15c[_0x49da45(0x39c)][_0x49da45(0x304)](_0x1eb15c);var _0x5ba8d6=document['createElement'](_0x49da45(0x194));_0x5ba8d6['id']='monteCarloPeriods',_0x5ba8d6[_0x49da45(0x4a1)]=_0x173a9b,_0x34088a[_0x49da45(0x39c)]['appendChild'](_0x5ba8d6);}}}var originalInit=window[a0_0x4859bd(0x3d8)];document[a0_0x4859bd(0x164)]('DOMContentLoaded',function(){setTimeout(initViewTabs,0x64);}),window['enterPosition']=enterPosition,window[a0_0x4859bd(0x220)]=closePosition,window['refreshAnalysis']=refreshAnalysis,window[a0_0x4859bd(0x189)]=removeFromWatchlist,window[a0_0x4859bd(0x27a)]=addToWatchlist,window['selectAsset']=selectAsset,window[a0_0x4859bd(0x2df)]=toggleChartIndicator,window[a0_0x4859bd(0x24e)]=resetChartView,window['runMonteCarloTest']=runMonteCarloTest,window[a0_0x4859bd(0x167)]=handleAIPromptClick;
+// signight PWA - App v1.0
+// Main Application Logic - با آیکن‌های SVG
+
+// ==================== SVG Icons (Lucide Icons) ====================
+// https://lucide.dev - Open source icon library
+var ICONS = {
+  // Status Icons
+  excellent: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+  good: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+  moderate: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+  risky: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  avoid: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
+  
+  // Chart & Stats Icons
+  trendingUp: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>',
+  checkCircle: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+  coins: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="M16 14h1v4"/></svg>',
+  alertTriangle: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  dollarSign: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+  barChart: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>',
+  target: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+  x: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+  calendar: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+  zap: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  
+  // Existing icons
+  btc: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-4h2v-2h1c1.1 0 2-.9 2-2v-2c0-1.1-.9-2-2-2h-3V6h-2v2H8v8h3zm0-6h2v2h-2z"/></svg>',
+  eth: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.75l-6.25 10.5L12 16l6.25-3.75L12 1.75zM5.75 13.5L12 22.25l6.25-8.75L12 17.25 5.75 13.5z"/></svg>',
+  sol: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>',
+  gold: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5zm0 2.18l6 3.72v7.2l-6 3.72-6-3.72V7.9l6-3.72z"/></svg>',
+  coin: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 6v12M8 8.5h6c1 0 2 .5 2 2s-1 2-2 2h-4c-1 0-2 .5-2 2s1 2 2 2h6"/></svg>',
+  trendUp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>',
+  trendDown: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>',
+  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
+  crosshair: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg>',
+  stopCircle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><rect x="9" y="9" width="6" height="6"></rect></svg>',
+  layers: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>',
+  refresh: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>',
+  trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
+  rocket: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>',
+  circle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>',
+  arrowRight: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>',
+  clipboard: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g fill="none" stroke="currentColor" stroke-width="2"><path stroke-linejoin="round" d="M15.5 4H18a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2.5"/><path stroke-linejoin="round" d="M8.621 3.515A2 2 0 0 1 10.561 2h2.877a2 2 0 0 1 1.94 1.515L16 6H8l.621-2.485Z"/><path d="M9 12h6m-6 4h6"/></g></svg>',
+
+  // Extra small icons for labels / headings
+  star: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px;vertical-align:middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  list: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:6px;vertical-align:middle;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>',
+  pauseCircle: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="10" y1="9" x2="10" y2="15"/><line x1="14" y1="9" x2="14" y2="15"/></svg>'
+};
+
+// ==================== State ====================
+var STATE = {
+  prices: {},
+  klines: {},
+  signals: {},
+  positions: {},
+  settings: {
+    capital: 1000,
+    riskPercent: 10,
+    strategy: 'default',
+    leverage: 'auto',
+    notificationEnabled: true
+  },
+  lastUpdate: null,
+  allSymbols: [],
+  watchlist: [],
+  activeAsset: null,
+  searchHistory: [], // Last searched symbols
+  suggestions: {
+    symbols: {}, // { 'BTCUSDT': { symbol, signal, lastUpdate, isActive, updateTimer } }
+    updateInterval: 10000, // 10 seconds
+    autoUpdateEnabled: true,
+    updateTimer: null
+  }
+};
+
+var TIMEFRAMES = ['30m', '1h', '4h', '1d'];
+
+var ASSET_INFO = {};
+
+// ==================== API Configuration ====================
+var BINANCE_API = 'https://api.binance.com';
+var CMC_API_KEY = '7d3a7b427ee144eabbcdd9c2b78c07ab';
+var CMC_API = 'https://pro-api.coinmarketcap.com';
+var COINGECKO_API = 'https://api.coingecko.com/api/v3';
+var CRYPTOCOMPARE_API = 'https://min-api.cryptocompare.com/data/v2';
+
+// ==================== Realtime Price (Binance WebSocket) ====================
+var BINANCE_WS = null;
+var BINANCE_WS_CONNECTED = false;
+var BINANCE_WS_RECONNECT_TIMEOUT = null;
+
+function startRealtimePrices() {
+  // If WebSocket is not supported, skip
+  if (typeof WebSocket === 'undefined') return;
+
+  // Avoid multiple connections
+  if (BINANCE_WS && (BINANCE_WS.readyState === WebSocket.OPEN || BINANCE_WS.readyState === WebSocket.CONNECTING)) {
+    return;
+  }
+
+  try {
+    // Use all-tickers stream and filter by watchlist on the client
+    BINANCE_WS = new WebSocket('wss://stream.binance.com:9443/ws/!ticker@arr');
+
+    BINANCE_WS.onopen = function() {
+      console.log('Binance WS connected (realtime prices)');
+      BINANCE_WS_CONNECTED = true;
+      checkAPIStatus('binance', true);
+      if (BINANCE_WS_RECONNECT_TIMEOUT) {
+        clearTimeout(BINANCE_WS_RECONNECT_TIMEOUT);
+        BINANCE_WS_RECONNECT_TIMEOUT = null;
+      }
+    };
+
+    BINANCE_WS.onclose = function(event) {
+      console.log('Binance WS closed:', event.code, event.reason || '');
+      BINANCE_WS_CONNECTED = false;
+      BINANCE_WS = null;
+
+      // Do NOT mark Binance API as unavailable just because of WS close;
+      // REST fallbacks might still work. We only rely on checkAPIStatus()
+      // from REST calls to decide about availability.
+
+      // Schedule reconnect with simple delay
+      if (!BINANCE_WS_RECONNECT_TIMEOUT) {
+        BINANCE_WS_RECONNECT_TIMEOUT = setTimeout(function() {
+          BINANCE_WS_RECONNECT_TIMEOUT = null;
+          startRealtimePrices();
+        }, 10000); // 10s
+      }
+    };
+
+    BINANCE_WS.onerror = function(err) {
+      console.log('Binance WS error:', err && err.message ? err.message : err);
+      // Let onclose handle reconnection
+    };
+
+    BINANCE_WS.onmessage = function(event) {
+      try {
+        var data = JSON.parse(event.data);
+
+        // !ticker@arr sends an array of tickers
+        var tickers = Array.isArray(data) ? data : [data];
+
+        // Fast lookup for watchlist symbols
+        var watchlistSet = {};
+        STATE.watchlist.forEach(function(sym) { watchlistSet[sym] = true; });
+
+        var updatedAny = false;
+
+        tickers.forEach(function(t) {
+          // Binance uses "s" for symbol, "c" for lastPrice, "P" for priceChangePercent,
+          // "h" for high, "l" for low, "v" for volume.
+          var symbol = t.s;
+          if (!symbol || !watchlistSet[symbol]) return;
+
+          var price = parseFloat(t.c);
+          if (!isFinite(price) || price <= 0) return;
+
+          var change = parseFloat(t.P);
+
+          STATE.prices[symbol] = {
+            price: price,
+            change: isFinite(change) ? change : 0,
+            high: parseFloat(t.h) || price,
+            low: parseFloat(t.l) || price,
+            volume: parseFloat(t.v) || 0,
+            source: 'binance_ws'
+          };
+
+          updatedAny = true;
+
+          // If this is the active asset, re-render panel
+          if (symbol === STATE.activeAsset) {
+            renderAssetPanel(symbol);
+          }
+        });
+
+        if (updatedAny) {
+          STATE.lastUpdate = Date.now();
+          updateLastUpdateTime();
+        }
+      } catch (e) {
+        console.log('Binance WS parse error:', e.message);
+      }
+    };
+  } catch (e) {
+    console.log('Failed to start Binance WS:', e.message);
+  }
+}
+
+// API Status tracking
+var API_STATUS = {
+  binance: { available: true, lastCheck: 0, errorCount: 0 },
+  coingecko: { available: true, lastCheck: 0, errorCount: 0 },
+  cryptocompare: { available: true, lastCheck: 0, errorCount: 0 }
+};
+
+var CMC_API_EXHAUSTED = false;
+var CMC_PRICE_CACHE = {}; // Cache for CMC prices
+var KLINES_CACHE = {}; // Cache for klines from alternative sources
+
+// Stablecoins that are always ~$1
+var STABLECOINS = ['USDT', 'USDC', 'BUSD', 'DAI', 'TUSD', 'USDP', 'GUSD', 'FRAX', 'LUSD', 'FDUSD'];
+
+// Check API availability
+function checkAPIStatus(apiName, success) {
+  var status = API_STATUS[apiName];
+  if (success) {
+    status.available = true;
+    status.errorCount = 0;
+  } else {
+    status.errorCount++;
+    // Mark as unavailable after 3 consecutive errors
+    if (status.errorCount >= 3) {
+      status.available = false;
+      console.log(apiName + ' API marked as unavailable');
+    }
+  }
+  status.lastCheck = Date.now();
+}
+
+// Reset API status periodically (every 5 minutes)
+setInterval(function() {
+  Object.keys(API_STATUS).forEach(function(api) {
+    if (!API_STATUS[api].available && Date.now() - API_STATUS[api].lastCheck > 300000) {
+      API_STATUS[api].available = true;
+      API_STATUS[api].errorCount = 0;
+      console.log(api + ' API reset to available');
+    }
+  });
+}, 60000);
+
+// ==================== Coin Icon Cache ====================
+var COIN_ICON_CACHE = {};
+
+// CoinMarketCap ID mapping for icons - Comprehensive list
+var CMC_IDS = {
+  // Top Coins
+  'BTC': 1, 'ETH': 1027, 'USDT': 825, 'BNB': 1839, 'XRP': 52, 'USDC': 3408,
+  'ADA': 2010, 'DOGE': 74, 'SOL': 5426, 'TRX': 1958, 'DOT': 6636, 'MATIC': 3890,
+  'LTC': 2, 'SHIB': 5994, 'AVAX': 5805, 'LINK': 1975, 'ATOM': 3794, 'XMR': 328,
+  'ETC': 1321, 'BCH': 1831, 'XLM': 512, 'ALGO': 4030, 'VET': 3077, 'HBAR': 4642,
+  'ICP': 8916, 'FIL': 2280, 'APT': 21794, 'NEAR': 6535, 'QNT': 3155, 'ARB': 11841,
+  'OP': 11840, 'MKR': 1518, 'AAVE': 7278, 'GRT': 6719, 'STX': 4847, 'EGLD': 6892,
+  'XTZ': 2011, 'THETA': 2416, 'EOS': 1765, 'AXS': 6783, 'SAND': 6210, 'MANA': 1966,
+  'NEO': 1376, 'KCS': 2087, 'FLOW': 4558, 'CHZ': 4066, 'XEC': 10791, 'KLAY': 4256,
+  'CRV': 6538, 'FTM': 3513, 'LUNC': 4172, 'TUSD': 2563, 'XDC': 2634, 'MINA': 8646,
+  'SNX': 2586, 'ENJ': 2130, 'ZEC': 1437, 'DASH': 131, 'BAT': 1697, 'LRC': 1934,
+  'ZIL': 2469, 'ONE': 3945, 'WAVES': 1274, 'KSM': 5034, 'HOT': 2682, 'IOTA': 1720,
+  'CAKE': 7186, 'RUNE': 4157, 'COMP': 5692, 'GALA': 7080, 'AR': 5632, 'ROSE': 7653,
+  'GMT': 18069, 'CELO': 5567, 'ENS': 13855, 'FXS': 6953, 'ANKR': 3783, 'JST': 5488,
+  'LDO': 8000, 'IMX': 10603, 'DYDX': 11156, 'INJ': 7226, 'MASK': 8536, 'YFI': 5864,
+  'OCEAN': 3911, 'AUDIO': 7455, 'BAND': 4679, 'REN': 2539, 'UMA': 5617, 'SXP': 4279,
+  'STORJ': 1772, 'SKL': 5765, 'CELR': 3814, 'COTI': 3992, 'CTSI': 5444, 'DENT': 1886,
+  'VTHO': 3012, 'WIN': 4206, 'SUN': 10529, 'TROY': 4293, 'DREP': 4287, 'STMX': 2297,
+  'NKN': 2780, 'KEY': 2398, 'DOCK': 2675, 'VITE': 2937, 'OGN': 5117, 'PERL': 4293,
+  'IRIS': 3874, 'COS': 4036, 'MBL': 4038, 'ARDR': 1320, 'IOTX': 2777, 'FUN': 1757,
+  'LOOM': 2588, 'RLC': 1637, 'LSK': 1214, 'MTL': 1788, 'KNC': 1982, 'REP': 1104,
+  'BNT': 1727, 'POWR': 2132, 'DNT': 1856, 'NMR': 1732, 'ANT': 1680, 'GNO': 1659,
+  'MLN': 1552, 'CVC': 1816, 'AST': 2058, 'REQ': 2071, 'MITH': 3721, 'STPT': 4006,
+  'WRX': 5161, 'HARD': 7576, 'DODO': 7224, 'ALPHA': 7232, 'LINA': 7102, 'PERP': 6950,
+  'SUPER': 8290, 'TLM': 8376, 'POND': 7497, 'ALICE': 8766, 'SFP': 8119, 'BETA': 8705,
+  'RARE': 11294, 'GHST': 7046, 'AUCTION': 8602, 'PHA': 6841, 'BADGER': 7859, 'OM': 6536,
+  'ALCX': 8613, 'C98': 10903, 'CLV': 8384, 'QI': 9288, 'RAD': 6843, 'XVS': 7288,
+  'TVK': 8037, 'FORTH': 8873, 'BAKE': 7064, 'BURGER': 7158, 'SLP': 5765, 'TKO': 9020,
+  'UNFI': 7672, 'MDX': 8335, 'AGLD': 11568, 'RAY': 8526, 'FIDA': 7978, 'MNGO': 11171,
+  'BICO': 9543, 'HIGH': 10993, 'CVX': 9903, 'PEOPLE': 14806, 'SPELL': 11289, 'JOE': 11396,
+  'ACH': 6958, 'JASMY': 8425, 'AMP': 6945, 'PLA': 3659, 'DAR': 11374, 'XNO': 1567,
+  'MOVR': 9285, 'GLMR': 6836, 'ASTR': 12885, 'API3': 7737, 'WOO': 7501, 'FLUX': 3029,
+  'SCRT': 5604, 'T': 2348, 'RNDR': 5690, 'HFT': 22461, 'MAGIC': 14783, 'SSV': 12999,
+  'HOOK': 22764, 'EDU': 26111, 'ID': 27843, 'SUI': 20947, 'PEPE': 24478, 'FLOKI': 10804,
+  'WLD': 13502, 'SEI': 23149, 'TIA': 22861, 'BLUR': 23121, 'CFX': 7334, 'CYBER': 28871,
+  'ARKM': 27712, 'PENDLE': 9481, 'RDNT': 21106, 'MAV': 28727, 'WBT': 21925, 'ORDI': 25028,
+  'INJ': 7226, 'TWT': 5964, 'FET': 3773, 'AGIX': 2424, 'RNDR': 5690, 'ROSE': 7653,
+  'GMX': 11857, 'LPT': 3640, 'RPL': 2943, 'FLR': 7950, 'CORE': 23254, 'MEME': 28301,
+  'PYTH': 28177, 'JTO': 28541, 'BONK': 23095, 'SATS': 28683, 'RATS': 28450, '1000SATS': 28683,
+  // Gold/Precious Metals
+  'XAUT': 5176, 'PAXG': 4705, 'XAU': 5176,
+  // Stablecoins
+  'DAI': 4943, 'BUSD': 4687, 'FRAX': 6952, 'USDP': 3330, 'GUSD': 3306, 'LUSD': 9566,
+  'FDUSD': 26081, 'PYUSD': 28773, 'EURC': 27003,
+  // APE ecosystem
+  'APE': 18876,
+  // Additional popular coins
+  'LUNA': 20314, 'CRO': 3635, 'OKB': 3897, 'LEO': 3957, 'TON': 11419, 'NEXO': 2694,
+  'HT': 2502, 'GT': 4269, 'HUSD': 4779, 'CEL': 2700, 'PROM': 4120, 'RSR': 3964,
+  'LOOKS': 17081, 'X2Y2': 18106, 'BLUR': 23121, 'DEXE': 7326, '1INCH': 8104,
+  'SUSHI': 6758, 'QUICK': 8206, 'VELO': 5765, 'UOS': 4189, 'DPI': 7055, 'YGG': 10688,
+  'GODS': 10631, 'ILV': 8719, 'REVV': 6989, 'SPS': 11454, 'GTC': 10052, 'BTRST': 11584,
+  'RGT': 7486, 'TRIBE': 9023, 'AERGO': 3637, 'ARPA': 4039, 'BEL': 5765, 'BLZ': 2505,
+  'COCOS': 4275, 'CREAM': 6193, 'DATA': 2143, 'DEGO': 7087, 'DIA': 6138, 'FARM': 6859,
+  'FOR': 4118, 'FIRO': 1414, 'GAS': 1785, 'GTO': 2289, 'HEGIC': 6929, 'IDEX': 3928,
+  'KMD': 1521, 'MFT': 3365, 'MIR': 7857, 'NULS': 2092, 'NXM': 5830, 'ORN': 5765,
+  'OXT': 5765, 'POND': 7497, 'REEF': 6951, 'RAMP': 7463, 'SRM': 6187, 'TCT': 2964,
+  'TORN': 8049, 'WING': 7048, 'XVG': 693, 'YFII': 5765, 'ZEN': 1698,
+  // Additional missing icons
+  'LUNC': 4172, 'USTC': 7129, 'WBTC': 3717, 'WETH': 2396, 'STETH': 8085,
+  'LEO': 3957, 'OKB': 3897, 'CRO': 3635, 'TUSD': 2563, 'USDP': 3330,
+  'WBNB': 7192, 'WMATIC': 18881, 'WSOL': 16116, 'FTT': 4195, 'HNT': 5665,
+  'BTT': 16086, 'JST': 5488, 'NFT': 9816, 'BTTC': 16086, 'SAFEMOON': 8757,
+  'BUSD': 4687, 'FRAX': 6952, 'GUSD': 3306, 'LUSD': 9566, 'MIM': 9626,
+  'OUSD': 7189, 'TRIBE': 9023, 'CVP': 7037, 'CREAM': 6193, 'ALPHA': 7232,
+  'PERP': 6950, 'LINA': 7102, 'DODO': 7224, 'HARD': 7576, 'AUTO': 8387,
+  'EPS': 8938, 'NBS': 9879, 'POLS': 7208, 'DF': 8074, 'DEGO': 7087,
+  'KEEP': 5765, 'NU': 4761, 'BOR': 7289, 'POND': 7497, 'WING': 7048
+};
+
+// ==================== Initialize ====================
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('signight PWA Loading...');
+  setupUpdateUI();
+  registerSW();
+  loadSettings();
+  initUI();
+  setupEvents();
+  loadAllSymbols();
+  startDataLoop();
+  
+  // Start auto suggestions after a short delay
+  setTimeout(function() {
+    initSuggestionsSystem();
+  }, 3000);
+  
+  console.log('PWA Ready');
+});
+
+// ==================== Service Worker ====================
+var SW_UPDATE_STATE = {
+  waitingWorker: null,
+  bannerShown: false,
+  dismissed: false,
+  reloading: false
+};
+
+function setupUpdateUI() {
+  var refreshBtn = document.getElementById('updateRefreshBtn');
+  var dismissBtn = document.getElementById('updateDismissBtn');
+  
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', applyPendingUpdate);
+  }
+  
+  if (dismissBtn) {
+    dismissBtn.addEventListener('click', function() {
+      hideUpdateBanner(true);
+    });
+  }
+}
+
+function setWaitingWorker(worker) {
+  SW_UPDATE_STATE.waitingWorker = worker;
+  SW_UPDATE_STATE.bannerShown = false;
+  SW_UPDATE_STATE.dismissed = false;
+  showUpdateBanner();
+}
+
+function showUpdateBanner() {
+  if (SW_UPDATE_STATE.bannerShown || SW_UPDATE_STATE.dismissed) return;
+  var banner = document.getElementById('updateBanner');
+  if (!banner) return;
+  banner.classList.add('show');
+  SW_UPDATE_STATE.bannerShown = true;
+}
+
+function hideUpdateBanner(permanent) {
+  var banner = document.getElementById('updateBanner');
+  if (!banner) return;
+  banner.classList.remove('show');
+  if (permanent) {
+    SW_UPDATE_STATE.dismissed = true;
+  }
+}
+
+function applyPendingUpdate() {
+  if (SW_UPDATE_STATE.waitingWorker) {
+    SW_UPDATE_STATE.waitingWorker.postMessage({ type: 'SKIP_WAITING' });
+    showToast('در حال بروزرسانی...', 'info');
+  } else {
+    hideUpdateBanner();
+  }
+}
+
+function registerSW() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(reg) { 
+        console.log('Service Worker registered');
+        attachSWUpdateHandlers(reg);
+        // Check for updates periodically
+        setInterval(function() { reg.update(); }, 30 * 60 * 1000);
+      })
+      .catch(function(err) { console.log('SW registration failed:', err); });
+    
+    navigator.serviceWorker.addEventListener('controllerchange', function() {
+      if (SW_UPDATE_STATE.reloading) return;
+      SW_UPDATE_STATE.reloading = true;
+      window.location.reload();
+    });
+  }
+}
+
+function attachSWUpdateHandlers(reg) {
+  if (!reg) return;
+  
+  if (reg.waiting) {
+    setWaitingWorker(reg.waiting);
+  }
+  
+  reg.addEventListener('updatefound', function() {
+    var newWorker = reg.installing;
+    if (!newWorker) return;
+    
+    newWorker.addEventListener('statechange', function() {
+      if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+        setWaitingWorker(newWorker);
+      }
+    });
+  });
+}
+
+// ==================== Settings ====================
+function loadSettings() {
+  try {
+    var saved = localStorage.getItem('tradingSettings');
+    if (saved) STATE.settings = Object.assign(STATE.settings, JSON.parse(saved));
+    
+    var watchlist = localStorage.getItem('watchlist');
+    if (watchlist) STATE.watchlist = JSON.parse(watchlist);
+    
+    var positions = localStorage.getItem('positions');
+    if (positions) STATE.positions = JSON.parse(positions);
+    
+    var searchHistory = localStorage.getItem('searchHistory');
+    if (searchHistory) {
+      try {
+        STATE.searchHistory = JSON.parse(searchHistory);
+        // Ensure max 10 items
+        if (STATE.searchHistory.length > 10) {
+          STATE.searchHistory = STATE.searchHistory.slice(0, 10);
+        }
+      } catch (e) {
+        console.log('Error loading search history:', e);
+        STATE.searchHistory = [];
+      }
+    }
+    
+    // Load icon cache from localStorage
+    var iconCache = localStorage.getItem('coinIconCache');
+    if (iconCache) {
+      try {
+        COIN_ICON_CACHE = JSON.parse(iconCache);
+        // Sync ASSET_INFO with cache
+        for (var symbol in COIN_ICON_CACHE) {
+          ASSET_INFO[symbol] = COIN_ICON_CACHE[symbol];
+        }
+      } catch (e) {
+        console.log('Error loading icon cache:', e);
+      }
+    }
+    
+    // Load cached suggestions
+    var cachedSuggestions = localStorage.getItem('cachedSuggestions');
+    if (cachedSuggestions) {
+      try {
+        var parsed = JSON.parse(cachedSuggestions);
+        // Cached suggestions removed - using new suggestions system
+      } catch (e) {
+        console.log('Error loading cached suggestions:', e);
+      }
+    }
+  } catch (e) { console.log('Error loading settings:', e); }
+}
+
+function saveSettings() {
+  try {
+    localStorage.setItem('tradingSettings', JSON.stringify(STATE.settings));
+    localStorage.setItem('watchlist', JSON.stringify(STATE.watchlist));
+    localStorage.setItem('positions', JSON.stringify(STATE.positions));
+    localStorage.setItem('searchHistory', JSON.stringify(STATE.searchHistory));
+    // Save icon cache to localStorage
+    try {
+      localStorage.setItem('coinIconCache', JSON.stringify(COIN_ICON_CACHE));
+    } catch (e) {
+      console.log('Error saving icon cache (may be too large):', e);
+    }
+  } catch (e) { console.log('Error saving settings:', e); }
+}
+
+// ==================== UI ====================
+function initUI() {
+  document.getElementById('capitalInput').value = STATE.settings.capital;
+  document.getElementById('riskPercent').value = STATE.settings.riskPercent;
+  document.getElementById('strategySelect').value = STATE.settings.strategy;
+  document.getElementById('leverageSelect').value = STATE.settings.leverage || 'auto';
+  document.getElementById('notificationToggle').checked = STATE.settings.notificationEnabled;
+  
+  updateEntryAmount();
+  renderWatchlistTabs();
+  if (STATE.activeAsset) {
+    renderAssetPanel(STATE.activeAsset);
+  } else {
+    renderEmptyWatchlist();
+  }
+}
+
+function setupEvents() {
+  document.getElementById('saveSettings').addEventListener('click', function() {
+    STATE.settings.capital = parseFloat(document.getElementById('capitalInput').value) || 1000;
+    STATE.settings.riskPercent = parseInt(document.getElementById('riskPercent').value) || 10;
+    STATE.settings.strategy = document.getElementById('strategySelect').value;
+    STATE.settings.leverage = document.getElementById('leverageSelect').value;
+    STATE.settings.notificationEnabled = document.getElementById('notificationToggle').checked;
+    saveSettings();
+    updateEntryAmount();
+    
+    // Re-analyze all assets with new strategy
+    STATE.watchlist.forEach(function(symbol) {
+      if (STATE.klines[symbol]) {
+        analyzeAsset(symbol);
+      }
+    });
+    
+    var leverageText = STATE.settings.leverage === 'auto' ? 'خودکار' : STATE.settings.leverage + 'x';
+    showToast('تنظیمات ذخیره شد - اهرم: ' + leverageText, 'success');
+  });
+  
+  // Leverage change event
+  document.getElementById('leverageSelect').addEventListener('change', function() {
+    STATE.settings.leverage = this.value;
+    saveSettings();
+    var leverageText = this.value === 'auto' ? 'خودکار' : this.value + 'x';
+    showToast('اهرم تغییر کرد: ' + leverageText, 'info');
+    // Update display if asset is active
+    if (STATE.activeAsset) {
+      renderAssetPanel(STATE.activeAsset);
+    }
+  });
+  
+  // Strategy change should immediately re-analyze
+  document.getElementById('strategySelect').addEventListener('change', function() {
+    STATE.settings.strategy = this.value;
+    saveSettings();
+    
+    // Re-analyze all assets
+    STATE.watchlist.forEach(function(symbol) {
+      if (STATE.klines[symbol]) {
+        analyzeAsset(symbol);
+      }
+    });
+    
+    showToast('استراتژی تغییر کرد: ' + getStrategyName(STATE.settings.strategy), 'info');
+  });
+  
+  document.getElementById('capitalInput').addEventListener('input', updateEntryAmount);
+  document.getElementById('riskPercent').addEventListener('change', updateEntryAmount);
+  
+  var searchInput = document.getElementById('searchInput');
+  var searchResults = document.getElementById('searchResults');
+  
+  // Show history when input is focused and empty
+  searchInput.addEventListener('focus', function() {
+    if (this.value.trim().length === 0) {
+      renderSearchHistory();
+    }
+  });
+  
+  searchInput.addEventListener('input', function() {
+    var query = this.value.toUpperCase().trim();
+    if (query.length < 1) {
+      renderSearchHistory();
+      return;
+    }
+    
+    // Hide history when user starts typing
+    searchResults.classList.remove('search-history');
+    
+    // Search in both symbol and baseAsset, only in supported symbols (exclude stablecoins)
+    var matches = STATE.allSymbols.filter(function(s) {
+      if (STABLECOINS.includes(s.baseAsset)) return false;
+      return s.symbol.includes(query) || s.baseAsset.includes(query);
+    });
+    
+    // Sort: exact matches first, then alphabetically
+    matches.sort(function(a, b) {
+      var aExact = a.baseAsset === query || a.symbol === query;
+      var bExact = b.baseAsset === query || b.symbol === query;
+      if (aExact && !bExact) return -1;
+      if (!aExact && bExact) return 1;
+      var aStarts = a.baseAsset.startsWith(query);
+      var bStarts = b.baseAsset.startsWith(query);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+      return a.baseAsset.localeCompare(b.baseAsset);
+    });
+    
+    matches = matches.slice(0, 20); // Show up to 20 results
+    
+    if (matches.length > 0) {
+      searchResults.innerHTML = matches.map(function(s) {
+        var iconHtml = '<span style="margin-left:8px;">' + getCoinIconHtml(s.symbol, 20) + '</span>';
+        return '<div class="search-item" data-symbol="' + s.symbol + '">' +
+               iconHtml +
+               '<span class="search-symbol">' + s.baseAsset + '</span>' +
+               '<span class="search-pair">/' + s.quoteAsset + '</span>' +
+               '</div>';
+      }).join('');
+      searchResults.style.display = 'block';
+    } else {
+      // Show "not found" message - no custom symbols allowed
+      searchResults.innerHTML = '<div class="search-item search-not-found" style="opacity:0.6;cursor:default;">' +
+        '<span style="color:var(--text3);">نمادی با این نام یافت نشد</span>' +
+        '</div>';
+      searchResults.style.display = 'block';
+    }
+  });
+  
+  searchResults.addEventListener('click', function(e) {
+    var item = e.target.closest('.search-item');
+    // Only allow clicking on real symbols, not "not found" message
+    if (item && item.dataset.symbol && !item.classList.contains('search-not-found')) {
+      var symbol = item.dataset.symbol;
+      addToSearchHistory(symbol);
+      selectAsset(symbol);
+      searchInput.value = '';
+      searchResults.style.display = 'none';
+    }
+  });
+  
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-box')) searchResults.style.display = 'none';
+  });
+  
+  var installBtn = document.getElementById('installBtn');
+  var deferredPrompt = null;
+  
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'flex';
+  });
+  
+  installBtn.addEventListener('click', function() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function(choice) {
+        if (choice.outcome === 'accepted') showToast('اپلیکیشن نصب شد', 'success');
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      });
+    }
+  });
+}
+
+function updateEntryAmount() {
+  var cap = parseFloat(document.getElementById('capitalInput').value) || 1000;
+  var pct = parseInt(document.getElementById('riskPercent').value) || 10;
+  document.getElementById('entryAmount').textContent = '$' + (cap * pct / 100).toLocaleString();
+}
+
+// ==================== Watchlist ====================
+function renderWatchlistTabs() {
+  var container = document.getElementById('watchlistTabs');
+  container.innerHTML = '';
+  
+  // Create a set of watchlist symbols for quick lookup
+  var watchlistSet = {};
+  STATE.watchlist.forEach(function(s) { watchlistSet[s] = true; });
+  
+  // Show all watchlist symbols
+  STATE.watchlist.forEach(function(symbol) {
+    // Check both ASSET_INFO and COIN_ICON_CACHE
+    var info = ASSET_INFO[symbol] || COIN_ICON_CACHE[symbol] || { 
+      name: symbol.replace('USDT', ''), 
+      symbol: symbol.replace('USDT', ''),
+      icon: ICONS.coin,
+      color: '#00E5B0',
+      hasIcon: false
+    };
+    
+    // Ensure ASSET_INFO is synced with cache
+    if (COIN_ICON_CACHE[symbol] && !ASSET_INFO[symbol]) {
+      ASSET_INFO[symbol] = COIN_ICON_CACHE[symbol];
+      info = ASSET_INFO[symbol];
+    }
+    
+    var tab = document.createElement('button');
+    tab.className = 'tab' + (symbol === STATE.activeAsset ? ' active' : '');
+    tab.dataset.symbol = symbol;
+    
+    var iconHtml = getCoinIconHtml(symbol, 18);
+    
+    // Check if price has error
+    var priceData = STATE.prices[symbol];
+    var hasError = priceData && priceData.error;
+    
+    tab.innerHTML = iconHtml + '<span>' + info.symbol + '</span>' + 
+      (hasError ? '<span style="color:var(--red);font-size:8px;margin-right:4px;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;">' + ICONS.alertTriangle.replace('width="24"', 'width="12"').replace('height="24"', 'height="12"') + '</span>' : '');
+    
+    tab.addEventListener('click', function() { selectAsset(symbol); });
+    container.appendChild(tab);
+  });
+  
+  // Show temporary tab for active asset if it's not in watchlist
+  if (STATE.activeAsset && !watchlistSet[STATE.activeAsset]) {
+    var symbol = STATE.activeAsset;
+    var info = ASSET_INFO[symbol] || COIN_ICON_CACHE[symbol] || { 
+      name: symbol.replace('USDT', ''), 
+      symbol: symbol.replace('USDT', ''),
+      icon: ICONS.coin,
+      color: '#00E5B0',
+      hasIcon: false
+    };
+    
+    // Ensure ASSET_INFO is synced with cache
+    if (COIN_ICON_CACHE[symbol] && !ASSET_INFO[symbol]) {
+      ASSET_INFO[symbol] = COIN_ICON_CACHE[symbol];
+      info = ASSET_INFO[symbol];
+    }
+    
+    var tab = document.createElement('button');
+    tab.className = 'tab active temporary-tab'; // Add temporary-tab class for styling
+    tab.dataset.symbol = symbol;
+    tab.style.borderStyle = 'dashed'; // Different style for temporary tab
+    tab.style.opacity = '0.8';
+    
+    var iconHtml = getCoinIconHtml(symbol, 18);
+    
+    var priceData = STATE.prices[symbol];
+    var hasError = priceData && priceData.error;
+    
+    tab.innerHTML = iconHtml + '<span>' + info.symbol + '</span>' + 
+      (hasError ? '<span style="color:var(--red);font-size:8px;margin-right:4px;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;">' + ICONS.alertTriangle.replace('width="24"', 'width="12"').replace('height="24"', 'height="12"') + '</span>' : '');
+    
+    tab.addEventListener('click', function() { selectAsset(symbol); });
+    container.appendChild(tab);
+  }
+}
+
+function selectAsset(symbol) {
+  STATE.activeAsset = symbol;
+  renderWatchlistTabs(); // Update tabs to include temporary tab if needed
+  document.querySelectorAll('.tab').forEach(function(t) {
+    t.classList.toggle('active', t.dataset.symbol === symbol);
+  });
+  
+  // Switch to signal/details view when clicking on a symbol from watchlist
+  switchView('signal');
+  
+  renderAssetPanel(symbol);
+  if (!STATE.klines[symbol]) fetchAssetData(symbol);
+  // reset Monte Carlo view when switching asset so each symbol has its own clean state
+  if (typeof resetMonteCarloView === 'function') {
+    resetMonteCarloView();
+  }
+}
+
+function renderEmptyWatchlist() {
+  var panel = document.getElementById('assetPanel');
+  panel.innerHTML = '<div class="empty-watchlist" style="text-align:center;padding:60px 20px;color:var(--text2);">' +
+    '<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 20px;opacity:0.5;">' +
+    '<circle cx="11" cy="11" r="8"></circle>' +
+    '<line x1="21" y1="21" x2="16.65" y2="16.65"></line>' +
+    '</svg>' +
+    '<h3 style="margin:0 0 10px;color:var(--text1);">لیست شما خالی است</h3>' +
+    '<p style="margin:0;font-size:14px;">برای شروع، یک نماد را جستجو و اضافه کنید</p>' +
+    '</div>';
+}
+
+function addToSearchHistory(symbol) {
+  // Remove if exists (to move to top)
+  var index = STATE.searchHistory.indexOf(symbol);
+  if (index > -1) {
+    STATE.searchHistory.splice(index, 1);
+  }
+  
+  // Add to beginning
+  STATE.searchHistory.unshift(symbol);
+  
+  // Keep only last 10
+  if (STATE.searchHistory.length > 10) {
+    STATE.searchHistory = STATE.searchHistory.slice(0, 10);
+  }
+  
+  // Save to localStorage
+  try {
+    localStorage.setItem('searchHistory', JSON.stringify(STATE.searchHistory));
+  } catch (e) {
+    console.log('Error saving search history:', e);
+  }
+}
+
+function renderSearchHistory() {
+  var searchResults = document.getElementById('searchResults');
+  if (!searchResults) return;
+  
+  if (STATE.searchHistory.length === 0) {
+    searchResults.style.display = 'none';
+    return;
+  }
+  
+  searchResults.classList.add('search-history');
+  searchResults.innerHTML = STATE.searchHistory.map(function(symbol) {
+    var baseAsset = symbol.replace('USDT', '');
+    var iconHtml = '<span style="margin-left:8px;">' + getCoinIconHtml(symbol, 20) + '</span>';
+    
+    return '<div class="search-item search-history-item" data-symbol="' + symbol + '">' +
+           iconHtml +
+           '<span class="search-symbol">' + baseAsset + '</span>' +
+           '</div>';
+  }).join('');
+  searchResults.style.display = 'block';
+}
+
+function addToWatchlist(symbol) {
+  var baseAsset = symbol.replace('USDT', '');
+  // Silently ignore stablecoins
+  if (STABLECOINS.includes(baseAsset)) return;
+  
+  if (STATE.watchlist.includes(symbol)) {
+    showToast('این نماد قبلاً اضافه شده', 'error');
+    return;
+  }
+  STATE.watchlist.push(symbol);
+  if (!STATE.activeAsset) {
+    STATE.activeAsset = symbol;
+  }
+  saveSettings();
+  renderWatchlistTabs();
+  selectAsset(symbol);
+  fetchAssetData(symbol);
+  fetchCoinIcon(symbol);
+  showToast(symbol + ' اضافه شد', 'success');
+}
+
+function removeFromWatchlist(symbol) {
+  if (STATE.watchlist.length <= 1) {
+    showToast('حداقل یک نماد باید باشد', 'error');
+    return;
+  }
+  STATE.watchlist = STATE.watchlist.filter(function(s) { return s !== symbol; });
+  // Don't change activeAsset - keep it displayed even if removed from watchlist
+  // The tab will become a temporary tab automatically via renderWatchlistTabs
+  saveSettings();
+  renderWatchlistTabs();
+  // Always render the current active asset, even if it's not in watchlist
+  if (STATE.activeAsset) {
+    renderAssetPanel(STATE.activeAsset);
+  } else {
+    renderEmptyWatchlist();
+  }
+  showToast(symbol + ' از لیست حذف شد', 'success');
+}
+
+// ==================== Asset Panel ====================
+function renderAssetPanel(symbol) {
+  // Check both ASSET_INFO and COIN_ICON_CACHE
+  var info = ASSET_INFO[symbol] || COIN_ICON_CACHE[symbol] || { 
+    name: symbol.replace('USDT', ''), 
+    symbol: symbol.replace('USDT', ''),
+    icon: ICONS.coin,
+    color: '#00E5B0',
+    hasIcon: false
+  };
+  
+  // Ensure ASSET_INFO is synced with cache
+  if (COIN_ICON_CACHE[symbol] && !ASSET_INFO[symbol]) {
+    ASSET_INFO[symbol] = COIN_ICON_CACHE[symbol];
+    info = ASSET_INFO[symbol];
+  }
+  
+  var price = STATE.prices[symbol];
+  var signal = STATE.signals[symbol];
+  var position = STATE.positions[symbol];
+  var panel = document.getElementById('assetPanel');
+  
+  // Icon HTML
+  var iconHtml = getCoinIconHtml(symbol, 48);
+  
+  // Price Box - Handle error state
+  var priceDisplay = '--';
+  var changeDisplay = '--';
+  var changeClass = '';
+  var sourceDisplay = '';
+  
+  if (price && !price.error && price.price > 0) {
+    priceDisplay = formatPrice(price.price);
+    changeDisplay = (price.change >= 0 ? '+' : '') + price.change.toFixed(2) + '%';
+    changeClass = price.change >= 0 ? 'up' : 'down';
+    
+    // Show price source
+    if (price.source === 'coinmarketcap') {
+      sourceDisplay = '<span style="font-size:9px;color:var(--text3);margin-top:2px;">CMC</span>';
+    }
+  } else if (price && price.error) {
+    priceDisplay = '<span style="color:var(--red);font-size:12px;">' + (price.errorMsg || 'خطا') + '</span>';
+    changeDisplay = '';
+  }
+  
+  var priceHtml = '<div class="price-box">' +
+    '<div class="price-info">' +
+      iconHtml +
+      '<div class="asset-name">' +
+        '<h2>' + info.name + '</h2>' +
+        '<span class="asset-symbol">' + symbol + '</span>' +
+      '</div>' +
+    '</div>' +
+    '<div class="price-data">' +
+      '<span class="price-value">' + priceDisplay + '</span>' +
+      (changeDisplay ? '<span class="price-change ' + changeClass + '">' + changeDisplay + '</span>' : '') +
+      sourceDisplay +
+    '</div>' +
+  '</div>';
+  
+  // Signal Card
+  var signalType = signal ? signal.type : 'wait';
+  var signalIcon = signalType === 'long' ? ICONS.trendUp : signalType === 'short' ? ICONS.trendDown : ICONS.clock;
+  var signalText = signalType === 'long' ? 'خرید (Long)' : signalType === 'short' ? 'فروش (Short)' : 'صبر کنید';
+  
+  var signalHtml = '<div class="signal-card ' + signalType + '">' +
+    '<div class="signal-header">' +
+      '<span class="signal-badge">' + signalIcon + ' ' + signalText + '</span>' +
+      '<span class="signal-confidence">قدرت: ' + (signal ? signal.confidence || 0 : 0) + '/10</span>' +
+    '</div>' +
+    '<div class="signal-reasons">' +
+      (signal && signal.reasons ? signal.reasons.slice(0, 4).join(' • ') : 'در حال تحلیل...') +
+    '</div>' +
+  '</div>';
+  
+  // Trading Mode Recommendation
+  var tradingModeHtml = '';
+  if (signal && signal.type !== 'wait' && signal.tradingMode) {
+    var tm = signal.tradingMode;
+    var modeConfig = {};
+    
+    if (tm.mode === 'futures') {
+      modeConfig = {
+        icon: ICONS.rocket,
+        text: 'پیشنهاد: فیوچر',
+        color: '#3b82f6',
+        bg: 'rgba(59, 130, 246, 0.15)',
+        border: '#3b82f6'
+      };
+    } else if (tm.mode === 'spot') {
+      modeConfig = {
+        icon: ICONS.coin,
+        text: 'پیشنهاد: اسپات',
+        color: '#10b981',
+        bg: 'rgba(16, 185, 129, 0.15)',
+        border: '#10b981'
+      };
+    } else {
+      modeConfig = {
+        icon: ICONS.layers,
+        text: 'پیشنهاد: هر دو (فیوچر و اسپات)',
+        color: '#f59e0b',
+        bg: 'rgba(245, 158, 11, 0.15)',
+        border: '#f59e0b'
+      };
+    }
+    
+    tradingModeHtml = '<div class="trading-mode-card" style="background:' + modeConfig.bg + ';border:2px solid ' + modeConfig.border + ';border-radius:12px;padding:12px 16px;margin:16px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">' +
+      '<div style="display:flex;align-items:center;gap:10px;">' +
+        '<span style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:' + modeConfig.color + ';">' + modeConfig.icon + '</span>' +
+        '<span style="font-size:15px;font-weight:bold;color:' + modeConfig.color + ';">' + modeConfig.text + '</span>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">' +
+        (tm.reasons && tm.reasons.length > 0 ? 
+          '<span style="font-size:12px;color:var(--text1);">' + tm.reasons.join(' • ') + '</span>' : 
+          '') +
+      '</div>' +
+    '</div>';
+  }
+  
+  // Entry Details
+  var entryHtml = '';
+  if (signal && signal.type !== 'wait') {
+    var qualityIcon = signal.entryQuality === 'excellent' ? ICONS.target : 
+                      signal.entryQuality === 'good' ? ICONS.check : ICONS.circle;
+    var qualityText = signal.entryQuality === 'excellent' ? 'نقطه ورود عالی' :
+                      signal.entryQuality === 'good' ? 'نقطه ورود خوب' : 'نقطه ورود قابل قبول';
+    
+    // Calculate liquidation price for futures
+    var effectiveLeverage = getEffectiveLeverage(signal.leverage);
+    var leverageNum = parseInt(effectiveLeverage) || 5;
+    var liqPrice = TradingCore.calcLiquidationPrice ? 
+      TradingCore.calcLiquidationPrice(signal.entry, leverageNum, signal.type) : null;
+    
+    // Get smart leverage recommendation
+    var smartLev = TradingCore.getSmartLeverage ? 
+      TradingCore.getSmartLeverage(signal.entry, signal.sl, signal.atr, STATE.settings.capital, 2) : null;
+    
+    entryHtml = '<div class="entry-section">' +
+      '<div class="entry-header">' +
+        '<span class="entry-quality ' + (signal.entryQuality || 'good') + '">' + qualityIcon + ' ' + qualityText + '</span>' +
+        '<span class="entry-score">امتیاز: ' + (signal.confluenceScore || 0) + '</span>' +
+      '</div>' +
+      '<div class="entry-reasons">' + (signal.entryReasons ? signal.entryReasons.join(' + ') : '') + '</div>' +
+      '<div class="entry-details">' +
+        '<div class="detail-row"><span class="detail-label">' + ICONS.crosshair + ' نقطه ورود</span><span class="detail-value">' + formatPrice(signal.entry) + '</span></div>' +
+        '<div class="detail-row"><span class="detail-label">' + ICONS.stopCircle + ' استاپ‌لاس</span><span class="detail-value sl">' + formatPrice(signal.sl) + '</span></div>' +
+        '<div class="detail-row"><span class="detail-label">' + ICONS.target + ' تارگت ۱</span><span class="detail-value tp">' + formatPrice(signal.tp1) + '</span></div>' +
+        '<div class="detail-row"><span class="detail-label">' + ICONS.target + ' تارگت ۲</span><span class="detail-value tp">' + formatPrice(signal.tp2) + '</span></div>' +
+        '<div class="detail-row"><span class="detail-label">' + ICONS.zap + ' لوریج</span><span class="detail-value">' + effectiveLeverage + '</span></div>' +
+        '<div class="detail-row"><span class="detail-label">' + ICONS.dollarSign + ' حجم ورود</span><span class="detail-value">$' + (STATE.settings.capital * STATE.settings.riskPercent / 100).toLocaleString() + '</span></div>' +
+      '</div>' +
+    '</div>';
+    
+    // Futures Warning Section (Liquidation Price)
+    if (liqPrice) {
+      var liqClass = liqPrice.danger ? 'danger' : liqPrice.warning ? 'warning' : 'safe';
+      var liqIcon = liqPrice.danger ? ICONS.alertTriangle : liqPrice.warning ? ICONS.moderate : ICONS.check;
+      var liqText = liqPrice.danger ? 'خطر لیکویید!' : liqPrice.warning ? 'احتیاط' : 'فاصله امن';
+      var liqColor = liqPrice.danger ? '#ef4444' : liqPrice.warning ? '#f59e0b' : '#10b981';
+      
+      entryHtml += '<div class="futures-warning" style="background:' + liqColor + '15;border:1px solid ' + liqColor + '40;border-radius:10px;padding:12px;margin-top:12px;">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">' +
+          '<div style="display:flex;align-items:center;gap:8px;">' +
+            '<span style="color:' + liqColor + ';width:20px;height:20px;">' + liqIcon + '</span>' +
+            '<span style="font-weight:600;color:' + liqColor + ';">قیمت لیکویید: ' + formatPrice(liqPrice.price) + '</span>' +
+          '</div>' +
+          '<span style="font-size:12px;color:var(--text2);">فاصله: ' + liqPrice.distancePercent.toFixed(1) + '% | ' + liqText + '</span>' +
+        '</div>' +
+      '</div>';
+    }
+    
+    // Smart Leverage Recommendation
+    if (smartLev && smartLev.leverage !== leverageNum) {
+      var recColor = smartLev.riskLevel === 'low' ? '#10b981' : smartLev.riskLevel === 'medium' ? '#3b82f6' : smartLev.riskLevel === 'high' ? '#f59e0b' : '#ef4444';
+      entryHtml += '<div class="leverage-rec" style="background:var(--bg2);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;">' +
+          '<span style="color:var(--text2);">لوریج پیشنهادی:</span>' +
+          '<span style="color:' + recColor + ';font-weight:600;">' + smartLev.leverage + 'x (' + smartLev.reason + ')</span>' +
+        '</div>' +
+      '</div>';
+    }
+    
+    if (signal.smartEntries && signal.smartEntries.length > 0) {
+      entryHtml += '<div class="scaling-section">' +
+        '<div class="scaling-title">' + ICONS.layers + ' ورود پله‌ای</div>' +
+        '<div class="scaling-entries">';
+      signal.smartEntries.forEach(function(entry) {
+        entryHtml += '<div class="scaling-entry">' +
+          '<span class="scaling-step">' + entry.reason + '</span>' +
+          '<span class="scaling-price">' + formatPrice(entry.price) + '</span>' +
+          '<span class="scaling-pct">(' + entry.percent + '%)</span>' +
+        '</div>';
+      });
+      entryHtml += '</div></div>';
+    }
+  }
+  
+  // Indicators - Enhanced for Futures
+  var stochRSI = signal && (signal.stochRSI || signal.stochRsi) ? (signal.stochRSI || signal.stochRsi) : null;
+  var marketStruct = signal && signal.marketStructure ? signal.marketStructure : null;
+  
+  var indicatorsHtml = '<div class="indicators-section">' +
+    '<div class="indicators-title">' + ICONS.barChart + ' اندیکاتورها</div>' +
+    '<div class="ind-grid">' +
+      '<div class="ind-item"><span class="ind-label">RSI (14)</span><span class="ind-value ' + getRsiClass(signal ? signal.rsi : 50) + '">' + (signal && signal.rsi ? signal.rsi.toFixed(1) : '--') + '</span></div>' +
+      '<div class="ind-item"><span class="ind-label">StochRSI</span><span class="ind-value ' + getStochRSIClass(stochRSI) + '">' + (stochRSI ? stochRSI.k.toFixed(0) + '/' + stochRSI.d.toFixed(0) : '--') + '</span></div>' +
+      '<div class="ind-item"><span class="ind-label">روند</span><span class="ind-value ' + getTrendClass(signal ? signal.trend : 'neutral') + '">' + getTrendLabel(signal ? signal.trend : 'neutral') + '</span></div>' +
+      '<div class="ind-item"><span class="ind-label">ساختار</span><span class="ind-value ' + getStructureClass(marketStruct) + '">' + getStructureLabel(marketStruct) + '</span></div>' +
+      '<div class="ind-item"><span class="ind-label">ADX</span><span class="ind-value">' + (signal && signal.adx ? signal.adx.adx.toFixed(0) : '--') + '</span></div>' +
+      '<div class="ind-item"><span class="ind-label">MACD</span><span class="ind-value ' + (signal && signal.macd && signal.macd.histogram > 0 ? 'bullish' : 'bearish') + '">' + (signal && signal.macd ? (signal.macd.histogram > 0 ? 'صعودی' : 'نزولی') : '--') + '</span></div>' +
+    '</div>' +
+  '</div>';
+  
+  // Position
+  var positionHtml = '';
+  if (position) {
+    var pnl = calculatePnL(position, price ? price.price : 0);
+    positionHtml = '<div class="position-section ' + position.type + '">' +
+      '<div class="position-title">' + ICONS.clipboard + ' پوزیشن فعال</div>' +
+      '<div class="position-details">' +
+        '<div class="pos-row"><span>نوع:</span><span class="pos-type">' + (position.type === 'long' ? 'LONG' : 'SHORT') + '</span></div>' +
+        '<div class="pos-row"><span>ورود:</span><span>' + formatPrice(position.entry) + '</span></div>' +
+        '<div class="pos-row"><span>حجم:</span><span>$' + position.size.toLocaleString() + '</span></div>' +
+        '<div class="pos-row"><span>اهرم:</span><span>' + position.leverage + 'x</span></div>' +
+        '<div class="pos-row"><span>P&L:</span><span class="' + (pnl >= 0 ? 'profit' : 'loss') + '">' + (pnl >= 0 ? '+' : '') + pnl.toFixed(2) + '%</span></div>' +
+      '</div>' +
+      '<button class="btn-close-pos" onclick="closePosition(\'' + symbol + '\')">' + ICONS.x + ' بستن پوزیشن</button>' +
+    '</div>';
+  }
+  
+  // Actions
+  var actionsHtml = '<div class="actions-section">';
+  if (!position && signal && signal.type !== 'wait') {
+    actionsHtml += '<button class="btn-enter ' + signal.type + '" onclick="enterPosition(\'' + symbol + '\')">' + ICONS.rocket + ' ورود به معامله</button>';
+  }
+  actionsHtml += '<button class="btn-refresh" onclick="refreshAnalysis(\'' + symbol + '\')">' + ICONS.refresh + '</button>';
+  
+  // Show + button if not in watchlist, trash button if in watchlist
+  var isInWatchlist = STATE.watchlist.includes(symbol);
+  if (isInWatchlist) {
+    actionsHtml += '<button class="btn-remove" onclick="removeFromWatchlist(\'' + symbol + '\')">' + ICONS.trash + '</button>';
+  } else {
+    // Plus icon for adding to watchlist
+    var plusIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>';
+    actionsHtml += '<button class="btn-add" onclick="addToWatchlist(\'' + symbol + '\')">' + plusIcon + '</button>';
+  }
+  actionsHtml += '</div>';
+  
+  panel.innerHTML = priceHtml + signalHtml + tradingModeHtml + entryHtml + indicatorsHtml + positionHtml + actionsHtml;
+  
+  // Update sticky AI Advisor section
+  updateStickyAIAdvisor(symbol, signal);
+}
+
+// Update sticky AI Advisor section at bottom
+function updateStickyAIAdvisor(symbol, signal) {
+  var stickySection = document.getElementById('aiAdvisorSticky');
+  var button = document.getElementById('aiAdvisorButton');
+  
+  if (!stickySection || !button) return;
+  
+  if (signal && signal.type !== 'wait') {
+    stickySection.style.display = 'block';
+    // Update button onclick with current symbol
+    button.setAttribute('onclick', 'handleAIPromptClick(\'' + symbol + '\')');
+  } else {
+    stickySection.style.display = 'none';
+  }
+}
+
+// ==================== Coin Icon System ====================
+// Default fallback icon (app icon)
+var DEFAULT_ICON_URL = 'icons/icon-72.png';
+
+// Get icon URL for a symbol
+function getCoinIconUrl(symbol) {
+  var baseAsset = symbol.replace('USDT', '').toUpperCase();
+  var cmcId = CMC_IDS[baseAsset];
+  if (cmcId) {
+    return 'https://s2.coinmarketcap.com/static/img/coins/64x64/' + cmcId + '.png';
+  }
+  return null;
+}
+
+// Generate icon HTML with fallback to app icon
+function getCoinIconHtml(symbol, size) {
+  size = size || 24;
+  var iconUrl = getCoinIconUrl(symbol);
+  
+  if (iconUrl) {
+    return '<img src="' + iconUrl + '" alt="" style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;object-fit:cover;background:#222;" loading="lazy" decoding="async" onerror="this.src=\'' + DEFAULT_ICON_URL + '\'">';
+  }
+  return '<img src="' + DEFAULT_ICON_URL + '" alt="" style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;object-fit:cover;">';
+}
+
+// Fetch coin info and icon from CoinGecko (for unknown coins)
+function fetchCoinIcon(symbol) {
+  // Check cache first
+  if (COIN_ICON_CACHE[symbol] && COIN_ICON_CACHE[symbol].iconUrl) {
+    return Promise.resolve(COIN_ICON_CACHE[symbol]);
+  }
+  
+  var baseAsset = symbol.replace('USDT', '').toUpperCase();
+  var cmcId = CMC_IDS[baseAsset];
+  
+  // If we have CMC ID, use it
+  if (cmcId) {
+    var info = {
+      name: baseAsset,
+      symbol: baseAsset,
+      iconUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/' + cmcId + '.png',
+      color: '#00E5B0',
+      hasIcon: true
+    };
+    COIN_ICON_CACHE[symbol] = info;
+    ASSET_INFO[symbol] = info;
+    saveCoinCache();
+    return Promise.resolve(info);
+  }
+  
+  // Try CoinGecko for unknown coins
+  return fetch('https://api.coingecko.com/api/v3/search?query=' + baseAsset.toLowerCase())
+    .then(function(res) {
+      if (!res.ok) throw new Error('API error');
+      return res.json();
+    })
+    .then(function(data) {
+      if (data.coins && data.coins.length > 0) {
+        var coin = data.coins.find(function(c) {
+          return c.symbol.toUpperCase() === baseAsset;
+        }) || data.coins[0];
+        
+        if (coin && coin.large) {
+          var info = {
+            name: coin.name,
+            symbol: baseAsset,
+            iconUrl: coin.large,
+            color: '#00E5B0',
+            hasIcon: true
+          };
+          COIN_ICON_CACHE[symbol] = info;
+          ASSET_INFO[symbol] = info;
+          saveCoinCache();
+          renderWatchlistTabs();
+          if (symbol === STATE.activeAsset) renderAssetPanel(symbol);
+          return info;
+        }
+      }
+      throw new Error('Not found');
+    })
+    .catch(function() {
+      // Use default icon
+      var info = {
+        name: baseAsset,
+        symbol: baseAsset,
+        iconUrl: null,
+        color: '#00E5B0',
+        hasIcon: false
+      };
+      COIN_ICON_CACHE[symbol] = info;
+      ASSET_INFO[symbol] = info;
+      return info;
+    });
+}
+
+function saveCoinCache() {
+  try {
+    localStorage.setItem('coinIconCache', JSON.stringify(COIN_ICON_CACHE));
+  } catch (e) {}
+}
+
+// ==================== Default Symbols List ====================
+// Only symbols that actually exist on Binance with USDT pair
+// Supported symbols: Only these 12 symbols are supported
+var DEFAULT_SYMBOLS = ['BTC', 'ETH', 'XRP', 'BNB', 'SOL', 'TRX', 'DOGE', 'ADA', 'LINK', 'DOT', 'LTC', 'XAU'];
+
+// ==================== Data Fetching ====================
+function loadAllSymbols() {
+  // Only use the 11 supported symbols
+  STATE.allSymbols = DEFAULT_SYMBOLS
+    .filter(function(base) { return !STABLECOINS.includes(base); })
+    .map(function(base) {
+      return { symbol: base + 'USDT', baseAsset: base, quoteAsset: 'USDT' };
+    });
+  console.log('Loaded ' + STATE.allSymbols.length + ' supported symbols');
+}
+
+function startDataLoop() {
+  // Initial load: fetch data and icons (icons only once)
+  STATE.watchlist.forEach(function(symbol) { 
+    fetchAssetData(symbol);
+    // Icons are loaded once and cached - no need to reload
+    if (!COIN_ICON_CACHE[symbol] || !COIN_ICON_CACHE[symbol].hasIcon) {
+      fetchCoinIcon(symbol);
+    }
+  });
+  
+  // Start realtime price stream from Binance (tick-level prices)
+  // REST fetching remains as fallback and for klines.
+  startRealtimePrices();
+  
+  // Data update loop (every 5 seconds) - mainly klines + notifications
+  setInterval(function() {
+    STATE.watchlist.forEach(function(symbol) { 
+      fetchAssetData(symbol);
+      checkPositionNotifications(symbol);
+    });
+  }, 5000);
+  
+  // Real-time clock update (every second)
+  setInterval(function() {
+    updateLastUpdateTime();
+  }, 1000);
+}
+
+function fetchAssetData(symbol) {
+  var baseAsset = symbol.replace('USDT', '');
+  
+  // Check if symbol is in watchlist (for WebSocket price updates)
+  var isInWatchlist = STATE.watchlist.includes(symbol);
+  
+  // Always fetch price from REST API if:
+  // 1. WebSocket is not connected, OR
+  // 2. Symbol is not in watchlist (for scanner), OR
+  // 3. Price doesn't exist yet
+  if (!BINANCE_WS_CONNECTED || !isInWatchlist || !STATE.prices[symbol] || !STATE.prices[symbol].price) {
+  if (API_STATUS.binance.available) {
+    fetchPriceFromBinance(symbol, baseAsset);
+  } else {
+    fetchPriceFromCMC(symbol, baseAsset);
+    }
+  }
+  
+  // Fetch klines (candlestick data for analysis)
+  TIMEFRAMES.forEach(function(tf) { 
+    if (API_STATUS.binance.available) {
+      fetchKlinesFromBinance(symbol, tf, baseAsset);
+    } else {
+      fetchKlinesFromCryptoCompare(symbol, tf, baseAsset);
+    }
+  });
+}
+
+// Fetch price from Binance
+function fetchPriceFromBinance(symbol, baseAsset) {
+  fetch(BINANCE_API + '/api/v3/ticker/24hr?symbol=' + symbol)
+    .then(function(res) { 
+      if (!res.ok) throw new Error('Symbol not found');
+      return res.json(); 
+    })
+    .then(function(data) {
+      if (data.code || !data.lastPrice) {
+        throw new Error(data.msg || 'Invalid data');
+      }
+      
+      var price = parseFloat(data.lastPrice);
+      var change = parseFloat(data.priceChangePercent);
+      
+      if (isFinite(price) && price > 0) {
+        checkAPIStatus('binance', true);
+        STATE.prices[symbol] = {
+          price: price,
+          change: isFinite(change) ? change : 0,
+          high: parseFloat(data.highPrice) || price,
+          low: parseFloat(data.lowPrice) || price,
+          volume: parseFloat(data.volume) || 0,
+          source: 'binance'
+        };
+        
+        if (symbol === STATE.activeAsset) {
+          renderAssetPanel(symbol);
+        }
+        STATE.lastUpdate = Date.now();
+        updateLastUpdateTime();
+      } else {
+        throw new Error('Invalid price data');
+      }
+    })
+    .catch(function(err) { 
+      console.log('Binance price error for ' + symbol + ':', err.message);
+      checkAPIStatus('binance', false);
+      // Try alternative sources
+      fetchPriceFromCMC(symbol, baseAsset);
+    });
+}
+
+// Fetch price from CoinMarketCap API
+function fetchPriceFromCMC(symbol, baseAsset) {
+  // Check if we have recent cached data
+  if (CMC_PRICE_CACHE[baseAsset] && (Date.now() - CMC_PRICE_CACHE[baseAsset].timestamp < 60000)) {
+    applyPriceFromCMC(symbol, CMC_PRICE_CACHE[baseAsset]);
+    return;
+  }
+  
+  // Check if API is exhausted
+  if (CMC_API_EXHAUSTED) {
+    setErrorPrice(symbol, 'API محدود شده');
+    return;
+  }
+  
+  // Try CoinGecko first (no API key needed, CORS friendly)
+  fetchPriceFromCoinGecko(symbol, baseAsset)
+    .catch(function() {
+      // If CoinGecko fails, try CMC via proxy
+      return fetchPriceFromCMCProxy(symbol, baseAsset);
+    });
+}
+
+// CoinGecko API (Free, CORS friendly)
+function fetchPriceFromCoinGecko(symbol, baseAsset) {
+  var geckoId = getCoinGeckoId(baseAsset);
+  
+  return fetch('https://api.coingecko.com/api/v3/simple/price?ids=' + geckoId + '&vs_currencies=usd&include_24hr_change=true')
+    .then(function(res) {
+      if (!res.ok) throw new Error('CoinGecko API error');
+      return res.json();
+    })
+    .then(function(data) {
+      if (data[geckoId]) {
+        var coinData = data[geckoId];
+        var priceData = {
+          price: coinData.usd,
+          change: coinData.usd_24h_change || 0,
+          high: coinData.usd * 1.01,
+          low: coinData.usd * 0.99,
+          volume: 0,
+          timestamp: Date.now()
+        };
+        
+        CMC_PRICE_CACHE[baseAsset] = priceData;
+        applyPriceFromCMC(symbol, priceData);
+        console.log('Price from CoinGecko for ' + symbol + ':', priceData.price);
+        return priceData;
+      }
+      throw new Error('Coin not found');
+    });
+}
+
+// Get CoinGecko ID from symbol
+function getCoinGeckoId(baseAsset) {
+  var mapping = {
+    'BTC': 'bitcoin', 'ETH': 'ethereum', 'BNB': 'binancecoin', 'XRP': 'ripple',
+    'ADA': 'cardano', 'DOGE': 'dogecoin', 'SOL': 'solana', 'DOT': 'polkadot',
+    'MATIC': 'matic-network', 'LTC': 'litecoin', 'SHIB': 'shiba-inu', 'AVAX': 'avalanche-2',
+    'LINK': 'chainlink', 'ATOM': 'cosmos', 'XMR': 'monero', 'ETC': 'ethereum-classic',
+    'BCH': 'bitcoin-cash', 'XLM': 'stellar', 'ALGO': 'algorand', 'VET': 'vechain',
+    'HBAR': 'hedera-hashgraph', 'ICP': 'internet-computer', 'FIL': 'filecoin',
+    'APT': 'aptos', 'NEAR': 'near', 'ARB': 'arbitrum', 'OP': 'optimism',
+    'MKR': 'maker', 'AAVE': 'aave', 'GRT': 'the-graph', 'STX': 'stacks',
+    'XAUT': 'tether-gold', 'PAXG': 'pax-gold', 'XAU': 'tether-gold',
+    'TRX': 'tron', 'UNI': 'uniswap', 'SAND': 'the-sandbox', 'MANA': 'decentraland',
+    'AXS': 'axie-infinity', 'GALA': 'gala', 'ENJ': 'enjincoin', 'CHZ': 'chiliz',
+    'FTM': 'fantom', 'THETA': 'theta-token', 'EOS': 'eos', 'NEO': 'neo',
+    'FLOW': 'flow', 'KLAY': 'klay-token', 'CRV': 'curve-dao-token',
+    'INJ': 'injective-protocol', 'LDO': 'lido-dao', 'IMX': 'immutable-x',
+    'RNDR': 'render-token', 'FET': 'fetch-ai', 'AGIX': 'singularitynet',
+    'WLD': 'worldcoin-wld', 'SEI': 'sei-network', 'SUI': 'sui', 'TIA': 'celestia',
+    'PEPE': 'pepe', 'BONK': 'bonk', 'FLOKI': 'floki', 'TON': 'the-open-network'
+  };
+  return mapping[baseAsset.toUpperCase()] || baseAsset.toLowerCase();
+}
+
+// CMC via CORS proxy (fallback)
+function fetchPriceFromCMCProxy(symbol, baseAsset) {
+  // Using allorigins.win as CORS proxy
+  var cmcUrl = CMC_API + '/v1/cryptocurrency/quotes/latest?symbol=' + baseAsset;
+  var proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(cmcUrl);
+  
+  return fetch(proxyUrl, {
+    headers: {
+      'X-CMC_PRO_API_KEY': CMC_API_KEY
+    }
+  })
+  .then(function(res) {
+    if (res.status === 429 || res.status === 402) {
+      CMC_API_EXHAUSTED = true;
+      throw new Error('CMC API limit reached');
+    }
+    if (!res.ok) throw new Error('CMC API error');
+    return res.json();
+  })
+  .then(function(data) {
+    if (data.status && data.status.error_code === 0 && data.data && data.data[baseAsset]) {
+      var coinData = data.data[baseAsset];
+      var quote = coinData.quote && coinData.quote.USD;
+      
+      if (quote) {
+        var priceData = {
+          price: quote.price,
+          change: quote.percent_change_24h || 0,
+          high: quote.price * 1.01,
+          low: quote.price * 0.99,
+          volume: quote.volume_24h || 0,
+          timestamp: Date.now()
+        };
+        
+        CMC_PRICE_CACHE[baseAsset] = priceData;
+        applyPriceFromCMC(symbol, priceData);
+        console.log('Price from CMC for ' + symbol + ':', priceData.price);
+        return priceData;
+      }
+      throw new Error('No quote data');
+    }
+    throw new Error('Invalid CMC response');
+  })
+  .catch(function(err) {
+    console.log('CMC proxy error for ' + symbol + ':', err.message);
+    setErrorPrice(symbol, 'قیمت در دسترس نیست');
+    throw err;
+  });
+}
+
+function applyPriceFromCMC(symbol, priceData) {
+  STATE.prices[symbol] = {
+    price: priceData.price,
+    change: priceData.change,
+    high: priceData.high,
+    low: priceData.low,
+    volume: priceData.volume,
+    source: 'coinmarketcap'
+  };
+  
+  if (symbol === STATE.activeAsset) {
+    renderAssetPanel(symbol);
+  }
+  STATE.lastUpdate = Date.now();
+  updateLastUpdateTime();
+}
+
+function setErrorPrice(symbol, message) {
+  if (!STATE.prices[symbol] || STATE.prices[symbol].error) {
+    STATE.prices[symbol] = {
+      price: 0,
+      change: 0,
+      error: true,
+      errorMsg: message
+    };
+    if (symbol === STATE.activeAsset) {
+      renderAssetPanel(symbol);
+    }
+  }
+}
+
+// Fetch klines from Binance
+function fetchKlinesFromBinance(symbol, tf, baseAsset) {
+  // برای بک‌تست و Monte Carlo: استفاده از حداکثر دیتای ممکن از Binance
+  // Binance max limit is 1000
+  var limit;
+  if (tf === '1d') {
+    // حدود یک سال داده روزانه
+    limit = 365;
+  } else if (tf === '4h' || tf === '1h') {
+    // حداکثر دیتای ممکن برای ۱ ساعته و ۴ ساعته (۱۰۰۰ کندل)
+    limit = 1000;
+  } else {
+    // برای تایم‌فریم‌های دیگر (مثلاً 30m) مقدار متوسط
+    limit = 500;
+  }
+
+  fetch(BINANCE_API + '/api/v3/klines?symbol=' + symbol + '&interval=' + tf + '&limit=' + limit)
+    .then(function(res) { 
+      if (!res.ok) throw new Error('Klines not available');
+      return res.json(); 
+    })
+    .then(function(data) {
+      if (data.code) throw new Error(data.msg || 'Invalid klines');
+      
+      checkAPIStatus('binance', true);
+      if (!STATE.klines[symbol]) STATE.klines[symbol] = {};
+      STATE.klines[symbol][tf] = data.map(function(k) {
+        return { t: k[0], o: parseFloat(k[1]), h: parseFloat(k[2]), l: parseFloat(k[3]), c: parseFloat(k[4]), v: parseFloat(k[5]) };
+      });
+      checkAndAnalyze(symbol);
+    })
+    .catch(function(err) { 
+      console.log('Binance klines error for ' + symbol + ':', err.message);
+      checkAPIStatus('binance', false);
+      // Try CryptoCompare as fallback
+      fetchKlinesFromCryptoCompare(symbol, tf, baseAsset);
+    });
+}
+
+// Fetch klines from CryptoCompare (fallback)
+function fetchKlinesFromCryptoCompare(symbol, tf, baseAsset) {
+  // Map timeframe to CryptoCompare endpoint
+  // برای بک‌تست و Monte Carlo: تلاش برای حداکثر دیتای ممکن از CryptoCompare
+  var endpoint, limit;
+  switch(tf) {
+    case '30m':
+      endpoint = 'histominute';
+      // تا ۲۰۰۰ کندل نیم‌ساعته (چند ماه داده)
+      limit = 2000;
+      break;
+    case '1h':
+      endpoint = 'histohour';
+      // حداکثر دیتای ممکن برای یک‌ساعته
+      limit = 2000;
+      break;
+    case '4h':
+      endpoint = 'histohour';
+      // حداکثر دیتای ممکن، بعداً با aggregateKlines به ۴ساعته تبدیل می‌شود
+      limit = 2000;
+      break;
+    case '1d':
+      endpoint = 'histoday';
+      // تا ۲۰۰۰ کندل روزانه (چند سال داده)
+      limit = 2000;
+      break;
+    default:
+      endpoint = 'histohour';
+      limit = 2000;
+  }
+  
+  fetch(CRYPTOCOMPARE_API + '/' + endpoint + '?fsym=' + baseAsset + '&tsym=USDT&limit=' + Math.min(limit, 2000))
+    .then(function(res) { 
+      if (!res.ok) throw new Error('CryptoCompare error');
+      return res.json(); 
+    })
+    .then(function(data) {
+      if (data.Response === 'Error') throw new Error(data.Message || 'Invalid data');
+      
+      checkAPIStatus('cryptocompare', true);
+      if (!STATE.klines[symbol]) STATE.klines[symbol] = {};
+      
+      var rawData = data.Data && data.Data.Data ? data.Data.Data : (data.Data || []);
+      
+      // Aggregate data for larger timeframes
+      var aggregated = aggregateKlines(rawData, tf);
+      
+      STATE.klines[symbol][tf] = aggregated.map(function(k) {
+        return { 
+          t: k.time * 1000, 
+          o: k.open, 
+          h: k.high, 
+          l: k.low, 
+          c: k.close, 
+          v: k.volumefrom || 0 
+        };
+      });
+      
+      console.log('Klines from CryptoCompare for ' + symbol + ' ' + tf + ':', STATE.klines[symbol][tf].length + ' candles');
+      checkAndAnalyze(symbol);
+    })
+    .catch(function(err) { 
+      console.log('CryptoCompare klines error for ' + symbol + ':', err.message);
+      checkAPIStatus('cryptocompare', false);
+      // Try CoinGecko as last resort for basic data
+      fetchKlinesFromCoinGecko(symbol, tf, baseAsset);
+    });
+}
+
+// Aggregate minute/hour data into larger timeframes
+function aggregateKlines(data, tf) {
+  if (!data || data.length === 0) return [];
+  
+  var interval;
+  switch(tf) {
+    case '30m': interval = 30; break;
+    case '4h': interval = 4; break;
+    default: return data; // 1h and 1d don't need aggregation
+  }
+  
+  var aggregated = [];
+  for (var i = 0; i < data.length; i += interval) {
+    var chunk = data.slice(i, i + interval);
+    if (chunk.length === 0) continue;
+    
+    aggregated.push({
+      time: chunk[0].time,
+      open: chunk[0].open,
+      high: Math.max.apply(null, chunk.map(function(k) { return k.high; })),
+      low: Math.min.apply(null, chunk.map(function(k) { return k.low; })),
+      close: chunk[chunk.length - 1].close,
+      volumefrom: chunk.reduce(function(sum, k) { return sum + (k.volumefrom || 0); }, 0)
+    });
+  }
+  return aggregated;
+}
+
+// Fetch klines from CoinGecko (last resort)
+function fetchKlinesFromCoinGecko(symbol, tf, baseAsset) {
+  var geckoId = getCoinGeckoId(baseAsset);
+  // برای بک‌تست 6 ماهه: حداقل 180 روز
+  var days = tf === '1d' ? 200 : (tf === '4h' ? 90 : 30);
+  
+  fetch(COINGECKO_API + '/coins/' + geckoId + '/ohlc?vs_currency=usd&days=' + days)
+    .then(function(res) { 
+      if (!res.ok) throw new Error('CoinGecko OHLC error');
+      return res.json(); 
+    })
+    .then(function(data) {
+      if (!Array.isArray(data)) throw new Error('Invalid OHLC data');
+      
+      checkAPIStatus('coingecko', true);
+      if (!STATE.klines[symbol]) STATE.klines[symbol] = {};
+      
+      STATE.klines[symbol][tf] = data.map(function(k) {
+        return { t: k[0], o: k[1], h: k[2], l: k[3], c: k[4], v: 0 };
+      });
+      
+      console.log('Klines from CoinGecko for ' + symbol + ' ' + tf + ':', STATE.klines[symbol][tf].length + ' candles');
+      checkAndAnalyze(symbol);
+    })
+    .catch(function(err) { 
+      console.log('CoinGecko OHLC error for ' + symbol + ':', err.message);
+      checkAPIStatus('coingecko', false);
+    });
+}
+
+// Check if all timeframes are loaded and analyze
+function checkAndAnalyze(symbol) {
+  var allTFs = TIMEFRAMES.every(function(t) {
+    return STATE.klines[symbol] && STATE.klines[symbol][t] && STATE.klines[symbol][t].length > 0;
+  });
+  if (allTFs) analyzeAsset(symbol);
+}
+
+function refreshAnalysis(symbol) {
+  showToast('در حال تحلیل مجدد...', 'info');
+  fetchAssetData(symbol);
+}
+
+// ==================== Trading Mode Recommendation ====================
+function determineTradingMode(signal) {
+  // Only analyze valid signals (not 'wait')
+  if (!signal || signal.type === 'wait') {
+    return { mode: 'both', reasons: ['سیگنال در حال انتظار'] };
+  }
+  
+  var leverage = signal.leverage || 3;
+  var adx = signal.adx ? signal.adx.adx : 25;
+  var confidence = signal.confidence || 0;
+  var entryQuality = signal.entryQuality || 'good';
+  
+  var futuresScore = 0;
+  var spotScore = 0;
+  
+  // Futures indicators
+  if (leverage >= 4) {
+    futuresScore += 3;
+  } else if (leverage >= 3) {
+    futuresScore += 1;
+  }
+  
+  if (adx >= 25 && confidence >= 7) {
+    futuresScore += 3;
+  } else if (adx >= 25) {
+    futuresScore += 2;
+  }
+  
+  if (leverage >= 3 && entryQuality === 'excellent' && confidence >= 6) {
+    futuresScore += 2;
+  }
+  
+  if (confidence >= 8) {
+    futuresScore += 1;
+  }
+  
+  // Spot indicators
+  if (leverage <= 2) {
+    spotScore += 3;
+  } else if (leverage <= 3) {
+    spotScore += 1;
+  }
+  
+  if (adx < 20 && confidence < 6) {
+    spotScore += 2;
+  }
+  
+  if (confidence < 5) {
+    spotScore += 2;
+  }
+  
+  if (entryQuality === 'fair' && confidence < 6) {
+    spotScore += 1;
+  }
+  
+  // Determine mode and build reasons
+  var mode;
+  var modeReasons = [];
+  
+  if (futuresScore > spotScore + 2) {
+    mode = 'futures';
+    if (leverage >= 4) modeReasons.push('اهرم بالا');
+    if (adx >= 25 && confidence >= 7) modeReasons.push('روند قوی');
+    if (leverage >= 3 && entryQuality === 'excellent') modeReasons.push('ورود عالی');
+    if (modeReasons.length === 0) modeReasons.push('مناسب برای فیوچر');
+  } else if (spotScore > futuresScore + 2) {
+    mode = 'spot';
+    if (leverage <= 2) modeReasons.push('اهرم پایین');
+    if (adx < 20 && confidence < 6) modeReasons.push('روند ضعیف');
+    if (confidence < 5) modeReasons.push('قدرت پایین');
+    if (modeReasons.length === 0) modeReasons.push('مناسب برای اسپات');
+  } else {
+    mode = 'both';
+    modeReasons.push('مناسب برای هر دو');
+  }
+  
+  return { mode: mode, reasons: modeReasons };
+}
+
+// ==================== AI Advisor Functions ====================
+function generateAIPrompt(symbol) {
+  var signal = STATE.signals[symbol];
+  var price = STATE.prices[symbol];
+  if (!signal || !price) {
+    return null;
+  }
+
+  // مقادیر اندیکاتورها
+  var rsiValue = typeof signal.rsi === 'number' ? signal.rsi.toFixed(1) : 'N/A';
+  var stochK = signal.stochRsi && typeof signal.stochRsi.k === 'number' ? signal.stochRsi.k.toFixed(1) : 'N/A';
+  var stochD = signal.stochRsi && typeof signal.stochRsi.d === 'number' ? signal.stochRsi.d.toFixed(1) : 'N/A';
+  var ema21 = signal.ema21 ? formatPrice(signal.ema21) : 'N/A';
+  var ema50 = signal.ema50 ? formatPrice(signal.ema50) : 'N/A';
+  var macdHist = signal.macd && typeof signal.macd.histogram === 'number' ? signal.macd.histogram.toFixed(4) : 'N/A';
+  var macdSign = signal.macd && typeof signal.macd.histogram === 'number' ? (signal.macd.histogram > 0 ? 'مثبت' : 'منفی') : 'N/A';
+  var adxValue = signal.adx && typeof signal.adx.adx === 'number' ? signal.adx.adx.toFixed(1) : 'N/A';
+  var bbPosition = signal.bbPosition ? signal.bbPosition.toFixed(0) : 'N/A';
+
+  // ساختار بازار
+  var trend = signal.trend || 'نامشخص';
+  var structure = signal.structure || 'N/A';
+  var bos = signal.bos || 'ندارد';
+  var choch = signal.choch || 'ندارد';
+
+  // حجم و مومنتوم
+  var volumeRatio = signal.volume && signal.volume.ratio ? signal.volume.ratio.toFixed(2) : 'N/A';
+  var divergence = signal.rsiDivergence && signal.rsiDivergence.type ? signal.rsiDivergence.type : 'ندارد';
+
+  // الگوهای کندلی
+  var patterns = signal.patterns && signal.patterns.length > 0 ? signal.patterns.join('، ') : 'شناسایی نشده';
+
+  // سیگنال
+  var signalType = signal.type === 'long' ? 'LONG 📈' : (signal.type === 'short' ? 'SHORT 📉' : 'WAIT ⏸️');
+  var score = (signal.confidence || 0) + '/10';
+
+  var prompt = 'شما یک تحلیلگر تکنیکال حرفه‌ای بازار فیوچرز کریپتو هستید. لطفاً بر اساس داده‌های زیر یک تحلیل کاملاً صادقانه و بدون تعارف ارائه دهید.\n\n';
+  prompt += '═══════════════════════════════════════\n';
+  prompt += '📊 نماد: ' + symbol + '\n';
+  prompt += '⏰ تایم‌فریم: 1H\n';
+  prompt += '💰 قیمت فعلی: ' + formatPrice(price.price) + '\n';
+  prompt += '═══════════════════════════════════════\n\n';
+
+  prompt += '📈 اندیکاتورها:\n';
+  prompt += '- RSI (14): ' + rsiValue + '\n';
+  prompt += '- Stochastic RSI: K=' + stochK + ' / D=' + stochD + '\n';
+  prompt += '- EMA 21: ' + ema21 + '\n';
+  prompt += '- EMA 50: ' + ema50 + '\n';
+  prompt += '- MACD Histogram: ' + macdHist + ' (' + macdSign + ')\n';
+  prompt += '- ADX: ' + adxValue + '\n';
+  prompt += '- Bollinger Band Position: ' + bbPosition + '% (0=پایین، 100=بالا)\n\n';
+
+  prompt += '🏗️ ساختار بازار:\n';
+  prompt += '- روند: ' + trend + '\n';
+  prompt += '- ساختار: ' + structure + '\n';
+  prompt += '- Break of Structure: ' + bos + '\n';
+  prompt += '- Change of Character: ' + choch + '\n\n';
+
+  prompt += '📊 حجم و مومنتوم:\n';
+  prompt += '- حجم نسبت به میانگین: ' + volumeRatio + 'x\n';
+  prompt += '- واگرایی RSI: ' + divergence + '\n\n';
+
+  prompt += '🕯️ الگوهای کندلی:\n';
+  prompt += '- ' + patterns + '\n\n';
+
+  prompt += '💡 سیگنال سیستم: ' + signalType + ' با امتیاز ' + score + '\n';
+  prompt += '- نقطه ورود پیشنهادی: ' + formatPrice(signal.entry) + '\n';
+  prompt += '- استاپ‌لاس: ' + formatPrice(signal.sl) + '\n';
+  prompt += '- تارگت ۱: ' + formatPrice(signal.tp1) + '\n';
+  prompt += '- تارگت ۲: ' + formatPrice(signal.tp2) + '\n\n';
+
+  prompt += '═══════════════════════════════════════\n\n';
+
+  prompt += 'لطفاً موارد زیر را تحلیل کنید:\n\n';
+  prompt += '1. **ارزیابی سیگنال**: آیا این سیگنال قابل اعتماد است؟ چرا؟\n\n';
+  prompt += '2. **نقاط قوت**: چه فاکتورهایی از این معامله حمایت می‌کنند؟\n\n';
+  prompt += '3. **نقاط ضعف و ریسک‌ها**: چه خطراتی وجود دارد که سیستم ممکن است ندیده باشد؟\n\n';
+  prompt += '4. **تأیید یا رد**: اگر شما بودید، وارد این معامله می‌شدید؟ با چه لوریجی؟\n\n';
+  prompt += '5. **پیشنهاد بهبود**: آیا نقاط ورود/خروج بهتری پیشنهاد می‌کنید؟\n\n';
+  prompt += '6. **امتیاز نهایی**: از 1 تا 10 به این معامله چه امتیازی می‌دهید؟\n\n';
+  prompt += '⚠️ مهم: کاملاً صادق باشید. اگر معامله ضعیف است، بگویید. تعارف نکنید.';
+
+  return prompt;
+}
+
+function handleAIPromptClick(symbol) {
+  // Use activeAsset if symbol is not provided
+  if (!symbol) {
+    symbol = STATE.activeAsset;
+  }
+  
+  // Generate prompt
+  var prompt = generateAIPrompt(symbol);
+  
+  if (!prompt) {
+    showToast('سیگنال موجود نیست', 'error');
+    return;
+  }
+  
+  // Copy to clipboard
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(prompt).then(function() {
+      showToast('پرامپت با موفقیت کپی شد', 'success');
+    }).catch(function() {
+      // Fallback to execCommand
+      fallbackCopyToClipboard(prompt);
+    });
+  } else {
+    // Fallback to execCommand
+    fallbackCopyToClipboard(prompt);
+  }
+}
+
+function fallbackCopyToClipboard(text) {
+  try {
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    textarea.style.left = '-999999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, 99999);
+    
+    var success = document.execCommand('copy');
+    document.body.removeChild(textarea);
+    
+    if (success) {
+      showToast('پرامپت با موفقیت کپی شد', 'success');
+    } else {
+      showToast('خطا در کپی پرامپت', 'error');
+    }
+  } catch (err) {
+    showToast('خطا در کپی پرامپت', 'error');
+  }
+}
+
+// ==================== New Suggestions System ====================
+
+// Initialize suggestions system with 12 symbols
+function initSuggestionsSystem() {
+  // Initialize all 12 symbols
+  var supportedSymbols = DEFAULT_SYMBOLS.map(function(base) {
+    return base + 'USDT';
+  });
+  
+  supportedSymbols.forEach(function(symbol) {
+    STATE.suggestions.symbols[symbol] = {
+      symbol: symbol,
+      signal: null,
+      lastUpdate: null,
+      isActive: false,
+      updateTimer: null
+    };
+  });
+  
+  // Initial render
+  renderSuggestionsCards();
+  
+  // Start auto-update
+  if (STATE.suggestions.autoUpdateEnabled) {
+    startAutoSuggestions();
+  }
+}
+
+// Update analysis for a single symbol independently
+function updateSymbolAnalysis(symbol) {
+  if (!STATE.suggestions.symbols[symbol]) {
+    return;
+  }
+  
+  var symbolData = STATE.suggestions.symbols[symbol];
+  
+  // Fetch data if needed
+  if (!STATE.klines[symbol] || Object.keys(STATE.klines[symbol]).length < TIMEFRAMES.length) {
+    fetchAssetData(symbol);
+    // analyzeAsset will be called via checkAndAnalyze callback
+    return;
+  }
+  
+  // Analyze if we have data
+  if (STATE.klines[symbol]) {
+    analyzeAsset(symbol);
+    
+    // Update symbol data
+    var signal = STATE.signals[symbol];
+    symbolData.signal = signal;
+    symbolData.lastUpdate = Date.now();
+    symbolData.isActive = signal && signal.confidence >= 6 && signal.type !== 'wait';
+    
+    // Render this symbol's card
+    renderSuggestionCard(symbol);
+  }
+}
+
+// Render all suggestion cards
+function renderSuggestionsCards() {
+  var resultsList = document.getElementById('scannerResultsList');
+  var resultsContainer = document.getElementById('scannerResults');
+  var noSuggestions = document.getElementById('noSuggestionsState');
+  
+  if (!resultsList || !resultsContainer) {
+    return;
+  }
+  
+  // Hide no suggestions
+  if (noSuggestions) noSuggestions.style.display = 'none';
+  
+  // Show results container
+  resultsContainer.style.display = 'block';
+  
+  // Clear existing cards
+  resultsList.innerHTML = '';
+  
+  // Get all symbols sorted: active first, then by confidence, then alphabetically
+  var allSymbols = Object.keys(STATE.suggestions.symbols).map(function(symbol) {
+    return STATE.suggestions.symbols[symbol];
+  });
+  
+  allSymbols.sort(function(a, b) {
+    if (a.isActive && !b.isActive) return -1;
+    if (!a.isActive && b.isActive) return 1;
+    if (a.signal && b.signal) {
+      return (b.signal.confidence || 0) - (a.signal.confidence || 0);
+    }
+    if (a.signal && !b.signal) return -1;
+    if (!a.signal && b.signal) return 1;
+    return a.symbol.localeCompare(b.symbol);
+  });
+  
+  // Render each card
+  allSymbols.forEach(function(symbolData) {
+    var cardHtml = createSuggestionCard(symbolData);
+    var tempDiv = document.createElement('div');
+    tempDiv.innerHTML = cardHtml;
+    resultsList.appendChild(tempDiv.firstChild);
+  });
+}
+
+// Render a single suggestion card
+function renderSuggestionCard(symbol) {
+  var symbolData = STATE.suggestions.symbols[symbol];
+  if (!symbolData) return;
+  
+  var resultsList = document.getElementById('scannerResultsList');
+  if (!resultsList) return;
+  
+  var existingCard = resultsList.querySelector('[data-symbol="' + symbol + '"]');
+  var cardHtml = createSuggestionCard(symbolData);
+  
+  if (existingCard) {
+    // Update existing card
+    var tempDiv = document.createElement('div');
+    tempDiv.innerHTML = cardHtml;
+    var newCard = tempDiv.firstChild;
+    existingCard.innerHTML = newCard.innerHTML;
+    existingCard.className = newCard.className;
+    existingCard.setAttribute('style', newCard.getAttribute('style'));
+  } else {
+    // Add new card (shouldn't happen often, but handle it)
+    renderSuggestionsCards();
+  }
+}
+
+// Create HTML for a suggestion card
+function createSuggestionCard(symbolData) {
+  var symbol = symbolData.symbol;
+  var signal = symbolData.signal;
+  var lastUpdate = symbolData.lastUpdate;
+  var isActive = symbolData.isActive;
+  
+  var info = ASSET_INFO[symbol] || COIN_ICON_CACHE[symbol] || {
+    name: symbol.replace('USDT', ''),
+    symbol: symbol.replace('USDT', '')
+  };
+  
+  var iconHtml = getCoinIconHtml(symbol, 40);
+  
+  // Format update time
+  var updateTimeText = '--:--:--';
+  if (lastUpdate) {
+    var updateDate = new Date(lastUpdate);
+    var hours = String(updateDate.getHours()).padStart(2, '0');
+    var minutes = String(updateDate.getMinutes()).padStart(2, '0');
+    var seconds = String(updateDate.getSeconds()).padStart(2, '0');
+    updateTimeText = hours + ':' + minutes + ':' + seconds;
+  }
+  
+  // Card classes and styles
+  var cardClass = 'suggestion-card';
+  if (isActive) {
+    cardClass += ' suggestion-active';
+  } else {
+    cardClass += ' suggestion-inactive';
+  }
+  
+  var cardStyle = 'background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer;transition:all 0.2s;';
+  if (!isActive) {
+    cardStyle += 'opacity:0.5;';
+  }
+  
+  // Content HTML
+  var contentHtml = '';
+  
+  if (isActive && signal) {
+    // Active state: show signal details
+    var signalTypeText = signal.type === 'long' ? 'Long' : 'Short';
+    var signalIcon = signal.type === 'long' ? ICONS.trendUp : ICONS.trendDown;
+    var signalColor = signal.type === 'long' ? 'var(--teal)' : 'var(--red)';
+    var scoreColor = signal.confidence >= 7 ? 'var(--teal)' : (signal.confidence >= 5 ? 'var(--yellow)' : 'var(--text2)');
+    
+    contentHtml = '<div style="display:flex;align-items:center;gap:12px;font-size:13px;margin-bottom:6px;">' +
+      '<span style="display:flex;align-items:center;gap:4px;color:' + signalColor + ';font-weight:600;">' + signalIcon + ' ' + signalTypeText + '</span>' +
+      '<span style="color:var(--text2);">•</span>' +
+      '<span style="color:' + scoreColor + ';font-weight:600;">امتیاز ' + signal.confidence + '/10</span>' +
+    '</div>';
+  } else {
+    // Inactive state
+    var inactiveText = signal && signal.type === 'wait' ? 'در انتظار سیگنال' : (signal ? 'سیگنال ضعیف' : 'در حال بررسی...');
+    contentHtml = '<div style="display:flex;align-items:center;gap:12px;font-size:13px;margin-bottom:6px;">' +
+      '<span style="color:var(--text3);font-style:italic;">' + inactiveText + '</span>' +
+    '</div>';
+  }
+  
+  // Update time display
+  var updateTimeHtml = '<div style="font-size:11px;color:var(--text3);margin-top:4px;">آپدیت: ' + updateTimeText + '</div>';
+  
+  return '<div class="' + cardClass + '" data-symbol="' + symbol + '" onclick="navigateToSuggestionDetails(\'' + symbol + '\')" style="' + cardStyle + '" onmouseover="this.style.borderColor=\'var(--teal)\';this.style.transform=\'translateY(-2px)\';this.style.opacity=\'1\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.transform=\'none\';' + (!isActive ? 'this.style.opacity=\'0.5\'' : '') + '">' +
+    '<div style="display:flex;align-items:center;gap:14px;">' +
+      iconHtml +
+      '<div style="flex:1;min-width:0;">' +
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">' +
+          '<span style="font-size:16px;font-weight:600;color:var(--text1);">' + (info.name || info.symbol) + '</span>' +
+          '<span style="font-size:12px;color:var(--text2);">' + symbol + '</span>' +
+        '</div>' +
+        contentHtml +
+        updateTimeHtml +
+      '</div>' +
+      '<div style="color:var(--text2);">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+// Start auto-update for all symbols
+function startAutoSuggestions() {
+  if (STATE.suggestions.updateTimer) {
+    clearInterval(STATE.suggestions.updateTimer);
+  }
+  
+  // Update all symbols immediately
+  Object.keys(STATE.suggestions.symbols).forEach(function(symbol) {
+    updateSymbolAnalysis(symbol);
+  });
+  
+  // Then update each symbol independently every 10 seconds
+  STATE.suggestions.updateTimer = setInterval(function() {
+    Object.keys(STATE.suggestions.symbols).forEach(function(symbol) {
+      updateSymbolAnalysis(symbol);
+    });
+  }, STATE.suggestions.updateInterval);
+  
+  STATE.suggestions.autoUpdateEnabled = true;
+}
+
+// Stop auto-update
+function stopAutoSuggestions() {
+  if (STATE.suggestions.updateTimer) {
+    clearInterval(STATE.suggestions.updateTimer);
+    STATE.suggestions.updateTimer = null;
+  }
+  STATE.suggestions.autoUpdateEnabled = false;
+}
+
+// Navigate to details when clicking a suggestion card
+function navigateToSuggestionDetails(symbol) {
+  STATE.activeAsset = symbol;
+  renderWatchlistTabs();
+  fetchAssetData(symbol);
+  switchView('signal');
+  renderAssetPanel(symbol);
+}
+
+// Hook into analyzeAsset to update suggestions when analysis completes
+// This will be called after analyzeAsset finishes
+function onAnalysisComplete(symbol, signal) {
+  if (STATE.suggestions.symbols[symbol]) {
+    var symbolData = STATE.suggestions.symbols[symbol];
+    symbolData.signal = signal;
+    symbolData.lastUpdate = Date.now();
+    symbolData.isActive = signal && signal.confidence >= 6 && signal.type !== 'wait';
+    renderSuggestionCard(symbol);
+  }
+}
+
+// ==================== Confidence Caps (based on analyst feedback) ====================
+function applyConfidenceCaps(rawScore, mainTF, signalType) {
+  var maxScore = 10;
+  var penalties = 0;
+  
+  // Get ADX value
+  var adxValue = (mainTF && mainTF.adx) ? mainTF.adx.adx : 25;
+  
+  // Get volume ratio
+  var volumeRatio = (mainTF && mainTF.volume) ? mainTF.volume.ratio || 1 : 1;
+  
+  // Get divergence type
+  var divergence = (mainTF && mainTF.rsiDivergence) ? mainTF.rsiDivergence.type : 'none';
+  
+  // Get market structure
+  var structure = (mainTF && mainTF.marketStructure) ? mainTF.marketStructure.structure : 'neutral';
+  
+  // Check for Break of Structure
+  var hasBOS = structure === 'bos_bullish' || structure === 'bos_bearish';
+  var bosMatchesSignal = (signalType === 'long' && structure === 'bos_bullish') ||
+                         (signalType === 'short' && structure === 'bos_bearish');
+  
+  // ADX-based score capping (ranging market = unreliable signals)
+  if (adxValue < 20) {
+    maxScore = 5; // Ranging market - cap at 5
+  } else if (adxValue < 25) {
+    maxScore = 7; // Weak trend - cap at 7
+  }
+  
+  // BOS requirement for high scores
+  if (!hasBOS || !bosMatchesSignal) {
+    maxScore = Math.min(maxScore, 6); // No BOS = cap at 6
+  }
+  
+  // Volume penalties (already applied in core.js but double-check here)
+  if (volumeRatio < 0.5) {
+    penalties += 2; // Very low volume
+  } else if (volumeRatio < 0.8) {
+    penalties += 1; // Low volume
+  }
+  
+  // Opposing divergence penalty
+  if (signalType === 'short' && divergence === 'bullish') {
+    penalties += 2; // Bullish divergence on SHORT = dangerous
+  } else if (signalType === 'long' && divergence === 'bearish') {
+    penalties += 2; // Bearish divergence on LONG = dangerous
+  }
+  
+  // Calculate final confidence
+  var finalScore = Math.max(1, rawScore - penalties);
+  finalScore = Math.min(finalScore, maxScore);
+  
+  return finalScore;
+}
+
+// ==================== Analysis ====================
+function analyzeAsset(symbol) {
+  var price = STATE.prices[symbol] ? STATE.prices[symbol].price : 0;
+  if (!price) return;
+  
+  var results = {};
+  var totalLong = 0, totalShort = 0;
+  var weights = { '30m': 1, '1h': 2, '4h': 3, '1d': 4 };
+  var tfCount = 0;
+  
+  TIMEFRAMES.forEach(function(tf) {
+    var klines = STATE.klines[symbol][tf];
+    if (klines && klines.length >= 30) {
+      var analysis = TradingCore.analyzeTF(klines, price);
+      results[tf] = analysis;
+      tfCount++;
+      var w = weights[tf];
+      if (analysis.signal === 'long') totalLong += analysis.score * w;
+      else if (analysis.signal === 'short') totalShort += analysis.score * w;
+    }
+  });
+  
+  var sig = {
+    type: 'wait', entry: price, sl: 0, tp1: 0, tp2: 0, leverage: 3,
+    confidence: 0, reasons: [], rsi: 50, ema21: price, ema50: price,
+    trend: 'neutral', tfAnalysis: results
+  };
+  
+  var mainTF = results['1h'] || results['30m'] || results['4h'];
+  if (mainTF) {
+    sig.rsi = mainTF.rsi;
+    sig.ema21 = mainTF.ema21;
+    sig.ema50 = mainTF.ema50;
+    sig.trend = mainTF.trend;
+    sig.adx = mainTF.adx;
+    sig.macd = mainTF.macd;
+    sig.volume = mainTF.volume;
+    sig.rsiDivergence = mainTF.rsiDivergence;
+    // Add StochRSI and Market Structure
+    sig.stochRsi = mainTF.stochRSI;
+    sig.marketStructure = mainTF.marketStructure;
+    // Extract structure details for prompt
+    if (mainTF.marketStructure) {
+      sig.structure = mainTF.marketStructure.structure || 'N/A';
+      sig.bos = mainTF.marketStructure.structure === 'bos_bullish' ? 'صعودی' : 
+                (mainTF.marketStructure.structure === 'bos_bearish' ? 'نزولی' : 'ندارد');
+      sig.choch = mainTF.marketStructure.choch === 'bullish' ? 'صعودی' : 
+                  (mainTF.marketStructure.choch === 'bearish' ? 'نزولی' : 'ندارد');
+    }
+    // Bollinger Band position
+    if (mainTF.bb) {
+      var bbRange = mainTF.bb.upper - mainTF.bb.lower;
+      if (bbRange > 0) {
+        sig.bbPosition = ((sig.ema21 - mainTF.bb.lower) / bbRange) * 100;
+      }
+    }
+  }
+  
+  // شرایط سیگنال بهینه‌شده - حداقل 4 امتیاز کل و 2 امتیاز فاصله
+  var minScore = 4, minDiff = 2;
+  
+  if (tfCount === 0) {
+    sig.reasons = ['در حال دریافت داده...'];
+    STATE.signals[symbol] = sig;
+    if (symbol === STATE.activeAsset) renderAssetPanel(symbol);
+    return;
+  }
+  
+  // Volume and ADX filters - reduce confidence instead of blocking completely
+  var volumeRatio = (mainTF && mainTF.volume) ? mainTF.volume.ratio || 1 : 1;
+  var adxValue = (mainTF && mainTF.adx) ? mainTF.adx.adx : 25;
+  var volumePenalty = 0;
+  var adxPenalty = 0;
+  
+  // Volume filter: penalize low volume signals
+  if (volumeRatio < 0.5) {
+    volumePenalty = 3; // Heavy penalty
+  } else if (volumeRatio < 0.8) {
+    volumePenalty = 1; // Light penalty
+  }
+  
+  // ADX filter: penalize ranging market signals
+  if (adxValue < 15) {
+    adxPenalty = 3; // Heavy penalty - very weak trend
+  } else if (adxValue < 20) {
+    adxPenalty = 1; // Light penalty
+  }
+  
+  var atr = TradingCore.calcATR(STATE.klines[symbol]['4h'] || STATE.klines[symbol]['1h'] || [], 14, price);
+  if (!isFinite(atr) || atr <= 0) atr = price * 0.015;
+  
+  var entryCapital = STATE.settings.capital * (STATE.settings.riskPercent / 100);
+  
+  // Get EMA50 for trend filter
+  var ema50 = (mainTF && mainTF.ema50) ? mainTF.ema50 : price;
+  var ema21 = (mainTF && mainTF.ema21) ? mainTF.ema21 : price;
+  
+  // Check for strong reversal patterns (exception to trend filter)
+  var hasStrongReversal = false;
+  if (mainTF && mainTF.marketStructure) {
+    var structure = mainTF.marketStructure.structure || '';
+    hasStrongReversal = structure === 'bos_bullish' || structure === 'bos_bearish' ||
+                        mainTF.marketStructure.choch === 'bullish' || mainTF.marketStructure.choch === 'bearish';
+  }
+  
+  // TREND FILTER: Block Long below EMA50, Short above EMA50 (unless strong reversal)
+  if (totalLong >= minScore && totalLong > totalShort + minDiff) {
+    // Check trend filter for Long
+    if (price < ema50 && !hasStrongReversal) {
+      sig.type = 'wait';
+      sig.reasons = ['⛔ سیگنال Long زیر EMA50 ممنوع - قیمت: ' + price.toFixed(2) + ' < EMA50: ' + ema50.toFixed(2)];
+      sig.confidence = 0;
+      STATE.signals[symbol] = sig;
+      if (symbol === STATE.activeAsset) renderAssetPanel(symbol);
+      return;
+    }
+    sig.type = 'long';
+    var rawScore = Math.round(totalLong / 3);
+    
+    var smartEntry = TradingCore.findSmartEntry(
+      STATE.klines[symbol]['1h'] || STATE.klines[symbol]['4h'] || [],
+      STATE.klines[symbol]['4h'] || null,
+      price, 'long', mainTF ? mainTF.ema21 : price, mainTF ? mainTF.ema50 : price,
+      atr, entryCapital
+    );
+    
+    sig.entry = smartEntry.entry;
+    sig.entryReasons = smartEntry.reasons;
+    sig.entryQuality = smartEntry.quality;
+    sig.confluenceScore = smartEntry.confluenceScore;
+    sig.smartEntries = smartEntry.entries;
+    
+    // Realistic entry: limit pullback to max 1.5% from current price
+    var maxPullback = price * 0.015;
+    if (sig.entry < price - maxPullback) {
+      sig.entry = price - maxPullback * 0.5; // More realistic entry
+      sig.entryReasons = ['ورود نزدیک قیمت فعلی'];
+    }
+    
+    // Adjust SL/TP based on volume - tighter in low volume markets
+    var slMultiplier = volumeRatio < 0.5 ? 0.5 : (volumeRatio < 0.8 ? 0.6 : 0.8);
+    var tpMultiplier = volumeRatio < 0.5 ? 0.8 : (volumeRatio < 0.8 ? 1.0 : 1.5);
+    
+    sig.sl = sig.entry - atr * slMultiplier;
+    sig.tp1 = sig.entry + atr * tpMultiplier;
+    sig.tp2 = sig.entry + atr * tpMultiplier * 1.8;
+    sig.leverage = TradingCore.getLeverage(sig.entry, sig.sl);
+    
+    // RISK/REWARD FILTER: Check if target is blocked by EMA resistance
+    var distanceToEma21 = ema21 - sig.entry;
+    var distanceToTp1 = sig.tp1 - sig.entry;
+    if (distanceToEma21 > 0 && distanceToEma21 < distanceToTp1 * 0.5) {
+      // EMA21 is too close - blocks the target
+      sig.type = 'wait';
+      sig.reasons = ['⛔ تارگت پشت مقاومت EMA21 - فاصله تا EMA21: ' + distanceToEma21.toFixed(2)];
+      sig.confidence = 0;
+      STATE.signals[symbol] = sig;
+      if (symbol === STATE.activeAsset) renderAssetPanel(symbol);
+      return;
+    }
+    
+    TIMEFRAMES.forEach(function(tf) {
+      if (results[tf] && results[tf].signal === 'long') sig.reasons.push(tf.toUpperCase() + ' صعودی');
+    });
+    if (mainTF && mainTF.volume && mainTF.volume.signal === 'strong') sig.reasons.push('حجم بالا');
+    if (mainTF && mainTF.rsiDivergence && mainTF.rsiDivergence.type === 'bullish') sig.reasons.push('واگرایی صعودی');
+    if (mainTF && mainTF.adx && mainTF.adx.adx >= 25) sig.reasons.push('روند قوی');
+    
+    // Apply confidence caps based on ADX, BOS, and volume (penalties applied inside)
+    sig.confidence = applyConfidenceCaps(rawScore, mainTF, 'long');
+    
+    // Add warning reasons for display (penalties already applied in applyConfidenceCaps)
+    if (volumeRatio < 0.8) sig.reasons.push('⚠️ حجم پایین (' + (volumeRatio * 100).toFixed(0) + '%)');
+    if (adxValue < 25) sig.reasons.push('⚠️ ADX پایین (' + adxValue.toFixed(0) + ')');
+  }
+  else if (totalShort >= minScore && totalShort > totalLong + minDiff) {
+    // Check trend filter for Short
+    if (price > ema50 && !hasStrongReversal) {
+      sig.type = 'wait';
+      sig.reasons = ['⛔ سیگنال Short بالای EMA50 ممنوع - قیمت: ' + price.toFixed(2) + ' > EMA50: ' + ema50.toFixed(2)];
+      sig.confidence = 0;
+      STATE.signals[symbol] = sig;
+      if (symbol === STATE.activeAsset) renderAssetPanel(symbol);
+      return;
+    }
+    
+    sig.type = 'short';
+    var rawScore = Math.round(totalShort / 3);
+    
+    var smartEntry = TradingCore.findSmartEntry(
+      STATE.klines[symbol]['1h'] || STATE.klines[symbol]['4h'] || [],
+      STATE.klines[symbol]['4h'] || null,
+      price, 'short', mainTF ? mainTF.ema21 : price, mainTF ? mainTF.ema50 : price,
+      atr, entryCapital
+    );
+    
+    sig.entry = smartEntry.entry;
+    sig.entryReasons = smartEntry.reasons;
+    sig.entryQuality = smartEntry.quality;
+    sig.confluenceScore = smartEntry.confluenceScore;
+    sig.smartEntries = smartEntry.entries;
+    
+    // Realistic entry: limit pullback to max 1.5% from current price
+    var maxPullback = price * 0.015;
+    if (sig.entry > price + maxPullback) {
+      sig.entry = price + maxPullback * 0.5; // More realistic entry
+      sig.entryReasons = ['ورود نزدیک قیمت فعلی'];
+    }
+    
+    // Adjust SL/TP based on volume - tighter in low volume markets
+    var slMultiplier = volumeRatio < 0.5 ? 0.5 : (volumeRatio < 0.8 ? 0.6 : 0.8);
+    var tpMultiplier = volumeRatio < 0.5 ? 0.8 : (volumeRatio < 0.8 ? 1.0 : 1.5);
+    
+    sig.sl = sig.entry + atr * slMultiplier;
+    sig.tp1 = sig.entry - atr * tpMultiplier;
+    sig.tp2 = sig.entry - atr * tpMultiplier * 1.8;
+    sig.leverage = TradingCore.getLeverage(sig.entry, sig.sl);
+    
+    // RISK/REWARD FILTER: Check if target is blocked by EMA support
+    var distanceToEma21 = sig.entry - ema21;
+    var distanceToTp1 = sig.entry - sig.tp1;
+    if (distanceToEma21 > 0 && distanceToEma21 < distanceToTp1 * 0.5) {
+      // EMA21 is too close - blocks the target
+      sig.type = 'wait';
+      sig.reasons = ['⛔ تارگت پشت حمایت EMA21 - فاصله تا EMA21: ' + distanceToEma21.toFixed(2)];
+      sig.confidence = 0;
+      STATE.signals[symbol] = sig;
+      if (symbol === STATE.activeAsset) renderAssetPanel(symbol);
+      return;
+    }
+    
+    TIMEFRAMES.forEach(function(tf) {
+      if (results[tf] && results[tf].signal === 'short') sig.reasons.push(tf.toUpperCase() + ' نزولی');
+    });
+    if (mainTF && mainTF.volume && mainTF.volume.signal === 'strong') sig.reasons.push('حجم بالا');
+    if (mainTF && mainTF.rsiDivergence && mainTF.rsiDivergence.type === 'bearish') sig.reasons.push('واگرایی نزولی');
+    if (mainTF && mainTF.adx && mainTF.adx.adx >= 25) sig.reasons.push('روند قوی');
+    
+    // Apply confidence caps based on ADX, BOS, and volume (penalties applied inside)
+    sig.confidence = applyConfidenceCaps(rawScore, mainTF, 'short');
+    
+    // Add warning reasons for display (penalties already applied in applyConfidenceCaps)
+    if (volumeRatio < 0.8) sig.reasons.push('⚠️ حجم پایین (' + (volumeRatio * 100).toFixed(0) + '%)');
+    if (adxValue < 25) sig.reasons.push('⚠️ ADX پایین (' + adxValue.toFixed(0) + ')');
+  }
+  else {
+    if (totalLong === 0 && totalShort === 0) sig.reasons = ['بازار خنثی'];
+    else if (Math.abs(totalLong - totalShort) < minDiff) sig.reasons = ['سیگنال‌های متضاد'];
+    else sig.reasons = ['قدرت سیگنال کافی نیست'];
+  }
+  
+  sig = applyStrategy(sig);
+  
+  // Determine trading mode recommendation
+  var tradingMode = determineTradingMode(sig);
+  sig.tradingMode = tradingMode;
+  
+  STATE.signals[symbol] = sig;
+  if (symbol === STATE.activeAsset) renderAssetPanel(symbol);
+  // Notifications are now handled by checkPositionNotifications() in the data loop
+  
+  // Notify suggestions system
+  onAnalysisComplete(symbol, sig);
+}
+
+function applyStrategy(signal) {
+  var strategy = STATE.settings.strategy;
+  
+  // Store original signal info for display
+  signal.originalType = signal.type;
+  signal.strategyApplied = strategy;
+  
+  if (signal.type === 'wait') return signal;
+  
+  // Conservative strategy: requires confidence >= 7
+  if (strategy === 'conservative') {
+    if (signal.confidence < 7) {
+      signal.type = 'wait';
+      signal.reasons = ['استراتژی محافظه‌کارانه: قدرت سیگنال ' + signal.confidence + '/10 (نیاز به حداقل 7)'];
+      signal.strategyBlocked = true;
+    }
+  }
+  
+  // Trend following strategy: requires ADX >= 25
+  if (strategy === 'trend_following') {
+    var adxValue = signal.adx ? signal.adx.adx : 0;
+    if (adxValue < 25) {
+      signal.type = 'wait';
+      signal.reasons = ['استراتژی روند: قدرت روند ' + adxValue.toFixed(0) + ' (نیاز به حداقل 25)'];
+      signal.strategyBlocked = true;
+    }
+  }
+  
+  return signal;
+}
+
+// ==================== Position Management ====================
+function enterPosition(symbol) {
+  var signal = STATE.signals[symbol];
+  var price = STATE.prices[symbol] ? STATE.prices[symbol].price : 0;
+  
+  if (!signal || signal.type === 'wait' || !price) {
+    showToast('سیگنال معتبر نیست', 'error');
+    return;
+  }
+  
+  // استفاده از اهرم دستی اگر تنظیم شده، در غیر این صورت اهرم محاسبه‌شده
+  var useLeverage = STATE.settings.leverage === 'auto' ? 
+    signal.leverage : 
+    parseInt(STATE.settings.leverage);
+  
+  STATE.positions[symbol] = {
+    type: signal.type, entry: price,
+    size: STATE.settings.capital * STATE.settings.riskPercent / 100,
+    leverage: useLeverage, sl: signal.sl, tp1: signal.tp1, tp2: signal.tp2,
+    openTime: Date.now()
+  };
+  
+  // Reset notification state for this position
+  NOTIFICATION_STATE[symbol + '_tp1'] = false;
+  NOTIFICATION_STATE[symbol + '_tp2'] = false;
+  NOTIFICATION_STATE[symbol + '_sl'] = false;
+  NOTIFICATION_STATE[symbol + '_tp1_approaching'] = false;
+  NOTIFICATION_STATE[symbol + '_sl_approaching'] = false;
+  
+  saveSettings();
+  renderAssetPanel(symbol);
+  showToast('پوزیشن ' + signal.type.toUpperCase() + ' با اهرم ' + useLeverage + 'x باز شد', 'success');
+}
+
+function closePosition(symbol) {
+  if (STATE.positions[symbol]) {
+    var pos = STATE.positions[symbol];
+    var price = STATE.prices[symbol] ? STATE.prices[symbol].price : pos.entry;
+    var pnl = calculatePnL(pos, price);
+    delete STATE.positions[symbol];
+    
+    // Clear notification state for this symbol
+    delete NOTIFICATION_STATE[symbol + '_tp1'];
+    delete NOTIFICATION_STATE[symbol + '_tp2'];
+    delete NOTIFICATION_STATE[symbol + '_sl'];
+    delete NOTIFICATION_STATE[symbol + '_tp1_approaching'];
+    delete NOTIFICATION_STATE[symbol + '_sl_approaching'];
+    
+    saveSettings();
+    renderAssetPanel(symbol);
+    showToast((pnl >= 0 ? 'سود: +' : 'ضرر: ') + pnl.toFixed(2) + '%', pnl >= 0 ? 'success' : 'error');
+  }
+}
+
+function calculatePnL(position, currentPrice) {
+  if (!position || !currentPrice) return 0;
+  var diff = currentPrice - position.entry;
+  if (position.type === 'short') diff = -diff;
+  return (diff / position.entry) * 100 * position.leverage;
+}
+
+// ==================== Notifications ====================
+var NOTIFICATION_STATE = {}; // Track last notification sent for each symbol/type
+
+function checkPositionNotifications(symbol) {
+  if (!STATE.settings.notificationEnabled) return;
+  
+  var position = STATE.positions[symbol];
+  if (!position) return;
+  
+  var price = STATE.prices[symbol];
+  if (!price || !price.price) return;
+  
+  var currentPrice = price.price;
+  var entry = position.entry;
+  var sl = position.sl;
+  var tp1 = position.tp1;
+  var tp2 = position.tp2;
+  
+  if (position.type === 'long') {
+    // Check TP hit
+    if (currentPrice >= tp1 && !NOTIFICATION_STATE[symbol + '_tp1']) {
+      sendPositionNotification(symbol, 'tp_hit', tp1);
+      NOTIFICATION_STATE[symbol + '_tp1'] = true;
+    }
+    if (currentPrice >= tp2 && !NOTIFICATION_STATE[symbol + '_tp2']) {
+      sendPositionNotification(symbol, 'tp_hit', tp2);
+      NOTIFICATION_STATE[symbol + '_tp2'] = true;
+    }
+    
+    // Check SL hit
+    if (currentPrice <= sl && !NOTIFICATION_STATE[symbol + '_sl']) {
+      sendPositionNotification(symbol, 'sl_hit', sl);
+      NOTIFICATION_STATE[symbol + '_sl'] = true;
+    }
+    
+    // Check approaching TP (50% distance)
+    var tp1Distance = tp1 - entry;
+    var tp1Halfway = entry + tp1Distance * 0.5;
+    if (currentPrice >= tp1Halfway && !NOTIFICATION_STATE[symbol + '_tp1_approaching']) {
+      sendPositionNotification(symbol, 'tp_approaching', tp1);
+      NOTIFICATION_STATE[symbol + '_tp1_approaching'] = true;
+    }
+    
+    // Check approaching SL (50% distance)
+    var slDistance = entry - sl;
+    var slHalfway = entry - slDistance * 0.5;
+    if (currentPrice <= slHalfway && !NOTIFICATION_STATE[symbol + '_sl_approaching']) {
+      sendPositionNotification(symbol, 'sl_approaching', sl);
+      NOTIFICATION_STATE[symbol + '_sl_approaching'] = true;
+    }
+  } else {
+    // SHORT position
+    // Check TP hit
+    if (currentPrice <= tp1 && !NOTIFICATION_STATE[symbol + '_tp1']) {
+      sendPositionNotification(symbol, 'tp_hit', tp1);
+      NOTIFICATION_STATE[symbol + '_tp1'] = true;
+    }
+    if (currentPrice <= tp2 && !NOTIFICATION_STATE[symbol + '_tp2']) {
+      sendPositionNotification(symbol, 'tp_hit', tp2);
+      NOTIFICATION_STATE[symbol + '_tp2'] = true;
+    }
+    
+    // Check SL hit
+    if (currentPrice >= sl && !NOTIFICATION_STATE[symbol + '_sl']) {
+      sendPositionNotification(symbol, 'sl_hit', sl);
+      NOTIFICATION_STATE[symbol + '_sl'] = true;
+    }
+    
+    // Check approaching TP (50% distance)
+    var tp1Distance = entry - tp1;
+    var tp1Halfway = entry - tp1Distance * 0.5;
+    if (currentPrice <= tp1Halfway && !NOTIFICATION_STATE[symbol + '_tp1_approaching']) {
+      sendPositionNotification(symbol, 'tp_approaching', tp1);
+      NOTIFICATION_STATE[symbol + '_tp1_approaching'] = true;
+    }
+    
+    // Check approaching SL (50% distance)
+    var slDistance = sl - entry;
+    var slHalfway = entry + slDistance * 0.5;
+    if (currentPrice >= slHalfway && !NOTIFICATION_STATE[symbol + '_sl_approaching']) {
+      sendPositionNotification(symbol, 'sl_approaching', sl);
+      NOTIFICATION_STATE[symbol + '_sl_approaching'] = true;
+    }
+  }
+}
+
+function sendPositionNotification(symbol, type, targetPrice) {
+  if (!('Notification' in window)) return;
+  
+  var requestPermission = function() {
+    if (Notification.permission === 'granted') {
+      showPositionNotification(symbol, type, targetPrice);
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission().then(function(permission) {
+        if (permission === 'granted') {
+          showPositionNotification(symbol, type, targetPrice);
+        }
+      });
+    }
+  };
+  
+  requestPermission();
+}
+
+function showPositionNotification(symbol, type, targetPrice) {
+  var info = ASSET_INFO[symbol] || { name: symbol.replace('USDT', ''), symbol: symbol.replace('USDT', '') };
+  var title = '';
+  var body = '';
+  
+  switch(type) {
+    case 'tp_approaching':
+      title = '🔔 signight: ' + info.name + ' در حال نزدیک شدن به تارگت سود شماست.';
+      body = 'قیمت فعلی: ' + formatPrice(STATE.prices[symbol].price) + '\nتارگت: ' + formatPrice(targetPrice);
+      break;
+    case 'sl_approaching':
+      title = 'signight: ' + info.name + ' به حد ضرر (Stop Loss) شما نزدیک شده است!';
+      body = 'قیمت فعلی: ' + formatPrice(STATE.prices[symbol].price) + '\nحد ضرر: ' + formatPrice(targetPrice);
+      break;
+    case 'tp_hit':
+      title = 'signight: پوزیشن ' + info.name + ' با موفقیت به حد سود رسید.';
+      body = 'قیمت: ' + formatPrice(targetPrice);
+      break;
+    case 'sl_hit':
+      title = '🛑 signight: پوزیشن ' + info.name + ' با اصابت به حد ضرر بسته شد.';
+      body = 'قیمت: ' + formatPrice(targetPrice);
+      break;
+  }
+  
+  new Notification(title, {
+    body: body,
+    icon: '/icons/icon-192.png',
+    badge: '/icons/icon-72.png',
+    vibrate: [200, 100, 200],
+    tag: symbol + '_' + type // Prevent duplicate notifications
+  });
+}
+
+// ==================== Helpers ====================
+function formatPrice(price) {
+  if (!price || !isFinite(price)) return '--';
+  if (price >= 1000) return price.toLocaleString('en-US', { maximumFractionDigits: 2 });
+  if (price >= 1) return price.toFixed(4);
+  return price.toFixed(8);
+}
+
+function updatePriceDisplay(symbol) {
+  // Price is updated in renderAssetPanel
+}
+
+function updateLastUpdateTime() {
+  var el = document.getElementById('lastUpdate');
+  if (!el) return;
+  
+  var now = new Date();
+  var timeStr = now.toLocaleTimeString('fa-IR');
+  
+  // Detect current price source for active asset
+  var sourceLabel = '';
+  var active = STATE.activeAsset;
+  if (active && STATE.prices[active]) {
+    var src = STATE.prices[active].source || '';
+    if (src === 'binance_ws') {
+      sourceLabel = 'Binance (Realtime)';
+    } else if (src === 'binance') {
+      sourceLabel = 'Binance (REST)';
+    } else if (src === 'coinmarketcap') {
+      sourceLabel = 'CoinMarketCap';
+    } else if (src === 'coingecko') {
+      sourceLabel = 'CoinGecko';
+    } else if (src) {
+      sourceLabel = src;
+    }
+    }
+    
+  // Fallback: show available APIs summary if no active price source
+  if (!sourceLabel) {
+    sourceLabel = getAPIStatusText() || 'منبع نامشخص';
+  }
+  
+  el.textContent = timeStr + ' • ' + sourceLabel;
+}
+
+// Get current API status for display
+function getAPIStatusText() {
+  var sources = [];
+  if (API_STATUS.binance.available) sources.push('Binance');
+  if (API_STATUS.coingecko.available) sources.push('CoinGecko');
+  if (API_STATUS.cryptocompare.available) sources.push('CryptoCompare');
+  return sources.join(', ');
+}
+
+function getRsiClass(rsi) {
+  if (!rsi) return 'neutral';
+  if (rsi <= 30) return 'bullish';
+  if (rsi >= 70) return 'bearish';
+  return 'neutral';
+}
+
+function getTrendClass(trend) {
+  if (trend === 'up' || trend === 'strong_up') return 'bullish';
+  if (trend === 'down' || trend === 'strong_down') return 'bearish';
+  return 'neutral';
+}
+
+function getTrendLabel(trend) {
+  if (trend === 'up' || trend === 'strong_up') return 'صعودی';
+  if (trend === 'down' || trend === 'strong_down') return 'نزولی';
+  return 'خنثی';
+}
+
+// New helper functions for futures indicators
+function getStochRSIClass(stochRSI) {
+  if (!stochRSI) return 'neutral';
+  if (stochRSI.signal === 'oversold' || stochRSI.signal === 'bullish_cross') return 'bullish';
+  if (stochRSI.signal === 'overbought' || stochRSI.signal === 'bearish_cross') return 'bearish';
+  return 'neutral';
+}
+
+function getStructureClass(structure) {
+  if (!structure) return 'neutral';
+  if (structure.structure === 'uptrend' || structure.structure === 'bos_bullish') return 'bullish';
+  if (structure.structure === 'downtrend' || structure.structure === 'bos_bearish') return 'bearish';
+  return 'neutral';
+}
+
+function getStructureLabel(structure) {
+  if (!structure) return '--';
+  switch(structure.structure) {
+    case 'uptrend': return 'صعودی ↗';
+    case 'downtrend': return 'نزولی ↘';
+    case 'bos_bullish': return 'شکست صعودی';
+    case 'bos_bearish': return 'شکست نزولی';
+    case 'consolidation': return 'تثبیت';
+    default: return 'نامشخص';
+  }
+}
+
+function getStrategyName(strategy) {
+  switch(strategy) {
+    case 'conservative': return 'محافظه‌کارانه';
+    case 'trend_following': return 'پیروی از روند';
+    default: return 'پیش‌فرض';
+  }
+}
+
+function getEffectiveLeverage(signalLeverage) {
+  if (STATE.settings.leverage === 'auto') {
+    return (signalLeverage || 3) + 'x';
+  } else {
+    return STATE.settings.leverage + 'x (دستی)';
+  }
+}
+
+function showToast(message, type) {
+  var toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast show' + (type === 'error' ? ' error' : '');
+  setTimeout(function() { toast.classList.remove('show'); }, 3000);
+}
+
+// ==================== View Tab Functions ====================
+var currentView = 'signal';
+var chartTF = '1h';
+
+function initViewTabs() {
+  document.querySelectorAll('.view-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      var view = this.dataset.view;
+      switchView(view);
+    });
+  });
+  
+  // Chart timeframe buttons
+  document.querySelectorAll('.tf-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tf-btn').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      chartTF = this.dataset.tf;
+      updateChart();
+    });
+  });
+}
+
+function switchView(view) {
+  currentView = view;
+  
+  // Update tabs
+  document.querySelectorAll('.view-tab').forEach(function(t) {
+    t.classList.toggle('active', t.dataset.view === view);
+  });
+  
+  // Update content
+  document.querySelectorAll('.view-content').forEach(function(c) {
+    c.classList.remove('active');
+  });
+  var viewId = view === 'monteCarlo' ? 'viewMonteCarlo' : 'view' + capitalizeFirst(view);
+  document.getElementById(viewId).classList.add('active');
+  
+  // Initialize view
+  if (view === 'chart') {
+    initChart();
+  } else if (view === 'monteCarlo') {
+    // Monte Carlo view ready
+    resetMonteCarloView();
+  } else if (view === 'scanner') {
+    // Always re-render when switching to this tab to ensure DOM is in sync
+    // Don't clear tracking - let renderScannerResults handle it properly
+    renderScannerResults();
+  }
+}
+
+function capitalizeFirst(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// ==================== Chart Functions ====================
+var chartInitialized = false;
+
+function initChart() {
+  if (!chartInitialized) {
+    if (Chart.init('priceChart')) {
+      chartInitialized = true;
+    }
+  }
+  updateChart();
+}
+
+function updateChart() {
+  var symbol = STATE.activeAsset;
+  var klines = STATE.klines[symbol] ? STATE.klines[symbol][chartTF] : null;
+  
+  if (!klines || klines.length === 0) {
+    console.log('No klines for chart');
+    return;
+  }
+  
+  // Update title
+  var info = ASSET_INFO[symbol] || { name: symbol };
+  document.getElementById('chartTitle').textContent = info.name + ' - ' + chartTF.toUpperCase();
+  
+  // Calculate indicators
+  Chart.calculateIndicators(klines);
+  
+  // Set data and render
+  Chart.setData(klines, {
+    ema21: Chart.getViewState ? [] : [],
+    ema50: [],
+    signals: []
+  });
+}
+
+function toggleChartIndicator(indicator) {
+  Chart.toggleIndicator(indicator);
+  
+  // Update button state
+  var btnId = 'btn' + indicator.toUpperCase();
+  if (indicator === 'ema') btnId = 'btnEMA';
+  if (indicator === 'bb') btnId = 'btnBB';
+  if (indicator === 'volume') btnId = 'btnVolume';
+  
+  var btn = document.getElementById(btnId);
+  if (btn) btn.classList.toggle('active');
+}
+
+function resetChartView() {
+  Chart.resetView();
+}
+
+// ==================== Monte Carlo Functions ====================
+function resetMonteCarloView() {
+  var placeholder = document.getElementById('monteCarloPlaceholder');
+  var progress = document.getElementById('monteCarloProgress');
+  var results = document.getElementById('monteCarloResults');
+  var btn = document.getElementById('runMonteCarloBtn');
+  
+  if (placeholder) placeholder.style.display = 'block';
+  if (progress) progress.style.display = 'none';
+  if (results) results.style.display = 'none';
+  if (btn) btn.disabled = false;
+}
+
+function runMonteCarloTest() {
+  var symbol = STATE.activeAsset;
+  var errorBox = document.getElementById('monteCarloError');
+  if (errorBox) {
+    errorBox.style.display = 'none';
+    errorBox.textContent = '';
+  }
+  
+  if (!symbol) {
+    showToast('لطفا ابتدا یک نماد انتخاب کنید', 'error');
+    return;
+  }
+  
+  // Combine multiple timeframes for better testing
+  var klines1h = STATE.klines[symbol] ? STATE.klines[symbol]['1h'] : null;
+  var klines4h = STATE.klines[symbol] ? STATE.klines[symbol]['4h'] : null;
+  var klines1d = STATE.klines[symbol] ? STATE.klines[symbol]['1d'] : null;
+  
+  // Use 1h as primary, but get context from higher timeframes
+  var klines = klines1h;
+  var minCandles = 150;
+  
+  // Try different timeframes if 1h doesn't have enough data
+  if (!klines || klines.length < minCandles) {
+    if (klines4h && klines4h.length >= minCandles) {
+      klines = klines4h;
+      showToast('استفاده از تایم‌فریم 4 ساعته به دلیل کمبود داده', 'info');
+    } else if (klines1d && klines1d.length >= 100) {
+      klines = klines1d;
+      minCandles = 100;
+      showToast('استفاده از تایم‌فریم روزانه', 'info');
+    }
+  }
+  
+  if (!klines || klines.length < minCandles) {
+    var availableCount = klines ? klines.length : 0;
+    showToast('داده کافی نیست. حداقل ' + minCandles + ' کندل لازم است. (فعلی: ' + availableCount + '). لطفا چند ثانیه صبر کنید و دوباره تست کنید.', 'error');
+    return;
+  }
+
+  // Get current signal context
+  var currentSignal = STATE.signals[symbol];
+  var signalType = currentSignal ? currentSignal.type : 'both';
+
+  // Read Monte Carlo settings from UI
+  var simulationsSelect = document.getElementById('monteSimulations');
+  var confidenceSelect = document.getElementById('monteConfidence');
+  var scenarioSelect = document.getElementById('monteScenario');
+
+  var simulations = simulationsSelect ? parseInt(simulationsSelect.value, 10) : 1000;
+  var confidenceLevel = confidenceSelect ? parseInt(confidenceSelect.value, 10) : 95;
+  var scenario = scenarioSelect ? scenarioSelect.value : 'normal';
+
+  // Basic validation for simulations count
+  if (!simulations || simulations < 200 || simulations > 5000) {
+    var msg = 'تعداد شبیه‌سازی باید بین ۲۰۰ تا ۵۰۰۰ باشد.';
+    if (errorBox) {
+      errorBox.textContent = msg;
+      errorBox.style.display = 'block';
+    }
+    showToast(msg, 'error');
+    if (simulationsSelect) simulationsSelect.focus();
+    return;
+  }
+  
+  // Show progress
+  var placeholder = document.getElementById('monteCarloPlaceholder');
+  var progress = document.getElementById('monteCarloProgress');
+  var results = document.getElementById('monteCarloResults');
+  var progressText = document.getElementById('monteCarloProgressText');
+  var progressBar = document.getElementById('monteCarloProgressBar');
+  var statusText = document.getElementById('monteCarloStatusText');
+  var btn = document.getElementById('runMonteCarloBtn');
+  
+  if (placeholder) placeholder.style.display = 'none';
+  if (progress) progress.style.display = 'block';
+  if (results) results.style.display = 'none';
+  if (btn) btn.disabled = true;
+  
+  if (progressText) progressText.textContent = 'در حال اجرای تست Walk-Forward...';
+  if (progressBar) progressBar.style.width = '20%';
+  if (statusText) statusText.textContent = 'تعداد کندل: ' + klines.length;
+  
+  showToast('در حال اجرای تست‌ها با ' + klines.length + ' کندل...');
+  
+  // Run tests asynchronously
+  setTimeout(function() {
+    try {
+      // Step 1: Walk-Forward
+      if (statusText) statusText.textContent = 'اجرای Walk-Forward...';
+      if (progressBar) progressBar.style.width = '30%';
+      
+      var settings = {
+        capital: STATE.settings.capital,
+        riskPercent: 2,
+        strategy: STATE.settings.strategy || 'default',
+        leverage: STATE.settings.leverage === 'auto' ? 5 : parseInt(STATE.settings.leverage) || 5,
+        simulations: simulations,
+        confidenceLevel: confidenceLevel,
+        scenario: scenario,
+        signalFilter: signalType, // Pass signal context
+        // More aggressive period settings for more test periods
+        trainPercent: 40,
+        testPercent: 12,
+        minPeriods: 5,
+        maxPeriods: 40
+      };
+      
+      var fullResults = MonteCarlo.runFullTest(klines, settings);
+      
+      if (fullResults.error) {
+        showToast(fullResults.error, 'error');
+        resetMonteCarloView();
+        return;
+      }
+      
+      // Add symbol and signal context to results
+      fullResults.symbol = symbol;
+      fullResults.signalContext = signalType;
+      fullResults.dataPoints = klines.length;
+      
+      // Step 2: Update progress for Monte Carlo
+      if (progressText) progressText.textContent = 'در حال اجرای تست Monte Carlo...';
+      if (progressBar) progressBar.style.width = '70%';
+      if (statusText) statusText.textContent = fullResults.walkForward.stats.numPeriods + ' دوره تست یافت شد';
+      
+      setTimeout(function() {
+        if (progressBar) progressBar.style.width = '100%';
+        if (statusText) statusText.textContent = 'در حال آماده‌سازی نتایج...';
+        
+        setTimeout(function() {
+          displayMonteCarloResults(fullResults);
+          
+          if (progress) progress.style.display = 'none';
+          if (results) results.style.display = 'block';
+          if (btn) btn.disabled = false;
+          
+          showToast('تست‌ها با موفقیت انجام شد (' + fullResults.walkForward.stats.numPeriods + ' دوره)', 'success');
+        }, 200);
+      }, 100);
+      
+    } catch (error) {
+      console.error('Monte Carlo test error:', error);
+      showToast('خطا در اجرای تست: ' + error.message, 'error');
+      resetMonteCarloView();
+    }
+  }, 100);
+}
+
+function displayMonteCarloResults(results) {
+  var walkForward = results.walkForward;
+  var monteCarlo = results.monteCarlo;
+  var kFold = results.kFold;
+  
+  if (!walkForward || !monteCarlo) {
+    showToast('نتایج ناقص است', 'error');
+    return;
+  }
+  
+  var wfStats = walkForward.stats;
+  var mcStats = monteCarlo;
+  
+  // Use the calculated verdict from results if available
+  var verdict = results.overallVerdict || 'moderate';
+  var robustnessScore = results.robustnessScore || 50;
+  
+  var verdictConfig = {
+    'excellent': { icon: ICONS.excellent, text: 'عالی - قابل اعتماد', color: '#10b981', bg: 'rgba(16,185,129,0.15)' },
+    'good': { icon: ICONS.good, text: 'خوب - قابل استفاده', color: '#3b82f6', bg: 'rgba(59,130,246,0.15)' },
+    'moderate': { icon: ICONS.moderate, text: 'متوسط - با احتیاط', color: '#f59e0b', bg: 'rgba(245,158,11,0.15)' },
+    'risky': { icon: ICONS.risky, text: 'پرریسک - توصیه نمیشه', color: '#f97316', bg: 'rgba(249,115,22,0.15)' },
+    'avoid': { icon: ICONS.avoid, text: 'ضعیف - استفاده نکن', color: '#ef4444', bg: 'rgba(239,68,68,0.15)' }
+  };
+  
+  var v = verdictConfig[verdict];
+  
+  // Verdict box with robustness score
+  var verdictHtml = '<div class="verdict-box" style="background:' + v.bg + ';border:2px solid ' + v.color + ';border-radius:12px;padding:14px 18px;margin-bottom:20px;width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-sizing:border-box;">' +
+    '<div style="display:flex;align-items:center;gap:10px;">' +
+      '<span style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:' + v.color + ';">' + v.icon + '</span>' +
+      '<span style="font-size:17px;font-weight:bold;color:' + v.color + ';">' + v.text + '</span>' +
+    '</div>' +
+    '<div style="display:flex;align-items:center;gap:20px;font-size:13px;color:var(--text1);">' +
+      '<span style="display:flex;align-items:center;gap:4px;"><span style="width:16px;height:16px;display:flex;align-items:center;justify-content:center;opacity:0.7;">' + ICONS.target + '</span> <strong>امتیاز استحکام: ' + robustnessScore.toFixed(0) + '/100</strong></span>' +
+      '<span style="display:flex;align-items:center;gap:4px;"><span style="width:16px;height:16px;display:flex;align-items:center;justify-content:center;opacity:0.7;">' + ICONS.barChart + '</span> <strong>' + wfStats.numPeriods + ' دوره تست</strong></span>' +
+    '</div>' +
+  '</div>';
+  
+  document.getElementById('monteCarloVerdict').innerHTML = verdictHtml;
+  
+  // Create stat card function
+  var createStatCard = function(value, label, icon, color, subtitle) {
+    return '<div class="stat-card" style="background:var(--bg2);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:18px;text-align:center;transition:all 0.2s;">' +
+      '<div style="font-size:14px;margin-bottom:8px;color:var(--text2);display:flex;align-items:center;justify-content:center;gap:6px;">' +
+        '<span style="width:18px;height:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' + icon + '</span>' +
+        '<span>' + label + '</span>' +
+      '</div>' +
+      '<div style="font-size:26px;font-weight:bold;color:' + color + ';margin-bottom:4px;">' + value + '</div>' +
+      (subtitle ? '<div style="font-size:11px;color:var(--text3);">' + subtitle + '</div>' : '') +
+    '</div>';
+  };
+  
+  // Walk-Forward stats cards - Enhanced
+  var wfCards = [
+    {
+      value: wfStats.avgWinRate.toFixed(1) + '%',
+      label: 'میانگین Win Rate',
+      icon: ICONS.checkCircle,
+      color: wfStats.avgWinRate >= 50 ? '#10b981' : '#ef4444',
+      subtitle: wfStats.avgWinRate >= 50 ? 'عملکرد خوب' : 'نیاز به بهبود'
+    },
+    {
+      value: wfStats.avgProfitFactor.toFixed(2),
+      label: 'میانگین Profit Factor',
+      icon: ICONS.coins,
+      color: wfStats.avgProfitFactor >= 1.5 ? '#10b981' : wfStats.avgProfitFactor >= 1 ? '#f59e0b' : '#ef4444',
+      subtitle: wfStats.avgProfitFactor >= 1.5 ? 'عالی' : 'متوسط'
+    },
+    {
+      value: (wfStats.avgReturn >= 0 ? '+' : '') + wfStats.avgReturn.toFixed(1) + '%',
+      label: 'میانگین Return',
+      icon: ICONS.trendingUp,
+      color: wfStats.avgReturn >= 0 ? '#10b981' : '#ef4444',
+      subtitle: wfStats.avgReturn >= 0 ? 'سودده' : 'ضررده'
+    },
+    {
+      value: wfStats.numPeriods,
+      label: 'تعداد دوره‌ها',
+      icon: ICONS.barChart,
+      color: '#3b82f6',
+      subtitle: 'دوره‌های تست'
+    },
+    {
+      value: wfStats.avgMaxDrawdown ? wfStats.avgMaxDrawdown.toFixed(1) + '%' : 'N/A',
+      label: 'میانگین Max Drawdown',
+      icon: ICONS.alertTriangle,
+      color: wfStats.avgMaxDrawdown && wfStats.avgMaxDrawdown < 15 ? '#10b981' : '#ef4444',
+      subtitle: wfStats.avgMaxDrawdown && wfStats.avgMaxDrawdown < 15 ? 'قابل قبول' : 'بالا'
+    },
+    {
+      value: wfStats.consistencyScore ? wfStats.consistencyScore.toFixed(0) + '%' : 'N/A',
+      label: 'ثبات عملکرد',
+      icon: ICONS.target,
+      color: wfStats.consistencyScore >= 60 ? '#10b981' : wfStats.consistencyScore >= 40 ? '#f59e0b' : '#ef4444',
+      subtitle: wfStats.profitablePeriods + '/' + wfStats.numPeriods + ' سودده'
+    }
+  ];
+  
+  var wfCardsHtml = wfCards.map(function(card) {
+    return createStatCard(card.value, card.label, card.icon, card.color, card.subtitle);
+  }).join('');
+  
+  document.getElementById('walkForwardStats').innerHTML = wfCardsHtml;
+  
+  // Monte Carlo stats cards - Enhanced
+  var mcCards = [
+    {
+      value: mcStats.probabilityOfProfit.toFixed(1) + '%',
+      label: 'احتمال سود',
+      icon: ICONS.target,
+      color: mcStats.probabilityOfProfit >= 60 ? '#10b981' : mcStats.probabilityOfProfit >= 50 ? '#f59e0b' : '#ef4444',
+      subtitle: mcStats.probabilityOfProfit >= 60 ? 'احتمال بالا' : 'متوسط'
+    },
+    {
+      value: (mcStats.medianReturn >= 0 ? '+' : '') + mcStats.medianReturn.toFixed(1) + '%',
+      label: 'سناریوی متوسط',
+      icon: ICONS.barChart,
+      color: mcStats.medianReturn >= 0 ? '#10b981' : '#ef4444',
+      subtitle: 'Median (P50)'
+    },
+    {
+      value: (mcStats.bestCase >= 0 ? '+' : '') + mcStats.bestCase.toFixed(1) + '%',
+      label: 'بهترین حالت',
+      icon: ICONS.trendingUp,
+      color: '#10b981',
+      subtitle: '95th Percentile'
+    },
+    {
+      value: (mcStats.worstCase >= 0 ? '+' : '') + mcStats.worstCase.toFixed(1) + '%',
+      label: 'بدترین حالت',
+      icon: ICONS.alertTriangle,
+      color: '#ef4444',
+      subtitle: '5th Percentile'
+    }
+  ];
+  
+  var mcCardsHtml = mcCards.map(function(card) {
+    return createStatCard(card.value, card.label, card.icon, card.color, card.subtitle);
+  }).join('');
+  
+  document.getElementById('monteCarloStats').innerHTML = mcCardsHtml;
+  
+  // Additional Risk Metrics Section
+  var riskMetricsHtml = '<h4 style="margin:24px 0 16px;color:var(--text1);font-size:18px;display:flex;align-items:center;gap:8px;">' +
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">' +
+    '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>' +
+    '</svg>' +
+    'معیارهای ریسک' +
+  '</h4>';
+  
+  var riskCards = [
+    {
+      value: mcStats.drawdownStats ? mcStats.drawdownStats.median.toFixed(1) + '%' : 'N/A',
+      label: 'Median Drawdown',
+      icon: ICONS.alertTriangle,
+      color: '#f59e0b',
+      subtitle: 'کاهش سرمایه معمول'
+    },
+    {
+      value: mcStats.expectedShortfall ? mcStats.expectedShortfall.toFixed(1) + '%' : 'N/A',
+      label: 'Expected Shortfall',
+      icon: ICONS.alertTriangle,
+      color: '#ef4444',
+      subtitle: 'CVaR (5%)'
+    },
+    {
+      value: mcStats.riskOfRuin !== undefined ? mcStats.riskOfRuin.toFixed(1) + '%' : 'N/A',
+      label: 'ریسک ورشکستگی',
+      icon: ICONS.x,
+      color: mcStats.riskOfRuin < 5 ? '#10b981' : '#ef4444',
+      subtitle: 'احتمال ضرر >50%'
+    },
+    {
+      value: mcStats.probReturn10Plus ? mcStats.probReturn10Plus.toFixed(1) + '%' : 'N/A',
+      label: 'احتمال سود +10%',
+      icon: ICONS.trendingUp,
+      color: mcStats.probReturn10Plus >= 50 ? '#10b981' : '#f59e0b',
+      subtitle: 'سود قابل توجه'
+    }
+  ];
+  
+  var riskCardsHtml = riskCards.map(function(card) {
+    return createStatCard(card.value, card.label, card.icon, card.color, card.subtitle);
+  }).join('');
+  
+  riskMetricsHtml += '<div class="stats-grid">' + riskCardsHtml + '</div>';
+  
+  // Add Risk Metrics after Monte Carlo Stats
+  var mcStatsContainer = document.getElementById('monteCarloStats');
+  if (mcStatsContainer && mcStatsContainer.parentNode) {
+    // پاک کردن نسخه‌های قبلی (اگر چند بار Monte Carlo اجرا شود)
+    var oldRisk = document.getElementById('monteCarloRiskMetrics');
+    if (oldRisk && oldRisk.parentNode) {
+      oldRisk.parentNode.removeChild(oldRisk);
+    }
+
+    var riskDiv = document.createElement('div');
+    riskDiv.id = 'monteCarloRiskMetrics';
+    riskDiv.innerHTML = riskMetricsHtml;
+    mcStatsContainer.parentNode.insertBefore(riskDiv, mcStatsContainer.nextSibling);
+  }
+  
+  // Histogram Visualization
+  if (mcStats.histogram && mcStats.histogram.length > 0) {
+    var histogramHtml = '<h4 style="margin:24px 0 16px;color:var(--text1);font-size:18px;display:flex;align-items:center;gap:8px;">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">' +
+      '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>' +
+      '</svg>' +
+      'توزیع نتایج شبیه‌سازی' +
+    '</h4>';
+    
+    var maxCount = Math.max.apply(null, mcStats.histogram.map(function(h) { return h.count; }));
+    
+    histogramHtml += '<div class="histogram-container" style="background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px;">';
+    histogramHtml += '<div class="histogram-bars" style="display:flex;align-items:flex-end;gap:2px;height:120px;margin-bottom:8px;">';
+    
+    mcStats.histogram.forEach(function(bin) {
+      var heightPercent = maxCount > 0 ? (bin.count / maxCount) * 100 : 0;
+      var barColor = bin.binMid >= 0 ? '#10b981' : '#ef4444';
+      var opacity = bin.binMid >= 0 ? '0.8' : '0.6';
+      
+      histogramHtml += '<div style="flex:1;background:' + barColor + ';opacity:' + opacity + ';height:' + heightPercent + '%;min-height:2px;border-radius:2px 2px 0 0;transition:height 0.3s;" title="' + bin.binMid.toFixed(1) + '%: ' + bin.count + ' نتیجه"></div>';
+    });
+    
+    histogramHtml += '</div>';
+    
+    // X-axis labels
+    histogramHtml += '<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);">';
+    histogramHtml += '<span>' + mcStats.histogram[0].binStart.toFixed(0) + '%</span>';
+    histogramHtml += '<span>0%</span>';
+    histogramHtml += '<span>' + mcStats.histogram[mcStats.histogram.length - 1].binEnd.toFixed(0) + '%</span>';
+    histogramHtml += '</div>';
+    
+    histogramHtml += '</div>';
+    
+    // Insert histogram
+    if (mcStatsContainer && mcStatsContainer.parentNode) {
+      var oldHist = document.getElementById('monteCarloHistogram');
+      if (oldHist && oldHist.parentNode) {
+        oldHist.parentNode.removeChild(oldHist);
+      }
+
+      var histDiv = document.createElement('div');
+      histDiv.id = 'monteCarloHistogram';
+      histDiv.innerHTML = histogramHtml;
+      mcStatsContainer.parentNode.appendChild(histDiv);
+    }
+  }
+  
+  // Percentiles Table
+  if (mcStats.percentiles) {
+    var percentilesHtml = '<div style="background:var(--bg2);border-radius:12px;padding:16px;margin-top:16px;">';
+    percentilesHtml += '<h5 style="margin:0 0 12px;color:var(--text1);font-size:14px;">صدک‌های بازده</h5>';
+    percentilesHtml += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">';
+    
+    var percentileLabels = [
+      { key: 'p5', label: 'P5 (بدترین)' },
+      { key: 'p25', label: 'P25' },
+      { key: 'p50', label: 'P50 (میانه)' },
+      { key: 'p75', label: 'P75' },
+      { key: 'p90', label: 'P90' },
+      { key: 'p95', label: 'P95 (بهترین)' }
+    ];
+    
+    percentileLabels.forEach(function(p) {
+      var val = mcStats.percentiles[p.key];
+      var color = val >= 0 ? '#10b981' : '#ef4444';
+      percentilesHtml += '<div style="text-align:center;padding:8px;background:var(--card);border-radius:6px;">';
+      percentilesHtml += '<div style="color:var(--text2);margin-bottom:4px;">' + p.label + '</div>';
+      percentilesHtml += '<div style="color:' + color + ';font-weight:bold;">' + (val >= 0 ? '+' : '') + val.toFixed(1) + '%</div>';
+      percentilesHtml += '</div>';
+    });
+    
+    percentilesHtml += '</div></div>';
+    
+    if (mcStatsContainer && mcStatsContainer.parentNode) {
+      var oldPerc = document.getElementById('monteCarloPercentiles');
+      if (oldPerc && oldPerc.parentNode) {
+        oldPerc.parentNode.removeChild(oldPerc);
+      }
+
+      var percDiv = document.createElement('div');
+      percDiv.id = 'monteCarloPercentiles';
+      percDiv.innerHTML = percentilesHtml;
+      mcStatsContainer.parentNode.appendChild(percDiv);
+    }
+  }
+  
+  // توضیح بازه اطمینان Monte Carlo
+  if (mcStats.confidenceInterval && mcStats.confidenceInterval.level) {
+    var ci = mcStats.confidenceInterval;
+    var ciText = document.createElement('div');
+    ciText.style.cssText = 'margin-top:16px;padding:12px 16px;background:var(--bg2);border-radius:10px;font-size:13px;color:var(--text2);line-height:1.6;border:1px solid var(--border);';
+    ciText.innerHTML =
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--text1);font-weight:600;">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" style="width:18px;height:18px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+        'بازه اطمینان ' + ci.level + '%' +
+      '</div>' +
+      '<div>در ' + ci.level + '% از سناریوها، بازده کل استراتژی بین <strong style="color:' + (ci.lower >= 0 ? '#10b981' : '#ef4444') + '">' +
+      (ci.lower >= 0 ? '+' : '') + ci.lower.toFixed(1) + '%</strong> و <strong style="color:' + (ci.upper >= 0 ? '#10b981' : '#ef4444') + '">' +
+      (ci.upper >= 0 ? '+' : '') + ci.upper.toFixed(1) + '%</strong> خواهد بود.</div>';
+    
+    if (mcStatsContainer && mcStatsContainer.parentNode) {
+      var oldCI = document.getElementById('monteCarloCI');
+      if (oldCI && oldCI.parentNode) {
+        oldCI.parentNode.removeChild(oldCI);
+      }
+
+      ciText.id = 'monteCarloCI';
+      mcStatsContainer.parentNode.appendChild(ciText);
+    }
+  }
+  
+  // Period Details Collapsible
+  if (walkForward.periods && walkForward.periods.length > 0) {
+    var periodsHtml = '<details style="margin-top:20px;">';
+    periodsHtml += '<summary style="cursor:pointer;padding:12px 16px;background:var(--bg2);border-radius:10px;color:var(--text1);font-weight:600;display:flex;align-items:center;gap:8px;">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>' +
+      'جزئیات دوره‌های تست (' + walkForward.periods.length + ' دوره)' +
+    '</summary>';
+    periodsHtml += '<div style="margin-top:12px;max-height:300px;overflow-y:auto;">';
+    
+    walkForward.periods.forEach(function(period, idx) {
+      var r = period.result;
+      var returnColor = r.netReturn >= 0 ? '#10b981' : '#ef4444';
+      periodsHtml += '<div style="padding:10px 12px;background:var(--card);border-radius:8px;margin-bottom:8px;display:grid;grid-template-columns:auto 1fr repeat(3,auto);gap:12px;align-items:center;font-size:12px;">';
+      periodsHtml += '<span style="color:var(--text2);font-weight:600;">دوره ' + (idx + 1) + '</span>';
+      periodsHtml += '<span style="color:var(--text3);">معاملات: ' + r.totalTrades + '</span>';
+      periodsHtml += '<span style="color:' + (r.winRate >= 50 ? '#10b981' : '#ef4444') + ';">WR: ' + r.winRate.toFixed(0) + '%</span>';
+      periodsHtml += '<span style="color:' + (r.profitFactor >= 1 ? '#10b981' : '#ef4444') + ';">PF: ' + Math.min(r.profitFactor, 9.99).toFixed(2) + '</span>';
+      periodsHtml += '<span style="color:' + returnColor + ';font-weight:600;">' + (r.netReturn >= 0 ? '+' : '') + r.netReturn.toFixed(1) + '%</span>';
+      periodsHtml += '</div>';
+    });
+    
+    periodsHtml += '</div></details>';
+    
+    if (mcStatsContainer && mcStatsContainer.parentNode) {
+      var oldPeriods = document.getElementById('monteCarloPeriods');
+      if (oldPeriods && oldPeriods.parentNode) {
+        oldPeriods.parentNode.removeChild(oldPeriods);
+      }
+
+      var periodsDiv = document.createElement('div');
+      periodsDiv.id = 'monteCarloPeriods';
+      periodsDiv.innerHTML = periodsHtml;
+      mcStatsContainer.parentNode.appendChild(periodsDiv);
+    }
+  }
+}
+
+// ==================== Initialize ====================
+// Add tab initialization to DOMContentLoaded
+var originalInit = window.onload;
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(initViewTabs, 100);
+});
+
+// Make functions global
+window.enterPosition = enterPosition;
+window.closePosition = closePosition;
+window.refreshAnalysis = refreshAnalysis;
+window.removeFromWatchlist = removeFromWatchlist;
+window.addToWatchlist = addToWatchlist;
+window.selectAsset = selectAsset;
+window.toggleChartIndicator = toggleChartIndicator;
+window.resetChartView = resetChartView;
+window.runMonteCarloTest = runMonteCarloTest;
+window.handleAIPromptClick = handleAIPromptClick;
+window.navigateToSuggestionDetails = navigateToSuggestionDetails;
+window.startAutoSuggestions = startAutoSuggestions;
+// Window exports will be added for new suggestions system

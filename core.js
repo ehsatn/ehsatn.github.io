@@ -1,1 +1,1455 @@
-var a0_0x575222=a0_0xa972;(function(_0x55f2c1,_0x206232){var _0x31f948=a0_0xa972,_0xbe5b0d=_0x55f2c1();while(!![]){try{var _0x46cb95=-parseInt(_0x31f948(0xd9))/0x1*(-parseInt(_0x31f948(0xc1))/0x2)+-parseInt(_0x31f948(0xf8))/0x3+parseInt(_0x31f948(0xd3))/0x4*(parseInt(_0x31f948(0xdd))/0x5)+parseInt(_0x31f948(0x12a))/0x6+-parseInt(_0x31f948(0x112))/0x7*(-parseInt(_0x31f948(0xdc))/0x8)+parseInt(_0x31f948(0xe6))/0x9+-parseInt(_0x31f948(0xbd))/0xa;if(_0x46cb95===_0x206232)break;else _0xbe5b0d['push'](_0xbe5b0d['shift']());}catch(_0x58d826){_0xbe5b0d['push'](_0xbe5b0d['shift']());}}}(a0_0x3460,0x8ca00));function calcRSI(_0x47b0ed,_0xccd18c){var _0x4efd1c=a0_0xa972;if(!_0x47b0ed||_0x47b0ed[_0x4efd1c(0xe8)]<_0xccd18c+0x1)return 0x32;_0xccd18c=_0xccd18c||0xe;var _0x52dc90=0x0,_0x16e7b1=0x0;for(var _0x5bd9c4=0x1;_0x5bd9c4<=_0xccd18c;_0x5bd9c4++){var _0x1fde29=_0x47b0ed[_0x5bd9c4]-_0x47b0ed[_0x5bd9c4-0x1];if(_0x1fde29>0x0)_0x52dc90+=_0x1fde29;else _0x16e7b1-=_0x1fde29;}var _0x46765d=_0x52dc90/_0xccd18c,_0x1c6617=_0x16e7b1/_0xccd18c;for(var _0x288dfd=_0xccd18c+0x1;_0x288dfd<_0x47b0ed[_0x4efd1c(0xe8)];_0x288dfd++){var _0x1fde29=_0x47b0ed[_0x288dfd]-_0x47b0ed[_0x288dfd-0x1];_0x1fde29>0x0?(_0x46765d=(_0x46765d*(_0xccd18c-0x1)+_0x1fde29)/_0xccd18c,_0x1c6617=_0x1c6617*(_0xccd18c-0x1)/_0xccd18c):(_0x46765d=_0x46765d*(_0xccd18c-0x1)/_0xccd18c,_0x1c6617=(_0x1c6617*(_0xccd18c-0x1)-_0x1fde29)/_0xccd18c);}if(_0x1c6617===0x0)return 0x64;var _0x4c4ccb=_0x46765d/_0x1c6617;return 0x64-0x64/(0x1+_0x4c4ccb);}function calcEMA(_0x20ccd8,_0x1f289c){var _0x41991c=a0_0xa972;if(!_0x20ccd8||_0x20ccd8['length']<_0x1f289c)return _0x20ccd8?_0x20ccd8[_0x20ccd8[_0x41991c(0xe8)]-0x1]:0x0;var _0x4fa224=0x2/(_0x1f289c+0x1),_0x3acfb3=_0x20ccd8[_0x41991c(0xd1)](0x0,_0x1f289c)['reduce'](function(_0x47c7a8,_0x5f22eb){return _0x47c7a8+_0x5f22eb;},0x0)/_0x1f289c;for(var _0x17d275=_0x1f289c;_0x17d275<_0x20ccd8[_0x41991c(0xe8)];_0x17d275++){_0x3acfb3=(_0x20ccd8[_0x17d275]-_0x3acfb3)*_0x4fa224+_0x3acfb3;}return _0x3acfb3;}function calcMACD(_0x3efc1e){var _0x2ff716=a0_0xa972;if(!_0x3efc1e||_0x3efc1e[_0x2ff716(0xe8)]<0x1a)return{'line':0x0,'signal':0x0,'histogram':0x0};var _0x3e109a=0x2/0xd,_0x2ad942=0x2/0x1b,_0x2bd27d=0x2/0xa,_0x35f740=_0x3efc1e[_0x2ff716(0xd1)](0x0,0xc)[_0x2ff716(0xd2)](function(_0x35cf50,_0x44f38d){return _0x35cf50+_0x44f38d;},0x0)/0xc;for(var _0x3de2f1=0xc;_0x3de2f1<0x1a;_0x3de2f1++){_0x35f740=(_0x3efc1e[_0x3de2f1]-_0x35f740)*_0x3e109a+_0x35f740;}var _0x59ff2e=_0x3efc1e[_0x2ff716(0xd1)](0x0,0x1a)[_0x2ff716(0xd2)](function(_0x3b3432,_0x6adeac){return _0x3b3432+_0x6adeac;},0x0)/0x1a,_0x4c8405=[];for(var _0x481f40=0x1a;_0x481f40<_0x3efc1e[_0x2ff716(0xe8)];_0x481f40++){_0x35f740=(_0x3efc1e[_0x481f40]-_0x35f740)*_0x3e109a+_0x35f740,_0x59ff2e=(_0x3efc1e[_0x481f40]-_0x59ff2e)*_0x2ad942+_0x59ff2e,_0x4c8405['push'](_0x35f740-_0x59ff2e);}var _0xf85998=_0x35f740-_0x59ff2e;if(_0x4c8405[_0x2ff716(0xe8)]<0x9)return{'line':_0xf85998,'signal':0x0,'histogram':_0xf85998};var _0x197c11=_0x4c8405[_0x2ff716(0xd1)](0x0,0x9)['reduce'](function(_0x26dd89,_0x1f917b){return _0x26dd89+_0x1f917b;},0x0)/0x9;for(var _0x1c7cfb=0x9;_0x1c7cfb<_0x4c8405[_0x2ff716(0xe8)];_0x1c7cfb++){_0x197c11=(_0x4c8405[_0x1c7cfb]-_0x197c11)*_0x2bd27d+_0x197c11;}return{'line':_0xf85998,'signal':_0x197c11,'histogram':_0xf85998-_0x197c11};}function calcBB(_0x59d02f,_0x31958a,_0x1fcba1){var _0x28e9f9=a0_0xa972;if(!_0x59d02f||_0x59d02f[_0x28e9f9(0xe8)]<_0x31958a){var _0x2e9b2d=_0x59d02f?_0x59d02f[_0x59d02f[_0x28e9f9(0xe8)]-0x1]:0x0;return{'upper':_0x2e9b2d*1.02,'middle':_0x2e9b2d,'lower':_0x2e9b2d*0.98};}_0x31958a=_0x31958a||0x14,_0x1fcba1=_0x1fcba1||0x2;var _0x5c25ba=_0x59d02f[_0x28e9f9(0xd1)](-_0x31958a),_0x276a4b=_0x5c25ba['reduce'](function(_0x1725ae,_0x4e0fac){return _0x1725ae+_0x4e0fac;},0x0)/_0x31958a,_0xdb67dd=_0x5c25ba['map'](function(_0x416b90){var _0x2394f7=_0x28e9f9;return Math[_0x2394f7(0x101)](_0x416b90-_0x276a4b,0x2);}),_0x109ae8=_0xdb67dd[_0x28e9f9(0xd2)](function(_0x27fbb7,_0x4d4e2f){return _0x27fbb7+_0x4d4e2f;},0x0)/_0x31958a,_0x319773=Math['sqrt'](_0x109ae8);return{'upper':_0x276a4b+_0x319773*_0x1fcba1,'middle':_0x276a4b,'lower':_0x276a4b-_0x319773*_0x1fcba1};}function calcATR(_0x4d1fa5,_0x50b631,_0xe80717){var _0x22d0b5=a0_0xa972;if(!_0x4d1fa5||_0x4d1fa5[_0x22d0b5(0xe8)]<_0x50b631+0x1)return _0xe80717?_0xe80717*0.02:0x0;var _0x1a7c64=[];for(var _0xe783b5=0x1;_0xe783b5<_0x4d1fa5[_0x22d0b5(0xe8)];_0xe783b5++){var _0x42d3cb=_0x4d1fa5[_0xe783b5]['h']||0x0,_0x12763f=_0x4d1fa5[_0xe783b5]['l']||0x0,_0x318912=_0x4d1fa5[_0xe783b5-0x1]['c']||0x0;if(!isFinite(_0x42d3cb)||!isFinite(_0x12763f)||!isFinite(_0x318912))continue;var _0x1181a4=Math['max'](_0x42d3cb-_0x12763f,Math[_0x22d0b5(0xef)](_0x42d3cb-_0x318912),Math[_0x22d0b5(0xef)](_0x12763f-_0x318912));isFinite(_0x1181a4)&&_0x1181a4>0x0&&_0x1a7c64[_0x22d0b5(0x115)](_0x1181a4);}if(_0x1a7c64['length']<_0x50b631)return _0xe80717?_0xe80717*0.02:0x0;var _0x569484=_0x1a7c64[_0x22d0b5(0xd1)](0x0,_0x50b631)['reduce'](function(_0x7ef88f,_0x334718){return _0x7ef88f+_0x334718;},0x0)/_0x50b631;for(var _0x2714b4=_0x50b631;_0x2714b4<_0x1a7c64[_0x22d0b5(0xe8)];_0x2714b4++){_0x569484=(_0x569484*(_0x50b631-0x1)+_0x1a7c64[_0x2714b4])/_0x50b631;}return isFinite(_0x569484)?_0x569484:_0xe80717?_0xe80717*0.02:0x0;}function calcADX(_0x10b590,_0x3497b9){var _0x5c951d=a0_0xa972;if(!_0x10b590||!Array[_0x5c951d(0x11e)](_0x10b590)||_0x10b590[_0x5c951d(0xe8)]<_0x3497b9*0x2)return{'adx':0x19,'diPlus':0x0,'diMinus':0x0,'trend':_0x5c951d(0x10c)};_0x3497b9=_0x3497b9||0xe;var _0x315caa={'adx':0x19,'diPlus':0x0,'diMinus':0x0,'trend':'neutral'};try{var _0x21e901=[],_0x39dffe=[],_0x131f2b=[];for(var _0x206a72=0x1;_0x206a72<_0x10b590['length'];_0x206a72++){var _0x277d2e=_0x10b590[_0x206a72-0x1]['c']||0x0,_0x2f2b3f=_0x10b590[_0x206a72]['h']||0x0,_0x182f5c=_0x10b590[_0x206a72]['l']||0x0,_0x3ba6b3=_0x10b590[_0x206a72-0x1]['h']||_0x2f2b3f,_0x6a4475=_0x10b590[_0x206a72-0x1]['l']||_0x182f5c;if(!isFinite(_0x277d2e)||!isFinite(_0x2f2b3f)||!isFinite(_0x182f5c))continue;var _0x4366ea=Math[_0x5c951d(0xd0)](_0x2f2b3f-_0x182f5c,Math[_0x5c951d(0xef)](_0x2f2b3f-_0x277d2e),Math[_0x5c951d(0xef)](_0x182f5c-_0x277d2e));_0x21e901['push'](isFinite(_0x4366ea)&&_0x4366ea>0x0?_0x4366ea:0x0);var _0x3bd8f5=_0x2f2b3f-_0x3ba6b3,_0x6aaf18=_0x6a4475-_0x182f5c;if(_0x3bd8f5>_0x6aaf18&&_0x3bd8f5>0x0)_0x39dffe['push'](_0x3bd8f5),_0x131f2b[_0x5c951d(0x115)](0x0);else _0x6aaf18>_0x3bd8f5&&_0x6aaf18>0x0?(_0x39dffe[_0x5c951d(0x115)](0x0),_0x131f2b[_0x5c951d(0x115)](_0x6aaf18)):(_0x39dffe[_0x5c951d(0x115)](0x0),_0x131f2b[_0x5c951d(0x115)](0x0));}if(_0x21e901[_0x5c951d(0xe8)]<_0x3497b9*0x2||_0x39dffe['length']<_0x3497b9*0x2)return _0x315caa;var _0x5873b4=0x0,_0x3bae98=0x0,_0x5801da=0x0;for(var _0x3bf43f=0x0;_0x3bf43f<_0x3497b9;_0x3bf43f++){_0x5873b4+=_0x21e901[_0x3bf43f],_0x3bae98+=_0x39dffe[_0x3bf43f],_0x5801da+=_0x131f2b[_0x3bf43f];}var _0x2bb845=[];for(var _0x191193=_0x3497b9;_0x191193<_0x21e901['length'];_0x191193++){_0x5873b4=_0x5873b4-_0x5873b4/_0x3497b9+_0x21e901[_0x191193],_0x3bae98=_0x3bae98-_0x3bae98/_0x3497b9+_0x39dffe[_0x191193],_0x5801da=_0x5801da-_0x5801da/_0x3497b9+_0x131f2b[_0x191193];var _0x41e9d8=_0x5873b4>0x0?_0x3bae98/_0x5873b4*0x64:0x0,_0x4bd0e9=_0x5873b4>0x0?_0x5801da/_0x5873b4*0x64:0x0,_0x557131=_0x41e9d8+_0x4bd0e9,_0x4ca418=_0x557131>0x0?Math[_0x5c951d(0xef)](_0x41e9d8-_0x4bd0e9)/_0x557131*0x64:0x0;_0x2bb845[_0x5c951d(0x115)]({'dx':_0x4ca418,'diPlus':_0x41e9d8,'diMinus':_0x4bd0e9});}if(_0x2bb845[_0x5c951d(0xe8)]<_0x3497b9)return _0x315caa;var _0x190b72=0x0;for(var _0x351f8e=0x0;_0x351f8e<_0x3497b9;_0x351f8e++){_0x190b72+=_0x2bb845[_0x351f8e]['dx'];}_0x190b72/=_0x3497b9;for(var _0x443519=_0x3497b9;_0x443519<_0x2bb845[_0x5c951d(0xe8)];_0x443519++){_0x190b72=(_0x190b72*(_0x3497b9-0x1)+_0x2bb845[_0x443519]['dx'])/_0x3497b9;}var _0x191beb=_0x2bb845[_0x2bb845['length']-0x1];_0x315caa[_0x5c951d(0xcf)]=isFinite(_0x190b72)?Math[_0x5c951d(0x121)](_0x190b72*0xa)/0xa:0x19,_0x315caa[_0x5c951d(0xe9)]=isFinite(_0x191beb[_0x5c951d(0xe9)])?Math['round'](_0x191beb[_0x5c951d(0xe9)]*0xa)/0xa:0x0,_0x315caa[_0x5c951d(0xf4)]=isFinite(_0x191beb[_0x5c951d(0xf4)])?Math[_0x5c951d(0x121)](_0x191beb[_0x5c951d(0xf4)]*0xa)/0xa:0x0;if(_0x315caa[_0x5c951d(0xcf)]>=0x19&&_0x315caa[_0x5c951d(0xe9)]>_0x315caa['diMinus'])_0x315caa[_0x5c951d(0xbb)]=_0x5c951d(0xc3);else{if(_0x315caa[_0x5c951d(0xcf)]>=0x19&&_0x315caa[_0x5c951d(0xf4)]>_0x315caa[_0x5c951d(0xe9)])_0x315caa['trend']='strong_down';else{if(_0x315caa[_0x5c951d(0xe9)]>_0x315caa['diMinus'])_0x315caa[_0x5c951d(0xbb)]='up';else _0x315caa[_0x5c951d(0xf4)]>_0x315caa['diPlus']&&(_0x315caa[_0x5c951d(0xbb)]=_0x5c951d(0xfc));}}_0x315caa['adx']=Math[_0x5c951d(0xd0)](0x0,Math['min'](0x64,_0x315caa[_0x5c951d(0xcf)])),_0x315caa[_0x5c951d(0xe9)]=Math[_0x5c951d(0xd0)](0x0,Math['min'](0x64,_0x315caa[_0x5c951d(0xe9)])),_0x315caa[_0x5c951d(0xf4)]=Math[_0x5c951d(0xd0)](0x0,Math[_0x5c951d(0xfa)](0x64,_0x315caa[_0x5c951d(0xf4)]));}catch(_0x57ef16){console[_0x5c951d(0xf0)](_0x5c951d(0xf3),_0x57ef16[_0x5c951d(0x126)]);}return _0x315caa;}function analyzeVolume(_0x4bd1e5,_0x431f6f){var _0x38cac1=a0_0xa972;if(!_0x4bd1e5||_0x4bd1e5[_0x38cac1(0xe8)]<0x14||!_0x431f6f)return{'strength':0x0,'signal':_0x38cac1(0x10c),'avgVolume':0x0};var _0x556b35=_0x4bd1e5[_0x38cac1(0xd1)](-0x14)[_0x38cac1(0xdf)](function(_0x121338){return _0x121338['v']||0x0;}),_0x47e722=_0x556b35['reduce'](function(_0x8d69b3,_0x40922a){return _0x8d69b3+_0x40922a;},0x0)/_0x556b35['length'];if(_0x47e722===0x0)return{'strength':0x0,'signal':_0x38cac1(0x10c),'avgVolume':0x0};var _0x4da975=_0x431f6f/_0x47e722,_0x9bbc8e=0x0,_0x4b3557='neutral';if(_0x4da975>=0x2)_0x9bbc8e=0x2,_0x4b3557=_0x38cac1(0xf9);else{if(_0x4da975>=1.5)_0x9bbc8e=0x1,_0x4b3557=_0x38cac1(0x11f);else _0x4da975<0.5&&(_0x9bbc8e=-0x1,_0x4b3557=_0x38cac1(0x11d));}return{'strength':_0x9bbc8e,'signal':_0x4b3557,'avgVolume':_0x47e722,'ratio':_0x4da975};}function detectDivergence(_0x11f2dd,_0x4dd728,_0x4596f0){var _0x7c326=a0_0xa972;if(!_0x11f2dd||!Array[_0x7c326(0x11e)](_0x11f2dd)||_0x11f2dd[_0x7c326(0xe8)]<0x1e)return{'type':_0x7c326(0xcd),'strength':0x0,'hidden':![]};if(!_0x4dd728||!Array[_0x7c326(0x11e)](_0x4dd728)||_0x4dd728[_0x7c326(0xe8)]<0x1e)return{'type':'none','strength':0x0,'hidden':![]};var _0x4ac189=Math['min'](0x32,_0x11f2dd[_0x7c326(0xe8)],_0x4dd728[_0x7c326(0xe8)]),_0x52dab2=_0x11f2dd[_0x7c326(0xe8)]-_0x4ac189,_0x2726c3=_0x4dd728['length']-_0x4ac189,_0x74da44=[];for(var _0x561864=0x0;_0x561864<_0x4ac189;_0x561864++){var _0x3a4495=_0x11f2dd[_0x52dab2+_0x561864],_0x40e77d=_0x4dd728[_0x2726c3+_0x561864];_0x3a4495&&_0x3a4495['c']&&isFinite(_0x3a4495['c'])&&_0x40e77d!==undefined&&isFinite(_0x40e77d)&&_0x74da44['push']({'relativeIndex':_0x561864,'price':_0x3a4495['c'],'indicator':_0x40e77d});}if(_0x74da44[_0x7c326(0xe8)]<0x14)return{'type':_0x7c326(0xcd),'strength':0x0,'hidden':![]};var _0x1cb835=[],_0x4f0823=[];for(var _0x492871=0x2;_0x492871<_0x74da44['length']-0x2;_0x492871++){var _0x1bab94=_0x74da44[_0x492871],_0x33d1f2=_0x1bab94[_0x7c326(0x11c)]>_0x74da44[_0x492871-0x1][_0x7c326(0x11c)]&&_0x1bab94[_0x7c326(0x11c)]>_0x74da44[_0x492871-0x2][_0x7c326(0x11c)]&&_0x1bab94[_0x7c326(0x11c)]>_0x74da44[_0x492871+0x1][_0x7c326(0x11c)]&&_0x1bab94[_0x7c326(0x11c)]>_0x74da44[_0x492871+0x2][_0x7c326(0x11c)],_0x2ca616=_0x1bab94[_0x7c326(0x11c)]<_0x74da44[_0x492871-0x1][_0x7c326(0x11c)]&&_0x1bab94['price']<_0x74da44[_0x492871-0x2][_0x7c326(0x11c)]&&_0x1bab94['price']<_0x74da44[_0x492871+0x1][_0x7c326(0x11c)]&&_0x1bab94[_0x7c326(0x11c)]<_0x74da44[_0x492871+0x2][_0x7c326(0x11c)];_0x33d1f2&&_0x1cb835[_0x7c326(0x115)]({'dataIndex':_0x492871,'price':_0x1bab94[_0x7c326(0x11c)],'indicator':_0x1bab94['indicator']}),_0x2ca616&&_0x4f0823['push']({'dataIndex':_0x492871,'price':_0x1bab94[_0x7c326(0x11c)],'indicator':_0x1bab94[_0x7c326(0x128)]});}if(_0x4f0823[_0x7c326(0xe8)]>=0x2)for(var _0x6cc3fa=_0x4f0823[_0x7c326(0xe8)]-0x1;_0x6cc3fa>=0x1;_0x6cc3fa--){var _0x3c9579=_0x4f0823[_0x6cc3fa],_0x537e40=_0x4f0823[_0x6cc3fa-0x1];if(_0x3c9579[_0x7c326(0x11c)]<_0x537e40[_0x7c326(0x11c)]&&_0x3c9579[_0x7c326(0x128)]>_0x537e40[_0x7c326(0x128)]){var _0x33587a=Math[_0x7c326(0xfa)](0x3,Math['abs']((_0x3c9579[_0x7c326(0x11c)]-_0x537e40[_0x7c326(0x11c)])/_0x537e40[_0x7c326(0x11c)]*0x64)+0x1);return{'type':'bullish','strength':Math['floor'](_0x33587a),'hidden':![]};}if(_0x3c9579[_0x7c326(0x11c)]>_0x537e40['price']&&_0x3c9579[_0x7c326(0x128)]<_0x537e40[_0x7c326(0x128)])return{'type':'bullish','strength':0x1,'hidden':!![]};}if(_0x1cb835['length']>=0x2)for(var _0x33e47c=_0x1cb835['length']-0x1;_0x33e47c>=0x1;_0x33e47c--){var _0x6fc08d=_0x1cb835[_0x33e47c],_0x536609=_0x1cb835[_0x33e47c-0x1];if(_0x6fc08d[_0x7c326(0x11c)]>_0x536609['price']&&_0x6fc08d['indicator']<_0x536609[_0x7c326(0x128)]){var _0x33587a=Math[_0x7c326(0xfa)](0x3,Math[_0x7c326(0xef)]((_0x6fc08d[_0x7c326(0x11c)]-_0x536609['price'])/_0x536609[_0x7c326(0x11c)]*0x64)+0x1);return{'type':_0x7c326(0x120),'strength':Math[_0x7c326(0x11a)](_0x33587a),'hidden':![]};}if(_0x6fc08d[_0x7c326(0x11c)]<_0x536609[_0x7c326(0x11c)]&&_0x6fc08d[_0x7c326(0x128)]>_0x536609[_0x7c326(0x128)])return{'type':_0x7c326(0x120),'strength':0x1,'hidden':!![]};}return{'type':'none','strength':0x0,'hidden':![]};}function detectCandlestickPatterns(_0x5c8d5a){var _0x263523=a0_0xa972;if(!_0x5c8d5a||!Array['isArray'](_0x5c8d5a)||_0x5c8d5a[_0x263523(0xe8)]<0x3)return{'patterns':[],'bullish':0x0,'bearish':0x0};var _0x54a411=[],_0x4736a8=0x0,_0x241e13=0x0;try{var _0x516eee=Math['min'](0x3,_0x5c8d5a[_0x263523(0xe8)]);for(var _0x5164aa=_0x5c8d5a[_0x263523(0xe8)]-_0x516eee;_0x5164aa<_0x5c8d5a[_0x263523(0xe8)];_0x5164aa++){if(_0x5164aa<0x2)continue;var _0x3e4a9d=_0x5c8d5a[_0x5164aa],_0x2392ec=_0x5c8d5a[_0x5164aa-0x1],_0x4135ad=_0x5c8d5a[_0x5164aa-0x2];if(!_0x3e4a9d||!_0x2392ec||!_0x3e4a9d['o']||!_0x3e4a9d['c']||!_0x3e4a9d['h']||!_0x3e4a9d['l'])continue;if(!_0x2392ec['o']||!_0x2392ec['c']||!_0x2392ec['h']||!_0x2392ec['l'])continue;var _0x2c5c54=Math[_0x263523(0xef)](_0x3e4a9d['c']-_0x3e4a9d['o']),_0x588bfb=_0x3e4a9d['h']-_0x3e4a9d['l'],_0x3a334c=Math[_0x263523(0xef)](_0x2392ec['c']-_0x2392ec['o']),_0x1ce7d9=_0x3e4a9d['c']>=_0x3e4a9d['o'],_0x31d4a0=_0x2392ec['c']>=_0x2392ec['o'];_0x2c5c54<_0x588bfb*0.1&&_0x54a411['push']({'type':_0x263523(0x10d),'index':_0x5164aa,'bullish':null});if(_0x5164aa===_0x5c8d5a[_0x263523(0xe8)]-0x1){var _0xe0d3c8=Math[_0x263523(0xfa)](_0x3e4a9d['o'],_0x3e4a9d['c'])-_0x3e4a9d['l'],_0x23b440=_0x3e4a9d['h']-Math[_0x263523(0xd0)](_0x3e4a9d['o'],_0x3e4a9d['c']);_0xe0d3c8>_0x2c5c54*0x2&&_0x23b440<_0x2c5c54*0.3&&_0x588bfb>0x0&&(_0x54a411[_0x263523(0x115)]({'type':'hammer','index':_0x5164aa,'bullish':!![]}),_0x4736a8+=0x2),_0x23b440>_0x2c5c54*0x2&&_0xe0d3c8<_0x2c5c54*0.3&&_0x588bfb>0x0&&(_0x54a411['push']({'type':_0x263523(0x114),'index':_0x5164aa,'bullish':![]}),_0x241e13+=0x2);}_0x5164aa===_0x5c8d5a['length']-0x1&&(!_0x31d4a0&&_0x1ce7d9&&_0x3e4a9d['o']<_0x2392ec['c']&&_0x3e4a9d['c']>_0x2392ec['o']&&_0x2c5c54>_0x3a334c*1.1&&(_0x54a411[_0x263523(0x115)]({'type':_0x263523(0xcc),'index':_0x5164aa,'bullish':!![]}),_0x4736a8+=0x3),_0x31d4a0&&!_0x1ce7d9&&_0x3e4a9d['o']>_0x2392ec['c']&&_0x3e4a9d['c']<_0x2392ec['o']&&_0x2c5c54>_0x3a334c*1.1&&(_0x54a411['push']({'type':'bearish_engulfing','index':_0x5164aa,'bullish':![]}),_0x241e13+=0x3));if(_0x5164aa>=0x2&&_0x5164aa===_0x5c8d5a['length']-0x1&&_0x4135ad){var _0x5311a5=_0x4135ad,_0x364c64=_0x2392ec,_0x563312=_0x3e4a9d;if(_0x5311a5['c']&&_0x5311a5['o']&&_0x364c64['c']&&_0x364c64['o']&&_0x563312['c']&&_0x563312['o']){var _0x22d1da=_0x5311a5['c']<_0x5311a5['o'],_0x310abb=Math['abs'](_0x364c64['c']-_0x364c64['o'])<Math[_0x263523(0xef)](_0x5311a5['c']-_0x5311a5['o'])*0.5,_0xc2eae=_0x563312['c']>_0x563312['o'];_0x22d1da&&_0x310abb&&_0xc2eae&&_0x563312['c']>(_0x5311a5['o']+_0x5311a5['c'])/0x2&&(_0x54a411['push']({'type':_0x263523(0x118),'index':_0x5164aa,'bullish':!![]}),_0x4736a8+=0x3);var _0x5f524e=_0x5311a5['c']>_0x5311a5['o'],_0xd47d5f=_0x563312['c']<_0x563312['o'];_0x5f524e&&_0x310abb&&_0xd47d5f&&_0x563312['c']<(_0x5311a5['o']+_0x5311a5['c'])/0x2&&(_0x54a411[_0x263523(0x115)]({'type':_0x263523(0xc6),'index':_0x5164aa,'bullish':![]}),_0x241e13+=0x3);}}}}catch(_0x19b439){console[_0x263523(0xf0)]('[WARN]\x20Pattern\x20detection\x20error:',_0x19b439[_0x263523(0x126)]);}return{'patterns':_0x54a411,'bullish':_0x4736a8,'bearish':_0x241e13,'strongest':_0x54a411['length']>0x0?_0x54a411[_0x54a411['length']-0x1]:null};}function detectMarketRegime(_0x553a98,_0x21fb24){var _0x46b693=a0_0xa972;if(!_0x553a98||!Array['isArray'](_0x553a98)||_0x553a98[_0x46b693(0xe8)]<0x32||!_0x21fb24||!isFinite(_0x21fb24))return{'regime':_0x46b693(0x110),'strength':0x0,'volatility':_0x46b693(0xf6)};var _0x52e731={'regime':_0x46b693(0x11b),'strength':0x0,'volatility':'medium'};try{var _0x1ff0ca=calcATR(_0x553a98,0xe,_0x21fb24),_0xcdbc41=_0x1ff0ca/_0x21fb24*0x64;if(_0xcdbc41>0x3)_0x52e731[_0x46b693(0xe4)]='high';else _0xcdbc41<0x1&&(_0x52e731['volatility']=_0x46b693(0xbe));var _0x277a20=_0x553a98[_0x46b693(0xdf)](function(_0x5d2736){return _0x5d2736['c'];})[_0x46b693(0xed)](function(_0x5993a7){return typeof _0x5993a7==='number'&&isFinite(_0x5993a7)&&_0x5993a7>0x0;});if(_0x277a20['length']<0x32)return _0x52e731;var _0x5819ca=calcEMA(_0x277a20,0x14),_0x241255=calcEMA(_0x277a20,0x32),_0x4bb1dc=calcADX(_0x553a98,0xe);if(_0x4bb1dc[_0x46b693(0xcf)]>=0x19){if(_0x21fb24>_0x5819ca&&_0x5819ca>_0x241255&&_0x4bb1dc['trend'][_0x46b693(0x129)]('up'))_0x52e731['regime']=_0x46b693(0x10e),_0x52e731['strength']=_0x4bb1dc[_0x46b693(0xcf)];else _0x21fb24<_0x5819ca&&_0x5819ca<_0x241255&&_0x4bb1dc[_0x46b693(0xbb)][_0x46b693(0x129)]('down')&&(_0x52e731[_0x46b693(0xd7)]=_0x46b693(0xd4),_0x52e731[_0x46b693(0xfd)]=_0x4bb1dc['adx']);}else _0x52e731[_0x46b693(0xd7)]='ranging',_0x52e731[_0x46b693(0xfd)]=0x64-_0x4bb1dc[_0x46b693(0xcf)];}catch(_0x54c228){console[_0x46b693(0xf0)](_0x46b693(0xde),_0x54c228['message']);}return _0x52e731;}function calcFibonacci(_0x3cdb4a,_0x57f5fd){var _0x27b3bc=a0_0xa972;if(!_0x3cdb4a||_0x3cdb4a[_0x27b3bc(0xe8)]<_0x57f5fd)return null;var _0x2b4f43=_0x3cdb4a['slice'](-_0x57f5fd),_0x5a1104=-Infinity,_0x511ee8=Infinity,_0x275c12=0x0,_0x81cf50=0x0;for(var _0x48b79f=0x0;_0x48b79f<_0x2b4f43['length'];_0x48b79f++){_0x2b4f43[_0x48b79f]['h']>_0x5a1104&&(_0x5a1104=_0x2b4f43[_0x48b79f]['h'],_0x275c12=_0x48b79f),_0x2b4f43[_0x48b79f]['l']<_0x511ee8&&(_0x511ee8=_0x2b4f43[_0x48b79f]['l'],_0x81cf50=_0x48b79f);}if(_0x5a1104===_0x511ee8||!isFinite(_0x5a1104)||!isFinite(_0x511ee8))return null;var _0x6a9692=_0x5a1104-_0x511ee8,_0x276f00=_0x81cf50<_0x275c12,_0x18e107={0x0:_0x276f00?_0x5a1104:_0x511ee8,0.236:_0x276f00?_0x5a1104-_0x6a9692*0.236:_0x511ee8+_0x6a9692*0.236,0.382:_0x276f00?_0x5a1104-_0x6a9692*0.382:_0x511ee8+_0x6a9692*0.382,0.5:_0x276f00?_0x5a1104-_0x6a9692*0.5:_0x511ee8+_0x6a9692*0.5,0.618:_0x276f00?_0x5a1104-_0x6a9692*0.618:_0x511ee8+_0x6a9692*0.618,0.786:_0x276f00?_0x5a1104-_0x6a9692*0.786:_0x511ee8+_0x6a9692*0.786,0x1:_0x276f00?_0x511ee8:_0x5a1104};return{'high':_0x5a1104,'low':_0x511ee8,'isUptrend':_0x276f00,'levels':_0x18e107};}function detectOrderBlocks(_0x169263,_0x5ed23f){var _0x4ea337=a0_0xa972;if(!_0x169263||_0x169263['length']<_0x5ed23f+0x5)return[];var _0x51b0b5=[],_0x2d4830=_0x169263[_0x4ea337(0xd1)](-(_0x5ed23f+0x5));for(var _0x504455=0x2;_0x504455<_0x2d4830[_0x4ea337(0xe8)]-0x2;_0x504455++){var _0x4534e3=_0x2d4830[_0x504455],_0x34646e=_0x2d4830[_0x504455+0x1],_0x515425=_0x2d4830[_0x504455+0x2];if(!_0x4534e3||!_0x34646e||!_0x515425)continue;var _0x3dd14c=Math[_0x4ea337(0xef)](_0x4534e3['c']-_0x4534e3['o']),_0x49a8e2=Math[_0x4ea337(0xef)](_0x34646e['c']-_0x34646e['o']),_0xe2797e=Math[_0x4ea337(0xef)](_0x515425['c']-_0x515425['o']);_0x4534e3['c']<_0x4534e3['o']&&_0x34646e['c']>_0x34646e['o']&&_0x515425['c']>_0x515425['o']&&_0x49a8e2+_0xe2797e>_0x3dd14c*0x2&&_0x51b0b5['push']({'type':_0x4ea337(0x124),'high':_0x4534e3['h'],'low':_0x4534e3['l'],'strength':Math[_0x4ea337(0xfa)](0x3,Math[_0x4ea337(0x11a)]((_0x49a8e2+_0xe2797e)/_0x3dd14c))}),_0x4534e3['c']>_0x4534e3['o']&&_0x34646e['c']<_0x34646e['o']&&_0x515425['c']<_0x515425['o']&&_0x49a8e2+_0xe2797e>_0x3dd14c*0x2&&_0x51b0b5[_0x4ea337(0x115)]({'type':_0x4ea337(0x120),'high':_0x4534e3['h'],'low':_0x4534e3['l'],'strength':Math['min'](0x3,Math[_0x4ea337(0x11a)]((_0x49a8e2+_0xe2797e)/_0x3dd14c))});}return _0x51b0b5[_0x4ea337(0xd1)](-0x3);}function a0_0x3460(){var _0x495ff3=['message','4H\x20TF','indicator','includes','4497360ObEDLZ','ورود\x20سوم\x20(اگر\x20رسید)','toFixed','trend','fair','13940710RRvbyA','low','bos_bearish','choch','551052nIutYf','bullish_cross','strong_up','EMA21','weight','evening_star','RSI','consolidation','apply','entry','signal','bullish_engulfing','none','ورود\x20چهارم\x20(اگر\x20رسید)','adx','max','slice','reduce','4JwujMe','trending_down','VWAP\x20+1σ','داده\x20کافی\x20نیست','regime','upper','3nZwdTR','confirmations','levels','60808OiSiDM','4896330uREqzW','[WARN]\x20Market\x20regime\x20error:','map','TradingCore','strong_down','SL\x20فاصله\x20زیاد\x20یا\x20نوسان\x20بالا','extreme','volatility','Order\x20Block','621423ecuJLw','reasons','length','diPlus','structure','high','confluenceScore','filter','downtrend','abs','log','ورود\x20دوم','excellent','[WARN]\x20ADX\x20calc\x20error:','diMinus','bos_bullish','medium','short','2259579jfVIXN','strong','min','keys','down','strength','sort','long','lower','pow','uptrend','sources','good','quality','source','lowerBand1','type','histogram','ورود\x20اول','vwap','neutral','doji','trending_up','oversold','unknown','پیش‌فرض','91kkHgnF','score','shooting_star','push','bearish_cross','overbought','morning_star','ورود\x20در\x20EMA21','floor','ranging','price','weak','isArray','above_average','bearish','round','upperBand1','entries','bullish','SL\x20نزدیک\x20-\x20ریسک\x20بالاتر'];a0_0x3460=function(){return _0x495ff3;};return a0_0x3460();}function detectFVG(_0x4f605d,_0xd8f5a4){var _0x1a4664=a0_0xa972;if(!_0x4f605d||_0x4f605d[_0x1a4664(0xe8)]<_0xd8f5a4)return[];var _0x414f29=[],_0x326685=_0x4f605d[_0x1a4664(0xd1)](-_0xd8f5a4);for(var _0x45c0c5=0x2;_0x45c0c5<_0x326685[_0x1a4664(0xe8)];_0x45c0c5++){var _0x30856d=_0x326685[_0x45c0c5-0x2],_0x33030a=_0x326685[_0x45c0c5];if(!_0x30856d||!_0x33030a)continue;_0x33030a['l']>_0x30856d['h']&&_0x414f29[_0x1a4664(0x115)]({'type':_0x1a4664(0x124),'high':_0x33030a['l'],'low':_0x30856d['h'],'filled':![]}),_0x33030a['h']<_0x30856d['l']&&_0x414f29['push']({'type':_0x1a4664(0x120),'high':_0x30856d['l'],'low':_0x33030a['h'],'filled':![]});}return _0x414f29['slice'](-0x3);}function calcVWAP(_0xf5f687,_0x3afc34){var _0x1535c5=a0_0xa972;if(!_0xf5f687||_0xf5f687[_0x1535c5(0xe8)]<_0x3afc34)return null;var _0x4dacd0=_0xf5f687[_0x1535c5(0xd1)](-_0x3afc34),_0x4b84db=0x0,_0x3077c5=0x0;for(var _0x416313=0x0;_0x416313<_0x4dacd0[_0x1535c5(0xe8)];_0x416313++){var _0x18d543=_0x4dacd0[_0x416313],_0x526191=(_0x18d543['h']+_0x18d543['l']+_0x18d543['c'])/0x3,_0x7ab507=_0x18d543['v']||0x1;_0x4b84db+=_0x526191*_0x7ab507,_0x3077c5+=_0x7ab507;}if(_0x3077c5===0x0)return null;var _0x4bc553=_0x4b84db/_0x3077c5,_0xc79377=0x0;for(var _0x5e1a58=0x0;_0x5e1a58<_0x4dacd0['length'];_0x5e1a58++){var _0x2ffd8f=(_0x4dacd0[_0x5e1a58]['h']+_0x4dacd0[_0x5e1a58]['l']+_0x4dacd0[_0x5e1a58]['c'])/0x3;_0xc79377+=Math[_0x1535c5(0x101)](_0x2ffd8f-_0x4bc553,0x2);}var _0x55bd35=Math['sqrt'](_0xc79377/_0x4dacd0[_0x1535c5(0xe8)]);return{'vwap':_0x4bc553,'upperBand1':_0x4bc553+_0x55bd35,'lowerBand1':_0x4bc553-_0x55bd35,'upperBand2':_0x4bc553+_0x55bd35*0x2,'lowerBand2':_0x4bc553-_0x55bd35*0x2};}function findConfluenceZones(_0x5914ce,_0x2a72d8,_0xf99fee,_0x177929,_0x287de0,_0x4feac8,_0x49961d,_0x4ede49,_0x5c3ef6){var _0x2dcb14=a0_0xa972,_0xdb0d56=[],_0x1fa169=_0x5c3ef6*0.3,_0x4a94fc=[];if(_0xf99fee&&_0xf99fee[_0x2dcb14(0xdb)]){var _0x5d9fcd=[0.382,0.5,0.618,0.786];for(var _0x440a35=0x0;_0x440a35<_0x5d9fcd[_0x2dcb14(0xe8)];_0x440a35++){var _0x273ec6=_0xf99fee['levels'][_0x5d9fcd[_0x440a35]];_0x273ec6&&isFinite(_0x273ec6)&&_0x4a94fc[_0x2dcb14(0x115)]({'price':_0x273ec6,'source':'Fib\x20'+(_0x5d9fcd[_0x440a35]*0x64)[_0x2dcb14(0xba)](0x1)+'%','weight':_0x5d9fcd[_0x440a35]===0.618?0x2:0x1});}}if(_0x177929&&_0x177929[_0x2dcb14(0xe8)]>0x0)for(var _0x1f412a=0x0;_0x1f412a<_0x177929[_0x2dcb14(0xe8)];_0x1f412a++){var _0x1c0c5a=_0x177929[_0x1f412a];if(_0x2a72d8===_0x2dcb14(0xff)&&_0x1c0c5a[_0x2dcb14(0x108)]==='bullish'||_0x2a72d8===_0x2dcb14(0xf7)&&_0x1c0c5a[_0x2dcb14(0x108)]==='bearish'){var _0x5ce116=(_0x1c0c5a[_0x2dcb14(0xeb)]+_0x1c0c5a[_0x2dcb14(0xbe)])/0x2;_0x4a94fc[_0x2dcb14(0x115)]({'price':_0x5ce116,'source':_0x2dcb14(0xe5),'weight':_0x1c0c5a[_0x2dcb14(0xfd)]});}}if(_0x287de0&&_0x287de0[_0x2dcb14(0xe8)]>0x0)for(var _0x347eb2=0x0;_0x347eb2<_0x287de0[_0x2dcb14(0xe8)];_0x347eb2++){var _0xf5c69d=_0x287de0[_0x347eb2];if(_0x2a72d8==='long'&&_0xf5c69d[_0x2dcb14(0x108)]===_0x2dcb14(0x124)||_0x2a72d8===_0x2dcb14(0xf7)&&_0xf5c69d['type']===_0x2dcb14(0x120)){var _0x2fb8aa=(_0xf5c69d[_0x2dcb14(0xeb)]+_0xf5c69d[_0x2dcb14(0xbe)])/0x2;_0x4a94fc[_0x2dcb14(0x115)]({'price':_0x2fb8aa,'source':'FVG','weight':0x1});}}_0x4feac8&&_0x4feac8[_0x2dcb14(0x10b)]&&(_0x4a94fc[_0x2dcb14(0x115)]({'price':_0x4feac8[_0x2dcb14(0x10b)],'source':'VWAP','weight':0x2}),_0x2a72d8==='long'?_0x4a94fc[_0x2dcb14(0x115)]({'price':_0x4feac8[_0x2dcb14(0x107)],'source':'VWAP\x20-1σ','weight':0x1}):_0x4a94fc[_0x2dcb14(0x115)]({'price':_0x4feac8[_0x2dcb14(0x122)],'source':_0x2dcb14(0xd5),'weight':0x1}));_0x49961d&&isFinite(_0x49961d)&&_0x4a94fc[_0x2dcb14(0x115)]({'price':_0x49961d,'source':_0x2dcb14(0xc4),'weight':0x1});_0x4ede49&&isFinite(_0x4ede49)&&_0x4a94fc[_0x2dcb14(0x115)]({'price':_0x4ede49,'source':'EMA50','weight':0x2});_0x4a94fc=_0x4a94fc[_0x2dcb14(0xed)](function(_0x4dc77e){var _0x31ed05=_0x2dcb14;return _0x4dc77e[_0x31ed05(0x11c)]&&isFinite(_0x4dc77e[_0x31ed05(0x11c)])&&_0x4dc77e[_0x31ed05(0x11c)]>0x0;});_0x2a72d8===_0x2dcb14(0xff)?_0x4a94fc=_0x4a94fc[_0x2dcb14(0xed)](function(_0x59b977){var _0x2552cd=_0x2dcb14;return _0x59b977[_0x2552cd(0x11c)]<=_0x5914ce+_0x1fa169;}):_0x4a94fc=_0x4a94fc[_0x2dcb14(0xed)](function(_0x421d77){return _0x421d77['price']>=_0x5914ce-_0x1fa169;});_0x4a94fc[_0x2dcb14(0xfe)](function(_0x28faaf,_0x26e044){var _0x4938df=_0x2dcb14;return _0x28faaf[_0x4938df(0x11c)]-_0x26e044[_0x4938df(0x11c)];});var _0x440a35=0x0;while(_0x440a35<_0x4a94fc[_0x2dcb14(0xe8)]){var _0xff79ff={'price':_0x4a94fc[_0x440a35][_0x2dcb14(0x11c)],'sources':[_0x4a94fc[_0x440a35][_0x2dcb14(0x106)]],'score':_0x4a94fc[_0x440a35][_0x2dcb14(0xc5)],'confirmations':0x1},_0x1f412a=_0x440a35+0x1;while(_0x1f412a<_0x4a94fc[_0x2dcb14(0xe8)]&&Math['abs'](_0x4a94fc[_0x1f412a][_0x2dcb14(0x11c)]-_0xff79ff[_0x2dcb14(0x11c)])<=_0x1fa169){_0xff79ff['price']=(_0xff79ff[_0x2dcb14(0x11c)]*_0xff79ff['confirmations']+_0x4a94fc[_0x1f412a][_0x2dcb14(0x11c)])/(_0xff79ff[_0x2dcb14(0xda)]+0x1),_0xff79ff['sources']['push'](_0x4a94fc[_0x1f412a]['source']),_0xff79ff[_0x2dcb14(0x113)]+=_0x4a94fc[_0x1f412a][_0x2dcb14(0xc5)],_0xff79ff[_0x2dcb14(0xda)]++,_0x1f412a++;}_0xdb0d56['push'](_0xff79ff),_0x440a35=_0x1f412a;}return _0xdb0d56[_0x2dcb14(0xfe)](function(_0x22544c,_0x1e35a3){var _0x5886b6=_0x2dcb14;return _0x1e35a3['score']-_0x22544c[_0x5886b6(0x113)];}),_0xdb0d56[_0x2dcb14(0xd1)](0x0,0x5);}function findSmartEntry(_0x237f4f,_0x12704d,_0x5c4625,_0x2239b0,_0x1eab4c,_0x3048ad,_0x1fdb10,_0x21fd4e){var _0x58f2ac=a0_0xa972,_0x57db93={'entry':_0x5c4625,'entries':[],'quality':_0x58f2ac(0x104),'reasons':[],'confluenceScore':0x0};if(!_0x237f4f||_0x237f4f[_0x58f2ac(0xe8)]<0x32||!isFinite(_0x5c4625)||_0x5c4625<=0x0)return _0x57db93[_0x58f2ac(0xe7)][_0x58f2ac(0x115)](_0x58f2ac(0xd6)),_0x57db93;var _0x3ba436=calcFibonacci(_0x237f4f,0x32),_0x41a69c=_0x12704d?calcFibonacci(_0x12704d,0x1e):null,_0x218dca=detectOrderBlocks(_0x237f4f,0x1e),_0x3815df=detectFVG(_0x237f4f,0x14),_0x1fbf14=calcVWAP(_0x237f4f,0x18),_0x15c4e1=findConfluenceZones(_0x5c4625,_0x2239b0,_0x3ba436,_0x218dca,_0x3815df,_0x1fbf14,_0x1eab4c,_0x3048ad,_0x1fdb10);if(_0x41a69c){var _0xb47186=findConfluenceZones(_0x5c4625,_0x2239b0,_0x41a69c,[],[],null,null,null,_0x1fdb10);for(var _0x3f9b38=0x0;_0x3f9b38<_0xb47186[_0x58f2ac(0xe8)];_0x3f9b38++){_0xb47186[_0x3f9b38][_0x58f2ac(0x113)]+=0x2,_0xb47186[_0x3f9b38]['sources'][_0x58f2ac(0x115)](_0x58f2ac(0x127)),_0x15c4e1[_0x58f2ac(0x115)](_0xb47186[_0x3f9b38]);}_0x15c4e1[_0x58f2ac(0xfe)](function(_0x22a436,_0x5e0b0f){var _0x449c56=_0x58f2ac;return _0x5e0b0f[_0x449c56(0x113)]-_0x22a436[_0x449c56(0x113)];});}if(_0x15c4e1[_0x58f2ac(0xe8)]===0x0)return _0x57db93[_0x58f2ac(0xca)]=_0x2239b0===_0x58f2ac(0xff)?Math['min'](_0x5c4625,_0x1eab4c):Math[_0x58f2ac(0xd0)](_0x5c4625,_0x1eab4c),_0x57db93['reasons']['push'](_0x58f2ac(0x119)),_0x57db93['quality']='good',_0x57db93[_0x58f2ac(0x123)]=calculateSmartScaling(_0x57db93[_0x58f2ac(0xca)],_0x2239b0,_0x1fdb10,_0x21fd4e),_0x57db93;var _0x4274b1=_0x15c4e1[0x0];_0x57db93[_0x58f2ac(0xca)]=_0x4274b1[_0x58f2ac(0x11c)],_0x57db93[_0x58f2ac(0xec)]=_0x4274b1['score'],_0x57db93[_0x58f2ac(0xe7)]=_0x4274b1[_0x58f2ac(0x103)];if(_0x4274b1[_0x58f2ac(0xda)]>=0x3||_0x4274b1[_0x58f2ac(0x113)]>=0x5)_0x57db93[_0x58f2ac(0x105)]=_0x58f2ac(0xf2);else _0x4274b1['confirmations']>=0x2||_0x4274b1[_0x58f2ac(0x113)]>=0x3?_0x57db93[_0x58f2ac(0x105)]='good':_0x57db93[_0x58f2ac(0x105)]=_0x58f2ac(0xbc);return _0x57db93[_0x58f2ac(0x123)]=calculateSmartScaling(_0x57db93[_0x58f2ac(0xca)],_0x2239b0,_0x1fdb10,_0x21fd4e,_0x15c4e1),_0x57db93;}function calculateSmartScaling(_0x35ecc8,_0xd80d31,_0x5e1d10,_0x527135,_0x5971dd){var _0x490775=a0_0xa972,_0xaf710c=[];if(!isFinite(_0x35ecc8)||_0x35ecc8<=0x0||!isFinite(_0x5e1d10)||_0x5e1d10<=0x0)return[{'price':_0x35ecc8,'percent':0x64,'reason':'ورود\x20کامل'}];_0x527135=_0x527135||0x3e8;if(_0x527135<0x1f4)_0xaf710c[_0x490775(0x115)]({'price':_0x35ecc8,'percent':0x64,'reason':'ورود\x20کامل\x20(سرمایه\x20کم)'});else{if(_0x527135<0x7d0){_0xaf710c[_0x490775(0x115)]({'price':_0x35ecc8,'percent':0x3c,'reason':_0x490775(0x10a)});var _0x10f3f5=_0xd80d31==='long'?_0x35ecc8-_0x5e1d10*0.3:_0x35ecc8+_0x5e1d10*0.3;_0xaf710c[_0x490775(0x115)]({'price':_0x10f3f5,'percent':0x28,'reason':'ورود\x20دوم\x20(DCA)'});}else{if(_0x527135<0x2710){_0xaf710c[_0x490775(0x115)]({'price':_0x35ecc8,'percent':0x32,'reason':'ورود\x20اول'});var _0x10f3f5=_0xd80d31===_0x490775(0xff)?_0x35ecc8-_0x5e1d10*0.25:_0x35ecc8+_0x5e1d10*0.25;_0xaf710c[_0x490775(0x115)]({'price':_0x10f3f5,'percent':0x1e,'reason':_0x490775(0xf1)});var _0x2f5ca5;_0x5971dd&&_0x5971dd[_0x490775(0xe8)]>0x1?_0x2f5ca5=_0x5971dd[0x1][_0x490775(0x11c)]:_0x2f5ca5=_0xd80d31===_0x490775(0xff)?_0x35ecc8-_0x5e1d10*0.5:_0x35ecc8+_0x5e1d10*0.5,_0xaf710c['push']({'price':_0x2f5ca5,'percent':0x14,'reason':_0x490775(0xb9)});}else{_0xaf710c[_0x490775(0x115)]({'price':_0x35ecc8,'percent':0x28,'reason':_0x490775(0x10a)});var _0x10f3f5=_0xd80d31===_0x490775(0xff)?_0x35ecc8-_0x5e1d10*0.2:_0x35ecc8+_0x5e1d10*0.2;_0xaf710c[_0x490775(0x115)]({'price':_0x10f3f5,'percent':0x19,'reason':_0x490775(0xf1)});var _0x2f5ca5=_0xd80d31==='long'?_0x35ecc8-_0x5e1d10*0.4:_0x35ecc8+_0x5e1d10*0.4;_0xaf710c[_0x490775(0x115)]({'price':_0x2f5ca5,'percent':0x14,'reason':'ورود\x20سوم'});var _0x29d73c=_0xd80d31===_0x490775(0xff)?_0x35ecc8-_0x5e1d10*0.6:_0x35ecc8+_0x5e1d10*0.6;_0xaf710c['push']({'price':_0x29d73c,'percent':0xf,'reason':_0x490775(0xce)});}}}return _0xaf710c;}function analyzeTF(_0xbd6df1,_0x8377a7){var _0x3ba730=a0_0xa972;if(!_0xbd6df1||!Array['isArray'](_0xbd6df1)||_0xbd6df1[_0x3ba730(0xe8)]<0x32)return{'signal':'neutral','score':0x0,'rsi':0x32,'ema21':_0x8377a7,'ema50':_0x8377a7,'trend':_0x3ba730(0x10c)};if(!_0x8377a7||!isFinite(_0x8377a7)||_0x8377a7<=0x0)return{'signal':_0x3ba730(0x10c),'score':0x0,'rsi':0x32,'ema21':0x0,'ema50':0x0,'trend':_0x3ba730(0x10c)};var _0x7278c9=_0xbd6df1[_0x3ba730(0xdf)](function(_0x4f3933){return _0x4f3933['c'];})[_0x3ba730(0xed)](function(_0x3d20c7){return typeof _0x3d20c7==='number'&&isFinite(_0x3d20c7)&&_0x3d20c7>0x0;});if(_0x7278c9[_0x3ba730(0xe8)]<0x32)return{'signal':'neutral','score':0x0,'rsi':0x32,'ema21':_0x8377a7,'ema50':_0x8377a7,'trend':_0x3ba730(0x10c)};var _0x54dc8e=calcRSI(_0x7278c9,0xe),_0x3006ee=calcEMA(_0x7278c9,0x15),_0x26c61c=calcEMA(_0x7278c9,0x32),_0x59a9db=calcMACD(_0x7278c9),_0x59f865=calcBB(_0x7278c9,0x14,0x2),_0x119aa8=calcADX(_0xbd6df1,0xe),_0xe13ed5=calcATR(_0xbd6df1,0xe,_0x8377a7),_0x36b5a6=calcStochRSI(_0x7278c9,0xe,0xe,0x3,0x3),_0x1cd4f9=analyzeMarketStructure(_0xbd6df1,0x32);if(!isFinite(_0x54dc8e))_0x54dc8e=0x32;if(!isFinite(_0x3006ee)||_0x3006ee<=0x0)_0x3006ee=_0x8377a7;if(!isFinite(_0x26c61c)||_0x26c61c<=0x0)_0x26c61c=_0x8377a7;if(!_0x59a9db||!isFinite(_0x59a9db[_0x3ba730(0x109)]))_0x59a9db={'histogram':0x0,'line':0x0,'signal':0x0};(!_0x59f865||!isFinite(_0x59f865[_0x3ba730(0xd8)])||!isFinite(_0x59f865[_0x3ba730(0x100)]))&&(_0x59f865={'upper':_0x8377a7*1.02,'lower':_0x8377a7*0.98,'middle':_0x8377a7});if(!_0x119aa8||!isFinite(_0x119aa8[_0x3ba730(0xcf)]))_0x119aa8={'adx':0x19,'diPlus':0x0,'diMinus':0x0,'trend':_0x3ba730(0x10c)};var _0x19b15c=_0xbd6df1[_0xbd6df1['length']-0x1]?_0xbd6df1[_0xbd6df1[_0x3ba730(0xe8)]-0x1]['v']:0x0,_0x14d5b6=analyzeVolume(_0xbd6df1,_0x19b15c),_0x3a9f3a=detectCandlestickPatterns(_0xbd6df1),_0x16d65a=detectMarketRegime(_0xbd6df1,_0x8377a7),_0x2807ef=[];for(var _0x217305=0x0;_0x217305<_0x7278c9[_0x3ba730(0xe8)];_0x217305++){if(_0x217305>=0xe){var _0x4ad1a6=_0x7278c9[_0x3ba730(0xd1)](0x0,_0x217305+0x1);_0x2807ef[_0x3ba730(0x115)](calcRSI(_0x4ad1a6,0xe));}else _0x2807ef['push'](0x32);}var _0x4ace17=detectDivergence(_0xbd6df1,_0x2807ef,_0x3ba730(0xc7)),_0x3f6c05=_0x3ba730(0x10c);if(_0x8377a7>_0x3006ee&&_0x3006ee>_0x26c61c)_0x3f6c05='up';else{if(_0x8377a7<_0x3006ee&&_0x3006ee<_0x26c61c)_0x3f6c05=_0x3ba730(0xfc);}var _0x116d07=0x0,_0x570047=0x0;if(_0x54dc8e<=0x19)_0x116d07+=0x4;else{if(_0x54dc8e<=0x23)_0x116d07+=0x2;else{if(_0x54dc8e>=0x4b)_0x570047+=0x4;else{if(_0x54dc8e>=0x41)_0x570047+=0x2;}}}if(_0x36b5a6[_0x3ba730(0xcb)]==='oversold')_0x116d07+=0x3;else{if(_0x36b5a6[_0x3ba730(0xcb)]===_0x3ba730(0x117))_0x570047+=0x3;else{if(_0x36b5a6['signal']===_0x3ba730(0xc2)&&_0x36b5a6['k']<0x32)_0x116d07+=0x2;else _0x36b5a6['signal']===_0x3ba730(0x116)&&_0x36b5a6['k']>0x32&&(_0x570047+=0x2);}}if(_0x3f6c05==='up')_0x116d07+=0x2;else{if(_0x3f6c05===_0x3ba730(0xfc))_0x570047+=0x2;}if(_0x59a9db[_0x3ba730(0x109)]>0x0)_0x116d07+=0x2;else{if(_0x59a9db[_0x3ba730(0x109)]<0x0)_0x570047+=0x2;}var _0x5d5dc2=(_0x8377a7-_0x59f865[_0x3ba730(0x100)])/(_0x59f865[_0x3ba730(0xd8)]-_0x59f865[_0x3ba730(0x100)]);if(_0x59f865[_0x3ba730(0xd8)]!==_0x59f865[_0x3ba730(0x100)]&&isFinite(_0x5d5dc2)){if(_0x5d5dc2<=0.1)_0x116d07+=0x3;else{if(_0x5d5dc2<=0.2)_0x116d07+=0x1;else{if(_0x5d5dc2>=0.9)_0x570047+=0x3;else{if(_0x5d5dc2>=0.8)_0x570047+=0x1;}}}}if(_0x119aa8[_0x3ba730(0xcf)]>=0x19){if(_0x119aa8[_0x3ba730(0xbb)]===_0x3ba730(0xc3))_0x116d07+=0x2;else{if(_0x119aa8[_0x3ba730(0xbb)]===_0x3ba730(0xe1))_0x570047+=0x2;}}else _0x119aa8['adx']<0x14&&(_0x116d07=Math[_0x3ba730(0xd0)](0x0,_0x116d07-0x1),_0x570047=Math[_0x3ba730(0xd0)](0x0,_0x570047-0x1));if(_0x14d5b6['strength']>0x0){if(_0x116d07>_0x570047)_0x116d07+=_0x14d5b6['strength'];else{if(_0x570047>_0x116d07)_0x570047+=_0x14d5b6['strength'];}}else _0x14d5b6[_0x3ba730(0xfd)]<0x0&&(_0x116d07=Math[_0x3ba730(0xd0)](0x0,_0x116d07-0x1),_0x570047=Math[_0x3ba730(0xd0)](0x0,_0x570047-0x1));if(_0x4ace17[_0x3ba730(0x108)]===_0x3ba730(0x124))_0x116d07+=Math[_0x3ba730(0xfa)](0x3,_0x4ace17[_0x3ba730(0xfd)]);else _0x4ace17[_0x3ba730(0x108)]===_0x3ba730(0x120)&&(_0x570047+=Math[_0x3ba730(0xfa)](0x3,_0x4ace17[_0x3ba730(0xfd)]));if(_0x3a9f3a[_0x3ba730(0x124)]>0x0)_0x116d07+=Math['min'](0x2,_0x3a9f3a[_0x3ba730(0x124)]);if(_0x3a9f3a['bearish']>0x0)_0x570047+=Math[_0x3ba730(0xfa)](0x2,_0x3a9f3a[_0x3ba730(0x120)]);if(_0x1cd4f9['structure']===_0x3ba730(0x102)){_0x116d07+=0x2;if(_0x1cd4f9[_0x3ba730(0xc0)]===_0x3ba730(0x124))_0x116d07+=0x2;}else{if(_0x1cd4f9['structure']==='downtrend'){_0x570047+=0x2;if(_0x1cd4f9[_0x3ba730(0xc0)]===_0x3ba730(0x120))_0x570047+=0x2;}else{if(_0x1cd4f9['structure']===_0x3ba730(0xf5))_0x116d07+=0x3;else _0x1cd4f9[_0x3ba730(0xea)]===_0x3ba730(0xbf)&&(_0x570047+=0x3);}}var _0xedd893=_0x3ba730(0x10c),_0x58530a=0x0;if(_0x116d07>=0x4&&_0x116d07>_0x570047+0x2)_0xedd893=_0x3ba730(0xff),_0x58530a=_0x116d07;else _0x570047>=0x4&&_0x570047>_0x116d07+0x2&&(_0xedd893='short',_0x58530a=_0x570047);return{'signal':_0xedd893,'score':_0x58530a,'rsi':_0x54dc8e,'ema21':_0x3006ee,'ema50':_0x26c61c,'trend':_0x3f6c05,'bb':_0x59f865,'macd':_0x59a9db,'adx':_0x119aa8,'atr':_0xe13ed5,'volume':_0x14d5b6,'rsiDivergence':_0x4ace17,'patterns':_0x3a9f3a,'marketRegime':_0x16d65a,'stochRSI':_0x36b5a6,'marketStructure':_0x1cd4f9,'longPoints':_0x116d07,'shortPoints':_0x570047};}function getLeverage(_0xea4985,_0x16ab71){var _0x50723f=a0_0xa972;if(!_0xea4985||!_0x16ab71||_0xea4985===_0x16ab71)return 0x3;var _0x4b7f8b=Math[_0x50723f(0xef)](_0xea4985-_0x16ab71)/_0xea4985*0x64;if(_0x4b7f8b>=0x5)return 0x2;if(_0x4b7f8b>=0x3)return 0x3;if(_0x4b7f8b>=0x2)return 0x4;return 0x5;}function calcStochRSI(_0x280282,_0x4f447a,_0x52ea58,_0x55496d,_0x51e989){var _0x420cf7=a0_0xa972;_0x4f447a=_0x4f447a||0xe,_0x52ea58=_0x52ea58||0xe,_0x55496d=_0x55496d||0x3,_0x51e989=_0x51e989||0x3;if(!_0x280282||_0x280282[_0x420cf7(0xe8)]<_0x4f447a+_0x52ea58+_0x55496d)return{'k':0x32,'d':0x32,'signal':_0x420cf7(0x10c)};var _0x4f3f43=[];for(var _0x4dcb95=_0x4f447a;_0x4dcb95<_0x280282[_0x420cf7(0xe8)];_0x4dcb95++){var _0x3f938f=_0x280282[_0x420cf7(0xd1)](0x0,_0x4dcb95+0x1);_0x4f3f43[_0x420cf7(0x115)](calcRSI(_0x3f938f,_0x4f447a));}if(_0x4f3f43['length']<_0x52ea58)return{'k':0x32,'d':0x32,'signal':_0x420cf7(0x10c)};var _0xf9f7eb=[];for(var _0x594496=_0x52ea58-0x1;_0x594496<_0x4f3f43[_0x420cf7(0xe8)];_0x594496++){var _0x3c7ccb=_0x4f3f43[_0x420cf7(0xd1)](_0x594496-_0x52ea58+0x1,_0x594496+0x1),_0x2a70ed=Math[_0x420cf7(0xfa)][_0x420cf7(0xc9)](null,_0x3c7ccb),_0x1e63ff=Math[_0x420cf7(0xd0)]['apply'](null,_0x3c7ccb),_0x2cedd3=_0x1e63ff!==_0x2a70ed?(_0x4f3f43[_0x594496]-_0x2a70ed)/(_0x1e63ff-_0x2a70ed)*0x64:0x32;_0xf9f7eb['push'](_0x2cedd3);}if(_0xf9f7eb[_0x420cf7(0xe8)]<_0x55496d)return{'k':0x32,'d':0x32,'signal':_0x420cf7(0x10c)};var _0x3edb9b=[];for(var _0x1a8257=_0x55496d-0x1;_0x1a8257<_0xf9f7eb[_0x420cf7(0xe8)];_0x1a8257++){var _0x192bcc=0x0;for(var _0x30cdfe=0x0;_0x30cdfe<_0x55496d;_0x30cdfe++){_0x192bcc+=_0xf9f7eb[_0x1a8257-_0x30cdfe];}_0x3edb9b[_0x420cf7(0x115)](_0x192bcc/_0x55496d);}if(_0x3edb9b['length']<_0x51e989)return{'k':_0x3edb9b[_0x3edb9b['length']-0x1]||0x32,'d':0x32,'signal':_0x420cf7(0x10c)};var _0x5d0397=0x0;for(var _0x49171e=0x0;_0x49171e<_0x51e989;_0x49171e++){_0x5d0397+=_0x3edb9b[_0x3edb9b[_0x420cf7(0xe8)]-0x1-_0x49171e];}var _0x231b6f=_0x5d0397/_0x51e989,_0x297346=_0x3edb9b[_0x3edb9b[_0x420cf7(0xe8)]-0x1],_0x5f4ea1=_0x420cf7(0x10c);if(_0x297346<=0x14&&_0x231b6f<=0x14)_0x5f4ea1=_0x420cf7(0x10f);else{if(_0x297346>=0x50&&_0x231b6f>=0x50)_0x5f4ea1='overbought';else{if(_0x297346>_0x231b6f&&_0x297346<0x50)_0x5f4ea1=_0x420cf7(0xc2);else _0x297346<_0x231b6f&&_0x297346>0x14&&(_0x5f4ea1=_0x420cf7(0x116));}}return{'k':Math[_0x420cf7(0x121)](_0x297346*0xa)/0xa,'d':Math['round'](_0x231b6f*0xa)/0xa,'signal':_0x5f4ea1,'crossover':_0x297346>_0x231b6f,'extreme':_0x297346<=0x14||_0x297346>=0x50};}function analyzeMarketStructure(_0x35e610,_0x2be09d){var _0xd248c1=a0_0xa972;_0x2be09d=_0x2be09d||0x32;if(!_0x35e610||_0x35e610['length']<_0x2be09d)return{'structure':_0xd248c1(0x110),'pivots':[],'strength':0x0};var _0x91c619=_0x35e610[_0xd248c1(0xd1)](-_0x2be09d),_0x3202ed=[],_0x50250e=[];for(var _0x222ef2=0x2;_0x222ef2<_0x91c619[_0xd248c1(0xe8)]-0x2;_0x222ef2++){var _0x2e2684=_0x91c619[_0x222ef2],_0x5547bd=_0x2e2684['h']>_0x91c619[_0x222ef2-0x1]['h']&&_0x2e2684['h']>_0x91c619[_0x222ef2-0x2]['h']&&_0x2e2684['h']>_0x91c619[_0x222ef2+0x1]['h']&&_0x2e2684['h']>_0x91c619[_0x222ef2+0x2]['h'],_0x125ff0=_0x2e2684['l']<_0x91c619[_0x222ef2-0x1]['l']&&_0x2e2684['l']<_0x91c619[_0x222ef2-0x2]['l']&&_0x2e2684['l']<_0x91c619[_0x222ef2+0x1]['l']&&_0x2e2684['l']<_0x91c619[_0x222ef2+0x2]['l'];_0x5547bd&&_0x3202ed[_0xd248c1(0x115)]({'index':_0x222ef2,'price':_0x2e2684['h']}),_0x125ff0&&_0x50250e['push']({'index':_0x222ef2,'price':_0x2e2684['l']});}if(_0x3202ed[_0xd248c1(0xe8)]<0x2||_0x50250e[_0xd248c1(0xe8)]<0x2)return{'structure':_0xd248c1(0xc8),'pivots':{'highs':_0x3202ed,'lows':_0x50250e},'strength':0x0};var _0x389c30=_0x3202ed[_0xd248c1(0xd1)](-0x3),_0x16f563=_0x50250e[_0xd248c1(0xd1)](-0x3),_0x2879c4=0x0,_0x2483e9=0x0,_0x5db565=0x0,_0x12e671=0x0;for(var _0x3cfeee=0x1;_0x3cfeee<_0x389c30['length'];_0x3cfeee++){if(_0x389c30[_0x3cfeee][_0xd248c1(0x11c)]>_0x389c30[_0x3cfeee-0x1][_0xd248c1(0x11c)])_0x2879c4++;else _0x2483e9++;}for(var _0xd4dc9a=0x1;_0xd4dc9a<_0x16f563[_0xd248c1(0xe8)];_0xd4dc9a++){if(_0x16f563[_0xd4dc9a][_0xd248c1(0x11c)]>_0x16f563[_0xd4dc9a-0x1][_0xd248c1(0x11c)])_0x5db565++;else _0x12e671++;}var _0x2762ea=_0xd248c1(0xc8),_0x29de6a=0x0;if(_0x2879c4>=0x1&&_0x5db565>=0x1)_0x2762ea=_0xd248c1(0x102),_0x29de6a=(_0x2879c4+_0x5db565)*0x19;else{if(_0x2483e9>=0x1&&_0x12e671>=0x1)_0x2762ea='downtrend',_0x29de6a=(_0x2483e9+_0x12e671)*0x19;else{if(_0x2879c4>=0x1&&_0x12e671>=0x1)_0x2762ea=_0xd248c1(0xf5),_0x29de6a=0x32;else _0x2483e9>=0x1&&_0x5db565>=0x1&&(_0x2762ea=_0xd248c1(0xbf),_0x29de6a=0x32);}}var _0x2897a7=_0x3202ed[_0x3202ed[_0xd248c1(0xe8)]-0x1],_0x25052b=_0x50250e[_0x50250e['length']-0x1],_0x168af5=_0x91c619[_0x91c619[_0xd248c1(0xe8)]-0x1]['c'],_0xc6d191=null;if(_0x2762ea===_0xd248c1(0xee)&&_0x168af5>_0x2897a7[_0xd248c1(0x11c)])_0xc6d191='bullish',_0x29de6a+=0x1e;else _0x2762ea===_0xd248c1(0x102)&&_0x168af5<_0x25052b['price']&&(_0xc6d191=_0xd248c1(0x120),_0x29de6a+=0x1e);return{'structure':_0x2762ea,'strength':Math[_0xd248c1(0xfa)](0x64,_0x29de6a),'pivots':{'highs':_0x3202ed,'lows':_0x50250e},'higherHighs':_0x2879c4,'higherLows':_0x5db565,'lowerHighs':_0x2483e9,'lowerLows':_0x12e671,'choch':_0xc6d191,'lastPivotHigh':_0x2897a7?_0x2897a7['price']:null,'lastPivotLow':_0x25052b?_0x25052b[_0xd248c1(0x11c)]:null};}function analyzeMTF(_0x5ac196){var _0x5a556e=a0_0xa972;if(!_0x5ac196||Object[_0x5a556e(0xfb)](_0x5ac196)[_0x5a556e(0xe8)]===0x0)return{'confluence':0x0,'direction':_0x5a556e(0x10c),'aligned':![]};var _0x20d31a=0x0,_0x25568e=0x0,_0x32c7f0=0x0,_0x1bfc97=0x0,_0x3d88a4={'30m':0x1,'1h':0x2,'4h':0x3,'1d':0x4};for(var _0x193af9 in _0x5ac196){if(!_0x5ac196[_0x193af9])continue;var _0x61fbc0=_0x5ac196[_0x193af9],_0x1a40e1=_0x3d88a4[_0x193af9]||0x1;_0x1bfc97+=_0x1a40e1;if(_0x61fbc0[_0x5a556e(0xcb)]==='long')_0x20d31a+=_0x1a40e1;else _0x61fbc0[_0x5a556e(0xcb)]===_0x5a556e(0xf7)?_0x25568e+=_0x1a40e1:_0x32c7f0+=_0x1a40e1;}if(_0x1bfc97===0x0)return{'confluence':0x0,'direction':_0x5a556e(0x10c),'aligned':![]};var _0x14019f=_0x20d31a/_0x1bfc97*0x64,_0x462c84=_0x25568e/_0x1bfc97*0x64,_0x33f5e2='neutral',_0x4a90c6=0x0,_0x408a21=![];if(_0x14019f>=0x46)_0x33f5e2=_0x5a556e(0xff),_0x4a90c6=_0x14019f,_0x408a21=!![];else{if(_0x462c84>=0x46)_0x33f5e2=_0x5a556e(0xf7),_0x4a90c6=_0x462c84,_0x408a21=!![];else{if(_0x14019f>=0x32)_0x33f5e2=_0x5a556e(0xff),_0x4a90c6=_0x14019f,_0x408a21=![];else _0x462c84>=0x32&&(_0x33f5e2=_0x5a556e(0xf7),_0x4a90c6=_0x462c84,_0x408a21=![]);}}return{'confluence':Math['round'](_0x4a90c6),'direction':_0x33f5e2,'aligned':_0x408a21,'breakdown':{'long':_0x20d31a,'short':_0x25568e,'neutral':_0x32c7f0,'total':_0x1bfc97}};}function calcLiquidationPrice(_0x3e671e,_0x308431,_0xb8a558,_0x2a2bc8){var _0x4658a0=a0_0xa972;_0x2a2bc8=_0x2a2bc8||0.005;if(!_0x3e671e||!_0x308431||_0x308431<0x1)return null;var _0x57af2f;_0xb8a558==='long'?_0x57af2f=_0x3e671e*(0x1-0x1/_0x308431+_0x2a2bc8):_0x57af2f=_0x3e671e*(0x1+0x1/_0x308431-_0x2a2bc8);var _0x5d0dce=Math[_0x4658a0(0xef)](_0x3e671e-_0x57af2f)/_0x3e671e*0x64;return{'price':_0x57af2f,'distancePercent':_0x5d0dce,'safe':_0x5d0dce>0x5,'warning':_0x5d0dce<=0x5&&_0x5d0dce>0x2,'danger':_0x5d0dce<=0x2};}function a0_0xa972(_0x28aa69,_0x235827){_0x28aa69=_0x28aa69-0xb9;var _0x3460c3=a0_0x3460();var _0xa97204=_0x3460c3[_0x28aa69];return _0xa97204;}function getSmartLeverage(_0x4bf0fe,_0x271f56,_0x191be6,_0x3c102e,_0x2bb133){var _0x1ca7e5=a0_0xa972;if(!_0x4bf0fe||!_0x271f56||_0x4bf0fe===_0x271f56||!_0x191be6)return{'leverage':0x3,'reason':_0x1ca7e5(0x111)};_0x2bb133=_0x2bb133||0x2,_0x3c102e=_0x3c102e||0x3e8;var _0x36d0bd=Math[_0x1ca7e5(0xef)](_0x4bf0fe-_0x271f56),_0x575265=_0x36d0bd/_0x4bf0fe*0x64,_0x2dc9f8=_0x191be6/_0x4bf0fe*0x64,_0x2aa8b6=Math[_0x1ca7e5(0x11a)](0x64/_0x575265),_0x5ee401=_0x2dc9f8/0x2,_0x38552e=Math[_0x1ca7e5(0x11a)](0xa/_0x5ee401),_0x590897=_0x3c102e*(_0x2bb133/0x64),_0x5c23cf=_0x590897/(_0x575265/0x64),_0x50983f=_0x3c102e*0.2,_0x3a8049=Math['floor'](_0x5c23cf/_0x50983f),_0x1e46f9=Math[_0x1ca7e5(0xfa)](_0x2aa8b6,_0x38552e,_0x3a8049,0x14);_0x1e46f9=Math[_0x1ca7e5(0xd0)](_0x1e46f9,0x1);var _0xacdaf1='',_0x38854d=_0x1ca7e5(0xf6);if(_0x1e46f9<=0x3)_0xacdaf1=_0x1ca7e5(0xe2),_0x38854d=_0x1ca7e5(0xbe);else{if(_0x1e46f9<=0x7)_0xacdaf1='تعادل\x20ریسک\x20و\x20سود',_0x38854d='medium';else _0x1e46f9<=0xf?(_0xacdaf1=_0x1ca7e5(0x125),_0x38854d=_0x1ca7e5(0xeb)):(_0xacdaf1='لوریج\x20بالا\x20-\x20احتیاط!',_0x38854d=_0x1ca7e5(0xe3));}return{'leverage':_0x1e46f9,'reason':_0xacdaf1,'riskLevel':_0x38854d,'maxFromSL':_0x2aa8b6,'maxFromATR':_0x38552e,'slPercent':_0x575265,'atrPercent':_0x2dc9f8};}typeof window!=='undefined'&&(window[a0_0x575222(0xe0)]={'calcRSI':calcRSI,'calcEMA':calcEMA,'calcMACD':calcMACD,'calcBB':calcBB,'calcATR':calcATR,'calcADX':calcADX,'analyzeVolume':analyzeVolume,'detectDivergence':detectDivergence,'detectCandlestickPatterns':detectCandlestickPatterns,'detectMarketRegime':detectMarketRegime,'findSmartEntry':findSmartEntry,'calculateSmartScaling':calculateSmartScaling,'analyzeTF':analyzeTF,'getLeverage':getLeverage,'calcFibonacci':calcFibonacci,'detectOrderBlocks':detectOrderBlocks,'detectFVG':detectFVG,'calcVWAP':calcVWAP,'calcStochRSI':calcStochRSI,'analyzeMarketStructure':analyzeMarketStructure,'analyzeMTF':analyzeMTF,'calcLiquidationPrice':calcLiquidationPrice,'getSmartLeverage':getSmartLeverage});
+// Core Trading Logic v1.0 - PWA Version
+// همه محاسبات اندیکاتورها و تحلیل‌ها
+
+// ==================== RSI ====================
+function calcRSI(closes, period) {
+  if (!closes || closes.length < period + 1) return 50;
+  
+  period = period || 14;
+  var gains = 0, losses = 0;
+  
+  for (var i = 1; i <= period; i++) {
+    var change = closes[i] - closes[i - 1];
+    if (change > 0) gains += change;
+    else losses -= change;
+  }
+  
+  var avgGain = gains / period;
+  var avgLoss = losses / period;
+  
+  for (var j = period + 1; j < closes.length; j++) {
+    var change = closes[j] - closes[j - 1];
+    if (change > 0) {
+      avgGain = (avgGain * (period - 1) + change) / period;
+      avgLoss = (avgLoss * (period - 1)) / period;
+    } else {
+      avgGain = (avgGain * (period - 1)) / period;
+      avgLoss = (avgLoss * (period - 1) - change) / period;
+    }
+  }
+  
+  if (avgLoss === 0) return 100;
+  var rs = avgGain / avgLoss;
+  return 100 - (100 / (1 + rs));
+}
+
+// ==================== EMA ====================
+function calcEMA(closes, period) {
+  if (!closes || closes.length < period) return closes ? closes[closes.length - 1] : 0;
+  
+  var multiplier = 2 / (period + 1);
+  var ema = closes.slice(0, period).reduce(function(a, b) { return a + b; }, 0) / period;
+  
+  for (var i = period; i < closes.length; i++) {
+    ema = (closes[i] - ema) * multiplier + ema;
+  }
+  
+  return ema;
+}
+
+// ==================== MACD ====================
+function calcMACD(closes) {
+  if (!closes || closes.length < 26) {
+    return { line: 0, signal: 0, histogram: 0 };
+  }
+  
+  var mult12 = 2 / 13;
+  var mult26 = 2 / 27;
+  var mult9 = 2 / 10;
+  
+  // Initialize EMA12 with SMA of first 12 closes
+  var ema12Val = closes.slice(0, 12).reduce(function(a, b) { return a + b; }, 0) / 12;
+  
+  // Calculate EMA12 from index 12 to 25 (before EMA26 starts)
+  for (var i = 12; i < 26; i++) {
+    ema12Val = (closes[i] - ema12Val) * mult12 + ema12Val;
+  }
+  
+  // Initialize EMA26 with SMA of first 26 closes
+  var ema26Val = closes.slice(0, 26).reduce(function(a, b) { return a + b; }, 0) / 26;
+  
+  // Now calculate both EMAs and MACD values from index 26
+  var macdValues = [];
+  for (var j = 26; j < closes.length; j++) {
+    ema12Val = (closes[j] - ema12Val) * mult12 + ema12Val;
+    ema26Val = (closes[j] - ema26Val) * mult26 + ema26Val;
+    macdValues.push(ema12Val - ema26Val);
+  }
+  
+  // Current MACD line value
+  var macdLine = ema12Val - ema26Val;
+  
+  if (macdValues.length < 9) {
+    return { line: macdLine, signal: 0, histogram: macdLine };
+  }
+  
+  // Signal line (9-period EMA of MACD)
+  var signalLine = macdValues.slice(0, 9).reduce(function(a, b) { return a + b; }, 0) / 9;
+  for (var k = 9; k < macdValues.length; k++) {
+    signalLine = (macdValues[k] - signalLine) * mult9 + signalLine;
+  }
+  
+  return {
+    line: macdLine,
+    signal: signalLine,
+    histogram: macdLine - signalLine
+  };
+}
+
+// ==================== Bollinger Bands ====================
+function calcBB(closes, period, stdDev) {
+  if (!closes || closes.length < period) {
+    var lastPrice = closes ? closes[closes.length - 1] : 0;
+    return { upper: lastPrice * 1.02, middle: lastPrice, lower: lastPrice * 0.98 };
+  }
+  
+  period = period || 20;
+  stdDev = stdDev || 2;
+  
+  var slice = closes.slice(-period);
+  var sma = slice.reduce(function(a, b) { return a + b; }, 0) / period;
+  
+  var squaredDiffs = slice.map(function(v) { return Math.pow(v - sma, 2); });
+  var variance = squaredDiffs.reduce(function(a, b) { return a + b; }, 0) / period;
+  var std = Math.sqrt(variance);
+  
+  return {
+    upper: sma + std * stdDev,
+    middle: sma,
+    lower: sma - std * stdDev
+  };
+}
+
+// ==================== ATR ====================
+function calcATR(klines, period, currentPrice) {
+  if (!klines || klines.length < period + 1) {
+    return currentPrice ? currentPrice * 0.02 : 0;
+  }
+  
+  var trValues = [];
+  for (var i = 1; i < klines.length; i++) {
+    var high = klines[i].h || 0;
+    var low = klines[i].l || 0;
+    var prevClose = klines[i - 1].c || 0;
+    
+    if (!isFinite(high) || !isFinite(low) || !isFinite(prevClose)) continue;
+    
+    var tr = Math.max(
+      high - low,
+      Math.abs(high - prevClose),
+      Math.abs(low - prevClose)
+    );
+    
+    if (isFinite(tr) && tr > 0) {
+      trValues.push(tr);
+    }
+  }
+  
+  if (trValues.length < period) {
+    return currentPrice ? currentPrice * 0.02 : 0;
+  }
+  
+  var atr = trValues.slice(0, period).reduce(function(a, b) { return a + b; }, 0) / period;
+  
+  for (var j = period; j < trValues.length; j++) {
+    atr = (atr * (period - 1) + trValues[j]) / period;
+  }
+  
+  return isFinite(atr) ? atr : (currentPrice ? currentPrice * 0.02 : 0);
+}
+
+// ==================== ADX (اصلاح شده) ====================
+function calcADX(klines, period) {
+  if (!klines || !Array.isArray(klines) || klines.length < period * 2) {
+    return { adx: 25, diPlus: 0, diMinus: 0, trend: 'neutral' };
+  }
+  
+  period = period || 14;
+  var result = { adx: 25, diPlus: 0, diMinus: 0, trend: 'neutral' };
+  
+  try {
+    var trValues = [];
+    var plusDM = [];
+    var minusDM = [];
+    
+    for (var i = 1; i < klines.length; i++) {
+      var prevClose = klines[i - 1].c || 0;
+      var high = klines[i].h || 0;
+      var low = klines[i].l || 0;
+      var prevHigh = klines[i - 1].h || high;
+      var prevLow = klines[i - 1].l || low;
+      
+      if (!isFinite(prevClose) || !isFinite(high) || !isFinite(low)) continue;
+      
+      var tr = Math.max(high - low, Math.abs(high - prevClose), Math.abs(low - prevClose));
+      trValues.push(isFinite(tr) && tr > 0 ? tr : 0);
+      
+      var upMove = high - prevHigh;
+      var downMove = prevLow - low;
+      
+      if (upMove > downMove && upMove > 0) {
+        plusDM.push(upMove);
+        minusDM.push(0);
+      } else if (downMove > upMove && downMove > 0) {
+        plusDM.push(0);
+        minusDM.push(downMove);
+      } else {
+        plusDM.push(0);
+        minusDM.push(0);
+      }
+    }
+    
+    if (trValues.length < period * 2 || plusDM.length < period * 2) {
+      return result;
+    }
+    
+    var smoothedTR = 0, smoothedPlusDM = 0, smoothedMinusDM = 0;
+    
+    for (var j = 0; j < period; j++) {
+      smoothedTR += trValues[j];
+      smoothedPlusDM += plusDM[j];
+      smoothedMinusDM += minusDM[j];
+    }
+    
+    var dxValues = [];
+    
+    for (var k = period; k < trValues.length; k++) {
+      smoothedTR = smoothedTR - (smoothedTR / period) + trValues[k];
+      smoothedPlusDM = smoothedPlusDM - (smoothedPlusDM / period) + plusDM[k];
+      smoothedMinusDM = smoothedMinusDM - (smoothedMinusDM / period) + minusDM[k];
+      
+      var diPlus = smoothedTR > 0 ? (smoothedPlusDM / smoothedTR) * 100 : 0;
+      var diMinus = smoothedTR > 0 ? (smoothedMinusDM / smoothedTR) * 100 : 0;
+      var diSum = diPlus + diMinus;
+      var dx = diSum > 0 ? (Math.abs(diPlus - diMinus) / diSum) * 100 : 0;
+      
+      dxValues.push({ dx: dx, diPlus: diPlus, diMinus: diMinus });
+    }
+    
+    if (dxValues.length < period) return result;
+    
+    var adx = 0;
+    for (var m = 0; m < period; m++) {
+      adx += dxValues[m].dx;
+    }
+    adx /= period;
+    
+    for (var n = period; n < dxValues.length; n++) {
+      adx = ((adx * (period - 1)) + dxValues[n].dx) / period;
+    }
+    
+    var lastDX = dxValues[dxValues.length - 1];
+    result.adx = isFinite(adx) ? Math.round(adx * 10) / 10 : 25;
+    result.diPlus = isFinite(lastDX.diPlus) ? Math.round(lastDX.diPlus * 10) / 10 : 0;
+    result.diMinus = isFinite(lastDX.diMinus) ? Math.round(lastDX.diMinus * 10) / 10 : 0;
+    
+    if (result.adx >= 25 && result.diPlus > result.diMinus) {
+      result.trend = 'strong_up';
+    } else if (result.adx >= 25 && result.diMinus > result.diPlus) {
+      result.trend = 'strong_down';
+    } else if (result.diPlus > result.diMinus) {
+      result.trend = 'up';
+    } else if (result.diMinus > result.diPlus) {
+      result.trend = 'down';
+    }
+    
+    result.adx = Math.max(0, Math.min(100, result.adx));
+    result.diPlus = Math.max(0, Math.min(100, result.diPlus));
+    result.diMinus = Math.max(0, Math.min(100, result.diMinus));
+    
+  } catch (e) {
+    console.log('[WARN] ADX calc error:', e.message);
+  }
+  
+  return result;
+}
+
+// ==================== Volume Analysis ====================
+function analyzeVolume(klines, currentVolume) {
+  if (!klines || klines.length < 20 || !currentVolume) {
+    return { strength: 0, signal: 'neutral', avgVolume: 0 };
+  }
+  
+  var volumes = klines.slice(-20).map(function(k) { return k.v || 0; });
+  var avgVolume = volumes.reduce(function(a, b) { return a + b; }, 0) / volumes.length;
+  
+  if (avgVolume === 0) {
+    return { strength: 0, signal: 'neutral', avgVolume: 0 };
+  }
+  
+  var volumeRatio = currentVolume / avgVolume;
+  var strength = 0;
+  var signal = 'neutral';
+  
+  if (volumeRatio >= 2) {
+    strength = 2;
+    signal = 'strong';
+  } else if (volumeRatio >= 1.5) {
+    strength = 1;
+    signal = 'above_average';
+  } else if (volumeRatio < 0.5) {
+    strength = -1;
+    signal = 'weak';
+  }
+  
+  return { strength: strength, signal: signal, avgVolume: avgVolume, ratio: volumeRatio };
+}
+
+// ==================== Divergence Detection ====================
+function detectDivergence(klines, indicatorValues, indicatorName) {
+  if (!klines || !Array.isArray(klines) || klines.length < 30) {
+    return { type: 'none', strength: 0, hidden: false };
+  }
+  if (!indicatorValues || !Array.isArray(indicatorValues) || indicatorValues.length < 30) {
+    return { type: 'none', strength: 0, hidden: false };
+  }
+  
+  // Use the minimum of both arrays' lengths for lookback
+  var lookback = Math.min(50, klines.length, indicatorValues.length);
+  
+  // Get the last 'lookback' items from both arrays, aligned from the end
+  var startKline = klines.length - lookback;
+  var startIndicator = indicatorValues.length - lookback;
+  
+  // Build aligned arrays with relative indices (0 to lookback-1)
+  var data = [];
+  for (var i = 0; i < lookback; i++) {
+    var kline = klines[startKline + i];
+    var indValue = indicatorValues[startIndicator + i];
+    
+    if (kline && kline.c && isFinite(kline.c) && indValue !== undefined && isFinite(indValue)) {
+      data.push({
+        relativeIndex: i,
+        price: kline.c,
+        indicator: indValue
+      });
+    }
+  }
+  
+  if (data.length < 20) {
+    return { type: 'none', strength: 0, hidden: false };
+  }
+  
+  // Find local highs and lows in the aligned data
+  var priceHighs = [];
+  var priceLows = [];
+  
+  for (var j = 2; j < data.length - 2; j++) {
+    var curr = data[j];
+    var isHigh = curr.price > data[j - 1].price && 
+                 curr.price > data[j - 2].price &&
+                 curr.price > data[j + 1].price &&
+                 curr.price > data[j + 2].price;
+    var isLow = curr.price < data[j - 1].price && 
+                curr.price < data[j - 2].price &&
+                curr.price < data[j + 1].price &&
+                curr.price < data[j + 2].price;
+    
+    if (isHigh) {
+      priceHighs.push({ dataIndex: j, price: curr.price, indicator: curr.indicator });
+    }
+    if (isLow) {
+      priceLows.push({ dataIndex: j, price: curr.price, indicator: curr.indicator });
+    }
+  }
+  
+  // Check for bullish divergence (lower lows in price, higher lows in indicator)
+  if (priceLows.length >= 2) {
+    for (var l = priceLows.length - 1; l >= 1; l--) {
+      var lastLow = priceLows[l];
+      var prevLow = priceLows[l - 1];
+      
+      // Regular bullish divergence: price makes lower low, indicator makes higher low
+      if (lastLow.price < prevLow.price && lastLow.indicator > prevLow.indicator) {
+        var strength = Math.min(3, Math.abs((lastLow.price - prevLow.price) / prevLow.price * 100) + 1);
+        return { type: 'bullish', strength: Math.floor(strength), hidden: false };
+      }
+      
+      // Hidden bullish divergence: price makes higher low, indicator makes lower low
+      if (lastLow.price > prevLow.price && lastLow.indicator < prevLow.indicator) {
+        return { type: 'bullish', strength: 1, hidden: true };
+      }
+    }
+  }
+  
+  // Check for bearish divergence (higher highs in price, lower highs in indicator)
+  if (priceHighs.length >= 2) {
+    for (var h = priceHighs.length - 1; h >= 1; h--) {
+      var lastHigh = priceHighs[h];
+      var prevHigh = priceHighs[h - 1];
+      
+      // Regular bearish divergence: price makes higher high, indicator makes lower high
+      if (lastHigh.price > prevHigh.price && lastHigh.indicator < prevHigh.indicator) {
+        var strength = Math.min(3, Math.abs((lastHigh.price - prevHigh.price) / prevHigh.price * 100) + 1);
+        return { type: 'bearish', strength: Math.floor(strength), hidden: false };
+      }
+      
+      // Hidden bearish divergence: price makes lower high, indicator makes higher high
+      if (lastHigh.price < prevHigh.price && lastHigh.indicator > prevHigh.indicator) {
+        return { type: 'bearish', strength: 1, hidden: true };
+      }
+    }
+  }
+  
+  return { type: 'none', strength: 0, hidden: false };
+}
+
+// ==================== Candlestick Patterns ====================
+function detectCandlestickPatterns(klines) {
+  if (!klines || !Array.isArray(klines) || klines.length < 3) {
+    return { patterns: [], bullish: 0, bearish: 0 };
+  }
+  
+  var patterns = [];
+  var bullishScore = 0;
+  var bearishScore = 0;
+  
+  try {
+    var checkCount = Math.min(3, klines.length);
+    
+    for (var i = klines.length - checkCount; i < klines.length; i++) {
+      if (i < 2) continue;
+      
+      var current = klines[i];
+      var prev = klines[i - 1];
+      var prev2 = klines[i - 2];
+      
+      if (!current || !prev || !current.o || !current.c || !current.h || !current.l) continue;
+      if (!prev.o || !prev.c || !prev.h || !prev.l) continue;
+      
+      var currentBody = Math.abs(current.c - current.o);
+      var currentRange = current.h - current.l;
+      var prevBody = Math.abs(prev.c - prev.o);
+      
+      var currentIsBullish = current.c >= current.o;
+      var prevIsBullish = prev.c >= prev.o;
+      
+      // Doji
+      if (currentBody < (currentRange * 0.1)) {
+        patterns.push({ type: 'doji', index: i, bullish: null });
+      }
+      
+      // Hammer
+      if (i === klines.length - 1) {
+        var lowerShadow = Math.min(current.o, current.c) - current.l;
+        var upperShadow = current.h - Math.max(current.o, current.c);
+        
+        if (lowerShadow > currentBody * 2 && upperShadow < currentBody * 0.3 && currentRange > 0) {
+          patterns.push({ type: 'hammer', index: i, bullish: true });
+          bullishScore += 2;
+        }
+        
+        // Shooting Star
+        if (upperShadow > currentBody * 2 && lowerShadow < currentBody * 0.3 && currentRange > 0) {
+          patterns.push({ type: 'shooting_star', index: i, bullish: false });
+          bearishScore += 2;
+        }
+      }
+      
+      // Engulfing
+      if (i === klines.length - 1) {
+        if (!prevIsBullish && currentIsBullish &&
+            current.o < prev.c && current.c > prev.o &&
+            currentBody > prevBody * 1.1) {
+          patterns.push({ type: 'bullish_engulfing', index: i, bullish: true });
+          bullishScore += 3;
+        }
+        
+        if (prevIsBullish && !currentIsBullish &&
+            current.o > prev.c && current.c < prev.o &&
+            currentBody > prevBody * 1.1) {
+          patterns.push({ type: 'bearish_engulfing', index: i, bullish: false });
+          bearishScore += 3;
+        }
+      }
+      
+      // Morning/Evening Star
+      if (i >= 2 && i === klines.length - 1 && prev2) {
+        var first = prev2;
+        var second = prev;
+        var third = current;
+        
+        if (first.c && first.o && second.c && second.o && third.c && third.o) {
+          var firstBearish = first.c < first.o;
+          var secondSmall = Math.abs(second.c - second.o) < Math.abs(first.c - first.o) * 0.5;
+          var thirdBullish = third.c > third.o;
+          
+          if (firstBearish && secondSmall && thirdBullish && third.c > (first.o + first.c) / 2) {
+            patterns.push({ type: 'morning_star', index: i, bullish: true });
+            bullishScore += 3;
+          }
+          
+          var firstBullish = first.c > first.o;
+          var thirdBearish = third.c < third.o;
+          
+          if (firstBullish && secondSmall && thirdBearish && third.c < (first.o + first.c) / 2) {
+            patterns.push({ type: 'evening_star', index: i, bullish: false });
+            bearishScore += 3;
+          }
+        }
+      }
+    }
+  } catch (e) {
+    console.log('[WARN] Pattern detection error:', e.message);
+  }
+  
+  return {
+    patterns: patterns,
+    bullish: bullishScore,
+    bearish: bearishScore,
+    strongest: patterns.length > 0 ? patterns[patterns.length - 1] : null
+  };
+}
+
+// ==================== Market Regime ====================
+function detectMarketRegime(klines, price) {
+  if (!klines || !Array.isArray(klines) || klines.length < 50 || !price || !isFinite(price)) {
+    return { regime: 'unknown', strength: 0, volatility: 'medium' };
+  }
+  
+  var result = { regime: 'ranging', strength: 0, volatility: 'medium' };
+  
+  try {
+    var atr = calcATR(klines, 14, price);
+    var atrPercent = (atr / price) * 100;
+    
+    if (atrPercent > 3) {
+      result.volatility = 'high';
+    } else if (atrPercent < 1) {
+      result.volatility = 'low';
+    }
+    
+    var closes = klines.map(function(k) { return k.c; }).filter(function(c) {
+      return typeof c === 'number' && isFinite(c) && c > 0;
+    });
+    
+    if (closes.length < 50) return result;
+    
+    var ema20 = calcEMA(closes, 20);
+    var ema50 = calcEMA(closes, 50);
+    var adx = calcADX(klines, 14);
+    
+    if (adx.adx >= 25) {
+      if (price > ema20 && ema20 > ema50 && adx.trend.includes('up')) {
+        result.regime = 'trending_up';
+        result.strength = adx.adx;
+      } else if (price < ema20 && ema20 < ema50 && adx.trend.includes('down')) {
+        result.regime = 'trending_down';
+        result.strength = adx.adx;
+      }
+    } else {
+      result.regime = 'ranging';
+      result.strength = 100 - adx.adx;
+    }
+  } catch (e) {
+    console.log('[WARN] Market regime error:', e.message);
+  }
+  
+  return result;
+}
+
+// ==================== Smart Entry System ====================
+function calcFibonacci(klines, lookback) {
+  if (!klines || klines.length < lookback) return null;
+  
+  var recentKlines = klines.slice(-lookback);
+  var high = -Infinity, low = Infinity;
+  var highIdx = 0, lowIdx = 0;
+  
+  for (var i = 0; i < recentKlines.length; i++) {
+    if (recentKlines[i].h > high) {
+      high = recentKlines[i].h;
+      highIdx = i;
+    }
+    if (recentKlines[i].l < low) {
+      low = recentKlines[i].l;
+      lowIdx = i;
+    }
+  }
+  
+  if (high === low || !isFinite(high) || !isFinite(low)) return null;
+  
+  var diff = high - low;
+  var isUptrend = lowIdx < highIdx;
+  
+  var levels = {
+    0: isUptrend ? high : low,
+    0.236: isUptrend ? high - diff * 0.236 : low + diff * 0.236,
+    0.382: isUptrend ? high - diff * 0.382 : low + diff * 0.382,
+    0.5: isUptrend ? high - diff * 0.5 : low + diff * 0.5,
+    0.618: isUptrend ? high - diff * 0.618 : low + diff * 0.618,
+    0.786: isUptrend ? high - diff * 0.786 : low + diff * 0.786,
+    1: isUptrend ? low : high
+  };
+  
+  return { high: high, low: low, isUptrend: isUptrend, levels: levels };
+}
+
+function detectOrderBlocks(klines, lookback) {
+  if (!klines || klines.length < lookback + 5) return [];
+  
+  var orderBlocks = [];
+  var recentKlines = klines.slice(-(lookback + 5));
+  
+  for (var i = 2; i < recentKlines.length - 2; i++) {
+    var current = recentKlines[i];
+    var next1 = recentKlines[i + 1];
+    var next2 = recentKlines[i + 2];
+    
+    if (!current || !next1 || !next2) continue;
+    
+    var currentBody = Math.abs(current.c - current.o);
+    var next1Body = Math.abs(next1.c - next1.o);
+    var next2Body = Math.abs(next2.c - next2.o);
+    
+    if (current.c < current.o && next1.c > next1.o && next2.c > next2.o &&
+        (next1Body + next2Body) > currentBody * 2) {
+      orderBlocks.push({
+        type: 'bullish',
+        high: current.h,
+        low: current.l,
+        strength: Math.min(3, Math.floor((next1Body + next2Body) / currentBody))
+      });
+    }
+    
+    if (current.c > current.o && next1.c < next1.o && next2.c < next2.o &&
+        (next1Body + next2Body) > currentBody * 2) {
+      orderBlocks.push({
+        type: 'bearish',
+        high: current.h,
+        low: current.l,
+        strength: Math.min(3, Math.floor((next1Body + next2Body) / currentBody))
+      });
+    }
+  }
+  
+  return orderBlocks.slice(-3);
+}
+
+function detectFVG(klines, lookback) {
+  if (!klines || klines.length < lookback) return [];
+  
+  var fvgs = [];
+  var recentKlines = klines.slice(-lookback);
+  
+  for (var i = 2; i < recentKlines.length; i++) {
+    var candle1 = recentKlines[i - 2];
+    var candle3 = recentKlines[i];
+    
+    if (!candle1 || !candle3) continue;
+    
+    if (candle3.l > candle1.h) {
+      fvgs.push({ type: 'bullish', high: candle3.l, low: candle1.h, filled: false });
+    }
+    
+    if (candle3.h < candle1.l) {
+      fvgs.push({ type: 'bearish', high: candle1.l, low: candle3.h, filled: false });
+    }
+  }
+  
+  return fvgs.slice(-3);
+}
+
+function calcVWAP(klines, period) {
+  if (!klines || klines.length < period) return null;
+  
+  var recentKlines = klines.slice(-period);
+  var cumulativeTPV = 0;
+  var cumulativeVolume = 0;
+  
+  for (var i = 0; i < recentKlines.length; i++) {
+    var k = recentKlines[i];
+    var typicalPrice = (k.h + k.l + k.c) / 3;
+    var volume = k.v || 1;
+    
+    cumulativeTPV += typicalPrice * volume;
+    cumulativeVolume += volume;
+  }
+  
+  if (cumulativeVolume === 0) return null;
+  
+  var vwap = cumulativeTPV / cumulativeVolume;
+  
+  var squaredDiffs = 0;
+  for (var j = 0; j < recentKlines.length; j++) {
+    var tp = (recentKlines[j].h + recentKlines[j].l + recentKlines[j].c) / 3;
+    squaredDiffs += Math.pow(tp - vwap, 2);
+  }
+  var stdDev = Math.sqrt(squaredDiffs / recentKlines.length);
+  
+  return {
+    vwap: vwap,
+    upperBand1: vwap + stdDev,
+    lowerBand1: vwap - stdDev,
+    upperBand2: vwap + stdDev * 2,
+    lowerBand2: vwap - stdDev * 2
+  };
+}
+
+function findConfluenceZones(currentPrice, signalType, fib, orderBlocks, fvgs, vwap, ema21, ema50, atr) {
+  var zones = [];
+  var tolerance = atr * 0.3;
+  var allLevels = [];
+  
+  if (fib && fib.levels) {
+    var fibLevels = [0.382, 0.5, 0.618, 0.786];
+    for (var i = 0; i < fibLevels.length; i++) {
+      var level = fib.levels[fibLevels[i]];
+      if (level && isFinite(level)) {
+        allLevels.push({ price: level, source: 'Fib ' + (fibLevels[i] * 100).toFixed(1) + '%', weight: fibLevels[i] === 0.618 ? 2 : 1 });
+      }
+    }
+  }
+  
+  if (orderBlocks && orderBlocks.length > 0) {
+    for (var j = 0; j < orderBlocks.length; j++) {
+      var ob = orderBlocks[j];
+      if ((signalType === 'long' && ob.type === 'bullish') ||
+          (signalType === 'short' && ob.type === 'bearish')) {
+        var obMid = (ob.high + ob.low) / 2;
+        allLevels.push({ price: obMid, source: 'Order Block', weight: ob.strength });
+      }
+    }
+  }
+  
+  if (fvgs && fvgs.length > 0) {
+    for (var k = 0; k < fvgs.length; k++) {
+      var fvg = fvgs[k];
+      if ((signalType === 'long' && fvg.type === 'bullish') ||
+          (signalType === 'short' && fvg.type === 'bearish')) {
+        var fvgMid = (fvg.high + fvg.low) / 2;
+        allLevels.push({ price: fvgMid, source: 'FVG', weight: 1 });
+      }
+    }
+  }
+  
+  if (vwap && vwap.vwap) {
+    allLevels.push({ price: vwap.vwap, source: 'VWAP', weight: 2 });
+    if (signalType === 'long') {
+      allLevels.push({ price: vwap.lowerBand1, source: 'VWAP -1σ', weight: 1 });
+    } else {
+      allLevels.push({ price: vwap.upperBand1, source: 'VWAP +1σ', weight: 1 });
+    }
+  }
+  
+  if (ema21 && isFinite(ema21)) {
+    allLevels.push({ price: ema21, source: 'EMA21', weight: 1 });
+  }
+  if (ema50 && isFinite(ema50)) {
+    allLevels.push({ price: ema50, source: 'EMA50', weight: 2 });
+  }
+  
+  allLevels = allLevels.filter(function(l) {
+    return l.price && isFinite(l.price) && l.price > 0;
+  });
+  
+  if (signalType === 'long') {
+    allLevels = allLevels.filter(function(l) { return l.price <= currentPrice + tolerance; });
+  } else {
+    allLevels = allLevels.filter(function(l) { return l.price >= currentPrice - tolerance; });
+  }
+  
+  allLevels.sort(function(a, b) { return a.price - b.price; });
+  
+  var i = 0;
+  while (i < allLevels.length) {
+    var zone = {
+      price: allLevels[i].price,
+      sources: [allLevels[i].source],
+      score: allLevels[i].weight,
+      confirmations: 1
+    };
+    
+    var j = i + 1;
+    while (j < allLevels.length && Math.abs(allLevels[j].price - zone.price) <= tolerance) {
+      zone.price = (zone.price * zone.confirmations + allLevels[j].price) / (zone.confirmations + 1);
+      zone.sources.push(allLevels[j].source);
+      zone.score += allLevels[j].weight;
+      zone.confirmations++;
+      j++;
+    }
+    
+    zones.push(zone);
+    i = j;
+  }
+  
+  zones.sort(function(a, b) { return b.score - a.score; });
+  return zones.slice(0, 5);
+}
+
+function findSmartEntry(klines, klines4h, currentPrice, signalType, ema21, ema50, atr, capital) {
+  var result = {
+    entry: currentPrice,
+    entries: [],
+    quality: 'good',
+    reasons: [],
+    confluenceScore: 0
+  };
+  
+  if (!klines || klines.length < 50 || !isFinite(currentPrice) || currentPrice <= 0) {
+    result.reasons.push('داده کافی نیست');
+    return result;
+  }
+  
+  var fib = calcFibonacci(klines, 50);
+  var fib4h = klines4h ? calcFibonacci(klines4h, 30) : null;
+  var orderBlocks = detectOrderBlocks(klines, 30);
+  var fvgs = detectFVG(klines, 20);
+  var vwap = calcVWAP(klines, 24);
+  
+  var zones = findConfluenceZones(currentPrice, signalType, fib, orderBlocks, fvgs, vwap, ema21, ema50, atr);
+  
+  if (fib4h) {
+    var zones4h = findConfluenceZones(currentPrice, signalType, fib4h, [], [], null, null, null, atr);
+    for (var z = 0; z < zones4h.length; z++) {
+      zones4h[z].score += 2;
+      zones4h[z].sources.push('4H TF');
+      zones.push(zones4h[z]);
+    }
+    zones.sort(function(a, b) { return b.score - a.score; });
+  }
+  
+  if (zones.length === 0) {
+    result.entry = signalType === 'long' ? Math.min(currentPrice, ema21) : Math.max(currentPrice, ema21);
+    result.reasons.push('ورود در EMA21');
+    result.quality = 'good';
+    result.entries = calculateSmartScaling(result.entry, signalType, atr, capital);
+    return result;
+  }
+  
+  var bestZone = zones[0];
+  result.entry = bestZone.price;
+  result.confluenceScore = bestZone.score;
+  result.reasons = bestZone.sources;
+  
+  if (bestZone.confirmations >= 3 || bestZone.score >= 5) {
+    result.quality = 'excellent';
+  } else if (bestZone.confirmations >= 2 || bestZone.score >= 3) {
+    result.quality = 'good';
+  } else {
+    result.quality = 'fair';
+  }
+  
+  result.entries = calculateSmartScaling(result.entry, signalType, atr, capital, zones);
+  
+  return result;
+}
+
+function calculateSmartScaling(baseEntry, signalType, atr, capital, zones) {
+  var entries = [];
+  
+  if (!isFinite(baseEntry) || baseEntry <= 0 || !isFinite(atr) || atr <= 0) {
+    return [{ price: baseEntry, percent: 100, reason: 'ورود کامل' }];
+  }
+  
+  capital = capital || 1000;
+  
+  if (capital < 500) {
+    entries.push({ price: baseEntry, percent: 100, reason: 'ورود کامل (سرمایه کم)' });
+  }
+  else if (capital < 2000) {
+    entries.push({ price: baseEntry, percent: 60, reason: 'ورود اول' });
+    var entry2 = signalType === 'long' ? baseEntry - atr * 0.3 : baseEntry + atr * 0.3;
+    entries.push({ price: entry2, percent: 40, reason: 'ورود دوم (DCA)' });
+  }
+  else if (capital < 10000) {
+    entries.push({ price: baseEntry, percent: 50, reason: 'ورود اول' });
+    var entry2 = signalType === 'long' ? baseEntry - atr * 0.25 : baseEntry + atr * 0.25;
+    entries.push({ price: entry2, percent: 30, reason: 'ورود دوم' });
+    var entry3;
+    if (zones && zones.length > 1) {
+      entry3 = zones[1].price;
+    } else {
+      entry3 = signalType === 'long' ? baseEntry - atr * 0.5 : baseEntry + atr * 0.5;
+    }
+    entries.push({ price: entry3, percent: 20, reason: 'ورود سوم (اگر رسید)' });
+  }
+  else {
+    entries.push({ price: baseEntry, percent: 40, reason: 'ورود اول' });
+    var entry2 = signalType === 'long' ? baseEntry - atr * 0.2 : baseEntry + atr * 0.2;
+    entries.push({ price: entry2, percent: 25, reason: 'ورود دوم' });
+    var entry3 = signalType === 'long' ? baseEntry - atr * 0.4 : baseEntry + atr * 0.4;
+    entries.push({ price: entry3, percent: 20, reason: 'ورود سوم' });
+    var entry4 = signalType === 'long' ? baseEntry - atr * 0.6 : baseEntry + atr * 0.6;
+    entries.push({ price: entry4, percent: 15, reason: 'ورود چهارم (اگر رسید)' });
+  }
+  
+  return entries;
+}
+
+// ==================== تحلیل تایم‌فریم ====================
+function analyzeTF(klines, price) {
+  if (!klines || !Array.isArray(klines) || klines.length < 50) {
+    return { signal: 'neutral', score: 0, rsi: 50, ema21: price, ema50: price, trend: 'neutral' };
+  }
+  
+  if (!price || !isFinite(price) || price <= 0) {
+    return { signal: 'neutral', score: 0, rsi: 50, ema21: 0, ema50: 0, trend: 'neutral' };
+  }
+  
+  var closes = klines.map(function(k) { return k.c; }).filter(function(c) {
+    return typeof c === 'number' && isFinite(c) && c > 0;
+  });
+  
+  if (closes.length < 50) {
+    return { signal: 'neutral', score: 0, rsi: 50, ema21: price, ema50: price, trend: 'neutral' };
+  }
+  
+  // Standard indicators
+  var rsi = calcRSI(closes, 14);
+  var ema21 = calcEMA(closes, 21);
+  var ema50 = calcEMA(closes, 50);
+  var macd = calcMACD(closes);
+  var bb = calcBB(closes, 20, 2);
+  var adx = calcADX(klines, 14);
+  var atr = calcATR(klines, 14, price);
+  
+  // New futures-focused indicators
+  var stochRSI = calcStochRSI(closes, 14, 14, 3, 3);
+  var marketStructure = analyzeMarketStructure(klines, 50);
+  
+  if (!isFinite(rsi)) rsi = 50;
+  if (!isFinite(ema21) || ema21 <= 0) ema21 = price;
+  if (!isFinite(ema50) || ema50 <= 0) ema50 = price;
+  if (!macd || !isFinite(macd.histogram)) macd = { histogram: 0, line: 0, signal: 0 };
+  if (!bb || !isFinite(bb.upper) || !isFinite(bb.lower)) {
+    bb = { upper: price * 1.02, lower: price * 0.98, middle: price };
+  }
+  if (!adx || !isFinite(adx.adx)) adx = { adx: 25, diPlus: 0, diMinus: 0, trend: 'neutral' };
+  
+  var currentVolume = klines[klines.length - 1] ? klines[klines.length - 1].v : 0;
+  var volumeAnalysis = analyzeVolume(klines, currentVolume);
+  var patterns = detectCandlestickPatterns(klines);
+  var marketRegime = detectMarketRegime(klines, price);
+  
+  var rsiValues = [];
+  for (var i = 0; i < closes.length; i++) {
+    if (i >= 14) {
+      var slice = closes.slice(0, i + 1);
+      rsiValues.push(calcRSI(slice, 14));
+    } else {
+      rsiValues.push(50);
+    }
+  }
+  
+  var rsiDivergence = detectDivergence(klines, rsiValues, 'RSI');
+  
+  var trend = 'neutral';
+  if (price > ema21 && ema21 > ema50) trend = 'up';
+  else if (price < ema21 && ema21 < ema50) trend = 'down';
+  
+  var longPts = 0, shortPts = 0;
+  
+  // RSI Analysis (optimized for futures)
+  if (rsi <= 25) longPts += 4;
+  else if (rsi <= 35) longPts += 2;
+  else if (rsi >= 75) shortPts += 4;
+  else if (rsi >= 65) shortPts += 2;
+  
+  // Stochastic RSI Analysis (new - better for ranging markets)
+  if (stochRSI.signal === 'oversold') {
+    longPts += 3;
+  } else if (stochRSI.signal === 'overbought') {
+    shortPts += 3;
+  } else if (stochRSI.signal === 'bullish_cross' && stochRSI.k < 50) {
+    longPts += 2;
+  } else if (stochRSI.signal === 'bearish_cross' && stochRSI.k > 50) {
+    shortPts += 2;
+  }
+  
+  // Trend Analysis
+  if (trend === 'up') longPts += 2;
+  else if (trend === 'down') shortPts += 2;
+  
+  // MACD Analysis
+  if (macd.histogram > 0) longPts += 2;
+  else if (macd.histogram < 0) shortPts += 2;
+  
+  // Bollinger Bands Analysis
+  var bbPos = (price - bb.lower) / (bb.upper - bb.lower);
+  if (bb.upper !== bb.lower && isFinite(bbPos)) {
+    if (bbPos <= 0.1) longPts += 3;
+    else if (bbPos <= 0.2) longPts += 1;
+    else if (bbPos >= 0.9) shortPts += 3;
+    else if (bbPos >= 0.8) shortPts += 1;
+  }
+  
+  // ADX Analysis
+  if (adx.adx >= 25) {
+    if (adx.trend === 'strong_up') longPts += 2;
+    else if (adx.trend === 'strong_down') shortPts += 2;
+  } else if (adx.adx < 20) {
+    // Ranging market - reduce base points but rely more on StochRSI
+    longPts = Math.max(0, longPts - 1);
+    shortPts = Math.max(0, shortPts - 1);
+  }
+  
+  // Volume Confirmation - Stronger penalties for low volume
+  var volumeRatio = volumeAnalysis.ratio || 1;
+  if (volumeRatio < 0.5) {
+    // Very low volume - unreliable signal
+    longPts = Math.max(0, longPts - 4);
+    shortPts = Math.max(0, shortPts - 4);
+  } else if (volumeRatio < 0.8) {
+    // Low volume - reduce confidence
+    longPts = Math.max(0, longPts - 2);
+    shortPts = Math.max(0, shortPts - 2);
+  } else if (volumeRatio > 1.5) {
+    // High volume - bonus
+    if (longPts > shortPts) longPts += 2;
+    else if (shortPts > longPts) shortPts += 2;
+  } else if (volumeAnalysis.strength > 0) {
+    if (longPts > shortPts) longPts += volumeAnalysis.strength;
+    else if (shortPts > longPts) shortPts += volumeAnalysis.strength;
+  }
+  
+  // RSI Divergence - with opposing divergence penalties
+  if (rsiDivergence.type === 'bullish') {
+    longPts += Math.min(3, rsiDivergence.strength);
+    // Penalty for SHORT signal with bullish divergence
+    shortPts = Math.max(0, shortPts - 3);
+  } else if (rsiDivergence.type === 'bearish') {
+    shortPts += Math.min(3, rsiDivergence.strength);
+    // Penalty for LONG signal with bearish divergence
+    longPts = Math.max(0, longPts - 3);
+  }
+  
+  // Candlestick Patterns
+  if (patterns.bullish > 0) longPts += Math.min(2, patterns.bullish);
+  if (patterns.bearish > 0) shortPts += Math.min(2, patterns.bearish);
+  
+  // Market Structure Analysis (new - important for futures)
+  if (marketStructure.structure === 'uptrend') {
+    longPts += 2;
+    if (marketStructure.choch === 'bullish') longPts += 2;
+  } else if (marketStructure.structure === 'downtrend') {
+    shortPts += 2;
+    if (marketStructure.choch === 'bearish') shortPts += 2;
+  } else if (marketStructure.structure === 'bos_bullish') {
+    longPts += 3; // Break of Structure is strong signal
+  } else if (marketStructure.structure === 'bos_bearish') {
+    shortPts += 3;
+  }
+  
+  var signal = 'neutral';
+  var score = 0;
+  
+  // شرایط سیگنال‌دهی - حداقل 4 امتیاز و 2 امتیاز فاصله (بهینه برای فیوچرز)
+  if (longPts >= 4 && longPts > shortPts + 2) {
+    signal = 'long';
+    score = longPts;
+  } else if (shortPts >= 4 && shortPts > longPts + 2) {
+    signal = 'short';
+    score = shortPts;
+  }
+  
+  return { 
+    signal: signal, 
+    score: score, 
+    rsi: rsi, 
+    ema21: ema21, 
+    ema50: ema50, 
+    trend: trend,
+    bb: bb,
+    macd: macd,
+    adx: adx,
+    atr: atr,
+    volume: volumeAnalysis,
+    rsiDivergence: rsiDivergence,
+    patterns: patterns,
+    marketRegime: marketRegime,
+    // New futures-focused data
+    stochRSI: stochRSI,
+    marketStructure: marketStructure,
+    longPoints: longPts,
+    shortPoints: shortPts
+  };
+}
+
+// ==================== Leverage Calculator ====================
+function getLeverage(entry, sl) {
+  if (!entry || !sl || entry === sl) return 3;
+  
+  var riskPercent = Math.abs(entry - sl) / entry * 100;
+  
+  if (riskPercent >= 5) return 2;
+  if (riskPercent >= 3) return 3;
+  if (riskPercent >= 2) return 4;
+  return 5;
+}
+
+// ==================== Stochastic RSI (برای فیوچرز) ====================
+function calcStochRSI(closes, rsiPeriod, stochPeriod, kPeriod, dPeriod) {
+  rsiPeriod = rsiPeriod || 14;
+  stochPeriod = stochPeriod || 14;
+  kPeriod = kPeriod || 3;
+  dPeriod = dPeriod || 3;
+  
+  if (!closes || closes.length < rsiPeriod + stochPeriod + kPeriod) {
+    return { k: 50, d: 50, signal: 'neutral' };
+  }
+  
+  // Calculate RSI values first
+  var rsiValues = [];
+  for (var i = rsiPeriod; i < closes.length; i++) {
+    var slice = closes.slice(0, i + 1);
+    rsiValues.push(calcRSI(slice, rsiPeriod));
+  }
+  
+  if (rsiValues.length < stochPeriod) {
+    return { k: 50, d: 50, signal: 'neutral' };
+  }
+  
+  // Calculate Stochastic of RSI
+  var stochKValues = [];
+  for (var j = stochPeriod - 1; j < rsiValues.length; j++) {
+    var rsiSlice = rsiValues.slice(j - stochPeriod + 1, j + 1);
+    var minRSI = Math.min.apply(null, rsiSlice);
+    var maxRSI = Math.max.apply(null, rsiSlice);
+    
+    var stochK = maxRSI !== minRSI ? 
+      ((rsiValues[j] - minRSI) / (maxRSI - minRSI)) * 100 : 50;
+    stochKValues.push(stochK);
+  }
+  
+  if (stochKValues.length < kPeriod) {
+    return { k: 50, d: 50, signal: 'neutral' };
+  }
+  
+  // Smooth K (Fast %K -> Slow %K)
+  var smoothedK = [];
+  for (var m = kPeriod - 1; m < stochKValues.length; m++) {
+    var sum = 0;
+    for (var n = 0; n < kPeriod; n++) {
+      sum += stochKValues[m - n];
+    }
+    smoothedK.push(sum / kPeriod);
+  }
+  
+  if (smoothedK.length < dPeriod) {
+    return { k: smoothedK[smoothedK.length - 1] || 50, d: 50, signal: 'neutral' };
+  }
+  
+  // Calculate %D (SMA of smoothed K)
+  var dSum = 0;
+  for (var p = 0; p < dPeriod; p++) {
+    dSum += smoothedK[smoothedK.length - 1 - p];
+  }
+  var d = dSum / dPeriod;
+  var k = smoothedK[smoothedK.length - 1];
+  
+  // Generate signal
+  var signal = 'neutral';
+  if (k <= 20 && d <= 20) {
+    signal = 'oversold';
+  } else if (k >= 80 && d >= 80) {
+    signal = 'overbought';
+  } else if (k > d && k < 80) {
+    signal = 'bullish_cross';
+  } else if (k < d && k > 20) {
+    signal = 'bearish_cross';
+  }
+  
+  return { 
+    k: Math.round(k * 10) / 10, 
+    d: Math.round(d * 10) / 10, 
+    signal: signal,
+    crossover: k > d,
+    extreme: k <= 20 || k >= 80
+  };
+}
+
+// ==================== Market Structure (Higher Highs/Lower Lows) ====================
+function analyzeMarketStructure(klines, lookback) {
+  lookback = lookback || 50;
+  
+  if (!klines || klines.length < lookback) {
+    return { structure: 'unknown', pivots: [], strength: 0 };
+  }
+  
+  var recentKlines = klines.slice(-lookback);
+  var pivotHighs = [];
+  var pivotLows = [];
+  
+  // Find pivot points (swing highs and lows)
+  for (var i = 2; i < recentKlines.length - 2; i++) {
+    var curr = recentKlines[i];
+    var isHigh = curr.h > recentKlines[i-1].h && 
+                 curr.h > recentKlines[i-2].h &&
+                 curr.h > recentKlines[i+1].h &&
+                 curr.h > recentKlines[i+2].h;
+    var isLow = curr.l < recentKlines[i-1].l && 
+                curr.l < recentKlines[i-2].l &&
+                curr.l < recentKlines[i+1].l &&
+                curr.l < recentKlines[i+2].l;
+    
+    if (isHigh) {
+      pivotHighs.push({ index: i, price: curr.h });
+    }
+    if (isLow) {
+      pivotLows.push({ index: i, price: curr.l });
+    }
+  }
+  
+  if (pivotHighs.length < 2 || pivotLows.length < 2) {
+    return { structure: 'consolidation', pivots: { highs: pivotHighs, lows: pivotLows }, strength: 0 };
+  }
+  
+  // Analyze structure
+  var lastHighs = pivotHighs.slice(-3);
+  var lastLows = pivotLows.slice(-3);
+  
+  var higherHighs = 0;
+  var lowerHighs = 0;
+  var higherLows = 0;
+  var lowerLows = 0;
+  
+  for (var h = 1; h < lastHighs.length; h++) {
+    if (lastHighs[h].price > lastHighs[h-1].price) higherHighs++;
+    else lowerHighs++;
+  }
+  
+  for (var l = 1; l < lastLows.length; l++) {
+    if (lastLows[l].price > lastLows[l-1].price) higherLows++;
+    else lowerLows++;
+  }
+  
+  var structure = 'consolidation';
+  var strength = 0;
+  
+  // Uptrend: Higher Highs + Higher Lows
+  if (higherHighs >= 1 && higherLows >= 1) {
+    structure = 'uptrend';
+    strength = (higherHighs + higherLows) * 25;
+  }
+  // Downtrend: Lower Highs + Lower Lows
+  else if (lowerHighs >= 1 && lowerLows >= 1) {
+    structure = 'downtrend';
+    strength = (lowerHighs + lowerLows) * 25;
+  }
+  // Break of Structure checks
+  else if (higherHighs >= 1 && lowerLows >= 1) {
+    structure = 'bos_bullish'; // Breaking bearish structure
+    strength = 50;
+  }
+  else if (lowerHighs >= 1 && higherLows >= 1) {
+    structure = 'bos_bearish'; // Breaking bullish structure
+    strength = 50;
+  }
+  
+  // Check for Change of Character (ChoCh)
+  var lastHigh = pivotHighs[pivotHighs.length - 1];
+  var lastLow = pivotLows[pivotLows.length - 1];
+  var currentPrice = recentKlines[recentKlines.length - 1].c;
+  
+  var choch = null;
+  if (structure === 'downtrend' && currentPrice > lastHigh.price) {
+    choch = 'bullish';
+    strength += 30;
+  } else if (structure === 'uptrend' && currentPrice < lastLow.price) {
+    choch = 'bearish';
+    strength += 30;
+  }
+  
+  return {
+    structure: structure,
+    strength: Math.min(100, strength),
+    pivots: { highs: pivotHighs, lows: pivotLows },
+    higherHighs: higherHighs,
+    higherLows: higherLows,
+    lowerHighs: lowerHighs,
+    lowerLows: lowerLows,
+    choch: choch,
+    lastPivotHigh: lastHigh ? lastHigh.price : null,
+    lastPivotLow: lastLow ? lastLow.price : null
+  };
+}
+
+// ==================== Multi-Timeframe Confluence ====================
+function analyzeMTF(analyses) {
+  // analyses = { '30m': result, '1h': result, '4h': result, '1d': result }
+  if (!analyses || Object.keys(analyses).length === 0) {
+    return { confluence: 0, direction: 'neutral', aligned: false };
+  }
+  
+  var longCount = 0;
+  var shortCount = 0;
+  var neutralCount = 0;
+  var totalWeight = 0;
+  
+  // Weights for each timeframe (higher TF = more weight)
+  var weights = { '30m': 1, '1h': 2, '4h': 3, '1d': 4 };
+  
+  for (var tf in analyses) {
+    if (!analyses[tf]) continue;
+    
+    var analysis = analyses[tf];
+    var weight = weights[tf] || 1;
+    totalWeight += weight;
+    
+    if (analysis.signal === 'long') {
+      longCount += weight;
+    } else if (analysis.signal === 'short') {
+      shortCount += weight;
+    } else {
+      neutralCount += weight;
+    }
+  }
+  
+  if (totalWeight === 0) {
+    return { confluence: 0, direction: 'neutral', aligned: false };
+  }
+  
+  var longPercent = (longCount / totalWeight) * 100;
+  var shortPercent = (shortCount / totalWeight) * 100;
+  
+  var direction = 'neutral';
+  var confluence = 0;
+  var aligned = false;
+  
+  if (longPercent >= 70) {
+    direction = 'long';
+    confluence = longPercent;
+    aligned = true;
+  } else if (shortPercent >= 70) {
+    direction = 'short';
+    confluence = shortPercent;
+    aligned = true;
+  } else if (longPercent >= 50) {
+    direction = 'long';
+    confluence = longPercent;
+    aligned = false;
+  } else if (shortPercent >= 50) {
+    direction = 'short';
+    confluence = shortPercent;
+    aligned = false;
+  }
+  
+  return {
+    confluence: Math.round(confluence),
+    direction: direction,
+    aligned: aligned,
+    breakdown: {
+      long: longCount,
+      short: shortCount,
+      neutral: neutralCount,
+      total: totalWeight
+    }
+  };
+}
+
+// ==================== Liquidation Price Calculator (فیوچرز) ====================
+function calcLiquidationPrice(entryPrice, leverage, positionType, maintenanceMargin) {
+  maintenanceMargin = maintenanceMargin || 0.005; // 0.5% default
+  
+  if (!entryPrice || !leverage || leverage < 1) {
+    return null;
+  }
+  
+  // Liquidation formula for cross margin
+  // Long: Entry * (1 - 1/leverage + maintenance)
+  // Short: Entry * (1 + 1/leverage - maintenance)
+  
+  var liqPrice;
+  if (positionType === 'long') {
+    liqPrice = entryPrice * (1 - (1 / leverage) + maintenanceMargin);
+  } else {
+    liqPrice = entryPrice * (1 + (1 / leverage) - maintenanceMargin);
+  }
+  
+  var distancePercent = Math.abs(entryPrice - liqPrice) / entryPrice * 100;
+  
+  return {
+    price: liqPrice,
+    distancePercent: distancePercent,
+    safe: distancePercent > 5,
+    warning: distancePercent <= 5 && distancePercent > 2,
+    danger: distancePercent <= 2
+  };
+}
+
+// ==================== Enhanced Leverage Recommendation (فیوچرز) ====================
+function getSmartLeverage(entry, sl, atr, capital, riskPercent) {
+  if (!entry || !sl || entry === sl || !atr) return { leverage: 3, reason: 'پیش‌فرض' };
+  
+  riskPercent = riskPercent || 2;
+  capital = capital || 1000;
+  
+  var slDistance = Math.abs(entry - sl);
+  var slPercent = (slDistance / entry) * 100;
+  var atrPercent = (atr / entry) * 100;
+  
+  // Calculate max safe leverage based on SL distance
+  var maxLeverageFromSL = Math.floor(100 / slPercent);
+  
+  // Calculate recommended leverage based on ATR volatility
+  var volatilityFactor = atrPercent / 2; // Higher ATR = lower leverage
+  var maxLeverageFromATR = Math.floor(10 / volatilityFactor);
+  
+  // Risk-based leverage (to risk only riskPercent of capital)
+  var riskAmount = capital * (riskPercent / 100);
+  var positionSize = riskAmount / (slPercent / 100);
+  var margin = capital * 0.2; // Use 20% of capital as margin
+  var riskBasedLeverage = Math.floor(positionSize / margin);
+  
+  // Take minimum of all calculations for safety
+  var safeLeverage = Math.min(maxLeverageFromSL, maxLeverageFromATR, riskBasedLeverage, 20);
+  safeLeverage = Math.max(safeLeverage, 1); // At least 1x
+  
+  var reason = '';
+  var riskLevel = 'medium';
+  
+  if (safeLeverage <= 3) {
+    reason = 'SL فاصله زیاد یا نوسان بالا';
+    riskLevel = 'low';
+  } else if (safeLeverage <= 7) {
+    reason = 'تعادل ریسک و سود';
+    riskLevel = 'medium';
+  } else if (safeLeverage <= 15) {
+    reason = 'SL نزدیک - ریسک بالاتر';
+    riskLevel = 'high';
+  } else {
+    reason = 'لوریج بالا - احتیاط!';
+    riskLevel = 'extreme';
+  }
+  
+  return {
+    leverage: safeLeverage,
+    reason: reason,
+    riskLevel: riskLevel,
+    maxFromSL: maxLeverageFromSL,
+    maxFromATR: maxLeverageFromATR,
+    slPercent: slPercent,
+    atrPercent: atrPercent
+  };
+}
+
+// Export for use in app.js
+if (typeof window !== 'undefined') {
+  window.TradingCore = {
+    calcRSI: calcRSI,
+    calcEMA: calcEMA,
+    calcMACD: calcMACD,
+    calcBB: calcBB,
+    calcATR: calcATR,
+    calcADX: calcADX,
+    analyzeVolume: analyzeVolume,
+    detectDivergence: detectDivergence,
+    detectCandlestickPatterns: detectCandlestickPatterns,
+    detectMarketRegime: detectMarketRegime,
+    findSmartEntry: findSmartEntry,
+    calculateSmartScaling: calculateSmartScaling,
+    analyzeTF: analyzeTF,
+    getLeverage: getLeverage,
+    calcFibonacci: calcFibonacci,
+    detectOrderBlocks: detectOrderBlocks,
+    detectFVG: detectFVG,
+    calcVWAP: calcVWAP,
+    // New Futures-focused functions
+    calcStochRSI: calcStochRSI,
+    analyzeMarketStructure: analyzeMarketStructure,
+    analyzeMTF: analyzeMTF,
+    calcLiquidationPrice: calcLiquidationPrice,
+    getSmartLeverage: getSmartLeverage
+  };
+}

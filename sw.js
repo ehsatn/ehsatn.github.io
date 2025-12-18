@@ -1,5 +1,5 @@
-// Service Worker v1.2 - signight PWA
-const CACHE_NAME = 'signight-v1.3';
+// Service Worker v1.3 - signight PWA
+const CACHE_NAME = 'signight-v1.4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -16,11 +16,16 @@ const STATIC_ASSETS = [
 // Install
 self.addEventListener('install', (event) => {
   console.log('🔧 Service Worker installing...');
+  // Skip waiting to activate immediately
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
         console.log('[Cache] Caching static assets');
         return cache.addAll(STATIC_ASSETS);
+      })
+      .catch((err) => {
+        console.error('[Cache] Failed to cache assets:', err);
       })
   );
 });
@@ -66,23 +71,27 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   
-  // Static assets - cache first
+  // Static assets - stale-while-revalidate strategy
+  // This serves from cache immediately but fetches updates in background
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then((response) => {
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
+      .then((cachedResponse) => {
+        // Fetch fresh version in background
+        const fetchPromise = fetch(event.request).then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
           }
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
-          return response;
+          return networkResponse;
+        }).catch(() => {
+          // If network fails, return cached version if available
+          return cachedResponse;
         });
+        
+        // Return cached version immediately if available, otherwise wait for network
+        return cachedResponse || fetchPromise;
       })
   );
 });
