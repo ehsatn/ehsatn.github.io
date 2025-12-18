@@ -1790,54 +1790,50 @@ function generateAIPrompt(symbol) {
   var patterns = signal.patterns && signal.patterns.length > 0 ? signal.patterns.join('، ') : 'شناسایی نشده';
 
   // سیگنال
-  var signalType = signal.type === 'long' ? 'LONG 📈' : (signal.type === 'short' ? 'SHORT 📉' : 'WAIT ⏸️');
+  var signalType = signal.type === 'long' ? 'LONG' : (signal.type === 'short' ? 'SHORT' : 'WAIT');
   var score = (signal.confidence || 0) + '/10';
 
-  var prompt = 'شما یک تحلیلگر تکنیکال حرفه‌ای بازار فیوچرز کریپتو هستید. لطفاً بر اساس داده‌های زیر یک تحلیل کاملاً صادقانه و بدون تعارف ارائه دهید.\n\n';
-  prompt += '═══════════════════════════════════════\n';
-  prompt += '📊 نماد: ' + symbol + '\n';
-  prompt += '⏰ تایم‌فریم: 1H\n';
-  prompt += '💰 قیمت فعلی: ' + formatPrice(price.price) + '\n';
-  prompt += '═══════════════════════════════════════\n\n';
+  var prompt = '';
+  prompt += 'Role: Institutional Crypto Futures Analyst.\n';
+  prompt += 'Tone: Clinical, Strict, Data-Driven. NO filler, NO emojis, NO markdown bolding.\n';
+  prompt += 'Task: Audit the trade setup based on provided data.\n\n';
 
-  prompt += '📈 اندیکاتورها:\n';
+  prompt += '--- MARKET DATA ---\n';
+  prompt += 'Symbol: ' + symbol + '\n';
+  prompt += 'Timeframe: 1H\n';
+  prompt += 'Current Price: ' + formatPrice(price.price) + '\n\n';
+
+  prompt += 'Indicators:\n';
   prompt += '- RSI (14): ' + rsiValue + '\n';
   prompt += '- Stochastic RSI: K=' + stochK + ' / D=' + stochD + '\n';
   prompt += '- EMA 21: ' + ema21 + '\n';
   prompt += '- EMA 50: ' + ema50 + '\n';
-  prompt += '- MACD Histogram: ' + macdHist + ' (' + macdSign + ')\n';
+  prompt += '- MACD Histogram: ' + macdHist + '\n';
   prompt += '- ADX: ' + adxValue + '\n';
-  prompt += '- Bollinger Band Position: ' + bbPosition + '% (0=پایین، 100=بالا)\n\n';
+  prompt += '- Bollinger Position: ' + bbPosition + '%\n\n';
 
-  prompt += '🏗️ ساختار بازار:\n';
-  prompt += '- روند: ' + trend + '\n';
-  prompt += '- ساختار: ' + structure + '\n';
-  prompt += '- Break of Structure: ' + bos + '\n';
-  prompt += '- Change of Character: ' + choch + '\n\n';
+  prompt += 'Structure: ' + trend + ', Structure Detail: ' + structure + ', BOS: ' + bos + ', CHoCH: ' + choch + ', Vol vs Avg: ' + volumeRatio + 'x, RSI Divergence: ' + divergence + '.\n';
+  prompt += 'Candle Patterns: ' + patterns + '.\n\n';
 
-  prompt += '📊 حجم و مومنتوم:\n';
-  prompt += '- حجم نسبت به میانگین: ' + volumeRatio + 'x\n';
-  prompt += '- واگرایی RSI: ' + divergence + '\n\n';
+  prompt += 'System Signal: ' + signalType + ' (Score: ' + score + ')\n';
+  prompt += '- Entry: ' + formatPrice(signal.entry) + '\n';
+  prompt += '- SL: ' + formatPrice(signal.sl) + '\n';
+  prompt += '- TP1: ' + formatPrice(signal.tp1) + '\n';
+  if (signal.tp2) {
+    prompt += '- TP2: ' + formatPrice(signal.tp2) + '\n';
+  }
+  prompt += '\n';
 
-  prompt += '🕯️ الگوهای کندلی:\n';
-  prompt += '- ' + patterns + '\n\n';
-
-  prompt += '💡 سیگنال سیستم: ' + signalType + ' با امتیاز ' + score + '\n';
-  prompt += '- نقطه ورود پیشنهادی: ' + formatPrice(signal.entry) + '\n';
-  prompt += '- استاپ‌لاس: ' + formatPrice(signal.sl) + '\n';
-  prompt += '- تارگت ۱: ' + formatPrice(signal.tp1) + '\n';
-  prompt += '- تارگت ۲: ' + formatPrice(signal.tp2) + '\n\n';
-
-  prompt += '═══════════════════════════════════════\n\n';
-
-  prompt += 'لطفاً موارد زیر را تحلیل کنید:\n\n';
-  prompt += '1. **ارزیابی سیگنال**: آیا این سیگنال قابل اعتماد است؟ چرا؟\n\n';
-  prompt += '2. **نقاط قوت**: چه فاکتورهایی از این معامله حمایت می‌کنند؟\n\n';
-  prompt += '3. **نقاط ضعف و ریسک‌ها**: چه خطراتی وجود دارد که سیستم ممکن است ندیده باشد؟\n\n';
-  prompt += '4. **تأیید یا رد**: اگر شما بودید، وارد این معامله می‌شدید؟ با چه لوریجی؟\n\n';
-  prompt += '5. **پیشنهاد بهبود**: آیا نقاط ورود/خروج بهتری پیشنهاد می‌کنید؟\n\n';
-  prompt += '6. **امتیاز نهایی**: از 1 تا 10 به این معامله چه امتیازی می‌دهید؟\n\n';
-  prompt += '⚠️ مهم: کاملاً صادق باشید. اگر معامله ضعیف است، بگویید. تعارف نکنید.';
+  prompt += '--- RESPONSE REQUIREMENTS ---\n';
+  prompt += 'You must output EXACTLY 6 lines. No introduction, no conclusion.\n';
+  prompt += 'Format your response exactly like this example:\n\n';
+  prompt += '1. Signal Validity: [Verdict] - [Main Reason]\n';
+  prompt += '2. Key Catalysts: [Factor 1, Factor 2]\n';
+  prompt += '3. Critical Risks: [Risk 1, Risk 2]\n';
+  prompt += '4. Decision: [ENTER / SKIP]\n';
+  prompt += '5. Optimized Levels: [Specific price or condition]\n';
+  prompt += '6. Final Score: [1-10]\n\n';
+  prompt += 'Generate the response now based on the data provided:';
 
   return prompt;
 }
