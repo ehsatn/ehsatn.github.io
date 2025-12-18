@@ -752,10 +752,6 @@ function selectAsset(symbol) {
   
   renderAssetPanel(symbol);
   if (!STATE.klines[symbol]) fetchAssetData(symbol);
-  // reset Monte Carlo view when switching asset so each symbol has its own clean state
-  if (typeof resetMonteCarloView === 'function') {
-    resetMonteCarloView();
-  }
 }
 
 function renderEmptyWatchlist() {
@@ -1056,6 +1052,10 @@ function renderAssetPanel(symbol) {
   // Indicators - Enhanced for Futures
   var stochRSI = signal && (signal.stochRSI || signal.stochRsi) ? (signal.stochRSI || signal.stochRsi) : null;
   var marketStruct = signal && signal.marketStructure ? signal.marketStructure : null;
+  var srInfo = signal && signal.staticSR ? signal.staticSR : null;
+  var htf = signal && signal.htfSummary ? signal.htfSummary : null;
+  var liq = signal && signal.liquidity ? signal.liquidity : null;
+  var btcCtx = signal && signal.btcContext ? signal.btcContext : null;
   
   var indicatorsHtml = '<div class="indicators-section">' +
     '<div class="indicators-title">' + ICONS.barChart + ' اندیکاتورها</div>' +
@@ -1066,8 +1066,148 @@ function renderAssetPanel(symbol) {
       '<div class="ind-item"><span class="ind-label">ساختار</span><span class="ind-value ' + getStructureClass(marketStruct) + '">' + getStructureLabel(marketStruct) + '</span></div>' +
       '<div class="ind-item"><span class="ind-label">ADX</span><span class="ind-value">' + (signal && signal.adx ? signal.adx.adx.toFixed(0) : '--') + '</span></div>' +
       '<div class="ind-item"><span class="ind-label">MACD</span><span class="ind-value ' + (signal && signal.macd && signal.macd.histogram > 0 ? 'bullish' : 'bearish') + '">' + (signal && signal.macd ? (signal.macd.histogram > 0 ? 'صعودی' : 'نزولی') : '--') + '</span></div>' +
-    '</div>' +
-  '</div>';
+    '</div>';
+
+  // Advanced Context Row: S/R + HTF + Liquidity + BTC
+  // حتی اگر سیگنال روی حالت "صبر" باشد، دیدن این اطلاعات مفید است
+  if (signal) {
+    // Static S/R badges
+    var supportLabel = '--';
+    var resistanceLabel = '--';
+    var supportClass = '';
+    var resistanceClass = '';
+    if (srInfo && srInfo.nearestSupport) {
+      var supStrengthText = srInfo.supportStrength === 'strong' ? 'قوی' :
+                            srInfo.supportStrength === 'medium' ? 'متوسط' :
+                            srInfo.supportStrength === 'weak' ? 'ضعیف' : 'نامشخص';
+      supportLabel = 'حمایت ' + supStrengthText;
+      supportClass = srInfo.supportStrength === 'strong' ? 'strong' :
+                     srInfo.supportStrength === 'medium' ? 'medium' :
+                     srInfo.supportStrength === 'weak' ? 'weak' : '';
+    }
+    if (srInfo && srInfo.nearestResistance) {
+      var resStrengthText = srInfo.resistanceStrength === 'strong' ? 'قوی' :
+                            srInfo.resistanceStrength === 'medium' ? 'متوسط' :
+                            srInfo.resistanceStrength === 'weak' ? 'ضعیف' : 'نامشخص';
+      resistanceLabel = 'مقاومت ' + resStrengthText;
+      resistanceClass = srInfo.resistanceStrength === 'strong' ? 'strong' :
+                        srInfo.resistanceStrength === 'medium' ? 'medium' :
+                        srInfo.resistanceStrength === 'weak' ? 'weak' : '';
+    }
+
+    // HTF text
+    function simpleTrendLabel(tr) {
+      if (!tr || tr === 'unknown') return 'نامشخص';
+      tr = tr.toLowerCase();
+      if (tr.indexOf('bull') !== -1 || tr === 'up') return 'صعودی';
+      if (tr.indexOf('bear') !== -1 || tr === 'down') return 'نزولی';
+      return 'خنثی';
+    }
+    var trend4h = simpleTrendLabel(htf && htf.trend4h);
+    var trend1d = simpleTrendLabel(htf && htf.trend1d);
+
+    // Liquidity text
+    function simpleLiqLabel(score) {
+      if (score === 'low') return 'کم';
+      if (score === 'high') return 'زیاد';
+      return 'معمولی';
+    }
+    function simpleRiskLabel(r) {
+      if (r === 'low') return 'کم';
+      if (r === 'medium') return 'متوسط';
+      if (r === 'high') return 'زیاد';
+      return 'نامشخص';
+    }
+    var liqScore = liq && liq.entryLiquidityScore ? simpleLiqLabel(liq.entryLiquidityScore) : 'معمولی';
+    var slRisk = liq && liq.slLiquidityRisk ? simpleRiskLabel(liq.slLiquidityRisk) : 'نامشخص';
+
+    // Volume / ADX
+    var volumeRatio = signal && signal.volume && signal.volume.ratio ? signal.volume.ratio : 1;
+    var adxValue = signal && signal.adx ? signal.adx.adx : 25;
+
+    // Conflict checks
+    var srConflict = false;
+    if (srInfo) {
+      if (signal.type === 'short' && srInfo.nearestSupport && srInfo.supportStrength === 'strong' &&
+          srInfo.supportDistancePct !== null && srInfo.supportDistancePct < 0.7) {
+        srConflict = true;
+      }
+      if (signal.type === 'long' && srInfo.nearestResistance && srInfo.resistanceStrength === 'strong' &&
+          srInfo.resistanceDistancePct !== null && srInfo.resistanceDistancePct < 0.7) {
+        srConflict = true;
+      }
+    }
+
+    var htfWith = htf && htf.withHTFTrend;
+    var htfAgainst = htf && htf.againstHTFTrend;
+
+    var btcConflict = false;
+    if (btcCtx && btcCtx.isDependent && typeof btcCtx.correlation === 'number' && Math.abs(btcCtx.correlation) >= 0.5) {
+      var btc4 = (btcCtx.btcTrend4h || '').toLowerCase();
+      var btc1 = (btcCtx.btcTrend1d || '').toLowerCase();
+      if (signal.type === 'long') {
+        if ((btc4 && btc4.indexOf('bear') !== -1) || (btc1 && btc1.indexOf('bear') !== -1) ||
+            (btc4 && btc4.indexOf('down') !== -1) || (btc1 && btc1.indexOf('down') !== -1)) {
+          btcConflict = true;
+        }
+      } else if (signal.type === 'short') {
+        if ((btc4 && btc4.indexOf('bull') !== -1) || (btc1 && btc1.indexOf('bull') !== -1) ||
+            (btc4 && btc4.indexOf('up') !== -1) || (btc1 && btc1.indexOf('up') !== -1)) {
+          btcConflict = true;
+        }
+      }
+    }
+
+    // Setup quality summary
+    var setupQuality = 'متوسط';
+    var setupClass = 'medium';
+    if (
+      (signal.confidence || 0) >= 7 &&
+      adxValue >= 25 &&
+      volumeRatio >= 0.8 &&
+      htfWith &&
+      !srConflict &&
+      !btcConflict &&
+      (!liq || liq.slLiquidityRisk !== 'high')
+    ) {
+      setupQuality = 'بالا';
+      setupClass = 'high';
+    } else if (
+      (signal.confidence || 0) <= 4 ||
+      volumeRatio < 0.5 ||
+      adxValue < 20 ||
+      htfAgainst ||
+      srConflict ||
+      btcConflict ||
+      (liq && liq.slLiquidityRisk === 'high')
+    ) {
+      setupQuality = 'پایین';
+      setupClass = 'low';
+    }
+
+    // BTC context (only for dependent assets)
+    var btcHtml = '';
+    if (btcCtx && btcCtx.isDependent) {
+      var corrLabel = 'نامشخص';
+      if (btcCtx.label === 'high') corrLabel = 'بالا';
+      else if (btcCtx.label === 'medium') corrLabel = 'متوسط';
+      else if (btcCtx.label === 'low') corrLabel = 'کم';
+      else if (btcCtx.label === 'weak') corrLabel = 'خیلی کم';
+      btcHtml = '<div class="ind-item"><span class="ind-label">همبستگی BTC</span><span class="ind-value">' + corrLabel + '</span></div>';
+    }
+
+    indicatorsHtml +=
+      '<div class="ind-advanced" style="margin-top:10px;border-top:1px dashed var(--border);padding-top:8px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;font-size:11px;">' +
+        '<div class="ind-item"><span class="ind-label">کیفیت ستاپ</span><span class="ind-value ' + setupClass + '">' + setupQuality + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">حمایت افقی</span><span class="ind-value ' + supportClass + '">' + supportLabel + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">مقاومت افقی</span><span class="ind-value ' + resistanceClass + '">' + resistanceLabel + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">HTF (4H/1D)</span><span class="ind-value">' + trend4h + ' / ' + trend1d + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">Liquidity</span><span class="ind-value">ورود ' + liqScore + ' / ریسک SL ' + slRisk + '</span></div>' +
+        (btcHtml || '') +
+      '</div>';
+  }
+
+  indicatorsHtml += '</div></div>';
   
   // Position
   var positionHtml = '';
@@ -1501,7 +1641,7 @@ function setErrorPrice(symbol, message) {
 
 // Fetch klines from Binance
 function fetchKlinesFromBinance(symbol, tf, baseAsset) {
-  // برای بک‌تست و Monte Carlo: استفاده از حداکثر دیتای ممکن از Binance
+  // استفاده از حداکثر دیتای ممکن از Binance
   // Binance max limit is 1000
   var limit;
   if (tf === '1d') {
@@ -1541,7 +1681,7 @@ function fetchKlinesFromBinance(symbol, tf, baseAsset) {
 // Fetch klines from CryptoCompare (fallback)
 function fetchKlinesFromCryptoCompare(symbol, tf, baseAsset) {
   // Map timeframe to CryptoCompare endpoint
-  // برای بک‌تست و Monte Carlo: تلاش برای حداکثر دیتای ممکن از CryptoCompare
+  // تلاش برای حداکثر دیتای ممکن از CryptoCompare
   var endpoint, limit;
   switch(tf) {
     case '30m':
@@ -1793,6 +1933,36 @@ function generateAIPrompt(symbol) {
   var signalType = signal.type === 'long' ? 'LONG' : (signal.type === 'short' ? 'SHORT' : 'WAIT');
   var score = (signal.confidence || 0) + '/10';
 
+  // S/R استاتیک
+  var sr = signal.staticSR || {};
+  var nearestSupport = sr.nearestSupport ? formatPrice(sr.nearestSupport) : 'N/A';
+  var nearestResistance = sr.nearestResistance ? formatPrice(sr.nearestResistance) : 'N/A';
+  var supportStrength = sr.supportStrength || 'unknown';
+  var resistanceStrength = sr.resistanceStrength || 'unknown';
+
+  // HTF Summary
+  var htf = signal.htfSummary || {};
+  var trend4h = htf.trend4h || 'unknown';
+  var trend1d = htf.trend1d || 'unknown';
+  var rsi4h = typeof htf.rsi4h === 'number' ? htf.rsi4h.toFixed(1) : 'N/A';
+  var rsi1d = typeof htf.rsi1d === 'number' ? htf.rsi1d.toFixed(1) : 'N/A';
+
+  // Liquidity
+  var liq = signal.liquidity || {};
+  var liqVolRatio = typeof liq.volumeRatio === 'number' ? liq.volumeRatio.toFixed(2) : volumeRatio;
+  var entryLiqScore = liq.entryLiquidityScore || 'normal';
+  var slLiqRisk = liq.slLiquidityRisk || 'unknown';
+
+  // BTC Context (only برای نمادهای وابسته)
+  var btcCtx = signal.btcContext || {};
+  var showBTC = !!btcCtx.isDependent;
+  var btcCorrText = 'N/A';
+  if (showBTC && typeof btcCtx.correlation === 'number') {
+    btcCorrText = btcCtx.correlation.toFixed(2) + ' (' + (btcCtx.label || 'unknown') + ')';
+  }
+  var btcTrend4h = btcCtx.btcTrend4h || 'unknown';
+  var btcTrend1d = btcCtx.btcTrend1d || 'unknown';
+
   var prompt = '';
   prompt += 'Role: Institutional Crypto Futures Analyst.\n';
   prompt += 'Tone: Clinical, Strict, Data-Driven. NO filler, NO emojis, NO markdown bolding.\n';
@@ -1814,6 +1984,15 @@ function generateAIPrompt(symbol) {
 
   prompt += 'Structure: ' + trend + ', Structure Detail: ' + structure + ', BOS: ' + bos + ', CHoCH: ' + choch + ', Vol vs Avg: ' + volumeRatio + 'x, RSI Divergence: ' + divergence + '.\n';
   prompt += 'Candle Patterns: ' + patterns + '.\n\n';
+
+  prompt += 'Static S/R (1H): Support=' + nearestSupport + ' [' + supportStrength + '], Resistance=' + nearestResistance + ' [' + resistanceStrength + '].\n';
+  prompt += 'HTF Context: 4H Trend=' + trend4h + ' (RSI=' + rsi4h + '), 1D Trend=' + trend1d + ' (RSI=' + rsi1d + ').\n';
+  prompt += 'Liquidity: Vol vs Avg=' + liqVolRatio + 'x, Entry Liquidity=' + entryLiqScore + ', SL Liquidity Risk=' + slLiqRisk + '.\n';
+  if (showBTC) {
+    prompt += 'BTC Correlation: ' + btcCorrText + ', BTC 4H Trend=' + btcTrend4h + ', BTC 1D Trend=' + btcTrend1d + '.\n';
+  } else {
+    prompt += 'BTC Correlation: Not BTC-dependent asset (ignored in validation).\n';
+  }
 
   prompt += 'System Signal: ' + signalType + ' (Score: ' + score + ')\n';
   prompt += '- Entry: ' + formatPrice(signal.entry) + '\n';
@@ -2204,6 +2383,251 @@ function applyConfidenceCaps(rawScore, mainTF, signalType) {
   return finalScore;
 }
 
+// ==================== Advanced Context Helpers (S/R, HTF, Liquidity, BTC) ====================
+
+// Detect swing highs/lows and nearest static support/resistance on current TF
+function findNearestSR(klines, price) {
+  if (!klines || klines.length < 20 || !price) {
+    return {
+      nearestSupport: null,
+      nearestResistance: null,
+      supportStrength: 'unknown',
+      resistanceStrength: 'unknown',
+      supportDistancePct: null,
+      resistanceDistancePct: null
+    };
+  }
+
+  var swingHighs = [];
+  var swingLows = [];
+  var len = klines.length;
+  var start = Math.max(2, len - 120); // last ~120 candles
+
+  for (var i = start; i < len - 2; i++) {
+    var prev = klines[i - 1];
+    var cur = klines[i];
+    var next = klines[i + 1];
+    if (cur.h > prev.h && cur.h > next.h) {
+      swingHighs.push(cur.h);
+    }
+    if (cur.l < prev.l && cur.l < next.l) {
+      swingLows.push(cur.l);
+    }
+  }
+
+  function nearestBelow(arr, p) {
+    var best = null;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] < p && (best === null || p - arr[i] < p - best)) {
+        best = arr[i];
+      }
+    }
+    return best;
+  }
+
+  function nearestAbove(arr, p) {
+    var best = null;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > p && (best === null || arr[i] - p < best - p)) {
+        best = arr[i];
+      }
+    }
+    return best;
+  }
+
+  var support = nearestBelow(swingLows, price);
+  var resistance = nearestAbove(swingHighs, price);
+
+  // Simple strength estimate based on number of touches near the level
+  function levelStrength(level, arr, p) {
+    if (!level) return 'unknown';
+    var tolerance = p * 0.003; // ~0.3%
+    var touches = 0;
+    for (var i = 0; i < arr.length; i++) {
+      if (Math.abs(arr[i] - level) <= tolerance) touches++;
+    }
+    if (touches >= 4) return 'strong';
+    if (touches >= 2) return 'medium';
+    return 'weak';
+  }
+
+  var supportStrength = levelStrength(support, swingLows, price);
+  var resistanceStrength = levelStrength(resistance, swingHighs, price);
+
+  return {
+    nearestSupport: support,
+    nearestResistance: resistance,
+    supportStrength: supportStrength,
+    resistanceStrength: resistanceStrength,
+    supportDistancePct: support ? ((price - support) / price) * 100 : null,
+    resistanceDistancePct: resistance ? ((resistance - price) / price) * 100 : null
+  };
+}
+
+// Summarize higher timeframe (4H/1D) trend and momentum for context
+function buildHTFSummary(tfResults, mainSignalType) {
+  var res4h = tfResults['4h'];
+  var res1d = tfResults['1d'];
+
+  var summary = {
+    trend4h: res4h ? res4h.trend || 'neutral' : 'unknown',
+    trend1d: res1d ? res1d.trend || 'neutral' : 'unknown',
+    rsi4h: res4h ? res4h.rsi : null,
+    rsi1d: res1d ? res1d.rsi : null,
+    stoch4h: res4h && (res4h.stochRsi || res4h.stochRSI) ? (res4h.stochRsi || res4h.stochRSI) : null,
+    stoch1d: res1d && (res1d.stochRsi || res1d.stochRSI) ? (res1d.stochRsi || res1d.stochRSI) : null,
+    withHTFTrend: false,
+    againstHTFTrend: false
+  };
+
+  if (mainSignalType === 'long') {
+    summary.withHTFTrend =
+      (summary.trend4h === 'bullish' || summary.trend4h === 'up') ||
+      (summary.trend1d === 'bullish' || summary.trend1d === 'up');
+    summary.againstHTFTrend =
+      (summary.trend4h === 'bearish' || summary.trend4h === 'down') &&
+      (summary.trend1d === 'bearish' || summary.trend1d === 'down');
+  } else if (mainSignalType === 'short') {
+    summary.withHTFTrend =
+      (summary.trend4h === 'bearish' || summary.trend4h === 'down') ||
+      (summary.trend1d === 'bearish' || summary.trend1d === 'down');
+    summary.againstHTFTrend =
+      (summary.trend4h === 'bullish' || summary.trend4h === 'up') &&
+      (summary.trend1d === 'bullish' || summary.trend1d === 'up');
+  }
+
+  return summary;
+}
+
+// Simple liquidity proxies around entry / SL using volume and S/R proximity
+function buildLiquidityContext(mainTF, entry, sl, signalType, srInfo) {
+  var volumeRatio = (mainTF && mainTF.volume) ? mainTF.volume.ratio || 1 : 1;
+  var entryLiquidityScore = 'normal';
+  if (volumeRatio < 0.5) entryLiquidityScore = 'low';
+  else if (volumeRatio > 1.5) entryLiquidityScore = 'high';
+
+  var slLiquidityRisk = 'unknown';
+  if (sl && srInfo) {
+    var refLevel = signalType === 'long' ? srInfo.nearestSupport : srInfo.nearestResistance;
+    if (refLevel) {
+      var distance = Math.abs(sl - refLevel) / refLevel * 100;
+      if (distance < 0.3) slLiquidityRisk = 'high';
+      else if (distance < 1) slLiquidityRisk = 'medium';
+      else slLiquidityRisk = 'low';
+    }
+  }
+
+  return {
+    volumeRatio: volumeRatio,
+    entryLiquidityScore: entryLiquidityScore,
+    slLiquidityRisk: slLiquidityRisk
+  };
+}
+
+// Helper: determine if base asset is fundamentally BTC-dependent (alts vs BTC/XAU)
+function isBTCDependentBase(base) {
+  if (!base) return false;
+  var upper = base.toUpperCase();
+  if (upper === 'BTC' || upper === 'XAU') return false;
+  return true;
+}
+
+// Compute simple Pearson correlation of 1H returns vs BTCUSDT
+function computeBTCCorrelation(symbol) {
+  var btcSymbol = 'BTCUSDT';
+  if (!STATE.klines || !STATE.klines[symbol] || !STATE.klines[btcSymbol]) return null;
+  var symKlines = STATE.klines[symbol]['1h'];
+  var btcKlines = STATE.klines[btcSymbol]['1h'];
+  if (!symKlines || !btcKlines || symKlines.length < 30 || btcKlines.length < 30) return null;
+
+  var n = Math.min(symKlines.length, btcKlines.length, 80);
+  var symCloses = symKlines.slice(-n).map(function(k) { return k.c; });
+  var btcCloses = btcKlines.slice(-n).map(function(k) { return k.c; });
+
+  var symReturns = [];
+  var btcReturns = [];
+  for (var i = 1; i < n; i++) {
+    var sr = (symCloses[i] - symCloses[i - 1]) / symCloses[i - 1];
+    var br = (btcCloses[i] - btcCloses[i - 1]) / btcCloses[i - 1];
+    symReturns.push(sr);
+    btcReturns.push(br);
+  }
+
+  var m1 = 0, m2 = 0;
+  for (var j = 0; j < symReturns.length; j++) {
+    m1 += symReturns[j];
+    m2 += btcReturns[j];
+  }
+  m1 /= symReturns.length;
+  m2 /= btcReturns.length;
+
+  var num = 0, d1 = 0, d2 = 0;
+  for (var k = 0; k < symReturns.length; k++) {
+    var a = symReturns[k] - m1;
+    var b = btcReturns[k] - m2;
+    num += a * b;
+    d1 += a * a;
+    d2 += b * b;
+  }
+  if (d1 === 0 || d2 === 0) return null;
+  return num / Math.sqrt(d1 * d2);
+}
+
+// Build BTC context (correlation + BTC HTF trend) for BTC-dependent symbols only
+function buildBTCContext(symbol, tfResults) {
+  var base = symbol.replace('USDT', '');
+  var isDependent = isBTCDependentBase(base);
+  if (!isDependent) {
+    return {
+      isDependent: false,
+      correlation: null,
+      label: null,
+      btcTrend4h: null,
+      btcTrend1d: null
+    };
+  }
+
+  var corr = computeBTCCorrelation(symbol);
+
+  // Try to infer BTC trend from available klines (independent of existing signal)
+  var btcSymbol = 'BTCUSDT';
+  var btcTrend4h = null;
+  var btcTrend1d = null;
+  if (STATE.klines && STATE.klines[btcSymbol]) {
+    try {
+      var btc4h = STATE.klines[btcSymbol]['4h'];
+      var btc1d = STATE.klines[btcSymbol]['1d'];
+      if (btc4h && btc4h.length >= 200) {
+        var btc4hRes = TradingCore.analyzeTF(btc4h, btc4h[btc4h.length - 1].c);
+        btcTrend4h = btc4hRes.trend || null;
+      }
+      if (btc1d && btc1d.length >= 200) {
+        var btc1dRes = TradingCore.analyzeTF(btc1d, btc1d[btc1d.length - 1].c);
+        btcTrend1d = btc1dRes.trend || null;
+      }
+    } catch (e) {
+      console.log('BTC trend context error:', e.message);
+    }
+  }
+
+  var label = null;
+  if (typeof corr === 'number') {
+    var abs = Math.abs(corr);
+    if (abs >= 0.75) label = 'high';
+    else if (abs >= 0.5) label = 'medium';
+    else if (abs >= 0.3) label = 'low';
+    else label = 'weak';
+  }
+
+  return {
+    isDependent: true,
+    correlation: corr,
+    label: label,
+    btcTrend4h: btcTrend4h,
+    btcTrend1d: btcTrend1d
+  };
+}
+
 // ==================== Analysis ====================
 function analyzeAsset(symbol) {
   var price = STATE.prices[symbol] ? STATE.prices[symbol].price : 0;
@@ -2221,8 +2645,10 @@ function analyzeAsset(symbol) {
       results[tf] = analysis;
       tfCount++;
       var w = weights[tf];
-      if (analysis.signal === 'long') totalLong += analysis.score * w;
-      else if (analysis.signal === 'short') totalShort += analysis.score * w;
+      // Fix: use confidence instead of score (score is now synced with confidence in core.js)
+      var signalScore = analysis.score || analysis.confidence || 0;
+      if (analysis.signal === 'long') totalLong += signalScore * w;
+      else if (analysis.signal === 'short') totalShort += signalScore * w;
     }
   });
   
@@ -2239,20 +2665,25 @@ function analyzeAsset(symbol) {
     sig.ema50 = mainTF.ema50;
     sig.trend = mainTF.trend;
     sig.adx = mainTF.adx;
-    sig.macd = mainTF.macd;
+    sig.macd = null; // محاسبه MACD کمی پایین‌تر انجام می‌شود
     sig.volume = mainTF.volume;
     sig.rsiDivergence = mainTF.rsiDivergence;
-    // Add StochRSI and Market Structure
-    sig.stochRsi = mainTF.stochRSI;
-    sig.marketStructure = mainTF.marketStructure;
-    // Extract structure details for prompt
-    if (mainTF.marketStructure) {
-      sig.structure = mainTF.marketStructure.structure || 'N/A';
-      sig.bos = mainTF.marketStructure.structure === 'bos_bullish' ? 'صعودی' : 
-                (mainTF.marketStructure.structure === 'bos_bearish' ? 'نزولی' : 'ندارد');
-      sig.choch = mainTF.marketStructure.choch === 'bullish' ? 'صعودی' : 
-                  (mainTF.marketStructure.choch === 'bearish' ? 'نزولی' : 'ندارد');
+    // Add StochRSI (use correct property name from core.js)
+    sig.stochRsi = mainTF.stochRsi || mainTF.stochRSI || null;
+    // Simple Market Structure approximation based on EMA alignment
+    var inferredStructure = 'consolidation';
+    if (sig.ema21 && sig.ema50) {
+      if (price > sig.ema21 && sig.ema21 > sig.ema50) {
+        inferredStructure = 'uptrend';
+      } else if (price < sig.ema21 && sig.ema21 < sig.ema50) {
+        inferredStructure = 'downtrend';
+      }
     }
+    sig.marketStructure = mainTF.marketStructure || { structure: inferredStructure };
+    sig.structure = sig.marketStructure.structure || 'N/A';
+    // برای نسخه فعلی BOS/CHoCH ساده‌سازی می‌شود
+    sig.bos = 'ندارد';
+    sig.choch = 'ندارد';
     // Bollinger Band position
     if (mainTF.bb) {
       var bbRange = mainTF.bb.upper - mainTF.bb.lower;
@@ -2261,9 +2692,38 @@ function analyzeAsset(symbol) {
       }
     }
   }
+
+  // --- New Context Blocks: Static S/R, HTF summary, Liquidity, BTC ---
+  var currentTFKlines = STATE.klines[symbol] && STATE.klines[symbol]['1h'] ? STATE.klines[symbol]['1h'] : null;
+  // Calculate MACD from 1H closes if available
+  if (currentTFKlines && TradingCore.calcMACD) {
+    try {
+      var closesForMacd = currentTFKlines.map(function(k) { return k.c; });
+      sig.macd = TradingCore.calcMACD(closesForMacd);
+    } catch (e) {
+      console.log('MACD calc error for ' + symbol + ': ' + e.message);
+    }
+  }
+  var srInfo = findNearestSR(currentTFKlines || (STATE.klines[symbol] && STATE.klines[symbol]['30m']), price);
+  sig.staticSR = srInfo;
+
+  // Higher timeframe context (4H / 1D) – based on final signal direction (set later)
+  // Temporarily assume 'wait', will be refined after type is chosen
+  sig.htfSummary = buildHTFSummary(results, sig.type);
+
+  // Liquidity context will be filled after entry / SL are set
+  sig.liquidity = {
+    volumeRatio: (mainTF && mainTF.volume) ? mainTF.volume.ratio || 1 : 1,
+    entryLiquidityScore: 'normal',
+    slLiquidityRisk: 'unknown'
+  };
+
+  // BTC context (filled after signal direction known)
+  sig.btcContext = buildBTCContext(symbol, results);
   
-  // شرایط سیگنال بهینه‌شده - حداقل 4 امتیاز کل و 2 امتیاز فاصله
-  var minScore = 4, minDiff = 2;
+  // شرایط سیگنال بهینه‌شده - هماهنگ با core.js (minScore=6, diffScore=3)
+  // اما در اینجا از مجموع weighted scores استفاده می‌کنیم، پس threshold کمی پایین‌تر
+  var minScore = 4, minDiff = 2; // Lower threshold because we sum weighted scores from multiple TFs
   
   if (tfCount === 0) {
     sig.reasons = ['در حال دریافت داده...'];
@@ -2374,6 +2834,10 @@ function analyzeAsset(symbol) {
     
     // Apply confidence caps based on ADX, BOS, and volume (penalties applied inside)
     sig.confidence = applyConfidenceCaps(rawScore, mainTF, 'long');
+
+    // Refresh HTF & Liquidity context now that entry/SL/type are known
+    sig.htfSummary = buildHTFSummary(results, sig.type);
+    sig.liquidity = buildLiquidityContext(mainTF, sig.entry, sig.sl, sig.type, srInfo);
     
     // Add warning reasons for display (penalties already applied in applyConfidenceCaps)
     if (volumeRatio < 0.8) sig.reasons.push('⚠️ حجم پایین (' + (volumeRatio * 100).toFixed(0) + '%)');
@@ -2444,6 +2908,10 @@ function analyzeAsset(symbol) {
     
     // Apply confidence caps based on ADX, BOS, and volume (penalties applied inside)
     sig.confidence = applyConfidenceCaps(rawScore, mainTF, 'short');
+
+    // Refresh HTF & Liquidity context now that entry/SL/type are known
+    sig.htfSummary = buildHTFSummary(results, sig.type);
+    sig.liquidity = buildLiquidityContext(mainTF, sig.entry, sig.sl, sig.type, srInfo);
     
     // Add warning reasons for display (penalties already applied in applyConfidenceCaps)
     if (volumeRatio < 0.8) sig.reasons.push('⚠️ حجم پایین (' + (volumeRatio * 100).toFixed(0) + '%)');
@@ -2856,15 +3324,12 @@ function switchView(view) {
   document.querySelectorAll('.view-content').forEach(function(c) {
     c.classList.remove('active');
   });
-  var viewId = view === 'monteCarlo' ? 'viewMonteCarlo' : 'view' + capitalizeFirst(view);
+  var viewId = 'view' + capitalizeFirst(view);
   document.getElementById(viewId).classList.add('active');
   
   // Initialize view
   if (view === 'chart') {
     initChart();
-  } else if (view === 'monteCarlo') {
-    // Monte Carlo view ready
-    resetMonteCarloView();
   } else if (view === 'scanner') {
     // Always re-render when switching to this tab to ensure DOM is in sync
     // Don't clear tracking - let renderScannerResults handle it properly
@@ -2929,518 +3394,6 @@ function resetChartView() {
   Chart.resetView();
 }
 
-// ==================== Monte Carlo Functions ====================
-function resetMonteCarloView() {
-  var placeholder = document.getElementById('monteCarloPlaceholder');
-  var progress = document.getElementById('monteCarloProgress');
-  var results = document.getElementById('monteCarloResults');
-  var btn = document.getElementById('runMonteCarloBtn');
-  
-  if (placeholder) placeholder.style.display = 'block';
-  if (progress) progress.style.display = 'none';
-  if (results) results.style.display = 'none';
-  if (btn) btn.disabled = false;
-}
-
-function runMonteCarloTest() {
-  var symbol = STATE.activeAsset;
-  var errorBox = document.getElementById('monteCarloError');
-  if (errorBox) {
-    errorBox.style.display = 'none';
-    errorBox.textContent = '';
-  }
-  
-  if (!symbol) {
-    showToast('لطفا ابتدا یک نماد انتخاب کنید', 'error');
-    return;
-  }
-  
-  // Combine multiple timeframes for better testing
-  var klines1h = STATE.klines[symbol] ? STATE.klines[symbol]['1h'] : null;
-  var klines4h = STATE.klines[symbol] ? STATE.klines[symbol]['4h'] : null;
-  var klines1d = STATE.klines[symbol] ? STATE.klines[symbol]['1d'] : null;
-  
-  // Use 1h as primary, but get context from higher timeframes
-  var klines = klines1h;
-  var minCandles = 150;
-  
-  // Try different timeframes if 1h doesn't have enough data
-  if (!klines || klines.length < minCandles) {
-    if (klines4h && klines4h.length >= minCandles) {
-      klines = klines4h;
-      showToast('استفاده از تایم‌فریم 4 ساعته به دلیل کمبود داده', 'info');
-    } else if (klines1d && klines1d.length >= 100) {
-      klines = klines1d;
-      minCandles = 100;
-      showToast('استفاده از تایم‌فریم روزانه', 'info');
-    }
-  }
-  
-  if (!klines || klines.length < minCandles) {
-    var availableCount = klines ? klines.length : 0;
-    showToast('داده کافی نیست. حداقل ' + minCandles + ' کندل لازم است. (فعلی: ' + availableCount + '). لطفا چند ثانیه صبر کنید و دوباره تست کنید.', 'error');
-    return;
-  }
-
-  // Get current signal context
-  var currentSignal = STATE.signals[symbol];
-  var signalType = currentSignal ? currentSignal.type : 'both';
-
-  // Read Monte Carlo settings from UI
-  var simulationsSelect = document.getElementById('monteSimulations');
-  var confidenceSelect = document.getElementById('monteConfidence');
-  var scenarioSelect = document.getElementById('monteScenario');
-
-  var simulations = simulationsSelect ? parseInt(simulationsSelect.value, 10) : 1000;
-  var confidenceLevel = confidenceSelect ? parseInt(confidenceSelect.value, 10) : 95;
-  var scenario = scenarioSelect ? scenarioSelect.value : 'normal';
-
-  // Basic validation for simulations count
-  if (!simulations || simulations < 200 || simulations > 5000) {
-    var msg = 'تعداد شبیه‌سازی باید بین ۲۰۰ تا ۵۰۰۰ باشد.';
-    if (errorBox) {
-      errorBox.textContent = msg;
-      errorBox.style.display = 'block';
-    }
-    showToast(msg, 'error');
-    if (simulationsSelect) simulationsSelect.focus();
-    return;
-  }
-  
-  // Show progress
-  var placeholder = document.getElementById('monteCarloPlaceholder');
-  var progress = document.getElementById('monteCarloProgress');
-  var results = document.getElementById('monteCarloResults');
-  var progressText = document.getElementById('monteCarloProgressText');
-  var progressBar = document.getElementById('monteCarloProgressBar');
-  var statusText = document.getElementById('monteCarloStatusText');
-  var btn = document.getElementById('runMonteCarloBtn');
-  
-  if (placeholder) placeholder.style.display = 'none';
-  if (progress) progress.style.display = 'block';
-  if (results) results.style.display = 'none';
-  if (btn) btn.disabled = true;
-  
-  if (progressText) progressText.textContent = 'در حال اجرای تست Walk-Forward...';
-  if (progressBar) progressBar.style.width = '20%';
-  if (statusText) statusText.textContent = 'تعداد کندل: ' + klines.length;
-  
-  showToast('در حال اجرای تست‌ها با ' + klines.length + ' کندل...');
-  
-  // Run tests asynchronously
-  setTimeout(function() {
-    try {
-      // Step 1: Walk-Forward
-      if (statusText) statusText.textContent = 'اجرای Walk-Forward...';
-      if (progressBar) progressBar.style.width = '30%';
-      
-      var settings = {
-        capital: STATE.settings.capital,
-        riskPercent: 2,
-        strategy: STATE.settings.strategy || 'default',
-        leverage: STATE.settings.leverage === 'auto' ? 5 : parseInt(STATE.settings.leverage) || 5,
-        simulations: simulations,
-        confidenceLevel: confidenceLevel,
-        scenario: scenario,
-        signalFilter: signalType, // Pass signal context
-        // More aggressive period settings for more test periods
-        trainPercent: 40,
-        testPercent: 12,
-        minPeriods: 5,
-        maxPeriods: 40
-      };
-      
-      var fullResults = MonteCarlo.runFullTest(klines, settings);
-      
-      if (fullResults.error) {
-        showToast(fullResults.error, 'error');
-        resetMonteCarloView();
-        return;
-      }
-      
-      // Add symbol and signal context to results
-      fullResults.symbol = symbol;
-      fullResults.signalContext = signalType;
-      fullResults.dataPoints = klines.length;
-      
-      // Step 2: Update progress for Monte Carlo
-      if (progressText) progressText.textContent = 'در حال اجرای تست Monte Carlo...';
-      if (progressBar) progressBar.style.width = '70%';
-      if (statusText) statusText.textContent = fullResults.walkForward.stats.numPeriods + ' دوره تست یافت شد';
-      
-      setTimeout(function() {
-        if (progressBar) progressBar.style.width = '100%';
-        if (statusText) statusText.textContent = 'در حال آماده‌سازی نتایج...';
-        
-        setTimeout(function() {
-          displayMonteCarloResults(fullResults);
-          
-          if (progress) progress.style.display = 'none';
-          if (results) results.style.display = 'block';
-          if (btn) btn.disabled = false;
-          
-          showToast('تست‌ها با موفقیت انجام شد (' + fullResults.walkForward.stats.numPeriods + ' دوره)', 'success');
-        }, 200);
-      }, 100);
-      
-    } catch (error) {
-      console.error('Monte Carlo test error:', error);
-      showToast('خطا در اجرای تست: ' + error.message, 'error');
-      resetMonteCarloView();
-    }
-  }, 100);
-}
-
-function displayMonteCarloResults(results) {
-  var walkForward = results.walkForward;
-  var monteCarlo = results.monteCarlo;
-  var kFold = results.kFold;
-  
-  if (!walkForward || !monteCarlo) {
-    showToast('نتایج ناقص است', 'error');
-    return;
-  }
-  
-  var wfStats = walkForward.stats;
-  var mcStats = monteCarlo;
-  
-  // Use the calculated verdict from results if available
-  var verdict = results.overallVerdict || 'moderate';
-  var robustnessScore = results.robustnessScore || 50;
-  
-  var verdictConfig = {
-    'excellent': { icon: ICONS.excellent, text: 'عالی - قابل اعتماد', color: '#10b981', bg: 'rgba(16,185,129,0.15)' },
-    'good': { icon: ICONS.good, text: 'خوب - قابل استفاده', color: '#3b82f6', bg: 'rgba(59,130,246,0.15)' },
-    'moderate': { icon: ICONS.moderate, text: 'متوسط - با احتیاط', color: '#f59e0b', bg: 'rgba(245,158,11,0.15)' },
-    'risky': { icon: ICONS.risky, text: 'پرریسک - توصیه نمیشه', color: '#f97316', bg: 'rgba(249,115,22,0.15)' },
-    'avoid': { icon: ICONS.avoid, text: 'ضعیف - استفاده نکن', color: '#ef4444', bg: 'rgba(239,68,68,0.15)' }
-  };
-  
-  var v = verdictConfig[verdict];
-  
-  // Verdict box with robustness score
-  var verdictHtml = '<div class="verdict-box" style="background:' + v.bg + ';border:2px solid ' + v.color + ';border-radius:12px;padding:14px 18px;margin-bottom:20px;width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;box-sizing:border-box;">' +
-    '<div style="display:flex;align-items:center;gap:10px;">' +
-      '<span style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:' + v.color + ';">' + v.icon + '</span>' +
-      '<span style="font-size:17px;font-weight:bold;color:' + v.color + ';">' + v.text + '</span>' +
-    '</div>' +
-    '<div style="display:flex;align-items:center;gap:20px;font-size:13px;color:var(--text1);">' +
-      '<span style="display:flex;align-items:center;gap:4px;"><span style="width:16px;height:16px;display:flex;align-items:center;justify-content:center;opacity:0.7;">' + ICONS.target + '</span> <strong>امتیاز استحکام: ' + robustnessScore.toFixed(0) + '/100</strong></span>' +
-      '<span style="display:flex;align-items:center;gap:4px;"><span style="width:16px;height:16px;display:flex;align-items:center;justify-content:center;opacity:0.7;">' + ICONS.barChart + '</span> <strong>' + wfStats.numPeriods + ' دوره تست</strong></span>' +
-    '</div>' +
-  '</div>';
-  
-  document.getElementById('monteCarloVerdict').innerHTML = verdictHtml;
-  
-  // Create stat card function
-  var createStatCard = function(value, label, icon, color, subtitle) {
-    return '<div class="stat-card" style="background:var(--bg2);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:18px;text-align:center;transition:all 0.2s;">' +
-      '<div style="font-size:14px;margin-bottom:8px;color:var(--text2);display:flex;align-items:center;justify-content:center;gap:6px;">' +
-        '<span style="width:18px;height:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' + icon + '</span>' +
-        '<span>' + label + '</span>' +
-      '</div>' +
-      '<div style="font-size:26px;font-weight:bold;color:' + color + ';margin-bottom:4px;">' + value + '</div>' +
-      (subtitle ? '<div style="font-size:11px;color:var(--text3);">' + subtitle + '</div>' : '') +
-    '</div>';
-  };
-  
-  // Walk-Forward stats cards - Enhanced
-  var wfCards = [
-    {
-      value: wfStats.avgWinRate.toFixed(1) + '%',
-      label: 'میانگین Win Rate',
-      icon: ICONS.checkCircle,
-      color: wfStats.avgWinRate >= 50 ? '#10b981' : '#ef4444',
-      subtitle: wfStats.avgWinRate >= 50 ? 'عملکرد خوب' : 'نیاز به بهبود'
-    },
-    {
-      value: wfStats.avgProfitFactor.toFixed(2),
-      label: 'میانگین Profit Factor',
-      icon: ICONS.coins,
-      color: wfStats.avgProfitFactor >= 1.5 ? '#10b981' : wfStats.avgProfitFactor >= 1 ? '#f59e0b' : '#ef4444',
-      subtitle: wfStats.avgProfitFactor >= 1.5 ? 'عالی' : 'متوسط'
-    },
-    {
-      value: (wfStats.avgReturn >= 0 ? '+' : '') + wfStats.avgReturn.toFixed(1) + '%',
-      label: 'میانگین Return',
-      icon: ICONS.trendingUp,
-      color: wfStats.avgReturn >= 0 ? '#10b981' : '#ef4444',
-      subtitle: wfStats.avgReturn >= 0 ? 'سودده' : 'ضررده'
-    },
-    {
-      value: wfStats.numPeriods,
-      label: 'تعداد دوره‌ها',
-      icon: ICONS.barChart,
-      color: '#3b82f6',
-      subtitle: 'دوره‌های تست'
-    },
-    {
-      value: wfStats.avgMaxDrawdown ? wfStats.avgMaxDrawdown.toFixed(1) + '%' : 'N/A',
-      label: 'میانگین Max Drawdown',
-      icon: ICONS.alertTriangle,
-      color: wfStats.avgMaxDrawdown && wfStats.avgMaxDrawdown < 15 ? '#10b981' : '#ef4444',
-      subtitle: wfStats.avgMaxDrawdown && wfStats.avgMaxDrawdown < 15 ? 'قابل قبول' : 'بالا'
-    },
-    {
-      value: wfStats.consistencyScore ? wfStats.consistencyScore.toFixed(0) + '%' : 'N/A',
-      label: 'ثبات عملکرد',
-      icon: ICONS.target,
-      color: wfStats.consistencyScore >= 60 ? '#10b981' : wfStats.consistencyScore >= 40 ? '#f59e0b' : '#ef4444',
-      subtitle: wfStats.profitablePeriods + '/' + wfStats.numPeriods + ' سودده'
-    }
-  ];
-  
-  var wfCardsHtml = wfCards.map(function(card) {
-    return createStatCard(card.value, card.label, card.icon, card.color, card.subtitle);
-  }).join('');
-  
-  document.getElementById('walkForwardStats').innerHTML = wfCardsHtml;
-  
-  // Monte Carlo stats cards - Enhanced
-  var mcCards = [
-    {
-      value: mcStats.probabilityOfProfit.toFixed(1) + '%',
-      label: 'احتمال سود',
-      icon: ICONS.target,
-      color: mcStats.probabilityOfProfit >= 60 ? '#10b981' : mcStats.probabilityOfProfit >= 50 ? '#f59e0b' : '#ef4444',
-      subtitle: mcStats.probabilityOfProfit >= 60 ? 'احتمال بالا' : 'متوسط'
-    },
-    {
-      value: (mcStats.medianReturn >= 0 ? '+' : '') + mcStats.medianReturn.toFixed(1) + '%',
-      label: 'سناریوی متوسط',
-      icon: ICONS.barChart,
-      color: mcStats.medianReturn >= 0 ? '#10b981' : '#ef4444',
-      subtitle: 'Median (P50)'
-    },
-    {
-      value: (mcStats.bestCase >= 0 ? '+' : '') + mcStats.bestCase.toFixed(1) + '%',
-      label: 'بهترین حالت',
-      icon: ICONS.trendingUp,
-      color: '#10b981',
-      subtitle: '95th Percentile'
-    },
-    {
-      value: (mcStats.worstCase >= 0 ? '+' : '') + mcStats.worstCase.toFixed(1) + '%',
-      label: 'بدترین حالت',
-      icon: ICONS.alertTriangle,
-      color: '#ef4444',
-      subtitle: '5th Percentile'
-    }
-  ];
-  
-  var mcCardsHtml = mcCards.map(function(card) {
-    return createStatCard(card.value, card.label, card.icon, card.color, card.subtitle);
-  }).join('');
-  
-  document.getElementById('monteCarloStats').innerHTML = mcCardsHtml;
-  
-  // Additional Risk Metrics Section
-  var riskMetricsHtml = '<h4 style="margin:24px 0 16px;color:var(--text1);font-size:18px;display:flex;align-items:center;gap:8px;">' +
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">' +
-    '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>' +
-    '</svg>' +
-    'معیارهای ریسک' +
-  '</h4>';
-  
-  var riskCards = [
-    {
-      value: mcStats.drawdownStats ? mcStats.drawdownStats.median.toFixed(1) + '%' : 'N/A',
-      label: 'Median Drawdown',
-      icon: ICONS.alertTriangle,
-      color: '#f59e0b',
-      subtitle: 'کاهش سرمایه معمول'
-    },
-    {
-      value: mcStats.expectedShortfall ? mcStats.expectedShortfall.toFixed(1) + '%' : 'N/A',
-      label: 'Expected Shortfall',
-      icon: ICONS.alertTriangle,
-      color: '#ef4444',
-      subtitle: 'CVaR (5%)'
-    },
-    {
-      value: mcStats.riskOfRuin !== undefined ? mcStats.riskOfRuin.toFixed(1) + '%' : 'N/A',
-      label: 'ریسک ورشکستگی',
-      icon: ICONS.x,
-      color: mcStats.riskOfRuin < 5 ? '#10b981' : '#ef4444',
-      subtitle: 'احتمال ضرر >50%'
-    },
-    {
-      value: mcStats.probReturn10Plus ? mcStats.probReturn10Plus.toFixed(1) + '%' : 'N/A',
-      label: 'احتمال سود +10%',
-      icon: ICONS.trendingUp,
-      color: mcStats.probReturn10Plus >= 50 ? '#10b981' : '#f59e0b',
-      subtitle: 'سود قابل توجه'
-    }
-  ];
-  
-  var riskCardsHtml = riskCards.map(function(card) {
-    return createStatCard(card.value, card.label, card.icon, card.color, card.subtitle);
-  }).join('');
-  
-  riskMetricsHtml += '<div class="stats-grid">' + riskCardsHtml + '</div>';
-  
-  // Add Risk Metrics after Monte Carlo Stats
-  var mcStatsContainer = document.getElementById('monteCarloStats');
-  if (mcStatsContainer && mcStatsContainer.parentNode) {
-    // پاک کردن نسخه‌های قبلی (اگر چند بار Monte Carlo اجرا شود)
-    var oldRisk = document.getElementById('monteCarloRiskMetrics');
-    if (oldRisk && oldRisk.parentNode) {
-      oldRisk.parentNode.removeChild(oldRisk);
-    }
-
-    var riskDiv = document.createElement('div');
-    riskDiv.id = 'monteCarloRiskMetrics';
-    riskDiv.innerHTML = riskMetricsHtml;
-    mcStatsContainer.parentNode.insertBefore(riskDiv, mcStatsContainer.nextSibling);
-  }
-  
-  // Histogram Visualization
-  if (mcStats.histogram && mcStats.histogram.length > 0) {
-    var histogramHtml = '<h4 style="margin:24px 0 16px;color:var(--text1);font-size:18px;display:flex;align-items:center;gap:8px;">' +
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">' +
-      '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>' +
-      '</svg>' +
-      'توزیع نتایج شبیه‌سازی' +
-    '</h4>';
-    
-    var maxCount = Math.max.apply(null, mcStats.histogram.map(function(h) { return h.count; }));
-    
-    histogramHtml += '<div class="histogram-container" style="background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px;">';
-    histogramHtml += '<div class="histogram-bars" style="display:flex;align-items:flex-end;gap:2px;height:120px;margin-bottom:8px;">';
-    
-    mcStats.histogram.forEach(function(bin) {
-      var heightPercent = maxCount > 0 ? (bin.count / maxCount) * 100 : 0;
-      var barColor = bin.binMid >= 0 ? '#10b981' : '#ef4444';
-      var opacity = bin.binMid >= 0 ? '0.8' : '0.6';
-      
-      histogramHtml += '<div style="flex:1;background:' + barColor + ';opacity:' + opacity + ';height:' + heightPercent + '%;min-height:2px;border-radius:2px 2px 0 0;transition:height 0.3s;" title="' + bin.binMid.toFixed(1) + '%: ' + bin.count + ' نتیجه"></div>';
-    });
-    
-    histogramHtml += '</div>';
-    
-    // X-axis labels
-    histogramHtml += '<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);">';
-    histogramHtml += '<span>' + mcStats.histogram[0].binStart.toFixed(0) + '%</span>';
-    histogramHtml += '<span>0%</span>';
-    histogramHtml += '<span>' + mcStats.histogram[mcStats.histogram.length - 1].binEnd.toFixed(0) + '%</span>';
-    histogramHtml += '</div>';
-    
-    histogramHtml += '</div>';
-    
-    // Insert histogram
-    if (mcStatsContainer && mcStatsContainer.parentNode) {
-      var oldHist = document.getElementById('monteCarloHistogram');
-      if (oldHist && oldHist.parentNode) {
-        oldHist.parentNode.removeChild(oldHist);
-      }
-
-      var histDiv = document.createElement('div');
-      histDiv.id = 'monteCarloHistogram';
-      histDiv.innerHTML = histogramHtml;
-      mcStatsContainer.parentNode.appendChild(histDiv);
-    }
-  }
-  
-  // Percentiles Table
-  if (mcStats.percentiles) {
-    var percentilesHtml = '<div style="background:var(--bg2);border-radius:12px;padding:16px;margin-top:16px;">';
-    percentilesHtml += '<h5 style="margin:0 0 12px;color:var(--text1);font-size:14px;">صدک‌های بازده</h5>';
-    percentilesHtml += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;font-size:12px;">';
-    
-    var percentileLabels = [
-      { key: 'p5', label: 'P5 (بدترین)' },
-      { key: 'p25', label: 'P25' },
-      { key: 'p50', label: 'P50 (میانه)' },
-      { key: 'p75', label: 'P75' },
-      { key: 'p90', label: 'P90' },
-      { key: 'p95', label: 'P95 (بهترین)' }
-    ];
-    
-    percentileLabels.forEach(function(p) {
-      var val = mcStats.percentiles[p.key];
-      var color = val >= 0 ? '#10b981' : '#ef4444';
-      percentilesHtml += '<div style="text-align:center;padding:8px;background:var(--card);border-radius:6px;">';
-      percentilesHtml += '<div style="color:var(--text2);margin-bottom:4px;">' + p.label + '</div>';
-      percentilesHtml += '<div style="color:' + color + ';font-weight:bold;">' + (val >= 0 ? '+' : '') + val.toFixed(1) + '%</div>';
-      percentilesHtml += '</div>';
-    });
-    
-    percentilesHtml += '</div></div>';
-    
-    if (mcStatsContainer && mcStatsContainer.parentNode) {
-      var oldPerc = document.getElementById('monteCarloPercentiles');
-      if (oldPerc && oldPerc.parentNode) {
-        oldPerc.parentNode.removeChild(oldPerc);
-      }
-
-      var percDiv = document.createElement('div');
-      percDiv.id = 'monteCarloPercentiles';
-      percDiv.innerHTML = percentilesHtml;
-      mcStatsContainer.parentNode.appendChild(percDiv);
-    }
-  }
-  
-  // توضیح بازه اطمینان Monte Carlo
-  if (mcStats.confidenceInterval && mcStats.confidenceInterval.level) {
-    var ci = mcStats.confidenceInterval;
-    var ciText = document.createElement('div');
-    ciText.style.cssText = 'margin-top:16px;padding:12px 16px;background:var(--bg2);border-radius:10px;font-size:13px;color:var(--text2);line-height:1.6;border:1px solid var(--border);';
-    ciText.innerHTML =
-      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;color:var(--text1);font-weight:600;">' +
-        '<svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" style="width:18px;height:18px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
-        'بازه اطمینان ' + ci.level + '%' +
-      '</div>' +
-      '<div>در ' + ci.level + '% از سناریوها، بازده کل استراتژی بین <strong style="color:' + (ci.lower >= 0 ? '#10b981' : '#ef4444') + '">' +
-      (ci.lower >= 0 ? '+' : '') + ci.lower.toFixed(1) + '%</strong> و <strong style="color:' + (ci.upper >= 0 ? '#10b981' : '#ef4444') + '">' +
-      (ci.upper >= 0 ? '+' : '') + ci.upper.toFixed(1) + '%</strong> خواهد بود.</div>';
-    
-    if (mcStatsContainer && mcStatsContainer.parentNode) {
-      var oldCI = document.getElementById('monteCarloCI');
-      if (oldCI && oldCI.parentNode) {
-        oldCI.parentNode.removeChild(oldCI);
-      }
-
-      ciText.id = 'monteCarloCI';
-      mcStatsContainer.parentNode.appendChild(ciText);
-    }
-  }
-  
-  // Period Details Collapsible
-  if (walkForward.periods && walkForward.periods.length > 0) {
-    var periodsHtml = '<details style="margin-top:20px;">';
-    periodsHtml += '<summary style="cursor:pointer;padding:12px 16px;background:var(--bg2);border-radius:10px;color:var(--text1);font-weight:600;display:flex;align-items:center;gap:8px;">' +
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>' +
-      'جزئیات دوره‌های تست (' + walkForward.periods.length + ' دوره)' +
-    '</summary>';
-    periodsHtml += '<div style="margin-top:12px;max-height:300px;overflow-y:auto;">';
-    
-    walkForward.periods.forEach(function(period, idx) {
-      var r = period.result;
-      var returnColor = r.netReturn >= 0 ? '#10b981' : '#ef4444';
-      periodsHtml += '<div style="padding:10px 12px;background:var(--card);border-radius:8px;margin-bottom:8px;display:grid;grid-template-columns:auto 1fr repeat(3,auto);gap:12px;align-items:center;font-size:12px;">';
-      periodsHtml += '<span style="color:var(--text2);font-weight:600;">دوره ' + (idx + 1) + '</span>';
-      periodsHtml += '<span style="color:var(--text3);">معاملات: ' + r.totalTrades + '</span>';
-      periodsHtml += '<span style="color:' + (r.winRate >= 50 ? '#10b981' : '#ef4444') + ';">WR: ' + r.winRate.toFixed(0) + '%</span>';
-      periodsHtml += '<span style="color:' + (r.profitFactor >= 1 ? '#10b981' : '#ef4444') + ';">PF: ' + Math.min(r.profitFactor, 9.99).toFixed(2) + '</span>';
-      periodsHtml += '<span style="color:' + returnColor + ';font-weight:600;">' + (r.netReturn >= 0 ? '+' : '') + r.netReturn.toFixed(1) + '%</span>';
-      periodsHtml += '</div>';
-    });
-    
-    periodsHtml += '</div></details>';
-    
-    if (mcStatsContainer && mcStatsContainer.parentNode) {
-      var oldPeriods = document.getElementById('monteCarloPeriods');
-      if (oldPeriods && oldPeriods.parentNode) {
-        oldPeriods.parentNode.removeChild(oldPeriods);
-      }
-
-      var periodsDiv = document.createElement('div');
-      periodsDiv.id = 'monteCarloPeriods';
-      periodsDiv.innerHTML = periodsHtml;
-      mcStatsContainer.parentNode.appendChild(periodsDiv);
-    }
-  }
-}
 
 // ==================== Initialize ====================
 // Add tab initialization to DOMContentLoaded
@@ -3458,7 +3411,6 @@ window.addToWatchlist = addToWatchlist;
 window.selectAsset = selectAsset;
 window.toggleChartIndicator = toggleChartIndicator;
 window.resetChartView = resetChartView;
-window.runMonteCarloTest = runMonteCarloTest;
 window.handleAIPromptClick = handleAIPromptClick;
 window.navigateToSuggestionDetails = navigateToSuggestionDetails;
 window.startAutoSuggestions = startAutoSuggestions;

@@ -87,13 +87,19 @@ function calcBB(closes, period, stdDev) {
 // ==================== ATR & ADX ====================
 function calcATR(klines, period, currentPrice) {
   if (!klines || klines.length < period + 1) return currentPrice * 0.01;
-  // Simplified ATR for latest candle
+  // Improved ATR calculation using True Range
   var trSum = 0;
   for(var i = klines.length - period; i < klines.length; i++) {
      var h = klines[i].h;
      var l = klines[i].l;
-     var c = klines[i].c;
-     trSum += (h - l); // Simple approximation
+     var c = i > 0 ? klines[i-1].c : klines[i].c;
+     // True Range = max of: (H-L), |H-C_prev|, |L-C_prev|
+     var tr = Math.max(
+       h - l,
+       Math.abs(h - c),
+       Math.abs(l - c)
+     );
+     trSum += tr;
   }
   return trSum / period;
 }
@@ -266,7 +272,7 @@ function analyzeTF(klines, price) {
   var result = {
     signal: 'neutral',
     confidence: 0,
-    score: 0,
+    score: 0, // Will be set to match confidence
     reasons: reasons,
     rsi: rsi,
     ema21: ema21,
@@ -283,9 +289,11 @@ function analyzeTF(klines, price) {
   if (longPts >= minScore && longPts > shortPts + diffScore) {
     result.signal = 'long';
     result.confidence = Math.min(10, longPts);
+    result.score = result.confidence; // Fix: score should match confidence
   } else if (shortPts >= minScore && shortPts > longPts + diffScore) {
     result.signal = 'short';
     result.confidence = Math.min(10, shortPts);
+    result.score = result.confidence; // Fix: score should match confidence
   }
 
   return result;

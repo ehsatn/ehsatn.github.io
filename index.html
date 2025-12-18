@@ -196,11 +196,13 @@
         </svg>
         نمودار
       </button>
-      <button class="view-tab" data-view="monteCarlo" id="tabMonteCarlo">
+      <button class="view-tab" data-view="analysis" id="tabAnalysis">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+          <path d="M2 17l10 5 10-5"></path>
+          <path d="M2 12l10 5 10-5"></path>
         </svg>
-        مونته کارلو
+        موتور تحلیلگر
       </button>
     </div>
     
@@ -277,116 +279,171 @@
       </div>
     </div>
     
-    <!-- Monte Carlo View -->
-    <div class="view-content" id="viewMonteCarlo">
-      <div class="monte-carlo-container">
-        <!-- تنظیمات تست Monte Carlo -->
-        <div class="capital-box monte-settings-box">
-          <div class="capital-row-main monte-settings-row" style="flex-wrap:wrap;row-gap:10px;margin-bottom:8px;border-bottom:none;padding-bottom:0;">
-            <div class="capital-field monte-field">
-              <label>
-                <svg viewBox="0 0 24 24" fill="none" stroke="#00E5B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="16"></line>
-                  <line x1="8" y1="12" x2="16" y2="12"></line>
-                </svg>
-                تعداد شبیه‌سازی
-              </label>
-              <select id="monteSimulations">
-                <option value="200">200</option>
-                <option value="500">500</option>
-                <option value="1000" selected>1000</option>
-                <option value="2000">2000</option>
-              </select>
-            </div>
-            <div class="capital-field monte-field">
-              <label>
-                <svg viewBox="0 0 24 24" fill="none" stroke="#00E5B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 12h16"></path>
-                  <path d="M12 4v16"></path>
-                </svg>
-                سطح اطمینان
-              </label>
-              <select id="monteConfidence">
-                <option value="90">90%</option>
-                <option value="95" selected>95%</option>
-                <option value="99">99%</option>
-              </select>
-            </div>
-            <div class="capital-field monte-field">
-              <label>
-                <svg viewBox="0 0 24 24" fill="none" stroke="#00E5B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="3 17 9 11 13 15 21 7"></polyline>
-                </svg>
-                سناریو
-              </label>
-              <select id="monteScenario">
-                <option value="normal" selected>نرمال</option>
-                <option value="conservative">محافظه‌کارانه</option>
-                <option value="aggressive">تهاجمی</option>
-              </select>
-            </div>
-          </div>
-          <div class="capital-row-main" style="justify-content:center;border-top:1px solid var(--border);padding-top:10px;border-bottom:none;margin-bottom:0;">
-            <button class="save-btn" onclick="runMonteCarloTest()" id="runMonteCarloBtn" style="padding:12px 24px;font-size:15px;min-width:60%;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;margin-left:8px;">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+    <!-- Analysis Engine View -->
+    <div class="view-content" id="viewAnalysis">
+      <div class="analysis-container">
+        <!-- Header -->
+        <div class="analysis-header" style="background:var(--card);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
               </svg>
-              شروع تست
-            </button>
+              <span style="color:var(--text1);font-weight:600;font-size:16px;">موتور تحلیلگر حرفه‌ای</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:120px;">
+              <label style="display:block;font-size:12px;color:var(--text2);margin-bottom:6px;">جفت ارز</label>
+              <select id="analysisSymbol" style="width:100%;padding:8px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text1);font-family:inherit;font-size:14px;">
+                <option value="BTC/USDT">BTC/USDT</option>
+                <option value="ETH/USDT">ETH/USDT</option>
+                <option value="BNB/USDT">BNB/USDT</option>
+                <option value="SOL/USDT">SOL/USDT</option>
+              </select>
+            </div>
+            <div style="flex:1;min-width:120px;">
+              <label style="display:block;font-size:12px;color:var(--text2);margin-bottom:6px;">صرافی</label>
+              <select id="analysisExchange" style="width:100%;padding:8px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text1);font-family:inherit;font-size:14px;">
+                <option value="binance">Binance</option>
+                <option value="okx">OKX</option>
+                <option value="bybit">Bybit</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:12px;">
+            <div id="engineStatus" style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--text3);"></div>
+              <span>در حال بارگذاری موتور...</span>
+            </div>
+          </div>
+          <button id="runAnalysisBtn" onclick="runAnalysis()" style="width:100%;margin-top:8px;padding:12px;background:var(--teal);color:#000;border:none;border-radius:8px;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;" disabled>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            اجرای تحلیل
+          </button>
+        </div>
+
+        <!-- Loading State -->
+        <div id="analysisLoading" style="display:none;text-align:center;padding:40px 20px;background:var(--card);border-radius:12px;border:1px solid var(--border);">
+          <div style="width:40px;height:40px;border:3px solid var(--teal);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px;"></div>
+          <p style="color:var(--text2);font-size:14px;">در حال تحلیل بازار...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="analysisError" style="display:none;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.5);color:#fecaca;border-radius:12px;padding:16px;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span style="font-weight:600;">خطا در تحلیل</span>
+          </div>
+          <p id="analysisErrorText" style="margin:0;font-size:13px;"></p>
+        </div>
+
+        <!-- Results -->
+        <div id="analysisResults" style="display:none;">
+          <!-- Scenario Card -->
+          <div class="analysis-card" style="background:var(--card);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid var(--border);">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <h3 style="margin:0;color:var(--text1);font-size:16px;font-weight:600;">سناریو</h3>
+              <span id="scenarioPriority" class="priority-badge" style="padding:4px 12px;border-radius:6px;font-size:11px;font-weight:600;"></span>
+            </div>
+            <p id="scenarioMessage" style="margin:0 0 8px;color:var(--text1);font-size:15px;font-weight:500;line-height:1.6;"></p>
+            <p id="scenarioDetails" style="margin:0;color:var(--text2);font-size:13px;line-height:1.5;"></p>
+          </div>
+
+          <!-- Score Card -->
+          <div class="analysis-card" style="background:var(--card);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid var(--border);">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+              <h3 style="margin:0;color:var(--text1);font-size:16px;font-weight:600;">امتیاز کلی</h3>
+              <span id="overallScore" style="font-size:24px;font-weight:700;color:var(--teal);"></span>
+            </div>
+            <div style="background:var(--bg2);border-radius:8px;height:8px;overflow:hidden;margin-bottom:8px;">
+              <div id="scoreBar" style="background:var(--teal);height:100%;transition:width 0.5s;border-radius:8px;"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);">
+              <span>0</span>
+              <span>50</span>
+              <span>100</span>
+            </div>
+          </div>
+
+          <!-- Momentum Card -->
+          <div class="analysis-card" style="background:var(--card);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid var(--border);">
+            <h3 style="margin:0 0 12px;color:var(--text1);font-size:16px;font-weight:600;">وضعیت مومنتوم</h3>
+            <div id="momentumStatus" style="display:flex;align-items:center;gap:10px;">
+              <span style="font-size:18px;font-weight:600;"></span>
+            </div>
+          </div>
+
+          <!-- Timeframe Results -->
+          <div class="analysis-card" style="background:var(--card);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid var(--border);">
+            <h3 style="margin:0 0 12px;color:var(--text1);font-size:16px;font-weight:600;">نتایج تایم‌فریم‌ها</h3>
+            <div id="timeframeResults" style="display:grid;gap:10px;"></div>
+          </div>
+
+          <!-- Liquidity Walls -->
+          <div class="analysis-card" style="background:var(--card);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid var(--border);">
+            <h3 style="margin:0 0 12px;color:var(--text1);font-size:16px;font-weight:600;">دیوارهای نقدینگی</h3>
+            <div id="liquidityWalls" style="display:grid;gap:12px;">
+              <div>
+                <div style="font-size:12px;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                  </svg>
+                  مقاومت (Ask Walls)
+                </div>
+                <div id="askWalls" style="display:flex;flex-direction:column;gap:6px;"></div>
+              </div>
+              <div>
+                <div style="font-size:12px;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="5 12 12 5 19 12"></polyline>
+                  </svg>
+                  حمایت (Bid Walls)
+                </div>
+                <div id="bidWalls" style="display:flex;flex-direction:column;gap:6px;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Book Preview -->
+          <div class="analysis-card" style="background:var(--card);border-radius:12px;padding:16px;border:1px solid var(--border);">
+            <h3 style="margin:0 0 12px;color:var(--text1);font-size:16px;font-weight:600;">پیش‌نمایش Order Book</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div>
+                <div style="font-size:12px;color:var(--text2);margin-bottom:8px;">فروشندگان (Asks)</div>
+                <div id="orderBookAsks" style="display:flex;flex-direction:column;gap:4px;font-size:12px;"></div>
+              </div>
+              <div>
+                <div style="font-size:12px;color:var(--text2);margin-bottom:8px;">خریداران (Bids)</div>
+                <div id="orderBookBids" style="display:flex;flex-direction:column;gap:4px;font-size:12px;"></div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- پیام خطا برای Monte Carlo -->
-        <div id="monteCarloError" style="display:none;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.5);color:#fecaca;border-radius:10px;padding:10px 12px;margin:12px 0;font-size:13px;"></div>
-
-        <!-- Placeholder: قبل از اجرای تست -->
-        <div id="monteCarloPlaceholder" style="text-align:center;padding:40px 20px;color:var(--text2);">
+        <!-- Empty State -->
+        <div id="analysisEmpty" style="text-align:center;padding:60px 20px;color:var(--text2);">
           <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 20px;opacity:0.5;">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
           </svg>
-          <h3 style="margin:0 0 10px;color:var(--text1);">تحلیل Monte Carlo</h3>
-          <p style="margin:0 0 6px;font-size:14px;">این ابزار با استفاده از Walk-Forward و شبیه‌سازی Monte Carlo، استحکام استراتژی را بررسی می‌کند.</p>
-          <p style="margin:0;font-size:12px;color:var(--text3);">بالا دقت تست را با تعداد شبیه‌سازی و سطح اطمینان تنظیم کنید، سپس روی «شروع تست» بزنید.</p>
-        </div>
-        
-        <!-- Progress: هنگام اجرای تست -->
-        <div id="monteCarloProgress" style="display:none;background:var(--card);border-radius:12px;padding:16px;margin:16px 0;border:1px solid var(--border);">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-            <div style="width:24px;height:24px;border:3px solid var(--teal);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div>
-            <span style="color:var(--text1);font-weight:600;" id="monteCarloProgressText">در حال اجرای تست‌ها...</span>
-          </div>
-          <div style="background:var(--bg2);border-radius:8px;height:8px;overflow:hidden;">
-            <div id="monteCarloProgressBar" style="background:var(--teal);height:100%;width:0%;transition:width 0.3s;"></div>
-          </div>
-          <div style="margin-top:8px;font-size:12px;color:var(--text2);" id="monteCarloStatusText">آماده‌سازی...</div>
-        </div>
-        
-        <!-- Results: بعد از اتمام تست -->
-        <div id="monteCarloResults" style="display:none;">
-          <!-- کارت نتیجه‌گیری کلی (Verdict) -->
-          <div id="monteCarloVerdict" style="margin-bottom:24px;"></div>
-          
-          <!-- Grid کارت‌های نتایج Walk-Forward -->
-          <h4 style="margin:24px 0 16px;color:var(--text1);font-size:18px;display:flex;align-items:center;gap:8px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-            </svg>
-            نتایج Walk-Forward
-          </h4>
-          <div class="stats-grid" id="walkForwardStats"></div>
-          
-          <!-- Grid کارت‌های نتایج Monte Carlo -->
-          <h4 style="margin:24px 0 16px;color:var(--text1);font-size:18px;display:flex;align-items:center;gap:8px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
-              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-            </svg>
-            نتایج Monte Carlo
-          </h4>
-          <div class="stats-grid" id="monteCarloStats"></div>
+          <h3 style="margin:0 0 10px;color:var(--text1);">آماده برای تحلیل</h3>
+          <p style="margin:0;font-size:14px;">جفت ارز و صرافی را انتخاب کنید و روی دکمه «اجرای تحلیل» کلیک کنید</p>
         </div>
       </div>
     </div>
+    
   </div>
   
     <!-- AI Advisor Sticky Section -->
@@ -400,10 +457,377 @@
   <!-- Toast -->
   <div class="toast" id="toast"></div>
   
+  <!-- External Libraries -->
+  <!-- ccxt library for exchange data -->
+  <script src="https://cdn.jsdelivr.net/npm/ccxt@4.0.0/dist/ccxt.browser.js"></script>
+  <!-- technicalindicators library for technical analysis -->
+  <script src="https://cdn.jsdelivr.net/npm/technicalindicators@3.1.0/dist/technicalindicators.min.js"></script>
+  
   <!-- Scripts -->
   <script src="core.js"></script>
   <script src="chart.js"></script>
-  <script src="monte-carlo.js"></script>
   <script src="app.js"></script>
+  
+  <!-- Analysis Engine Module -->
+  <script type="module">
+    // Wait for libraries to be available before loading the module
+    function waitForLibraries(maxWait = 15000) {
+      return new Promise((resolve, reject) => {
+        const startTime = Date.now();
+        const checkLibraries = () => {
+          if (typeof ccxt !== 'undefined' && typeof technicalIndicators !== 'undefined') {
+            console.log('Both libraries are loaded');
+            resolve();
+          } else if (Date.now() - startTime > maxWait) {
+            reject(new Error('Timeout waiting for libraries to load. ccxt: ' + (typeof ccxt !== 'undefined' ? 'loaded' : 'not loaded') + ', technicalIndicators: ' + (typeof technicalIndicators !== 'undefined' ? 'loaded' : 'not loaded')));
+          } else {
+            setTimeout(checkLibraries, 100);
+          }
+        };
+        checkLibraries();
+      });
+    }
+
+    async function loadAnalysisEngine() {
+      try {
+        console.log('Waiting for libraries...');
+        console.log('ccxt:', typeof ccxt !== 'undefined' ? 'loaded' : 'not loaded');
+        console.log('technicalIndicators:', typeof technicalIndicators !== 'undefined' ? 'loaded' : 'not loaded');
+        
+        await waitForLibraries();
+        console.log('Libraries loaded, importing AnalysisEngine...');
+        
+        const { AnalysisEngine } = await import('./analysis-engine.js');
+        
+        // Make AnalysisEngine available globally for use in app.js
+        window.AnalysisEngine = AnalysisEngine;
+        window.analysisEngineReady = true;
+        
+        // Dispatch event to notify that engine is ready
+        window.dispatchEvent(new CustomEvent('analysisEngineReady'));
+        
+        console.log('Analysis Engine module loaded successfully');
+      } catch (error) {
+        console.error('Error loading Analysis Engine:', error);
+        window.dispatchEvent(new CustomEvent('analysisEngineError', { detail: error }));
+      }
+    }
+
+    // Start loading immediately
+    loadAnalysisEngine();
+    
+    // Also listen for when libraries might be loaded later
+    window.addEventListener('load', function() {
+      if (typeof window.AnalysisEngine === 'undefined') {
+        console.log('Retrying AnalysisEngine load after page load...');
+        loadAnalysisEngine();
+      }
+    });
+  </script>
+
+  <!-- Analysis Engine UI Script -->
+  <script>
+    // Analysis Engine UI Functions
+    let currentAnalysisEngine = null;
+    let analysisEngineReady = false;
+
+    // Wait for AnalysisEngine to be loaded
+    async function waitForAnalysisEngine(maxWait = 10000) {
+      const startTime = Date.now();
+      
+      while (typeof window.AnalysisEngine === 'undefined') {
+        if (Date.now() - startTime > maxWait) {
+          throw new Error('زمان انتظار برای بارگذاری موتور تحلیلگر به پایان رسید. لطفاً صفحه را رفرش کنید.');
+        }
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      
+      analysisEngineReady = true;
+      return window.AnalysisEngine;
+    }
+
+    async function runAnalysis() {
+      const symbol = document.getElementById('analysisSymbol').value;
+      const exchange = document.getElementById('analysisExchange').value;
+      const runBtn = document.getElementById('runAnalysisBtn');
+      
+      // Hide previous results/errors
+      document.getElementById('analysisResults').style.display = 'none';
+      document.getElementById('analysisError').style.display = 'none';
+      document.getElementById('analysisEmpty').style.display = 'none';
+      document.getElementById('analysisLoading').style.display = 'block';
+      
+      // Disable button
+      runBtn.disabled = true;
+      runBtn.innerHTML = '<div style="width:18px;height:18px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div> در حال تحلیل...';
+
+      try {
+        // Wait for AnalysisEngine to be available
+        if (typeof window.AnalysisEngine === 'undefined') {
+          runBtn.innerHTML = '<div style="width:18px;height:18px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></div> در حال بارگذاری موتور...';
+          await waitForAnalysisEngine(15000); // Wait up to 15 seconds
+        }
+        
+        if (typeof window.AnalysisEngine === 'undefined') {
+          throw new Error('موتور تحلیلگر بارگذاری نشد. لطفاً صفحه را رفرش کنید.');
+        }
+
+        // Create engine instance
+        currentAnalysisEngine = new window.AnalysisEngine(exchange, symbol);
+        await currentAnalysisEngine.initialize();
+        
+        // Run analysis
+        const result = await currentAnalysisEngine.analyze();
+
+        if (!result.success) {
+          throw new Error(result.error || 'خطا در اجرای تحلیل');
+        }
+
+        // Display results
+        displayAnalysisResults(result);
+
+      } catch (error) {
+        console.error('Analysis error:', error);
+        showAnalysisError(error.message || 'خطای نامشخص در تحلیل');
+      } finally {
+        // Hide loading, enable button
+        document.getElementById('analysisLoading').style.display = 'none';
+        runBtn.disabled = false;
+        runBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> اجرای تحلیل';
+      }
+    }
+
+    function displayAnalysisResults(result) {
+      // Show results container
+      document.getElementById('analysisResults').style.display = 'block';
+      document.getElementById('analysisEmpty').style.display = 'none';
+
+      // Display scenario
+      const scenario = result.scenario;
+      document.getElementById('scenarioMessage').textContent = scenario.message;
+      document.getElementById('scenarioDetails').textContent = scenario.details;
+      
+      // Set priority badge
+      const priorityBadge = document.getElementById('scenarioPriority');
+      priorityBadge.textContent = scenario.priority === 'high' ? 'بالا' : scenario.priority === 'medium' ? 'متوسط' : 'پایین';
+      priorityBadge.style.background = scenario.priority === 'high' ? 'rgba(239,68,68,0.2)' : 
+                                       scenario.priority === 'medium' ? 'rgba(255,214,0,0.2)' : 
+                                       'rgba(156,163,175,0.2)';
+      priorityBadge.style.color = scenario.priority === 'high' ? '#fecaca' : 
+                                  scenario.priority === 'medium' ? '#fef3c7' : 
+                                  '#d1d5db';
+
+      // Display overall score
+      const score = result.overallScore;
+      document.getElementById('overallScore').textContent = score;
+      document.getElementById('scoreBar').style.width = score + '%';
+      
+      // Color code score
+      const scoreElement = document.getElementById('overallScore');
+      if (score >= 70) {
+        scoreElement.style.color = 'var(--teal)';
+        document.getElementById('scoreBar').style.background = 'var(--teal)';
+      } else if (score >= 40) {
+        scoreElement.style.color = 'var(--yellow)';
+        document.getElementById('scoreBar').style.background = 'var(--yellow)';
+      } else {
+        scoreElement.style.color = 'var(--red)';
+        document.getElementById('scoreBar').style.background = 'var(--red)';
+      }
+
+      // Display momentum
+      const momentumStatus = document.getElementById('momentumStatus');
+      const momentum = result.timeframeResults['1h']?.momentum || result.timeframeResults[Object.keys(result.timeframeResults)[0]]?.momentum || 'Neutral';
+      momentumStatus.innerHTML = `
+        <span style="font-size:18px;font-weight:600;color:${momentum === 'Increasing' ? 'var(--teal)' : momentum === 'Decreasing' ? 'var(--red)' : 'var(--text2)'};">
+          ${momentum === 'Increasing' ? '📈 افزایشی' : momentum === 'Decreasing' ? '📉 کاهشی' : '➡️ خنثی'}
+        </span>
+        <span style="color:var(--text2);font-size:14px;">${momentum}</span>
+      `;
+
+      // Display timeframe results
+      const timeframeContainer = document.getElementById('timeframeResults');
+      timeframeContainer.innerHTML = '';
+      
+      const timeframes = ['30m', '1h', '4h', '1d'];
+      timeframes.forEach(tf => {
+        const tfData = result.timeframeResults[tf];
+        if (!tfData) return;
+
+        const scoreData = result.scores.find(s => s.timeframe === tf);
+        const score = scoreData ? scoreData.score : 50;
+
+        const tfCard = document.createElement('div');
+        tfCard.style.cssText = 'background:var(--bg2);border-radius:8px;padding:12px;border:1px solid var(--border);';
+        tfCard.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-weight:600;color:var(--text1);">${tf}</span>
+            <span style="font-size:20px;font-weight:700;color:var(--teal);">${Math.round(score)}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
+            <div>
+              <span style="color:var(--text2);">RSI:</span>
+              <span style="color:var(--text1);margin-right:4px;">${tfData.rsi.toFixed(1)}</span>
+            </div>
+            <div>
+              <span style="color:var(--text2);">ADX:</span>
+              <span style="color:var(--text1);margin-right:4px;">${tfData.adx.toFixed(1)}</span>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:11px;color:var(--text2);">
+            روند: <span style="color:var(--text1);">${tfData.trend === 'strong_up' ? 'صعودی قوی' : tfData.trend === 'strong_down' ? 'نزولی قوی' : 'خنثی'}</span>
+          </div>
+        `;
+        timeframeContainer.appendChild(tfCard);
+      });
+
+      // Display liquidity walls
+      const walls = result.walls;
+      
+      // Ask walls (resistance)
+      const askWallsContainer = document.getElementById('askWalls');
+      askWallsContainer.innerHTML = '';
+      if (walls.asks && walls.asks.length > 0) {
+        walls.asks.slice(0, 5).forEach(wall => {
+          const wallEl = document.createElement('div');
+          wallEl.style.cssText = 'background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:6px;padding:8px;display:flex;justify-content:space-between;align-items:center;';
+          wallEl.innerHTML = `
+            <span style="color:var(--text1);font-weight:500;">${wall.price.toFixed(2)}</span>
+            <span style="color:var(--red);font-size:11px;">${wall.strength.toFixed(1)}x</span>
+          `;
+          askWallsContainer.appendChild(wallEl);
+        });
+      } else {
+        askWallsContainer.innerHTML = '<span style="color:var(--text3);font-size:12px;">دیواری یافت نشد</span>';
+      }
+
+      // Bid walls (support)
+      const bidWallsContainer = document.getElementById('bidWalls');
+      bidWallsContainer.innerHTML = '';
+      if (walls.bids && walls.bids.length > 0) {
+        walls.bids.slice(0, 5).forEach(wall => {
+          const wallEl = document.createElement('div');
+          wallEl.style.cssText = 'background:rgba(0,229,176,0.1);border:1px solid rgba(0,229,176,0.3);border-radius:6px;padding:8px;display:flex;justify-content:space-between;align-items:center;';
+          wallEl.innerHTML = `
+            <span style="color:var(--text1);font-weight:500;">${wall.price.toFixed(2)}</span>
+            <span style="color:var(--teal);font-size:11px;">${wall.strength.toFixed(1)}x</span>
+          `;
+          bidWallsContainer.appendChild(wallEl);
+        });
+      } else {
+        bidWallsContainer.innerHTML = '<span style="color:var(--text3);font-size:12px;">دیواری یافت نشد</span>';
+      }
+
+      // Display order book preview
+      const orderBook = result.orderBook;
+      
+      // Asks
+      const asksContainer = document.getElementById('orderBookAsks');
+      asksContainer.innerHTML = '';
+      if (orderBook.asks && orderBook.asks.length > 0) {
+        orderBook.asks.slice(0, 5).forEach(ask => {
+          const askEl = document.createElement('div');
+          askEl.style.cssText = 'display:flex;justify-content:space-between;color:var(--red);';
+          askEl.innerHTML = `<span>${ask.price.toFixed(2)}</span><span>${ask.amount.toFixed(4)}</span>`;
+          asksContainer.appendChild(askEl);
+        });
+      }
+
+      // Bids
+      const bidsContainer = document.getElementById('orderBookBids');
+      bidsContainer.innerHTML = '';
+      if (orderBook.bids && orderBook.bids.length > 0) {
+        orderBook.bids.slice(0, 5).forEach(bid => {
+          const bidEl = document.createElement('div');
+          bidEl.style.cssText = 'display:flex;justify-content:space-between;color:var(--teal);';
+          bidEl.innerHTML = `<span>${bid.price.toFixed(2)}</span><span>${bid.amount.toFixed(4)}</span>`;
+          bidsContainer.appendChild(bidEl);
+        });
+      }
+    }
+
+    function showAnalysisError(message) {
+      document.getElementById('analysisError').style.display = 'block';
+      document.getElementById('analysisErrorText').textContent = message;
+      document.getElementById('analysisLoading').style.display = 'none';
+      document.getElementById('analysisResults').style.display = 'none';
+    }
+
+    // Listen for AnalysisEngine ready event
+    window.addEventListener('analysisEngineReady', function() {
+      console.log('AnalysisEngine is ready!');
+      analysisEngineReady = true;
+      window.analysisEngineReady = true;
+      
+      // Update status indicator
+      const statusEl = document.getElementById('engineStatus');
+      if (statusEl) {
+        statusEl.innerHTML = '<div style="width:8px;height:8px;border-radius:50%;background:var(--teal);"></div><span style="color:var(--teal);">موتور آماده است</span>';
+      }
+      
+      // Enable button if it exists
+      const runBtn = document.getElementById('runAnalysisBtn');
+      if (runBtn) {
+        runBtn.disabled = false;
+        runBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> اجرای تحلیل';
+      }
+    });
+    
+    // Listen for AnalysisEngine error event
+    window.addEventListener('analysisEngineError', function(event) {
+      console.error('AnalysisEngine loading error:', event.detail);
+      const statusEl = document.getElementById('engineStatus');
+      if (statusEl) {
+        statusEl.innerHTML = '<div style="width:8px;height:8px;border-radius:50%;background:var(--red);"></div><span style="color:var(--red);">خطا در بارگذاری موتور</span>';
+      }
+    });
+
+    // Listen for AnalysisEngine error event
+    window.addEventListener('analysisEngineError', function(event) {
+      console.error('AnalysisEngine loading error:', event.detail);
+      const errorMsg = document.getElementById('analysisErrorText');
+      if (errorMsg) {
+        showAnalysisError('خطا در بارگذاری موتور تحلیلگر: ' + (event.detail?.message || 'خطای نامشخص'));
+      }
+    });
+
+    // Check if AnalysisEngine is ready when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait a bit and check again
+      setTimeout(function() {
+        if (typeof window.AnalysisEngine !== 'undefined') {
+          analysisEngineReady = true;
+          console.log('AnalysisEngine already loaded');
+        } else {
+          console.log('AnalysisEngine not yet loaded, waiting...');
+        }
+      }, 1000);
+    });
+  </script>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .analysis-card {
+      transition: all 0.2s ease;
+    }
+    
+    .analysis-card:hover {
+      border-color: var(--teal) !important;
+    }
+    
+    #runAnalysisBtn:hover:not(:disabled) {
+      background: var(--teal-dark) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 229, 176, 0.3);
+    }
+    
+    #runAnalysisBtn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  </style>
 </body>
 </html>

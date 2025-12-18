@@ -1171,21 +1171,6 @@ header h1 {
   padding: 14px;
 }
 
-/* ==================== Monte Carlo Styles ==================== */
-.monte-carlo-container {
-  background: var(--card);
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  padding: 14px;
-}
-
-.monte-settings-box {
-  margin-bottom: 12px;
-}
-
-.monte-settings-row .monte-field select {
-  background: var(--bg2);
-}
 
 .backtest-settings h4,
 .backtest-results h4 {
@@ -1515,18 +1500,6 @@ details[open] summary {
   background: var(--bg2);
 }
 
-/* Monte Carlo specific styles */
-.monte-carlo-container {
-  padding-bottom: 20px;
-}
-
-.monte-settings-box {
-  margin-bottom: 16px;
-}
-
-.monte-field {
-  min-width: 140px;
-}
 
 /* Verdict box animation */
 .verdict-box {
