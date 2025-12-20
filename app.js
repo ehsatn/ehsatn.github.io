@@ -3630,11 +3630,19 @@ function showPromptModal(prompt) {
     }
   };
   
-  // Copy button handler
+  // Copy button handler - use event capture for better mobile support
   if (copyBtn) {
-    copyBtn.onclick = function() {
-      copyPromptToClipboard(prompt, copyBtn);
+    copyBtn.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      copyPromptToClipboard(prompt, copyBtn, textarea);
     };
+    // Also add touchstart for better mobile support
+    copyBtn.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      copyPromptToClipboard(prompt, copyBtn, textarea);
+    });
   }
   
   // Close on Escape key
@@ -3646,57 +3654,71 @@ function showPromptModal(prompt) {
   });
 }
 
-function copyPromptToClipboard(text, btn) {
+function copyPromptToClipboard(text, btn, textarea) {
   if (!text || text.trim().length === 0) {
     showToast('متن برای کپی خالی است', 'warning');
     return;
   }
   
-  // Try to use textarea selection method first (works better on mobile)
-  var textarea = document.getElementById('promptTextarea');
-  if (textarea && textarea.value && textarea.value === text) {
-    // Use the visible textarea for better mobile support
-    textarea.setSelectionRange(0, textarea.value.length);
-    try {
-      var success = document.execCommand('copy');
-      if (success) {
-        showToast('پرامپت با موفقیت کپی شد', 'success');
-        if (btn) {
-          var originalText = btn.innerHTML;
-          btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> کپی شد!';
-          btn.classList.add('copied');
-          setTimeout(function() {
-            btn.innerHTML = originalText;
-            btn.classList.remove('copied');
-          }, 2000);
-        }
-        return;
-      }
-    } catch(e) {
-      // Continue to clipboard API fallback
+  // Get textarea if not provided
+  if (!textarea) {
+    textarea = document.getElementById('promptTextarea');
+  }
+  
+  // Helper function to show success message
+  function showCopySuccess() {
+    showToast('پرامپت با موفقیت کپی شد', 'success');
+    if (btn) {
+      var originalText = btn.innerHTML;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> کپی شد!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.innerHTML = originalText;
+        btn.classList.remove('copied');
+      }, 2000);
     }
   }
   
-  // Try modern clipboard API
+  // Method 1: Use textarea with execCommand (best for mobile)
+  if (textarea && textarea.value) {
+    try {
+      // Remove readonly temporarily for better mobile support
+      textarea.removeAttribute('readonly');
+      
+      // Focus and select
+      textarea.focus();
+      textarea.setSelectionRange(0, textarea.value.length);
+      
+      // Try copy command
+      var success = document.execCommand('copy');
+      
+      // Restore readonly
+      textarea.setAttribute('readonly', 'readonly');
+      
+      if (success) {
+        showCopySuccess();
+        return;
+      }
+    } catch(e) {
+      console.log('execCommand copy failed:', e);
+      // Restore readonly if it was removed
+      if (textarea) {
+        textarea.setAttribute('readonly', 'readonly');
+      }
+    }
+  }
+  
+  // Method 2: Try Clipboard API (requires HTTPS or localhost)
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function() {
-      showToast('پرامپت با موفقیت کپی شد', 'success');
-      if (btn) {
-        var originalText = btn.innerHTML;
-        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> کپی شد!';
-        btn.classList.add('copied');
-        setTimeout(function() {
-          btn.innerHTML = originalText;
-          btn.classList.remove('copied');
-        }, 2000);
-      }
+      showCopySuccess();
     }).catch(function(err) {
       console.error('Clipboard API error:', err);
-      // Fallback to execCommand
+      // Fallback to hidden textarea method
       fallbackCopyToClipboard(text, btn);
     });
   } else {
-    // Fallback to execCommand
+    // Fallback to hidden textarea method
     fallbackCopyToClipboard(text, btn);
   }
 }
@@ -3706,11 +3728,36 @@ function fallbackCopyToClipboard(text, btn) {
     var textarea = document.createElement('textarea');
     textarea.value = text;
     textarea.style.position = 'fixed';
+    textarea.style.top = '0';
+    textarea.style.left = '0';
+    textarea.style.width = '2em';
+    textarea.style.height = '2em';
+    textarea.style.padding = '0';
+    textarea.style.border = 'none';
+    textarea.style.outline = 'none';
+    textarea.style.boxShadow = 'none';
+    textarea.style.background = 'transparent';
     textarea.style.opacity = '0';
-    textarea.style.left = '-999999px';
+    textarea.setAttribute('readonly', '');
+    textarea.setAttribute('aria-hidden', 'true');
+    
     document.body.appendChild(textarea);
-    textarea.select();
-    textarea.setSelectionRange(0, 99999);
+    
+    // Select text for mobile devices (iOS)
+    if (navigator.userAgent.match(/ipad|iphone/i)) {
+      var range = document.createRange();
+      range.selectNodeContents(textarea);
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      textarea.setSelectionRange(0, 999999);
+    } else {
+      textarea.select();
+      textarea.setSelectionRange(0, 999999);
+    }
+    
+    // Focus the textarea before copying (important for mobile)
+    textarea.focus();
     
     var success = document.execCommand('copy');
     document.body.removeChild(textarea);
@@ -3730,6 +3777,7 @@ function fallbackCopyToClipboard(text, btn) {
       showToast('لطفاً متن را به صورت دستی انتخاب و کپی کنید', 'warning');
     }
   } catch (err) {
+    console.error('Fallback copy error:', err);
     showToast('لطفاً متن را به صورت دستی انتخاب و کپی کنید', 'warning');
   }
 }
