@@ -73,7 +73,9 @@ var STATE = {
     updateInterval: 10000, // 10 seconds
     autoUpdateEnabled: true,
     updateTimer: null
-  }
+  },
+  promptManualSelection: false, // Whether user manually selected a symbol in prompt dropdown
+  promptUpdatingProgrammatically: false // Flag to prevent change event when updating programmatically
 };
 
 var TIMEFRAMES = ['30m', '1h', '4h', '1d'];
@@ -666,18 +668,61 @@ function initUI() {
       promptSelect.appendChild(option);
     });
     // Set default to first symbol or active asset
-    if (STATE.activeAsset && symbols.includes(STATE.activeAsset)) {
-      promptSelect.value = STATE.activeAsset;
+    var baseAsset = STATE.activeAsset ? STATE.activeAsset.replace('USDT', '') : null;
+    if (baseAsset && symbols.includes(baseAsset)) {
+      promptSelect.value = baseAsset;
     } else if (symbols.length > 0) {
       promptSelect.value = symbols[0];
     }
+    
+    // Handle manual selection change
+    promptSelect.addEventListener('change', function() {
+      // Only set manual selection if not updating programmatically
+      if (!STATE.promptUpdatingProgrammatically) {
+        STATE.promptManualSelection = true;
+        updatePromptButtonText();
+      }
+    });
   }
+  
+  // Initial update of prompt button
+  updatePromptButtonText();
   
   renderWatchlistTabs();
   if (STATE.activeAsset) {
     renderAssetPanel(STATE.activeAsset);
   } else {
     renderEmptyWatchlist();
+  }
+}
+
+function updatePromptButtonText() {
+  var btnText = document.getElementById('promptBtnText');
+  var promptSelect = document.getElementById('promptSymbolSelect');
+  
+  if (!btnText) return;
+  
+  // If user manually selected, use dropdown value
+  if (STATE.promptManualSelection && promptSelect && promptSelect.value) {
+    btnText.textContent = 'پرامپت ' + promptSelect.value;
+    return;
+  }
+  
+  // Otherwise, use active asset
+  if (STATE.activeAsset) {
+    var baseAsset = STATE.activeAsset.replace('USDT', '');
+    btnText.textContent = 'پرامپت ' + baseAsset;
+    // Update dropdown to match (only if value is different)
+    if (promptSelect && promptSelect.value !== baseAsset) {
+      STATE.promptUpdatingProgrammatically = true;
+      promptSelect.value = baseAsset;
+      // Reset flag after a short delay to allow change event to process
+      setTimeout(function() {
+        STATE.promptUpdatingProgrammatically = false;
+      }, 0);
+    }
+  } else {
+    btnText.textContent = 'دریافت پرامپت';
   }
 }
 
@@ -886,6 +931,11 @@ function selectAsset(symbol) {
   if (!currentPrice || currentPrice.source !== 'binance' && currentPrice.source !== 'binance_ws') {
     // Force refresh from Binance if price is from fallback source
     fetchPriceFromBinance(symbol, baseAsset);
+  }
+  
+  // Update prompt button text if not manually selected
+  if (!STATE.promptManualSelection) {
+    updatePromptButtonText();
   }
   
   renderAssetPanel(symbol);
@@ -2168,10 +2218,14 @@ function renderAssetPanel(symbol) {
   
   panel.innerHTML = priceHtml + signalHtml + scoreGaugeHtml + entryHtml + indicatorsHtml + buyerSellerPowerHtml + positionHtml + actionsHtml;
   
-  // Update prompt dropdown to match active asset if it's in the list
-  var promptSelect = document.getElementById('promptSymbolSelect');
-  if (promptSelect && DEFAULT_SYMBOLS && DEFAULT_SYMBOLS.includes(symbol)) {
-    promptSelect.value = symbol;
+  // Update prompt dropdown and button if not manually selected
+  if (!STATE.promptManualSelection) {
+    var promptSelect = document.getElementById('promptSymbolSelect');
+    var baseAsset = symbol.replace('USDT', '');
+    if (promptSelect && DEFAULT_SYMBOLS && DEFAULT_SYMBOLS.includes(baseAsset)) {
+      promptSelect.value = baseAsset;
+    }
+    updatePromptButtonText();
   }
 }
 
@@ -3461,13 +3515,26 @@ async function generateCombinedPrompt(baseAsset) {
 
 function handleAIPromptClick(symbol) {
   // Get symbol from dropdown if not provided
+  var baseAsset = null;
   if (!symbol) {
     var selectElement = document.getElementById('promptSymbolSelect');
     if (selectElement && selectElement.value) {
-      symbol = selectElement.value;
+      baseAsset = selectElement.value; // This is already base asset (BTC, ETH, etc.)
+      symbol = baseAsset + 'USDT'; // Convert to full symbol for STATE
+    } else if (STATE.activeAsset) {
+      symbol = STATE.activeAsset;
+      baseAsset = symbol.replace('USDT', '');
     } else {
       showToast('لطفاً نماد را انتخاب کنید', 'error');
       return;
+    }
+  } else {
+    // If symbol provided, extract base asset
+    if (symbol.includes('USDT')) {
+      baseAsset = symbol.replace('USDT', '');
+    } else {
+      baseAsset = symbol;
+      symbol = symbol + 'USDT';
     }
   }
   
@@ -3478,26 +3545,16 @@ function handleAIPromptClick(symbol) {
     var originalText = btn.innerHTML;
     btn.innerHTML = '<div style="width:16px;height:16px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;display:inline-block;"></div> در حال تولید...';
     
-    // Generate combined prompt
-    generateCombinedPrompt(symbol).then(function(prompt) {
-      // Copy to clipboard
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(prompt).then(function() {
-          showToast('پرامپت با موفقیت کپی شد', 'success');
-          btn.disabled = false;
-          btn.innerHTML = originalText;
-        }).catch(function() {
-          // Fallback to execCommand
-          fallbackCopyToClipboard(prompt);
-          btn.disabled = false;
-          btn.innerHTML = originalText;
-        });
+    // Generate combined prompt (pass baseAsset, not full symbol)
+    generateCombinedPrompt(baseAsset || symbol.replace('USDT', '')).then(function(prompt) {
+      // Show modal with prompt
+      if (prompt && prompt.trim().length > 0) {
+        showPromptModal(prompt);
       } else {
-        // Fallback to execCommand
-        fallbackCopyToClipboard(prompt);
-        btn.disabled = false;
-        btn.innerHTML = originalText;
+        showToast('پرامپت خالی است. لطفاً منتظر بمانید تا داده‌ها لود شوند', 'warning');
       }
+      btn.disabled = false;
+      btn.innerHTML = originalText;
     }).catch(function(error) {
       console.error('Error generating prompt:', error);
       showToast('خطا در تولید پرامپت: ' + error.message, 'error');
@@ -3506,15 +3563,11 @@ function handleAIPromptClick(symbol) {
     });
   } else {
     // Fallback if button not found
-    generateCombinedPrompt(symbol).then(function(prompt) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(prompt).then(function() {
-          showToast('پرامپت با موفقیت کپی شد', 'success');
-        }).catch(function() {
-          fallbackCopyToClipboard(prompt);
-        });
+    generateCombinedPrompt(baseAsset || symbol.replace('USDT', '')).then(function(prompt) {
+      if (prompt && prompt.trim().length > 0) {
+        showPromptModal(prompt);
       } else {
-        fallbackCopyToClipboard(prompt);
+        showToast('پرامپت خالی است. لطفاً منتظر بمانید تا داده‌ها لود شوند', 'warning');
       }
     }).catch(function(error) {
       console.error('Error generating prompt:', error);
@@ -3523,7 +3576,132 @@ function handleAIPromptClick(symbol) {
   }
 }
 
-function fallbackCopyToClipboard(text) {
+function showPromptModal(prompt) {
+  var modal = document.getElementById('promptModal');
+  var textarea = document.getElementById('promptTextarea');
+  var closeBtn = document.getElementById('promptModalClose');
+  var copyBtn = document.getElementById('promptCopyBtn');
+  
+  if (!modal || !textarea) {
+    // Fallback: try to copy directly
+    copyPromptToClipboard(prompt);
+    return;
+  }
+  
+  // Set prompt text
+  textarea.value = prompt || '';
+  
+  // Ensure textarea is selectable on mobile
+  textarea.setAttribute('readonly', 'readonly'); // Prevent editing but allow selection
+  textarea.style.webkitUserSelect = 'text';
+  textarea.style.userSelect = 'text';
+  
+  // Show modal
+  modal.classList.add('show');
+  
+  // Focus textarea and select all text for easy selection on mobile
+  setTimeout(function() {
+    textarea.focus();
+    // Use setSelectionRange for better mobile support
+    textarea.setSelectionRange(0, textarea.value.length);
+    // Also try select() for desktop
+    try {
+      textarea.select();
+    } catch(e) {
+      // Ignore errors on some browsers
+    }
+    // Scroll to top
+    textarea.scrollTop = 0;
+  }, 200);
+  
+  // Close modal handlers
+  function closeModal() {
+    modal.classList.remove('show');
+  }
+  
+  if (closeBtn) {
+    closeBtn.onclick = closeModal;
+  }
+  
+  // Close on backdrop click
+  modal.onclick = function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  };
+  
+  // Copy button handler
+  if (copyBtn) {
+    copyBtn.onclick = function() {
+      copyPromptToClipboard(prompt, copyBtn);
+    };
+  }
+  
+  // Close on Escape key
+  document.addEventListener('keydown', function escHandler(e) {
+    if (e.key === 'Escape' && modal.classList.contains('show')) {
+      closeModal();
+      document.removeEventListener('keydown', escHandler);
+    }
+  });
+}
+
+function copyPromptToClipboard(text, btn) {
+  if (!text || text.trim().length === 0) {
+    showToast('متن برای کپی خالی است', 'warning');
+    return;
+  }
+  
+  // Try to use textarea selection method first (works better on mobile)
+  var textarea = document.getElementById('promptTextarea');
+  if (textarea && textarea.value && textarea.value === text) {
+    // Use the visible textarea for better mobile support
+    textarea.setSelectionRange(0, textarea.value.length);
+    try {
+      var success = document.execCommand('copy');
+      if (success) {
+        showToast('پرامپت با موفقیت کپی شد', 'success');
+        if (btn) {
+          var originalText = btn.innerHTML;
+          btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> کپی شد!';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.innerHTML = originalText;
+            btn.classList.remove('copied');
+          }, 2000);
+        }
+        return;
+      }
+    } catch(e) {
+      // Continue to clipboard API fallback
+    }
+  }
+  
+  // Try modern clipboard API
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function() {
+      showToast('پرامپت با موفقیت کپی شد', 'success');
+      if (btn) {
+        var originalText = btn.innerHTML;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> کپی شد!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }
+    }).catch(function(err) {
+      console.error('Clipboard API error:', err);
+      // Fallback to execCommand
+      fallbackCopyToClipboard(text, btn);
+    });
+  } else {
+    // Fallback to execCommand
+    fallbackCopyToClipboard(text, btn);
+  }
+}
+
+function fallbackCopyToClipboard(text, btn) {
   try {
     var textarea = document.createElement('textarea');
     textarea.value = text;
@@ -3539,11 +3717,20 @@ function fallbackCopyToClipboard(text) {
     
     if (success) {
       showToast('پرامپت با موفقیت کپی شد', 'success');
+      if (btn) {
+        var originalText = btn.innerHTML;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> کپی شد!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      }
     } else {
-      showToast('خطا در کپی پرامپت', 'error');
+      showToast('لطفاً متن را به صورت دستی انتخاب و کپی کنید', 'warning');
     }
   } catch (err) {
-    showToast('خطا در کپی پرامپت', 'error');
+    showToast('لطفاً متن را به صورت دستی انتخاب و کپی کنید', 'warning');
   }
 }
 
@@ -5939,7 +6126,10 @@ function getEffectiveLeverage(signalLeverage) {
 function showToast(message, type) {
   var toast = document.getElementById('toast');
   toast.textContent = message;
-  toast.className = 'toast show' + (type === 'error' ? ' error' : '');
+  var className = 'toast show';
+  if (type === 'error') className += ' error';
+  else if (type === 'warning') className += ' warning';
+  toast.className = className;
   setTimeout(function() { toast.classList.remove('show'); }, 3000);
 }
 
