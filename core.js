@@ -147,6 +147,133 @@ function analyzeVolume(klines, currentVolume) {
   return { strength: strength, ratio: ratio, avgVolume: avgVol };
 }
 
+// ==================== Volume Spread Analysis (VSA) ====================
+function analyzeVSA(klines, currentPrice) {
+  if (!klines || klines.length < 20) {
+    return {
+      signal: 'neutral',
+      strength: 0,
+      patterns: [],
+      reasons: ['داده ناکافی برای VSA'],
+      volumeAnalysis: null,
+      spreadAnalysis: null,
+      closePosition: 50
+    };
+  }
+  
+  var currentCandle = klines[klines.length - 1];
+  var recent20 = klines.slice(-20);
+  
+  // محاسبه میانگین حجم
+  var avgVolume = recent20.reduce(function(sum, k) { return sum + k.v; }, 0) / 20;
+  var volumeRatio = avgVolume > 0 ? currentCandle.v / avgVolume : 1;
+  
+  // محاسبه میانگین Spread
+  var avgSpread = recent20.reduce(function(sum, k) { 
+    return sum + (k.h - k.l); 
+  }, 0) / 20;
+  var currentSpread = currentCandle.h - currentCandle.l;
+  var spreadRatio = avgSpread > 0 ? currentSpread / avgSpread : 1;
+  
+  // محاسبه Close Position
+  var closePosition = currentSpread > 0 ? 
+    ((currentCandle.c - currentCandle.l) / currentSpread) * 100 : 50;
+  
+  var isBullishCandle = currentCandle.c > currentCandle.o;
+  var isBearishCandle = currentCandle.c < currentCandle.o;
+  
+  var patterns = [];
+  var reasons = [];
+  var signal = 'neutral';
+  var strength = 0;
+  
+  // تشخیص الگوها
+  
+  // 1. Upthrust (Fake Breakout)
+  if (isBullishCandle && closePosition > 80 && volumeRatio < 0.8 && spreadRatio < 1.2) {
+    patterns.push('upthrust');
+    reasons.push('Upthrust: صعود با حجم پایین - احتمال Fake Breakout');
+    signal = 'warning';
+    strength = 3;
+  }
+  
+  // 2. No Demand (ضعف در صعود)
+  if (isBullishCandle && volumeRatio < 0.7 && spreadRatio < 0.8) {
+    patterns.push('no_demand');
+    reasons.push('No Demand: صعود با حجم و spread پایین - ضعف در خریداران');
+    if (signal === 'neutral') {
+      signal = 'warning';
+      strength = 2;
+    }
+  }
+  
+  // 3. No Supply (ضعف در نزول)
+  if (isBearishCandle && volumeRatio < 0.7 && spreadRatio < 0.8) {
+    patterns.push('no_supply');
+    reasons.push('No Supply: نزول با حجم و spread پایین - ضعف در فروشندگان');
+    if (signal === 'neutral') {
+      signal = 'warning';
+      strength = 2;
+    }
+  }
+  
+  // 4. Climax (پایان روند)
+  if (volumeRatio > 2.0 && spreadRatio > 1.5) {
+    patterns.push('climax');
+    reasons.push('Climax: حجم و spread بسیار بالا - احتمال پایان روند');
+    signal = 'warning';
+    strength = 4;
+  }
+  
+  // 5. Test (تست سطح)
+  if (volumeRatio < 0.6 && spreadRatio < 0.7) {
+    patterns.push('test');
+    reasons.push('Test: حجم و spread پایین - احتمال تست سطح');
+    if (signal === 'neutral') {
+      signal = 'warning';
+      strength = 1;
+    }
+  }
+  
+  // سیگنال‌های مثبت
+  
+  // Strong Buying (قدرت خرید قوی)
+  if (isBullishCandle && volumeRatio > 1.3 && closePosition > 70 && spreadRatio > 1.0) {
+    patterns.push('strong_buying');
+    reasons.push('قدرت خرید قوی: حجم بالا، close نزدیک high');
+    signal = 'bullish';
+    strength = 7;
+  }
+  
+  // Strong Selling (قدرت فروش قوی)
+  if (isBearishCandle && volumeRatio > 1.3 && closePosition < 30 && spreadRatio > 1.0) {
+    patterns.push('strong_selling');
+    reasons.push('قدرت فروش قوی: حجم بالا، close نزدیک low');
+    signal = 'bearish';
+    strength = 7;
+  }
+  
+  return {
+    signal: signal,
+    strength: strength,
+    patterns: patterns,
+    reasons: reasons,
+    volumeAnalysis: {
+      current: currentCandle.v,
+      average: avgVolume,
+      ratio: volumeRatio,
+      status: volumeRatio > 1.3 ? 'high' : (volumeRatio < 0.7 ? 'low' : 'normal')
+    },
+    spreadAnalysis: {
+      current: currentSpread,
+      average: avgSpread,
+      ratio: spreadRatio,
+      status: spreadRatio > 1.2 ? 'wide' : (spreadRatio < 0.8 ? 'narrow' : 'normal')
+    },
+    closePosition: closePosition
+  };
+}
+
 // ==================== StochRSI (New - Vital for Precision) ====================
 function calcStochRSI(closes, rsiPeriod, stochPeriod, kPeriod, dPeriod) {
   // Calculated in analyzeTF using simplified logic for performance
@@ -176,6 +303,7 @@ function analyzeTF(klines, price) {
   var adx = calcADX(klines, 14);
   var volAnalysis = analyzeVolume(klines, klines[klines.length-1].v);
   var atr = calcATR(klines, 14, price);
+  var vsaResult = analyzeVSA(klines, price);
 
   // 2. Trend Identification (The Filter)
   var majorTrend = price > ema200 ? 'bullish' : 'bearish';
@@ -277,14 +405,16 @@ function analyzeTF(klines, price) {
     rsi: rsi,
     ema21: ema21,
     ema50: ema50,
+    ema200: ema200, // EMA 200 for trend filter
     adx: adx,
     stochRsi: { k: stochK, d: stochK }, // Simplified D
-    trend: minorTrend
+    trend: minorTrend,
+    vsa: vsaResult // افزودن VSA results
   };
 
-  // Thresholds
-  var minScore = 6; // Increased from 4 to 6 for stricter entry
-  var diffScore = 3; // Difference must be distinct
+  // Thresholds - Relaxed for futures trading (some risk is acceptable)
+  var minScore = 4; // Reduced from 6 to 4 - allow more signals
+  var diffScore = 2; // Reduced from 3 to 2 - less strict difference requirement
 
   if (longPts >= minScore && longPts > shortPts + diffScore) {
     result.signal = 'long';
@@ -299,36 +429,160 @@ function analyzeTF(klines, price) {
   return result;
 }
 
+// ==================== Liquidity Grab Zones Detection ====================
+function detectLiquidityGrabZones(klines4h, currentPrice) {
+  if (!klines4h || klines4h.length < 20 || !currentPrice) {
+    return { upperZones: [], lowerZones: [] };
+  }
+  
+  var upperZones = [];
+  var lowerZones = [];
+  var recentKlines = klines4h.slice(-20);
+  
+  recentKlines.forEach(function(candle) {
+    var body = Math.abs(candle.c - candle.o);
+    var upperWick = candle.h - Math.max(candle.c, candle.o);
+    var lowerWick = Math.min(candle.c, candle.o) - candle.l;
+    
+    // Wick بلند بالا (stop hunt برای long positions)
+    if (body > 0 && upperWick > body * 2 && upperWick > currentPrice * 0.005) {
+      upperZones.push({
+        price: candle.h,
+        strength: upperWick / body,
+        distance: (candle.h - currentPrice) / currentPrice * 100
+      });
+    }
+    
+    // Wick بلند پایین (stop hunt برای short positions)
+    if (body > 0 && lowerWick > body * 2 && lowerWick > currentPrice * 0.005) {
+      lowerZones.push({
+        price: candle.l,
+        strength: lowerWick / body,
+        distance: (currentPrice - candle.l) / currentPrice * 100
+      });
+    }
+  });
+  
+  // مرتب‌سازی بر اساس فاصله از قیمت فعلی
+  upperZones.sort(function(a, b) { return a.distance - b.distance; });
+  lowerZones.sort(function(a, b) { return a.distance - b.distance; });
+  
+  return { upperZones: upperZones, lowerZones: lowerZones };
+}
+
+// ==================== Fibonacci Retracement ====================
+function calcFibonacciLevels(swingHigh, swingLow, isUptrend) {
+  if (!swingHigh || !swingLow || swingHigh <= swingLow) {
+    return null;
+  }
+  
+  var diff = swingHigh - swingLow;
+  var levels = {
+    0: isUptrend ? swingLow : swingHigh,
+    23.6: isUptrend ? swingLow + diff * 0.236 : swingHigh - diff * 0.236,
+    38.2: isUptrend ? swingLow + diff * 0.382 : swingHigh - diff * 0.382,
+    50: isUptrend ? swingLow + diff * 0.5 : swingHigh - diff * 0.5,
+    61.8: isUptrend ? swingLow + diff * 0.618 : swingHigh - diff * 0.618,
+    78.6: isUptrend ? swingLow + diff * 0.786 : swingHigh - diff * 0.786,
+    100: isUptrend ? swingHigh : swingLow
+  };
+  return levels;
+}
+
 // ==================== Smart Entry Finder (Updated) ====================
-function findSmartEntry(klines, klines4h, currentPrice, signalType, ema21, ema50, atr, capital) {
+function findSmartEntry(klines, klines4h, currentPrice, signalType, ema21, ema50, atr, capital, swingPoints) {
   // Adjusted to avoid entering at the peak of a candle
   var entry = currentPrice;
   var reasons = [];
   
-  // Pullback Entry Strategy
-  if (signalType === 'long') {
-     // Try to enter near EMA21 if price is far extended
-     if (currentPrice > ema21 * 1.01) {
-        entry = (currentPrice + ema21) / 2;
-        reasons.push('ورود در پولبک (Pullback)');
-     } else {
-        reasons.push('ورود مستقیم');
-     }
-  } else {
-     if (currentPrice < ema21 * 0.99) {
-        entry = (currentPrice + ema21) / 2;
-        reasons.push('ورود در پولبک (Pullback)');
-     } else {
-        reasons.push('ورود مستقیم');
-     }
+  // اگر swing points موجود باشد، از فیبوناچی استفاده کن
+  if (swingPoints && swingPoints.swingHigh && swingPoints.swingLow) {
+    var fibLevels = calcFibonacciLevels(
+      swingPoints.swingHigh, 
+      swingPoints.swingLow, 
+      signalType === 'long'
+    );
+    
+    if (fibLevels) {
+      // برای LONG: استفاده از 61.8% یا 78.6% (retracement)
+      if (signalType === 'long') {
+        var fib618 = fibLevels[61.8];
+        var fib786 = fibLevels[78.6];
+        
+        // اگر قیمت فعلی نزدیک به این سطوح است، استفاده کن
+        var tolerance = currentPrice * 0.01; // 1% tolerance
+        if (Math.abs(currentPrice - fib618) < tolerance) {
+          entry = fib618;
+          reasons.push('ورود در سطح فیبوناچی 61.8%');
+        } else if (Math.abs(currentPrice - fib786) < tolerance) {
+          entry = fib786;
+          reasons.push('ورود در سطح فیبوناچی 78.6%');
+        } else if (currentPrice < fib618 && currentPrice > fib786) {
+          // اگر قیمت بین 78.6% و 61.8% است، از 61.8% استفاده کن
+          entry = fib618;
+          reasons.push('ورود در سطح فیبوناچی 61.8% (پولبک)');
+        }
+      } else {
+        // برای SHORT: استفاده از 61.8% یا 78.6% (retracement در روند نزولی)
+        var fib618 = fibLevels[61.8];
+        var fib786 = fibLevels[78.6];
+        
+        var tolerance = currentPrice * 0.01; // 1% tolerance
+        if (Math.abs(currentPrice - fib618) < tolerance) {
+          entry = fib618;
+          reasons.push('ورود در سطح فیبوناچی 61.8%');
+        } else if (Math.abs(currentPrice - fib786) < tolerance) {
+          entry = fib786;
+          reasons.push('ورود در سطح فیبوناچی 78.6%');
+        } else if (currentPrice > fib618 && currentPrice < fib786) {
+          // اگر قیمت بین 61.8% و 78.6% است، از 61.8% استفاده کن
+          entry = fib618;
+          reasons.push('ورود در سطح فیبوناچی 61.8% (پولبک)');
+        }
+      }
+    }
+  }
+  
+  // Pullback Entry Strategy (fallback if no Fibonacci)
+  if (reasons.length === 0) {
+    if (signalType === 'long') {
+       // Try to enter near EMA21 if price is far extended
+       if (currentPrice > ema21 * 1.01) {
+          entry = (currentPrice + ema21) / 2;
+          reasons.push('ورود در پولبک (Pullback)');
+       } else {
+          reasons.push('ورود مستقیم');
+       }
+       
+       // If overbought condition, adjust entry to current price (not lower)
+       // This prevents waiting for a pullback that may not come
+       if (currentPrice > ema21 * 1.01) {
+         // Limit entry to not be too far below current price
+         entry = Math.max(entry, currentPrice * 0.997); // Max 0.3% below
+       }
+    } else {
+       if (currentPrice < ema21 * 0.99) {
+          entry = (currentPrice + ema21) / 2;
+          reasons.push('ورود در پولبک (Pullback)');
+       } else {
+          reasons.push('ورود مستقیم');
+       }
+       
+       // If oversold condition, adjust entry to current price (not higher)
+       // This prevents waiting for a bounce that may not come
+       if (currentPrice < ema21 * 0.99) {
+         // Limit entry to not be too far above current price
+         entry = Math.min(entry, currentPrice * 1.003); // Max 0.3% above
+       }
+    }
   }
 
   return {
     entry: entry,
-    entries: [{ price: entry, percent: 100, reason: 'Entry' }],
+    entries: [{ price: entry, percent: 100, reason: reasons[0] || 'Entry' }],
     reasons: reasons,
-    quality: 'good',
-    confluenceScore: 8
+    quality: reasons.some(function(r) { return r.indexOf('فیبوناچی') !== -1; }) ? 'excellent' : 'good',
+    confluenceScore: reasons.some(function(r) { return r.indexOf('فیبوناچی') !== -1; }) ? 9 : 8
   };
 }
 
@@ -344,13 +598,16 @@ if (typeof window !== 'undefined') {
     analyzeVolume: analyzeVolume,
     analyzeTF: analyzeTF,
     findSmartEntry: findSmartEntry,
+    calcFibonacciLevels: calcFibonacciLevels,
+    detectLiquidityGrabZones: detectLiquidityGrabZones,
+    analyzeVSA: analyzeVSA,
     
     // Legacy support placeholders if needed elsewhere
     detectDivergence: () => ({ type: 'none' }),
     detectCandlestickPatterns: () => ({ patterns: [], bullish: 0, bearish: 0 }),
     detectMarketRegime: () => ({ regime: 'unknown' }),
     getLeverage: (e, s) => 5,
-    calcFibonacci: () => null,
+    calcFibonacci: calcFibonacciLevels, // Alias for backward compatibility
     detectOrderBlocks: () => [],
     detectFVG: () => [],
     calcVWAP: () => null,
