@@ -20,7 +20,6 @@ var MARKETS_CACHE = {
 // Global cache for order books to prevent too many calls
 var ORDERBOOK_CACHE = {
   data: {},
-  lastErrorLog: {},
   ttl: 30 * 1000 // 30 seconds cache
 };
 
@@ -71,7 +70,6 @@ class AnalysisEngine {
     // Check cache first
     const now = Date.now();
     if (MARKETS_CACHE.data && (now - MARKETS_CACHE.timestamp) < MARKETS_CACHE.ttl) {
-      console.log('[AnalysisEngine] Using cached markets data');
       this.exchange.markets = MARKETS_CACHE.data;
       this.exchange.marketsById = this.exchange.indexBy(MARKETS_CACHE.data, 'id');
       this.exchange.symbols = Object.keys(MARKETS_CACHE.data);
@@ -86,16 +84,13 @@ class AnalysisEngine {
     for (let attempt = 0; attempt < maxRetries; attempt++) {
       try {
         if (attempt > 0) {
-          console.log(`[AnalysisEngine] Retrying loadMarkets (attempt ${attempt + 1}/${maxRetries})...`);
-          // Wait before retry (exponential backoff)
           await new Promise(resolve => setTimeout(resolve, 1000 * (attempt + 1)));
         }
 
-        // Use Promise.race with timeout
         const markets = await Promise.race([
           this.exchange.loadMarkets(),
           new Promise((_, reject) => 
-            setTimeout(() => reject(new Error('RequestTimeout')), 30000) // Increased to 30s
+            setTimeout(() => reject(new Error('RequestTimeout')), 30000)
           )
         ]);
 
@@ -103,16 +98,13 @@ class AnalysisEngine {
         MARKETS_CACHE.data = markets;
         MARKETS_CACHE.timestamp = Date.now();
         this.marketsLoaded = true;
-        console.log('[AnalysisEngine] Markets loaded and cached successfully');
         return markets;
       } catch (error) {
         lastError = error;
         if (error.message.includes('timeout') || error.message.includes('RequestTimeout')) {
-          console.warn(`[AnalysisEngine] LoadMarkets timeout (attempt ${attempt + 1}/${maxRetries})`);
           if (attempt === maxRetries - 1) {
             // Last attempt failed - use cached data if available (even if expired)
             if (MARKETS_CACHE.data) {
-              console.warn('[AnalysisEngine] Using expired cache as fallback');
               this.exchange.markets = MARKETS_CACHE.data;
               this.exchange.marketsById = this.exchange.indexBy(MARKETS_CACHE.data, 'id');
               this.exchange.symbols = Object.keys(MARKETS_CACHE.data);
@@ -121,15 +113,13 @@ class AnalysisEngine {
             }
           }
         } else {
-          // Non-timeout error - don't retry
           throw error;
         }
       }
     }
 
-    // All retries failed
+    // All retries failed - use expired cache if available
     if (MARKETS_CACHE.data) {
-      console.warn('[AnalysisEngine] All retries failed, using expired cache');
       this.exchange.markets = MARKETS_CACHE.data;
       this.exchange.marketsById = this.exchange.indexBy(MARKETS_CACHE.data, 'id');
       this.exchange.symbols = Object.keys(MARKETS_CACHE.data);
@@ -195,7 +185,6 @@ class AnalysisEngine {
       for (let attempt = 0; attempt <= retries; attempt++) {
         try {
           if (attempt > 0) {
-            console.log(`[AnalysisEngine] Retrying fetchOHLCV for ${timeframe} (attempt ${attempt + 1}/${retries + 1})...`);
             await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
           }
 
@@ -245,7 +234,6 @@ class AnalysisEngine {
       for (let attempt = 0; attempt <= retries; attempt++) {
         try {
           if (attempt > 0) {
-            console.log(`[AnalysisEngine] Retrying fetchFundingRate (attempt ${attempt + 1}/${retries + 1})...`);
             await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
           }
 
@@ -306,22 +294,35 @@ class AnalysisEngine {
       for (let attempt = 0; attempt <= retries; attempt++) {
         try {
           if (attempt > 0) {
-            console.log(`[AnalysisEngine] Retrying fetchOpenInterest (attempt ${attempt + 1}/${retries + 1})...`);
             await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
           }
 
-          // Fetch open interest using backend proxy to avoid CORS
+          // Fetch open interest directly from Binance Futures API
           // Format: BTC/USDT -> BTCUSDT
           const symbolForAPI = this.symbol.replace('/', '');
-          // Use backend proxy instead of direct Binance API
-          const backendUrl = `http://localhost:3000/api/binance/fapi/v1/openInterest?symbol=${symbolForAPI}`;
+          // Use direct Binance API
+          const binanceUrl = `https://fapi.binance.com/fapi/v1/openInterest?symbol=${symbolForAPI}`;
           
-          const response = await Promise.race([
-            fetch(backendUrl),
-            new Promise((_, reject) => 
-              setTimeout(() => reject(new Error('RequestTimeout')), 30000)
-            )
-          ]);
+          let response;
+          // Try direct fetch (may fail due to CORS in browser, but worth trying)
+          // Note: CORS proxy removed as api.allorigins.win is no longer working
+          try {
+            response = await Promise.race([
+              fetch(binanceUrl),
+              new Promise((_, reject) => 
+                setTimeout(() => reject(new Error('RequestTimeout')), 30000)
+              )
+            ]);
+          } catch (fetchError) {
+            // CORS errors are expected in browser - return null gracefully
+            // Open Interest data will not be available but app will continue working
+            if (fetchError.message.includes('CORS') || fetchError.message.includes('Failed to fetch') || fetchError.message.includes('blocked')) {
+              console.log(`[AnalysisEngine] CORS blocked for Open Interest (${symbolForAPI}) - skipping`);
+              return null;
+            } else {
+              throw fetchError;
+            }
+          }
 
           if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -329,6 +330,7 @@ class AnalysisEngine {
 
           const data = await response.json();
           
+          // Binance API returns: { openInterest: "123.45", openInterestValue: "123456.78", symbol: "BTCUSDT" }
           const currentOI = parseFloat(data.openInterest) || 0;
           const currentOIValue = parseFloat(data.openInterestValue) || 0;
           const timestamp = Date.now();
@@ -394,6 +396,11 @@ class AnalysisEngine {
           };
         } catch (error) {
           lastError = error;
+          // Handle CORS errors gracefully - return null instead of retrying
+          if (error.message.includes('CORS') || error.message.includes('blocked') || error.message.includes('Failed to fetch')) {
+            console.log(`[AnalysisEngine] CORS blocked for Open Interest (${symbolForAPI}) - skipping`);
+            return null;
+          }
           if (error.message.includes('timeout') || error.message.includes('RequestTimeout')) {
             if (attempt < retries) continue;
           } else {
@@ -402,20 +409,17 @@ class AnalysisEngine {
           }
         }
       }
-      throw lastError || new Error('Failed to fetch open interest after retries');
+      // If all retries failed, return null instead of throwing (allows app to continue)
+      return null;
     } catch (error) {
+      // Handle CORS errors gracefully
+      if (error.message.includes('CORS') || error.message.includes('blocked') || error.message.includes('Failed to fetch')) {
+        console.log(`[AnalysisEngine] CORS blocked for Open Interest (${this.symbol}) - skipping`);
+        return null;
+      }
       console.warn(`[AnalysisEngine] Error fetching open interest for ${this.symbol}:`, error.message);
-      // Return neutral open interest on error
-      return {
-        openInterest: 0,
-        openInterestValue: 0,
-        timestamp: Date.now(),
-        change: 0,
-        changePercent: 0,
-        changeUSD: 0,
-        interpretation: 'neutral',
-        error: error.message
-      };
+      // Return null on error instead of throwing - allows app to continue
+      return null;
     }
   }
 
@@ -434,7 +438,6 @@ class AnalysisEngine {
       for (let attempt = 0; attempt <= retries; attempt++) {
         try {
           if (attempt > 0) {
-            console.log(`[AnalysisEngine] Retrying fetchLongShortRatio (attempt ${attempt + 1}/${retries + 1})...`);
             await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
           }
 
@@ -495,6 +498,11 @@ class AnalysisEngine {
           };
         } catch (error) {
           lastError = error;
+          // Handle CORS errors gracefully - return null instead of retrying
+          if (error.message.includes('CORS') || error.message.includes('blocked') || error.message.includes('Failed to fetch')) {
+            console.log(`[AnalysisEngine] CORS blocked for Long/Short Ratio (${symbolForAPI}) - skipping`);
+            return null;
+          }
           if (error.message.includes('timeout') || error.message.includes('RequestTimeout')) {
             if (attempt < retries) continue;
           } else {
@@ -503,18 +511,17 @@ class AnalysisEngine {
           }
         }
       }
-      throw lastError || new Error('Failed to fetch long/short ratio after retries');
+      // If all retries failed, return null instead of throwing (allows app to continue)
+      return null;
     } catch (error) {
+      // Handle CORS errors gracefully
+      if (error.message.includes('CORS') || error.message.includes('blocked') || error.message.includes('Failed to fetch')) {
+        console.log(`[AnalysisEngine] CORS blocked for Long/Short Ratio (${this.symbol}) - skipping`);
+        return null;
+      }
       console.warn(`[AnalysisEngine] Error fetching long/short ratio for ${this.symbol}:`, error.message);
-      return {
-        ratio: 1,
-        longAccount: 0,
-        shortAccount: 0,
-        sentiment: 'neutral',
-        interpretation: 'خطا در دریافت داده',
-        timestamp: Date.now(),
-        error: error.message
-      };
+      // Return null on error instead of throwing - allows app to continue
+      return null;
     }
   }
 
@@ -540,11 +547,9 @@ class AnalysisEngine {
       for (let attempt = 0; attempt <= retries; attempt++) {
         try {
           if (attempt > 0) {
-            console.log(`[AnalysisEngine] Retrying fetchOrderBook (attempt ${attempt + 1}/${retries + 1})...`);
             await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
           }
 
-          // Increased timeout to 30 seconds for better reliability
           const orderBook = await Promise.race([
             this.exchange.fetchOrderBook(this.symbol, limit),
             new Promise((_, reject) => 
@@ -570,23 +575,12 @@ class AnalysisEngine {
           if (error.message.includes('timeout') || error.message.includes('RequestTimeout')) {
             if (attempt < retries) continue;
           } else {
-            // Non-timeout error - don't retry
             throw error;
           }
         }
       }
       throw lastError || new Error('Failed to fetch order book after retries');
     } catch (error) {
-      // Rate limit error logging - only log once per 60 seconds per symbol
-      const cacheKey = `${this.symbol}_${limit}`;
-      const now = Date.now();
-      const lastLogTime = ORDERBOOK_CACHE.lastErrorLog[cacheKey] || 0;
-      
-      if (now - lastLogTime > 60000) { // Log at most once per minute
-        console.error(`Error fetching order book for ${this.symbol}:`, error.message);
-        ORDERBOOK_CACHE.lastErrorLog[cacheKey] = now;
-      }
-      
       // Return empty order book instead of throwing to allow analysis to continue
       this.orderBook = {
         bids: [],
@@ -1802,6 +1796,204 @@ class AnalysisEngine {
   }
 
   /**
+   * Calculate Parabolic SAR (Stop and Reverse)
+   * Used to identify potential reversals in price direction
+   */
+  calculateParabolicSAR(ohlcvData, acceleration = 0.02, maximum = 0.2) {
+    try {
+      if (!ohlcvData || ohlcvData.length < 2) {
+        return null;
+      }
+
+      const prices = ohlcvData.map(c => ({
+        high: c.high || c.h,
+        low: c.low || c.l,
+        close: c.close || c.c
+      }));
+
+      let trend = prices[1].close > prices[0].close ? 'up' : 'down';
+      let sar = trend === 'up' ? prices[0].low : prices[0].high;
+      let ep = trend === 'up' ? prices[0].high : prices[0].low;
+      let af = acceleration;
+
+      const sarValues = [sar];
+
+      for (let i = 1; i < prices.length; i++) {
+        const current = prices[i];
+        const prev = prices[i - 1];
+
+        // Update SAR
+        sar = sar + af * (ep - sar);
+
+        // Check for reversal
+        if (trend === 'up') {
+          if (current.low < sar) {
+            trend = 'down';
+            sar = ep;
+            ep = current.low;
+            af = acceleration;
+          } else {
+            if (current.high > ep) {
+              ep = current.high;
+              af = Math.min(af + acceleration, maximum);
+            }
+            sar = Math.min(sar, prev.low, current.low);
+          }
+        } else {
+          if (current.high > sar) {
+            trend = 'up';
+            sar = ep;
+            ep = current.high;
+            af = acceleration;
+          } else {
+            if (current.low < ep) {
+              ep = current.low;
+              af = Math.min(af + acceleration, maximum);
+            }
+            sar = Math.max(sar, prev.high, current.high);
+          }
+        }
+
+        sarValues.push(sar);
+      }
+
+      const currentPrice = prices[prices.length - 1].close;
+      const currentSAR = sarValues[sarValues.length - 1];
+      const signal = trend === 'up' ? 'bullish' : 'bearish';
+      const distance = currentPrice > 0 ? ((currentPrice - currentSAR) / currentPrice) * 100 : 0;
+
+      return {
+        sar: currentSAR,
+        trend: trend,
+        signal: signal,
+        distance: distance,
+        values: sarValues.slice(-20)
+      };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  /**
+   * Calculate Supertrend
+   * A trend-following indicator that combines ATR and price action
+   */
+  calculateSupertrend(ohlcvData, period = 10, multiplier = 3.0) {
+    try {
+      if (!ohlcvData || ohlcvData.length < period + 1) {
+        return null;
+      }
+
+      const atrData = this.calculateATR(ohlcvData, period);
+      const atr = atrData.atr;
+      
+      if (atr === 0) {
+        return null;
+      }
+
+      const prices = ohlcvData.map(c => ({
+        high: c.high || c.h,
+        low: c.low || c.l,
+        close: c.close || c.c
+      }));
+
+      let trend = 'up';
+      const supertrendValues = [];
+      let prevUpperBand = 0;
+      let prevLowerBand = 0;
+
+      for (let i = period; i < prices.length; i++) {
+        const hlAvg = (prices[i].high + prices[i].low) / 2;
+        const upperBand = hlAvg + (multiplier * atr);
+        const lowerBand = hlAvg - (multiplier * atr);
+
+        // Determine trend
+        if (i === period) {
+          trend = prices[i].close > upperBand ? 'up' : 'down';
+          prevUpperBand = upperBand;
+          prevLowerBand = lowerBand;
+          const supertrend = trend === 'up' ? prevLowerBand : prevUpperBand;
+          supertrendValues.push(supertrend);
+        } else {
+          // Update bands based on previous values
+          const finalUpperBand = Math.min(upperBand, prevUpperBand, prices[i].high);
+          const finalLowerBand = Math.max(lowerBand, prevLowerBand, prices[i].low);
+
+          if (prices[i].close <= finalLowerBand) {
+            trend = 'down';
+          } else if (prices[i].close >= finalUpperBand) {
+            trend = 'up';
+          }
+
+          prevUpperBand = finalUpperBand;
+          prevLowerBand = finalLowerBand;
+          
+          const supertrend = trend === 'up' ? prevLowerBand : prevUpperBand;
+          supertrendValues.push(supertrend);
+        }
+      }
+
+      const currentPrice = prices[prices.length - 1].close;
+      const currentSupertrend = supertrendValues[supertrendValues.length - 1];
+      const signal = trend === 'up' ? 'bullish' : 'bearish';
+      const distance = currentPrice > 0 ? ((currentPrice - currentSupertrend) / currentPrice) * 100 : 0;
+
+      return {
+        supertrend: currentSupertrend,
+        trend: trend,
+        signal: signal,
+        distance: distance,
+        values: supertrendValues.slice(-20)
+      };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  /**
+   * Calculate VWAP (Volume Weighted Average Price)
+   * Important for intraday trading
+   */
+  calculateVWAP(ohlcvData) {
+    try {
+      if (!ohlcvData || ohlcvData.length < 1) {
+        return null;
+      }
+
+      let cumulativeTPV = 0; // Cumulative Typical Price * Volume
+      let cumulativeVolume = 0;
+
+      for (const candle of ohlcvData) {
+        const high = candle.high || candle.h;
+        const low = candle.low || candle.l;
+        const close = candle.close || candle.c;
+        const volume = candle.volume || candle.v || 0;
+
+        const typicalPrice = (high + low + close) / 3;
+        cumulativeTPV += typicalPrice * volume;
+        cumulativeVolume += volume;
+      }
+
+      if (cumulativeVolume === 0) {
+        return null;
+      }
+
+      const vwap = cumulativeTPV / cumulativeVolume;
+      const currentPrice = ohlcvData[ohlcvData.length - 1].close || ohlcvData[ohlcvData.length - 1].c;
+      const distance = currentPrice > 0 ? ((currentPrice - vwap) / currentPrice) * 100 : 0;
+      const position = currentPrice > vwap ? 'above' : currentPrice < vwap ? 'below' : 'at';
+
+      return {
+        vwap: vwap,
+        position: position,
+        distance: distance
+      };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  /**
    * Calculate Volume Profile (POC - Point of Control)
    * Finds the price level with the highest trading volume
    */
@@ -2061,6 +2253,16 @@ class AnalysisEngine {
         const currentRSI = this.calculateRSI(closes, 14);
         const currentADX = this.calculateADX(ohlcvData, 14);
         const currentMACD = this.calculateMACD(closes, 12, 26, 9);
+        
+        // Calculate new indicators using TradingCore
+        const stochastic = typeof TradingCore !== 'undefined' && TradingCore.calcStochastic ? 
+          TradingCore.calcStochastic(ohlcvData, 14, 3, 3) : { k: 50, d: 50, signal: 'neutral' };
+        const cci = typeof TradingCore !== 'undefined' && TradingCore.calcCCI ? 
+          TradingCore.calcCCI(ohlcvData, 20) : { cci: 0, signal: 'neutral' };
+        const williamsR = typeof TradingCore !== 'undefined' && TradingCore.calcWilliamsR ? 
+          TradingCore.calcWilliamsR(ohlcvData, 14) : { wr: -50, signal: 'neutral' };
+        const mfi = typeof TradingCore !== 'undefined' && TradingCore.calcMFI ? 
+          TradingCore.calcMFI(ohlcvData, 14) : { mfi: 50, signal: 'neutral' };
 
         // Calculate RSI for previous 5 candles
         const previousRSIs = [];
@@ -2140,6 +2342,15 @@ class AnalysisEngine {
         // Calculate Ichimoku Cloud
         const ichimoku = this.calculateIchimoku(ohlcvData);
 
+        // Calculate Parabolic SAR
+        const parabolicSAR = this.calculateParabolicSAR(ohlcvData);
+
+        // Calculate Supertrend
+        const supertrend = this.calculateSupertrend(ohlcvData);
+
+        // Calculate VWAP
+        const vwap = this.calculateVWAP(ohlcvData);
+
         // Calculate Volume 24h Change
         const volume24hChange = this.calculateVolume24hChange(ohlcvData, tf);
 
@@ -2161,7 +2372,14 @@ class AnalysisEngine {
           atr: atr,
           volumeProfile: volumeProfile,
           ichimoku: ichimoku,
-          volume24hChange: volume24hChange
+          volume24hChange: volume24hChange,
+          stochastic: stochastic,
+          cci: cci,
+          williamsR: williamsR,
+          mfi: mfi,
+          parabolicSAR: parabolicSAR,
+          supertrend: supertrend,
+          vwap: vwap
         };
 
         // Calculate score
@@ -2232,9 +2450,6 @@ class AnalysisEngine {
 // Make available globally for non-module usage
 // This ensures the class is accessible whether loaded as module or script
 (function setupGlobalAccess() {
-  console.log('[AnalysisEngine] Setting up global access...');
-  console.log('[AnalysisEngine] Class defined:', typeof AnalysisEngine !== 'undefined' ? 'yes' : 'no');
-  console.log('[AnalysisEngine] Window available:', typeof window !== 'undefined' ? 'yes' : 'no');
   
   // Use a function to ensure it runs after class is defined
   if (typeof AnalysisEngine === 'undefined') {
@@ -2245,12 +2460,10 @@ class AnalysisEngine {
   // Set on window if available
   if (typeof window !== 'undefined') {
     window.AnalysisEngine = AnalysisEngine;
-    console.log('[AnalysisEngine] Assigned to window.AnalysisEngine');
     
     // Also set on globalThis for compatibility
     if (typeof globalThis !== 'undefined') {
       globalThis.AnalysisEngine = AnalysisEngine;
-      console.log('[AnalysisEngine] Assigned to globalThis.AnalysisEngine');
     }
     
     // Dispatch event to notify that AnalysisEngine is ready
@@ -2258,9 +2471,7 @@ class AnalysisEngine {
       try {
         // Use setTimeout to ensure event is dispatched after module is fully loaded
         setTimeout(() => {
-          console.log('[AnalysisEngine] Dispatching ready event...');
           window.dispatchEvent(new CustomEvent('analysisEngineModuleLoaded'));
-          console.log('[AnalysisEngine] Ready event dispatched');
         }, 100);
       } catch (e) {
         console.warn('[AnalysisEngine] Failed to dispatch event:', e);

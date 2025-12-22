@@ -61,7 +61,8 @@ var STATE = {
     riskPercent: 10,
     strategy: 'default',
     leverage: 'auto',
-    notificationEnabled: true
+    notificationEnabled: true,
+    dashboardMode: 'professional' // 'simple' or 'professional'
   },
   lastUpdate: null,
   allSymbols: [],
@@ -76,6 +77,13 @@ var STATE = {
   },
   promptManualSelection: false, // Whether user manually selected a symbol in prompt dropdown
   promptUpdatingProgrammatically: false // Flag to prevent change event when updating programmatically
+};
+
+// ==================== Interval IDs for cleanup ====================
+var INTERVAL_IDS = {
+  apiStatusReset: null,
+  dataUpdateLoop: null,
+  clockUpdate: null
 };
 
 var TIMEFRAMES = ['30m', '1h', '4h', '1d'];
@@ -100,6 +108,117 @@ var ORDERBOOK_WS = null;
 var ORDERBOOK_WS_CONNECTED = false;
 var ORDERBOOK_WS_RECONNECT_TIMEOUT = null;
 var ORDERBOOK_WS_SYMBOL = null;
+
+// ==================== Memory Cleanup ====================
+
+// Track last access time for symbols
+var SYMBOL_LAST_ACCESS = {};
+
+// Cleanup data for symbols that are not in watchlist and not active
+function cleanupInactiveSymbolData() {
+  var activeSymbols = new Set();
+  
+  // Add watchlist symbols
+  STATE.watchlist.forEach(function(symbol) {
+    activeSymbols.add(symbol);
+  });
+  
+  // Add active asset (even if not in watchlist, it's still being viewed)
+  if (STATE.activeAsset) {
+    activeSymbols.add(STATE.activeAsset);
+  }
+  
+  // Clean up klines for inactive symbols
+  Object.keys(STATE.klines).forEach(function(symbol) {
+    if (!activeSymbols.has(symbol)) {
+      delete STATE.klines[symbol];
+    }
+  });
+  
+  // Clean up signals for inactive symbols
+  // Also clean up large nested data in signals to reduce memory
+  Object.keys(STATE.signals).forEach(function(symbol) {
+    if (!activeSymbols.has(symbol)) {
+      delete STATE.signals[symbol];
+    } else {
+      // Clean up large nested data in active signals to reduce memory
+      var signal = STATE.signals[symbol];
+      if (signal && signal.tfAnalysis) {
+        // Keep only essential data in tfAnalysis
+        Object.keys(signal.tfAnalysis).forEach(function(tf) {
+          var tfData = signal.tfAnalysis[tf];
+          if (tfData && tfData.klines) {
+            // Remove klines data from tfAnalysis (already stored in STATE.klines)
+            delete tfData.klines;
+          }
+        });
+      }
+    }
+  });
+  
+  // Clean up prices for inactive symbols (keep only recent ones for quick access)
+  // But keep prices that are updated via WebSocket (they're lightweight)
+  Object.keys(STATE.prices).forEach(function(symbol) {
+    if (!activeSymbols.has(symbol) && STATE.prices[symbol].source !== 'binance_ws') {
+      delete STATE.prices[symbol];
+    }
+  });
+  
+  // Clean up positions for inactive symbols
+  Object.keys(STATE.positions).forEach(function(symbol) {
+    if (!activeSymbols.has(symbol)) {
+      delete STATE.positions[symbol];
+    }
+  });
+}
+
+// Cleanup old symbol data (symbols inactive for more than 5 minutes)
+function cleanupOldSymbolData() {
+  var now = Date.now();
+  var maxInactiveTime = 5 * 60 * 1000; // 5 minutes (reduced from 10 to prevent memory issues)
+  var activeSymbols = new Set();
+  
+  // Add watchlist symbols
+  STATE.watchlist.forEach(function(symbol) {
+    activeSymbols.add(symbol);
+    SYMBOL_LAST_ACCESS[symbol] = now; // Update access time
+  });
+  
+  // Add active asset
+  if (STATE.activeAsset) {
+    activeSymbols.add(STATE.activeAsset);
+    SYMBOL_LAST_ACCESS[STATE.activeAsset] = now;
+  }
+  
+  // Clean up symbols that haven't been accessed recently
+  Object.keys(SYMBOL_LAST_ACCESS).forEach(function(symbol) {
+    if (!activeSymbols.has(symbol)) {
+      var lastAccess = SYMBOL_LAST_ACCESS[symbol];
+      if (now - lastAccess > maxInactiveTime) {
+        // Remove old data
+        delete STATE.klines[symbol];
+        delete STATE.signals[symbol];
+        if (STATE.prices[symbol] && STATE.prices[symbol].source !== 'binance_ws') {
+          delete STATE.prices[symbol];
+        }
+        delete STATE.positions[symbol];
+        delete SYMBOL_LAST_ACCESS[symbol];
+      }
+    }
+  });
+}
+
+// Cleanup data for a specific symbol
+function cleanupSymbolData(symbol) {
+  delete STATE.klines[symbol];
+  delete STATE.signals[symbol];
+  delete STATE.positions[symbol];
+  // Keep prices if from WebSocket (they're lightweight)
+  if (STATE.prices[symbol] && STATE.prices[symbol].source !== 'binance_ws') {
+    delete STATE.prices[symbol];
+  }
+  delete SYMBOL_LAST_ACCESS[symbol];
+}
 
 function startRealtimePrices() {
   // If WebSocket is not supported, skip
@@ -357,7 +476,6 @@ function startOrderBookWS(symbol) {
                 if (sig.reasons.indexOf('⚠️ سیگنال معکوس در دسترس است') === -1) {
                   sig.reasons.push('⚠️ سیگنال معکوس در دسترس است');
                 }
-                console.log('[Counter-Signal] Generated counter-signal in WebSocket update for', symbol);
                 // Force re-render to show counter-signal
                 if (symbol === STATE.activeAsset) {
                   renderAssetPanel(symbol);
@@ -367,7 +485,6 @@ function startOrderBookWS(symbol) {
                 sig.counterSignal = null;
               }
             } catch (e) {
-              console.log('Counter-Targeting re-check error for ' + symbol + ': ' + e.message);
             }
           }
           
@@ -430,7 +547,7 @@ function checkAPIStatus(apiName, success) {
 }
 
 // Reset API status periodically (every 5 minutes)
-setInterval(function() {
+INTERVAL_IDS.apiStatusReset = setInterval(function() {
   Object.keys(API_STATUS).forEach(function(api) {
     if (!API_STATUS[api].available && Date.now() - API_STATUS[api].lastCheck > 300000) {
       API_STATUS[api].available = true;
@@ -469,10 +586,7 @@ document.addEventListener('DOMContentLoaded', function() {
   loadAllSymbols();
   startDataLoop();
   
-  // Start auto suggestions after a short delay
-  setTimeout(function() {
-    initSuggestionsSystem();
-  }, 3000);
+  // Suggestions system disabled - only fetch data for active symbol when viewing details
   
   console.log('PWA Ready');
 });
@@ -656,6 +770,13 @@ function saveSettings() {
 
 // ==================== UI ====================
 function initUI() {
+  // Initialize dashboard mode toggle
+  var dashboardToggle = document.getElementById('dashboardModeToggle');
+  if (dashboardToggle) {
+    var savedMode = STATE.settings.dashboardMode || 'professional';
+    dashboardToggle.checked = savedMode === 'professional';
+  }
+  
   // Populate prompt symbol dropdown
   var promptSelect = document.getElementById('promptSymbolSelect');
   if (promptSelect) {
@@ -727,6 +848,23 @@ function updatePromptButtonText() {
 }
 
 function setupEvents() {
+  // Dashboard mode toggle
+  var dashboardToggle = document.getElementById('dashboardModeToggle');
+  if (dashboardToggle) {
+    // Load saved mode (default: professional)
+    var savedMode = STATE.settings.dashboardMode || 'professional';
+    dashboardToggle.checked = savedMode === 'professional';
+    
+    dashboardToggle.addEventListener('change', function() {
+      STATE.settings.dashboardMode = this.checked ? 'professional' : 'simple';
+      saveSettings();
+      // Re-render asset panel with new mode
+      if (STATE.activeAsset) {
+        renderAssetPanel(STATE.activeAsset);
+      }
+    });
+  }
+  
   // Prompt section button event
   var getPromptBtn = document.getElementById('getPromptBtn');
   if (getPromptBtn) {
@@ -913,7 +1051,13 @@ function renderWatchlistTabs() {
 }
 
 function selectAsset(symbol) {
+  // Cleanup inactive symbols before switching
+  cleanupInactiveSymbolData();
+  
   STATE.activeAsset = symbol;
+  
+  // Update access time
+  SYMBOL_LAST_ACCESS[symbol] = Date.now();
   
   // Start OrderBook WebSocket for active asset
   startOrderBookWS(symbol);
@@ -1030,6 +1174,14 @@ function removeFromWatchlist(symbol) {
   // The tab will become a temporary tab automatically via renderWatchlistTabs
   saveSettings();
   renderWatchlistTabs();
+  
+  // Cleanup symbol data if it's not the active asset
+  if (symbol !== STATE.activeAsset) {
+    cleanupSymbolData(symbol);
+  }
+  // Also cleanup other inactive symbols
+  cleanupInactiveSymbolData();
+  
   // Always render the current active asset, even if it's not in watchlist
   if (STATE.activeAsset) {
     renderAssetPanel(STATE.activeAsset);
@@ -1041,6 +1193,9 @@ function removeFromWatchlist(symbol) {
 
 // ==================== Asset Panel ====================
 function renderAssetPanel(symbol) {
+  // Check dashboard mode
+  var isSimpleMode = (STATE.settings.dashboardMode || 'professional') === 'simple';
+  
   // Check both ASSET_INFO and COIN_ICON_CACHE
   var info = ASSET_INFO[symbol] || COIN_ICON_CACHE[symbol] || { 
     name: symbol.replace('USDT', ''), 
@@ -1102,219 +1257,56 @@ function renderAssetPanel(symbol) {
   // Current price for calculations
   var currentPrice = price && price.price ? price.price : (signal && signal.entry ? signal.entry : 0);
   
-  // Signal Reasons (Tips and Warnings) - Simplified Card
-  var reasonsHtml = '';
-  if (signal && signal.reasons && signal.reasons.length > 0) {
-    var reasonsList = signal.reasons.slice(0, 8); // Show up to 8 tips/warnings
-    reasonsList.forEach(function(reason) {
-      var reasonType = 'neutral';
-      var reasonIcon = '';
-      
-      // Determine reason type and icon based on content
-      if (reason.includes('⚠️') || reason.includes('ریسک') || reason.includes('هشدار') || reason.includes('تناقض') || reason.includes('اشباع')) {
-        reasonType = 'warning';
-        reasonIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M13 17a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-.26-7.85a.75.75 0 0 0-1.5.1l.01 4.5v.1a.75.75 0 0 0 1.5-.1v-4.5l-.01-.1Zm1.23-5.5a2.25 2.25 0 0 0-3.94 0L2.3 17.67A2.25 2.25 0 0 0 4.26 21h15.49c1.71 0 2.8-1.84 1.96-3.34l-7.74-14Zm-2.63.73a.75.75 0 0 1 1.32 0l7.74 14a.75.75 0 0 1-.65 1.12H4.25a.75.75 0 0 1-.65-1.11l7.74-14Z"/></svg>';
-      } else if (reason.includes('صعودی') || reason.includes('قوی') || reason.includes('حجم بالا') || reason.includes('واگرایی صعودی') || reason.includes('روند قوی')) {
-        reasonType = 'positive';
-        reasonIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>';
-      } else if (reason.includes('نزولی') || reason.includes('ضعیف') || reason.includes('حجم پایین')) {
-        reasonType = 'negative';
-        reasonIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>';
-      } else {
-        reasonIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13.5a6.5 6.5 0 1 1 6.21-8.41M13.5 7v.5"/><path stroke-dasharray=".889 1.778" d="M13.11 9.23a6.51 6.51 0 0 1-2.79 3.36"/><path d="m9.53 13-.47.18"/></g></svg>';
-      }
-      
-      // Remove emoji if present for cleaner display
-      var cleanReason = reason.replace(/⚠️/g, '').trim();
-      
-      reasonsHtml += '<span class="reason-badge reason-' + reasonType + '">' +
-        '<span class="reason-icon">' + reasonIcon + '</span>' +
-        '<span class="reason-text">' + cleanReason + '</span>' +
-      '</span>';
-    });
-  } else {
-    reasonsHtml = '<span class="reason-badge reason-neutral"><span class="reason-text">در حال تحلیل...</span></span>';
-  }
-  
-  var signalHtml = '<div class="signal-reasons-card" style="background:var(--card);border-radius:10px;padding:14px;margin-bottom:12px;border:1px solid var(--border);">' +
-    '<div class="signal-reasons-title" style="display:flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:600;margin-bottom:10px;color:var(--text2);">' +
-      ICONS.barChart + 
-      '<span>هشدارها و نکات</span>' +
-    '</div>' +
-    '<div class="signal-reasons">' + reasonsHtml + '</div>' +
-  '</div>';
-  
-  // Trade Setup Score Gauge
+  // Signal Reasons and Score Gauge sections removed
+  var signalHtml = '';
   var scoreGaugeHtml = '';
-  if (signal && typeof ScoringEngine !== 'undefined') {
-    try {
-      var scoringEngine = new ScoringEngine();
-      var analysisData = {
-        timeframeResults: signal.tfAnalysis || {},
-        orderBook: signal.orderBook || null,
-        walls: signal.orderBookWalls || null,
-        currentPrice: currentPrice
-      };
-      // Pass BTC context for veto logic
-      var btcContextForScoring = signal.btcContext || null;
-      var scoreResult = scoringEngine.calculateOverallScore(analysisData, btcContextForScoring);
-      var overallScore = scoreResult.overall || 50;
-      
-      // Determine color based on score
-      var scoreColor = '#999';
-      var scoreLabel = 'متوسط';
-      if (overallScore >= 70) {
-        scoreColor = '#10b981'; // Green
-        scoreLabel = 'عالی';
-      } else if (overallScore >= 50) {
-        scoreColor = '#3b82f6'; // Blue
-        scoreLabel = 'خوب';
-      } else if (overallScore >= 30) {
-        scoreColor = '#f59e0b'; // Orange
-        scoreLabel = 'متوسط';
-      } else {
-        scoreColor = '#ef4444'; // Red
-        scoreLabel = 'ضعیف';
-      }
-      
-      // Create gauge (circular or linear progress bar)
-      scoreGaugeHtml = '<div class="score-gauge-card" style="background:var(--bg2);border:2px solid ' + scoreColor + '40;border-radius:12px;padding:16px;margin:16px 0;text-align:center;">' +
-        '<div style="font-size:13px;color:var(--text2);margin-bottom:10px;">امتیاز کلی ورود (Trade Setup Score)</div>' +
-        '<div style="position:relative;width:120px;height:120px;margin:0 auto;">' +
-          '<svg width="120" height="120" style="transform:rotate(-90deg);">' +
-            '<circle cx="60" cy="60" r="50" stroke="var(--border)" stroke-width="8" fill="none"/>' +
-            '<circle cx="60" cy="60" r="50" stroke="' + scoreColor + '" stroke-width="8" fill="none" stroke-dasharray="' + (overallScore * 3.14159) + ' 314.159" stroke-linecap="round"/>' +
-          '</svg>' +
-          '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">' +
-            '<div style="font-size:28px;font-weight:bold;color:' + scoreColor + ';">' + overallScore + '</div>' +
-            '<div style="font-size:12px;color:var(--text2);">/100</div>' +
-          '</div>' +
-        '</div>' +
-        '<div style="margin-top:12px;font-size:14px;font-weight:600;color:' + scoreColor + ';">' + scoreLabel + '</div>' +
-        (scoreResult.components ? '<div style="margin-top:10px;font-size:11px;color:var(--text2);">زمان: ' + Math.round(scoreResult.components.timeframe) + ' | نقدینگی: ' + Math.round(scoreResult.components.liquidity) + ' | اندیکاتورها: ' + Math.round(scoreResult.components.indicators) + '</div>' : '') +
-        (scoreResult.btcVetoApplied ? '<div style="margin-top:8px;font-size:11px;color:#f59e0b;font-weight:600;">⚠️ BTC Veto اعمال شد (همبستگی بالا با BTC نزولی)</div>' : '') +
-      '</div>';
-      
-      // Check for Score/Confidence conflict
-      var signalConfidence = signal.confidence || 0;
-      if (overallScore >= 60 && signalConfidence < 5) {
-        scoreGaugeHtml += '<div class="confidence-conflict-warning" style="background:linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.08));border:1px solid rgba(239,68,68,0.4);border-radius:10px;padding:12px;margin:12px 0;">' +
-          '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">' +
-            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>' +
-            '<span style="font-weight:600;color:#ef4444;font-size:14px;">هشدار تناقض Score/Confidence</span>' +
-          '</div>' +
-          '<div style="font-size:12px;color:var(--text);line-height:1.6;">' +
-            '<div>امتیاز کلی: <strong>' + overallScore + '/100</strong> (بالا)</div>' +
-            '<div>اعتماد: <strong>' + signalConfidence + '/10</strong> (پایین)</div>' +
-            '<div style="margin-top:8px;color:#ef4444;font-weight:600;">اندیکاتورهای تکنیکال ورود را پیشنهاد می‌دهند، اما فیلترهای مدیریت ریسک آن را مسدود می‌کنند.</div>' +
-            '<div style="margin-top:4px;color:var(--text2);">وقتی Confidence زیر ۵ است، Score بالا ارزشی ندارد. <strong>ورود نکنید.</strong></div>' +
-          '</div>' +
-        '</div>';
-      }
-    } catch (e) {
-      console.log('Score gauge calculation error:', e.message);
-    }
-  }
   
-  // Entry Details
+  // Entry Details - Removed entry suggestions section
   var entryHtml = '';
-  if (signal && signal.type !== 'wait') {
-    var qualityIcon = signal.entryQuality === 'excellent' ? ICONS.target : 
-                      signal.entryQuality === 'good' ? ICONS.check : ICONS.circle;
-    var qualityText = signal.entryQuality === 'excellent' ? 'نقطه ورود عالی' :
-                      signal.entryQuality === 'good' ? 'نقطه ورود خوب' : 'نقطه ورود قابل قبول';
-    
-    // Calculate liquidation price for futures
-    var effectiveLeverage = getEffectiveLeverage(signal.leverage);
-    var leverageNum = parseInt(effectiveLeverage) || 5;
-    var liqPrice = TradingCore.calcLiquidationPrice ? 
-      TradingCore.calcLiquidationPrice(signal.entry, leverageNum, signal.type) : null;
-    
-    entryHtml = '<div class="entry-section">' +
-      '<div class="entry-header">' +
-        '<span class="entry-quality ' + (signal.entryQuality || 'good') + '">' + qualityIcon + ' ' + qualityText + '</span>' +
-        '<span class="entry-score">امتیاز: ' + (signal.confluenceScore || 0) + '</span>' +
-      '</div>' +
-      '<div class="entry-reasons">' + (signal.entryReasons ? signal.entryReasons.join(' + ') : '') + '</div>' +
-      '<div class="entry-details">' +
-        '<div class="detail-row"><span class="detail-label">' + ICONS.crosshair + ' نقطه ورود</span><span class="detail-value">' + formatPrice(signal.entry) + '</span></div>' +
-        '<div class="detail-row"><span class="detail-label">' + ICONS.stopCircle + ' استاپ‌لاس</span><span class="detail-value sl">' + formatPrice(signal.sl) + '</span></div>' +
-        '<div class="detail-row"><span class="detail-label">' + ICONS.target + ' تارگت ۱</span><span class="detail-value tp">' + formatPrice(signal.tp1) + '</span></div>' +
-        '<div class="detail-row"><span class="detail-label">' + ICONS.target + ' تارگت ۲</span><span class="detail-value tp">' + formatPrice(signal.tp2) + '</span></div>' +
-        '<div class="detail-row"><span class="detail-label">' + ICONS.zap + ' لوریج</span><span class="detail-value">' + effectiveLeverage + '</span></div>' +
-      '</div>' +
-    '</div>';
-    
-    // Futures Warning Section (Liquidation Price)
-    if (liqPrice) {
-      var liqClass = liqPrice.danger ? 'danger' : liqPrice.warning ? 'warning' : 'safe';
-      var liqIcon = liqPrice.danger ? ICONS.alertTriangle : liqPrice.warning ? ICONS.moderate : ICONS.check;
-      var liqText = liqPrice.danger ? 'خطر لیکویید!' : liqPrice.warning ? 'احتیاط' : 'فاصله امن';
-      var liqColor = liqPrice.danger ? '#ef4444' : liqPrice.warning ? '#f59e0b' : '#10b981';
-      
-      entryHtml += '<div class="futures-warning" style="background:' + liqColor + '15;border:1px solid ' + liqColor + '40;border-radius:10px;padding:12px;margin-top:12px;">' +
-        '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">' +
-          '<div style="display:flex;align-items:center;gap:8px;">' +
-            '<span style="color:' + liqColor + ';width:20px;height:20px;">' + liqIcon + '</span>' +
-            '<span style="font-weight:600;color:' + liqColor + ';">قیمت لیکویید: ' + formatPrice(liqPrice.price) + '</span>' +
-          '</div>' +
-          '<span style="font-size:12px;color:var(--text2);">فاصله: ' + liqPrice.distancePercent.toFixed(1) + '% | ' + liqText + '</span>' +
-        '</div>' +
-      '</div>';
-    }
-    
-    if (signal.smartEntries && signal.smartEntries.length > 0) {
-      entryHtml += '<div class="scaling-section">' +
-        '<div class="scaling-title">' + ICONS.layers + ' ورود پله‌ای</div>' +
-        '<div class="scaling-entries">';
-      signal.smartEntries.forEach(function(entry) {
-        entryHtml += '<div class="scaling-entry">' +
-          '<span class="scaling-step">' + entry.reason + '</span>' +
-          '<span class="scaling-price">' + formatPrice(entry.price) + '</span>' +
-          '<span class="scaling-pct">(' + entry.percent + '%)</span>' +
-        '</div>';
-      });
-      entryHtml += '</div></div>';
-    }
-  }
   
   
   // Indicators - Enhanced for Futures
-  var stochRSI = signal && (signal.stochRSI || signal.stochRsi) ? (signal.stochRSI || signal.stochRsi) : null;
-  var marketStruct = signal && signal.marketStructure ? signal.marketStructure : null;
-  var srInfo = signal && signal.staticSR ? signal.staticSR : null;
-  var htf = signal && signal.htfSummary ? signal.htfSummary : null;
-  var liq = signal && signal.liquidity ? signal.liquidity : null;
-  var btcCtx = signal && signal.btcContext ? signal.btcContext : null;
-  var currentPrice = price && price.price ? price.price : (signal && signal.entry ? signal.entry : 0);
+  // Always use STATE.signals[symbol] instead of signal variable to ensure data is shown regardless of signal type
+  var sigData = STATE.signals[symbol] || {};
+  var stochRSI = (sigData.stochRSI || sigData.stochRsi) || null;
+  var marketStruct = sigData.marketStructure || null;
+  var srInfo = sigData.staticSR || null;
+  var htf = sigData.htfSummary || null;
+  var liq = sigData.liquidity || null;
+  var btcCtx = sigData.btcContext || null;
+  var currentPrice = price && price.price ? price.price : (sigData.entry || 0);
   
   // Calculate EMA distances from current price
   var ema21Distance = '';
   var ema50Distance = '';
-  if (signal && signal.ema21 && currentPrice > 0) {
-    var dist21 = ((currentPrice - signal.ema21) / currentPrice) * 100;
+  if (sigData.ema21 && currentPrice > 0) {
+    var dist21 = ((currentPrice - sigData.ema21) / currentPrice) * 100;
     ema21Distance = (dist21 >= 0 ? '+' : '') + dist21.toFixed(2) + '%';
   }
-  if (signal && signal.ema50 && currentPrice > 0) {
-    var dist50 = ((currentPrice - signal.ema50) / currentPrice) * 100;
+  if (sigData.ema50 && currentPrice > 0) {
+    var dist50 = ((currentPrice - sigData.ema50) / currentPrice) * 100;
     ema50Distance = (dist50 >= 0 ? '+' : '') + dist50.toFixed(2) + '%';
   }
   
   // MACD details
-  var macdLine = signal && signal.macd && signal.macd.line !== undefined ? signal.macd.line.toFixed(4) : '--';
-  var macdSignal = signal && signal.macd && signal.macd.signal !== undefined ? signal.macd.signal.toFixed(4) : '--';
-  var macdHist = signal && signal.macd && signal.macd.histogram !== undefined ? signal.macd.histogram.toFixed(4) : '--';
-  var macdClass = signal && signal.macd && signal.macd.histogram > 0 ? 'bullish' : 'bearish';
+  var macdLine = sigData.macd && sigData.macd.line !== undefined ? sigData.macd.line.toFixed(4) : '--';
+  var macdSignal = sigData.macd && sigData.macd.signal !== undefined ? sigData.macd.signal.toFixed(4) : '--';
+  var macdHist = sigData.macd && sigData.macd.histogram !== undefined ? sigData.macd.histogram.toFixed(4) : '--';
+  var macdClass = sigData.macd && sigData.macd.histogram > 0 ? 'bullish' : 'bearish';
   
   // Funding Rate
   var fundingRateHtml = '';
-  if (signal && signal.fundingRate) {
+  if (signal && signal.fundingRate !== undefined && signal.fundingRate !== null) {
     var fr = signal.fundingRate;
+    if (fr.rate !== undefined && fr.rate !== null) {
     var frRate = (fr.rate * 100).toFixed(4); // Convert to percentage
-    var frDaily = fr.dailyRate !== undefined ? fr.dailyRate.toFixed(2) : (frRate * 3).toFixed(2);
+      var frDaily = fr.dailyRate !== undefined && fr.dailyRate !== null ? fr.dailyRate.toFixed(2) : (frRate * 3).toFixed(2);
     var frClass = frRate >= 0 ? 'positive' : 'negative';
     var frColor = frRate >= 0 ? '#10b981' : '#ef4444';
     fundingRateHtml = '<div class="ind-item"><span class="ind-label">Funding Rate</span><span class="ind-value" style="color:' + frColor + ';">' + frRate + '% (' + frDaily + '%/روز)</span></div>';
+    } else {
+      fundingRateHtml = '<div class="ind-item"><span class="ind-label">Funding Rate</span><span class="ind-value">0% (rate not available)</span></div>';
+    }
   }
   
   // Divergence Warning Section - Enhanced with Hidden Divergence support and Timeframe Conflicts
@@ -1360,18 +1352,57 @@ function renderAssetPanel(symbol) {
   var indicatorsHtml = '<div class="indicators-section">' +
     '<div class="indicators-title">' + ICONS.barChart + ' اندیکاتورها</div>';
   
-  // Group 1: Core Technical Indicators (RSI, StochRSI, ADX, Trend, Structure)
-  indicatorsHtml += '<div class="ind-group">' +
-    '<div class="ind-group-title">اندیکاتورهای اصلی</div>' +
-    '<div class="ind-grid">' +
-      '<div class="ind-item"><span class="ind-label">RSI (14)</span><span class="ind-value ' + getRsiClass(signal ? signal.rsi : 50) + '">' + (signal && signal.rsi ? signal.rsi.toFixed(1) : '--') + '</span></div>' +
-      '<div class="ind-item"><span class="ind-label">StochRSI</span><span class="ind-value ' + getStochRSIClass(stochRSI) + '">' + (stochRSI ? stochRSI.k.toFixed(0) + '/' + stochRSI.d.toFixed(0) : '--') + '</span></div>' +
-      '<div class="ind-item"><span class="ind-label">ADX</span><span class="ind-value">' + (signal && signal.adx ? signal.adx.adx.toFixed(0) : '--') + '</span></div>' +
-      '<div class="ind-item"><span class="ind-label">روند</span><span class="ind-value ' + getTrendClass(signal ? signal.trend : 'neutral') + '">' + getTrendLabel(signal ? signal.trend : 'neutral') + '</span></div>' +
-      '<div class="ind-item"><span class="ind-label">ساختار</span><span class="ind-value ' + getStructureClass(marketStruct) + '">' + getStructureLabel(marketStruct) + '</span></div>' +
-      '<div class="ind-item"><span class="ind-label">MACD Hist</span><span class="ind-value ' + macdClass + '">' + macdHist + '</span></div>' +
-    '</div>' +
-  '</div>';
+  if (isSimpleMode) {
+    // Simple Mode: Only essential indicators
+    indicatorsHtml += '<div class="ind-group">' +
+      '<div class="ind-group-title">اطلاعات اصلی</div>' +
+      '<div class="ind-grid">' +
+        '<div class="ind-item"><span class="ind-label">RSI (14)</span><span class="ind-value ' + getRsiClass(sigData.rsi || 50) + '">' + (sigData.rsi ? sigData.rsi.toFixed(1) : '--') + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">StochRSI</span><span class="ind-value ' + getStochRSIClass(stochRSI) + '">' + (stochRSI ? stochRSI.k.toFixed(0) + '/' + stochRSI.d.toFixed(0) : '--') + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">ADX</span><span class="ind-value">' + (sigData.adx ? sigData.adx.adx.toFixed(0) : '--') + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">روند</span><span class="ind-value ' + getTrendClass(sigData.trend || 'neutral') + '">' + getTrendLabel(sigData.trend || 'neutral') + '</span></div>' +
+      '</div>' +
+    '</div>';
+    
+    // EMA Ribbon (simplified)
+    indicatorsHtml += '<div class="ind-group">' +
+      '<div class="ind-group-title">میانگین‌های متحرک</div>' +
+      '<div class="ind-grid ind-grid-3">' +
+        '<div class="ind-item"><span class="ind-label">EMA 21</span><span class="ind-value">' + (sigData.ema21 ? formatPrice(sigData.ema21) : '--') + (ema21Distance ? '<span class="ind-distance">' + ema21Distance + '</span>' : '') + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">EMA 50</span><span class="ind-value">' + (sigData.ema50 ? formatPrice(sigData.ema50) : '--') + (ema50Distance ? '<span class="ind-distance">' + ema50Distance + '</span>' : '') + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">EMA 200</span><span class="ind-value">' + (sigData.ema200 ? formatPrice(sigData.ema200) : '--') + (sigData.ema200 && currentPrice > 0 ? '<span class="ind-distance">' + (((currentPrice - sigData.ema200) / currentPrice) * 100 >= 0 ? '+' : '') + (((currentPrice - sigData.ema200) / currentPrice) * 100).toFixed(2) + '%)</span>' : '') + '</span></div>' +
+      '</div>' +
+    '</div>';
+    
+    // Funding Rate only (if available)
+    if (sigData.fundingRate !== undefined && sigData.fundingRate !== null && sigData.fundingRate.rate !== undefined && sigData.fundingRate.rate !== null) {
+      var fr = sigData.fundingRate;
+      var frRate = (fr.rate * 100).toFixed(4);
+      var frDaily = fr.dailyRate !== undefined && fr.dailyRate !== null ? fr.dailyRate.toFixed(2) : (frRate * 3).toFixed(2);
+      var frColor = frRate >= 0 ? '#10b981' : '#ef4444';
+      indicatorsHtml += '<div class="ind-group">' +
+        '<div class="ind-group-title">داده‌های مشتقات</div>' +
+        '<div class="ind-grid ind-grid-1">' +
+          '<div class="ind-item"><span class="ind-label">Funding Rate</span><span class="ind-value" style="color:' + frColor + ';">' + frRate + '%<br><span style="font-size:0.65rem;color:var(--text2);">(' + frDaily + '%/روز)</span></span></div>' +
+        '</div>' +
+      '</div>';
+    }
+    
+    indicatorsHtml += '</div>'; // Close indicators-section
+  } else {
+    // Professional Mode: All indicators
+    // Group 1: Core Technical Indicators (RSI, StochRSI, ADX, Trend, Structure)
+    indicatorsHtml += '<div class="ind-group">' +
+      '<div class="ind-group-title">اندیکاتورهای اصلی</div>' +
+      '<div class="ind-grid">' +
+        '<div class="ind-item"><span class="ind-label">RSI (14)</span><span class="ind-value ' + getRsiClass(sigData.rsi || 50) + '">' + (sigData.rsi ? sigData.rsi.toFixed(1) : '--') + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">StochRSI</span><span class="ind-value ' + getStochRSIClass(stochRSI) + '">' + (stochRSI ? stochRSI.k.toFixed(0) + '/' + stochRSI.d.toFixed(0) : '--') + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">ADX</span><span class="ind-value">' + (sigData.adx ? sigData.adx.adx.toFixed(0) : '--') + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">روند</span><span class="ind-value ' + getTrendClass(sigData.trend || 'neutral') + '">' + getTrendLabel(sigData.trend || 'neutral') + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">ساختار</span><span class="ind-value ' + getStructureClass(marketStruct) + '">' + getStructureLabel(marketStruct) + '</span></div>' +
+        '<div class="ind-item"><span class="ind-label">MACD Hist</span><span class="ind-value ' + macdClass + '">' + macdHist + '</span></div>' +
+      '</div>' +
+    '</div>';
   
   // Group 2: MACD Details
   indicatorsHtml += '<div class="ind-group">' +
@@ -1387,25 +1418,33 @@ function renderAssetPanel(symbol) {
   indicatorsHtml += '<div class="ind-group">' +
     '<div class="ind-group-title">میانگین‌های متحرک (EMA)</div>' +
     '<div class="ind-grid ind-grid-3">' +
-      '<div class="ind-item"><span class="ind-label">EMA 21</span><span class="ind-value">' + (signal && signal.ema21 ? formatPrice(signal.ema21) : '--') + (ema21Distance ? '<span class="ind-distance">' + ema21Distance + '</span>' : '') + '</span></div>' +
-      '<div class="ind-item"><span class="ind-label">EMA 50</span><span class="ind-value">' + (signal && signal.ema50 ? formatPrice(signal.ema50) : '--') + (ema50Distance ? '<span class="ind-distance">' + ema50Distance + '</span>' : '') + '</span></div>' +
-      '<div class="ind-item"><span class="ind-label">EMA 200</span><span class="ind-value">' + (signal && signal.ema200 ? formatPrice(signal.ema200) : '--') + (signal && signal.ema200 && currentPrice > 0 ? '<span class="ind-distance">' + (((currentPrice - signal.ema200) / currentPrice) * 100 >= 0 ? '+' : '') + (((currentPrice - signal.ema200) / currentPrice) * 100).toFixed(2) + '%)</span>' : '') + '</span></div>' +
+      '<div class="ind-item"><span class="ind-label">EMA 21</span><span class="ind-value">' + (sigData.ema21 ? formatPrice(sigData.ema21) : '--') + (ema21Distance ? '<span class="ind-distance">' + ema21Distance + '</span>' : '') + '</span></div>' +
+      '<div class="ind-item"><span class="ind-label">EMA 50</span><span class="ind-value">' + (sigData.ema50 ? formatPrice(sigData.ema50) : '--') + (ema50Distance ? '<span class="ind-distance">' + ema50Distance + '</span>' : '') + '</span></div>' +
+      '<div class="ind-item"><span class="ind-label">EMA 200</span><span class="ind-value">' + (sigData.ema200 ? formatPrice(sigData.ema200) : '--') + (sigData.ema200 && currentPrice > 0 ? '<span class="ind-distance">' + (((currentPrice - sigData.ema200) / currentPrice) * 100 >= 0 ? '+' : '') + (((currentPrice - sigData.ema200) / currentPrice) * 100).toFixed(2) + '%)</span>' : '') + '</span></div>' +
     '</div>' +
   '</div>';
   
   // Group 4: Derivatives (Funding Rate, Open Interest, Long/Short Ratio)
   var derivativesItems = [];
-  if (signal && signal.fundingRate) {
-    var fr = signal.fundingRate;
+  // Funding Rate - Always show, check data from STATE.signals[symbol]
+  if (sigData.fundingRate !== undefined && sigData.fundingRate !== null) {
+    var fr = sigData.fundingRate;
+    if (fr.rate !== undefined && fr.rate !== null) {
     var frRate = (fr.rate * 100).toFixed(4);
-    var frDaily = fr.dailyRate !== undefined ? fr.dailyRate.toFixed(2) : (frRate * 3).toFixed(2);
+      var frDaily = fr.dailyRate !== undefined && fr.dailyRate !== null ? fr.dailyRate.toFixed(2) : (frRate * 3).toFixed(2);
     var frColor = frRate >= 0 ? '#10b981' : '#ef4444';
     derivativesItems.push('<div class="ind-item"><span class="ind-label">Funding Rate</span><span class="ind-value" style="color:' + frColor + ';">' + frRate + '%<br><span style="font-size:0.65rem;color:var(--text2);">(' + frDaily + '%/روز)</span></span></div>');
+    } else {
+      derivativesItems.push('<div class="ind-item"><span class="ind-label">Funding Rate</span><span class="ind-value">0%<br><span style="font-size:0.65rem;color:var(--text2);">(rate not available)</span></span></div>');
+    }
+  } else {
+    derivativesItems.push('<div class="ind-item"><span class="ind-label">Funding Rate</span><span class="ind-value">--<br><span style="font-size:0.65rem;color:var(--text2);">(در حال بارگذاری...)</span></span></div>');
   }
-  if (signal && signal.openInterest && signal.openInterest.value > 0) {
-    var oiValue = signal.openInterest.value;
-    var oiValueUSD = signal.openInterest.valueUSD || 0;
-    if (oiValueUSD === 0 && currentPrice > 0) {
+  // Open Interest - Always show, check data from STATE.signals[symbol]
+  if (sigData.openInterest !== undefined && sigData.openInterest !== null) {
+    var oiValue = sigData.openInterest.value !== undefined && sigData.openInterest.value !== null ? sigData.openInterest.value : 0;
+    var oiValueUSD = sigData.openInterest.valueUSD !== undefined && sigData.openInterest.valueUSD !== null ? sigData.openInterest.valueUSD : 0;
+    if (oiValueUSD === 0 && currentPrice > 0 && oiValue > 0) {
       oiValueUSD = oiValue * currentPrice;
     }
     var oiFormatted = oiValue > 1000000 ? (oiValue / 1000000).toFixed(2) + 'M' : 
@@ -1417,139 +1456,255 @@ function renderAssetPanel(symbol) {
     
     // Add OI change if available
     var oiChangeText = '';
-    if (signal.openInterest.changePercent !== undefined && signal.openInterest.changePercent !== null) {
-      var oiChange = signal.openInterest.changePercent;
+    if (sigData.openInterest.changePercent !== undefined && sigData.openInterest.changePercent !== null) {
+      var oiChange = sigData.openInterest.changePercent;
       var oiChangeColor = oiChange >= 0 ? '#10b981' : '#ef4444';
       var oiChangeSign = oiChange >= 0 ? '+' : '';
       oiChangeText = '<br><span style="font-size:0.65rem;color:' + oiChangeColor + ';">' + oiChangeSign + oiChange.toFixed(2) + '%</span>';
     }
     
     derivativesItems.push('<div class="ind-item"><span class="ind-label">Open Interest</span><span class="ind-value">' + oiFormatted + '<br><span style="font-size:0.65rem;color:var(--text2);">(' + oiUSDFormatted + ' USDT)</span>' + oiChangeText + '</span></div>');
+  } else {
+    derivativesItems.push('<div class="ind-item"><span class="ind-label">Open Interest</span><span class="ind-value">--<br><span style="font-size:0.65rem;color:var(--text2);">(در حال بارگذاری...)</span></span></div>');
   }
-  if (signal && signal.longShortRatio && signal.longShortRatio.ratio) {
-    var lsr = signal.longShortRatio;
+  // Long/Short Ratio - Always show, check data from STATE.signals[symbol]
+  if (sigData.longShortRatio && sigData.longShortRatio.ratio) {
+    var lsr = sigData.longShortRatio;
     var lsrColor = lsr.sentiment === 'long_heavy' || lsr.sentiment === 'short_heavy' ? '#f59e0b' : '#10b981';
     derivativesItems.push('<div class="ind-item"><span class="ind-label">Long/Short Ratio</span><span class="ind-value" style="color:' + lsrColor + ';">' + lsr.ratio.toFixed(2) + '<br><span style="font-size:0.65rem;color:var(--text2);">' + lsr.interpretation + '</span></span></div>');
+  } else {
+    derivativesItems.push('<div class="ind-item"><span class="ind-label">Long/Short Ratio</span><span class="ind-value">--<br><span style="font-size:0.65rem;color:var(--text2);">(در حال بارگذاری...)</span></span></div>');
   }
-  if (derivativesItems.length > 0) {
-    indicatorsHtml += '<div class="ind-group">' +
-      '<div class="ind-group-title">داده‌های مشتقات</div>' +
-      '<div class="ind-grid ind-grid-' + derivativesItems.length + '">' +
-        derivativesItems.join('') +
-      '</div>' +
-    '</div>';
-  }
+  // Always show derivatives section
+  indicatorsHtml += '<div class="ind-group">' +
+    '<div class="ind-group-title">داده‌های مشتقات</div>' +
+    '<div class="ind-grid ind-grid-' + derivativesItems.length + '">' +
+      derivativesItems.join('') +
+    '</div>' +
+  '</div>';
   
   // Group 5: Volume & Momentum Indicators
   var volumeItems = [];
-  if (signal && signal.tfAnalysis && signal.tfAnalysis['1h'] && signal.tfAnalysis['1h'].momentum) {
-    var momentumClass = signal.tfAnalysis['1h'].momentum === 'Increasing' ? 'bullish' : signal.tfAnalysis['1h'].momentum === 'Decreasing' ? 'bearish' : 'neutral';
-    var momentumText = signal.tfAnalysis['1h'].momentum === 'Increasing' ? 'در حال افزایش' : signal.tfAnalysis['1h'].momentum === 'Decreasing' ? 'در حال کاهش' : 'خنثی';
+  if (sigData.tfAnalysis && sigData.tfAnalysis['1h'] && sigData.tfAnalysis['1h'].momentum) {
+    var momentumClass = sigData.tfAnalysis['1h'].momentum === 'Increasing' ? 'bullish' : sigData.tfAnalysis['1h'].momentum === 'Decreasing' ? 'bearish' : 'neutral';
+    var momentumText = sigData.tfAnalysis['1h'].momentum === 'Increasing' ? 'در حال افزایش' : sigData.tfAnalysis['1h'].momentum === 'Decreasing' ? 'در حال کاهش' : 'خنثی';
     volumeItems.push('<div class="ind-item"><span class="ind-label">Momentum</span><span class="ind-value ' + momentumClass + '">' + momentumText + '</span></div>');
+  } else {
+    volumeItems.push('<div class="ind-item"><span class="ind-label">Momentum</span><span class="ind-value">--</span></div>');
   }
-  if (signal && signal.obv) {
-    var obvClass = signal.obv.trend === 'increasing' ? 'bullish' : signal.obv.trend === 'decreasing' ? 'bearish' : 'neutral';
-    var obvText = signal.obv.trend === 'increasing' ? 'افزایش' : signal.obv.trend === 'decreasing' ? 'کاهش' : 'خنثی';
-    var obvDelta = signal.obv.delta ? ' <span class="ind-distance">(' + (signal.obv.delta >= 0 ? '+' : '') + signal.obv.delta.toFixed(0) + ')</span>' : '';
+  if (sigData.obv) {
+    var obvClass = sigData.obv.trend === 'increasing' ? 'bullish' : sigData.obv.trend === 'decreasing' ? 'bearish' : 'neutral';
+    var obvText = sigData.obv.trend === 'increasing' ? 'افزایش' : sigData.obv.trend === 'decreasing' ? 'کاهش' : 'خنثی';
+    var obvDelta = sigData.obv.delta ? ' <span class="ind-distance">(' + (sigData.obv.delta >= 0 ? '+' : '') + sigData.obv.delta.toFixed(0) + ')</span>' : '';
     volumeItems.push('<div class="ind-item"><span class="ind-label">OBV</span><span class="ind-value ' + obvClass + '">' + obvText + obvDelta + '</span></div>');
+  } else {
+    volumeItems.push('<div class="ind-item"><span class="ind-label">OBV</span><span class="ind-value">--</span></div>');
   }
   // Add Volume 24h Change if available
-  if (signal && signal.tfAnalysis && signal.tfAnalysis['1h'] && signal.tfAnalysis['1h'].volume24hChange) {
-    var vol24h = signal.tfAnalysis['1h'].volume24hChange;
+  if (sigData.tfAnalysis && sigData.tfAnalysis['1h'] && sigData.tfAnalysis['1h'].volume24hChange) {
+    var vol24h = sigData.tfAnalysis['1h'].volume24hChange;
     var vol24hColor = vol24h.changePercent >= 20 ? '#10b981' : vol24h.changePercent <= -20 ? '#ef4444' : 'var(--text)';
     var vol24hSign = vol24h.changePercent >= 0 ? '+' : '';
     volumeItems.push('<div class="ind-item"><span class="ind-label">حجم 24h</span><span class="ind-value" style="color:' + vol24hColor + ';">' + vol24hSign + vol24h.changePercent.toFixed(1) + '%</span></div>');
+  } else {
+    volumeItems.push('<div class="ind-item"><span class="ind-label">حجم 24h</span><span class="ind-value">--</span></div>');
   }
-  if (volumeItems.length > 0) {
-    indicatorsHtml += '<div class="ind-group">' +
-      '<div class="ind-group-title">حجم و مومنتوم</div>' +
-      '<div class="ind-grid ind-grid-' + volumeItems.length + '">' +
-        volumeItems.join('') +
-      '</div>' +
-    '</div>';
-  }
+  // Always show volume & momentum section
+  indicatorsHtml += '<div class="ind-group">' +
+    '<div class="ind-group-title">حجم و مومنتوم</div>' +
+    '<div class="ind-grid ind-grid-' + volumeItems.length + '">' +
+      volumeItems.join('') +
+    '</div>' +
+  '</div>';
   
   // Group 5b: Advanced Indicators (ATR, Volume Profile, Ichimoku)
   var advancedItems = [];
   
   // ATR
-  if (signal && signal.tfAnalysis && signal.tfAnalysis['1h'] && signal.tfAnalysis['1h'].atr) {
-    var atr = signal.tfAnalysis['1h'].atr;
+  if (sigData.tfAnalysis && sigData.tfAnalysis['1h'] && sigData.tfAnalysis['1h'].atr) {
+    var atr = sigData.tfAnalysis['1h'].atr;
     var atrVolatilityColor = atr.volatility === 'high' ? '#ef4444' : atr.volatility === 'medium' ? '#f59e0b' : '#10b981';
     advancedItems.push('<div class="ind-item"><span class="ind-label">ATR</span><span class="ind-value">' + atr.atrPercent.toFixed(2) + '%<br><span style="font-size:0.65rem;color:' + atrVolatilityColor + ';">' + (atr.volatility === 'high' ? 'نوسان بالا' : atr.volatility === 'medium' ? 'نوسان متوسط' : 'نوسان پایین') + '</span></span></div>');
+  } else {
+    advancedItems.push('<div class="ind-item"><span class="ind-label">ATR</span><span class="ind-value">--</span></div>');
   }
   
   // Volume Profile (POC)
-  if (signal && signal.tfAnalysis && signal.tfAnalysis['1h'] && signal.tfAnalysis['1h'].volumeProfile) {
-    var vp = signal.tfAnalysis['1h'].volumeProfile;
+  if (sigData.tfAnalysis && sigData.tfAnalysis['1h'] && sigData.tfAnalysis['1h'].volumeProfile) {
+    var vp = sigData.tfAnalysis['1h'].volumeProfile;
     var pocPositionColor = vp.position === 'above' ? '#10b981' : vp.position === 'below' ? '#ef4444' : '#f59e0b';
     var pocPositionText = vp.position === 'above' ? 'بالای POC' : vp.position === 'below' ? 'زیر POC' : 'در POC';
     advancedItems.push('<div class="ind-item"><span class="ind-label">Volume Profile</span><span class="ind-value" style="color:' + pocPositionColor + ';">' + formatPrice(vp.poc) + '<br><span style="font-size:0.65rem;color:var(--text2);">' + pocPositionText + ' (' + vp.distancePercent.toFixed(2) + '%)</span></span></div>');
+  } else {
+    advancedItems.push('<div class="ind-item"><span class="ind-label">Volume Profile</span><span class="ind-value">--</span></div>');
   }
   
   // Ichimoku Cloud
-  if (signal && signal.tfAnalysis && signal.tfAnalysis['1h'] && signal.tfAnalysis['1h'].ichimoku) {
-    var ichi = signal.tfAnalysis['1h'].ichimoku;
+  if (sigData.tfAnalysis && sigData.tfAnalysis['1h'] && sigData.tfAnalysis['1h'].ichimoku) {
+    var ichi = sigData.tfAnalysis['1h'].ichimoku;
     var ichiTrendColor = ichi.trend === 'bullish' ? '#10b981' : ichi.trend === 'bearish' ? '#ef4444' : '#f59e0b';
     var ichiPositionText = ichi.cloudPosition === 'above' ? 'بالای ابر' : ichi.cloudPosition === 'below' ? 'زیر ابر' : 'داخل ابر';
     var ichiTrendText = ichi.trend === 'bullish' ? 'صعودی' : ichi.trend === 'bearish' ? 'نزولی' : 'خنثی';
     advancedItems.push('<div class="ind-item"><span class="ind-label">Ichimoku</span><span class="ind-value" style="color:' + ichiTrendColor + ';">' + ichiTrendText + '<br><span style="font-size:0.65rem;color:var(--text2);">' + ichiPositionText + '</span></span></div>');
+  } else {
+    advancedItems.push('<div class="ind-item"><span class="ind-label">Ichimoku</span><span class="ind-value">--</span></div>');
   }
   
-  if (advancedItems.length > 0) {
+  // Parabolic SAR
+  if (sigData.tfAnalysis && sigData.tfAnalysis['1h'] && sigData.tfAnalysis['1h'].parabolicSAR && sigData.tfAnalysis['1h'].parabolicSAR !== null) {
+    var psar = sigData.tfAnalysis['1h'].parabolicSAR;
+    if (psar.sar !== undefined && psar.sar !== null) {
+      var psarColor = psar.signal === 'bullish' ? '#10b981' : '#ef4444';
+      var psarText = psar.signal === 'bullish' ? 'صعودی' : 'نزولی';
+      var psarDistance = Math.abs(psar.distance || 0).toFixed(2);
+      advancedItems.push('<div class="ind-item"><span class="ind-label">Parabolic SAR</span><span class="ind-value" style="color:' + psarColor + ';">' + psarText + '<br><span style="font-size:0.65rem;color:var(--text2);">SAR: ' + formatPrice(psar.sar) + ' (' + psarDistance + '%)</span></span></div>');
+    } else {
+      advancedItems.push('<div class="ind-item"><span class="ind-label">Parabolic SAR</span><span class="ind-value">--</span></div>');
+    }
+  } else {
+    advancedItems.push('<div class="ind-item"><span class="ind-label">Parabolic SAR</span><span class="ind-value">--</span></div>');
+  }
+  
+  // Supertrend
+  if (sigData.tfAnalysis && sigData.tfAnalysis['1h'] && sigData.tfAnalysis['1h'].supertrend && sigData.tfAnalysis['1h'].supertrend !== null) {
+    var st = sigData.tfAnalysis['1h'].supertrend;
+    if (st.supertrend !== undefined && st.supertrend !== null) {
+      var stColor = st.signal === 'bullish' ? '#10b981' : '#ef4444';
+      var stText = st.signal === 'bullish' ? 'صعودی' : 'نزولی';
+      var stDistance = Math.abs(st.distance || 0).toFixed(2);
+      advancedItems.push('<div class="ind-item"><span class="ind-label">Supertrend</span><span class="ind-value" style="color:' + stColor + ';">' + stText + '<br><span style="font-size:0.65rem;color:var(--text2);">ST: ' + formatPrice(st.supertrend) + ' (' + stDistance + '%)</span></span></div>');
+    } else {
+      advancedItems.push('<div class="ind-item"><span class="ind-label">Supertrend</span><span class="ind-value">--</span></div>');
+    }
+  } else {
+    advancedItems.push('<div class="ind-item"><span class="ind-label">Supertrend</span><span class="ind-value">--</span></div>');
+  }
+  
+  // VWAP
+  if (sigData.tfAnalysis && sigData.tfAnalysis['1h'] && sigData.tfAnalysis['1h'].vwap && sigData.tfAnalysis['1h'].vwap !== null) {
+    var vwap = sigData.tfAnalysis['1h'].vwap;
+    if (vwap.vwap !== undefined && vwap.vwap !== null) {
+      var vwapColor = vwap.position === 'above' ? '#10b981' : vwap.position === 'below' ? '#ef4444' : '#f59e0b';
+      var vwapText = vwap.position === 'above' ? 'بالای VWAP' : vwap.position === 'below' ? 'زیر VWAP' : 'در VWAP';
+      var vwapDistance = Math.abs(vwap.distance || 0).toFixed(2);
+      advancedItems.push('<div class="ind-item"><span class="ind-label">VWAP</span><span class="ind-value" style="color:' + vwapColor + ';">' + formatPrice(vwap.vwap) + '<br><span style="font-size:0.65rem;color:var(--text2);">' + vwapText + ' (' + vwapDistance + '%)</span></span></div>');
+    } else {
+      advancedItems.push('<div class="ind-item"><span class="ind-label">VWAP</span><span class="ind-value">--</span></div>');
+    }
+  } else {
+    advancedItems.push('<div class="ind-item"><span class="ind-label">VWAP</span><span class="ind-value">--</span></div>');
+  }
+  
+  // Always show advanced indicators section
+  indicatorsHtml += '<div class="ind-group">' +
+    '<div class="ind-group-title">اندیکاتورهای پیشرفته</div>' +
+    '<div class="ind-grid ind-grid-' + advancedItems.length + '">' +
+      advancedItems.join('') +
+    '</div>' +
+  '</div>';
+  
+  // Group 6: New Technical Indicators (Stochastic, CCI, Williams %R, MFI)
+  var newIndicatorsItems = [];
+  if (sigData.tfAnalysis && sigData.tfAnalysis['1h']) {
+    var tf1h = sigData.tfAnalysis['1h'];
+    
+    // Stochastic
+    if (tf1h.stochastic) {
+      var stoch = tf1h.stochastic;
+      var stochClass = stoch.signal === 'overbought' ? 'bearish' : stoch.signal === 'oversold' ? 'bullish' : 'neutral';
+      newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">Stochastic</span><span class="ind-value ' + stochClass + '">K: ' + stoch.k.toFixed(1) + ' / D: ' + stoch.d.toFixed(1) + '</span></div>');
+    } else {
+      newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">Stochastic</span><span class="ind-value">--</span></div>');
+    }
+    
+    // CCI
+    if (tf1h.cci) {
+      var cci = tf1h.cci;
+      var cciClass = cci.signal === 'overbought' ? 'bearish' : cci.signal === 'oversold' ? 'bullish' : 'neutral';
+      newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">CCI</span><span class="ind-value ' + cciClass + '">' + cci.cci.toFixed(1) + '</span></div>');
+    } else {
+      newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">CCI</span><span class="ind-value">--</span></div>');
+    }
+    
+    // Williams %R
+    if (tf1h.williamsR) {
+      var wr = tf1h.williamsR;
+      var wrClass = wr.signal === 'overbought' ? 'bearish' : wr.signal === 'oversold' ? 'bullish' : 'neutral';
+      newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">Williams %R</span><span class="ind-value ' + wrClass + '">' + wr.wr.toFixed(1) + '</span></div>');
+    } else {
+      newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">Williams %R</span><span class="ind-value">--</span></div>');
+    }
+    
+    // MFI
+    if (tf1h.mfi) {
+      var mfi = tf1h.mfi;
+      var mfiClass = mfi.signal === 'overbought' ? 'bearish' : mfi.signal === 'oversold' ? 'bullish' : 'neutral';
+      newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">MFI</span><span class="ind-value ' + mfiClass + '">' + mfi.mfi.toFixed(1) + '</span></div>');
+    } else {
+      newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">MFI</span><span class="ind-value">--</span></div>');
+    }
+  } else {
+    // No data - add all items with default values
+    newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">Stochastic</span><span class="ind-value">--</span></div>');
+    newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">CCI</span><span class="ind-value">--</span></div>');
+    newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">Williams %R</span><span class="ind-value">--</span></div>');
+    newIndicatorsItems.push('<div class="ind-item"><span class="ind-label">MFI</span><span class="ind-value">--</span></div>');
+  }
+  
+    // Always show new technical indicators section
     indicatorsHtml += '<div class="ind-group">' +
-      '<div class="ind-group-title">اندیکاتورهای پیشرفته</div>' +
-      '<div class="ind-grid ind-grid-' + advancedItems.length + '">' +
-        advancedItems.join('') +
+      '<div class="ind-group-title">اندیکاتورهای تکمیلی</div>' +
+      '<div class="ind-grid ind-grid-' + Math.min(newIndicatorsItems.length, 4) + '">' +
+        newIndicatorsItems.join('') +
       '</div>' +
     '</div>';
+    
+    // Warnings & Alerts (Divergence, Chop Index) - Full width
+    var warningsHtml = '';
+    if (divergenceWarningHtml) {
+      warningsHtml += divergenceWarningHtml;
+    }
+    if (signal && signal.chopIndex) {
+      var chop = signal.chopIndex;
+      var isChoppy = chop.isChoppy;
+      var chopColor = isChoppy ? '#f59e0b' : '#10b981';
+      var chopIcon = isChoppy ? '⚠️' : '✓';
+      var chopText = isChoppy ? 'بازار در حالت فشرده (Choppy)' : 'بازار در حالت عادی';
+      var distanceText = chop.totalDistance !== null ? ' (فاصله: ' + chop.totalDistance.toFixed(2) + '%)' : '';
+      warningsHtml += '<div class="chop-indicator">' +
+        '<span class="chop-icon">' + chopIcon + '</span>' +
+        '<div class="chop-content">' +
+          '<div class="chop-title">' + chopText + '</div>' +
+          (isChoppy ? '<div class="chop-description">فاصله بین حمایت و مقاومت کمتر از 0.5% است. منتظر Breakout بمانید.</div>' : '') +
+          (distanceText ? '<div class="chop-distance">' + distanceText + '</div>' : '') +
+        '</div>' +
+      '</div>';
+    }
+    if (warningsHtml) {
+      indicatorsHtml += '<div class="ind-group ind-group-warnings">' +
+        '<div class="ind-group-title">هشدارها و وضعیت بازار</div>' +
+        warningsHtml +
+      '</div>';
+    }
+    
+    // Pivot Points (if available)
+    if (signal && signal.pivotPoints) {
+      indicatorsHtml += '<div class="ind-group">' +
+        '<div class="ind-group-title">Pivot Points (نقاط محوری)</div>' +
+        '<div class="pivot-grid">' +
+          '<div class="pivot-item pivot-pp"><span class="pivot-label">PP</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.pivot) + '</span></div>' +
+          '<div class="pivot-item pivot-resistance"><span class="pivot-label">R1</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.resistance.r1) + '</span></div>' +
+          '<div class="pivot-item pivot-resistance"><span class="pivot-label">R2</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.resistance.r2) + '</span></div>' +
+          '<div class="pivot-item pivot-resistance"><span class="pivot-label">R3</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.resistance.r3) + '</span></div>' +
+          '<div class="pivot-item pivot-support"><span class="pivot-label">S1</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.support.s1) + '</span></div>' +
+          '<div class="pivot-item pivot-support"><span class="pivot-label">S2</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.support.s2) + '</span></div>' +
+          '<div class="pivot-item pivot-support"><span class="pivot-label">S3</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.support.s3) + '</span></div>' +
+        '</div>' +
+      '</div>';
+    }
   }
   
-  // Warnings & Alerts (Divergence, Chop Index) - Full width
-  var warningsHtml = '';
-  if (divergenceWarningHtml) {
-    warningsHtml += divergenceWarningHtml;
-  }
-  if (signal && signal.chopIndex) {
-    var chop = signal.chopIndex;
-    var isChoppy = chop.isChoppy;
-    var chopColor = isChoppy ? '#f59e0b' : '#10b981';
-    var chopIcon = isChoppy ? '⚠️' : '✓';
-    var chopText = isChoppy ? 'بازار در حالت فشرده (Choppy)' : 'بازار در حالت عادی';
-    var distanceText = chop.totalDistance !== null ? ' (فاصله: ' + chop.totalDistance.toFixed(2) + '%)' : '';
-    warningsHtml += '<div class="chop-indicator">' +
-      '<span class="chop-icon">' + chopIcon + '</span>' +
-      '<div class="chop-content">' +
-        '<div class="chop-title">' + chopText + '</div>' +
-        (isChoppy ? '<div class="chop-description">فاصله بین حمایت و مقاومت کمتر از 0.5% است. منتظر Breakout بمانید.</div>' : '') +
-        (distanceText ? '<div class="chop-distance">' + distanceText + '</div>' : '') +
-      '</div>' +
-    '</div>';
-  }
-  if (warningsHtml) {
-    indicatorsHtml += '<div class="ind-group ind-group-warnings">' +
-      '<div class="ind-group-title">هشدارها و وضعیت بازار</div>' +
-      warningsHtml +
-    '</div>';
-  }
-  
-  // Pivot Points (if available)
-  if (signal && signal.pivotPoints) {
-    indicatorsHtml += '<div class="ind-group">' +
-      '<div class="ind-group-title">Pivot Points (نقاط محوری)</div>' +
-      '<div class="pivot-grid">' +
-        '<div class="pivot-item pivot-pp"><span class="pivot-label">PP</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.pivot) + '</span></div>' +
-        '<div class="pivot-item pivot-resistance"><span class="pivot-label">R1</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.resistance.r1) + '</span></div>' +
-        '<div class="pivot-item pivot-resistance"><span class="pivot-label">R2</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.resistance.r2) + '</span></div>' +
-        '<div class="pivot-item pivot-resistance"><span class="pivot-label">R3</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.resistance.r3) + '</span></div>' +
-        '<div class="pivot-item pivot-support"><span class="pivot-label">S1</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.support.s1) + '</span></div>' +
-        '<div class="pivot-item pivot-support"><span class="pivot-label">S2</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.support.s2) + '</span></div>' +
-        '<div class="pivot-item pivot-support"><span class="pivot-label">S3</span><span class="pivot-value">' + formatPrice(signal.pivotPoints.support.s3) + '</span></div>' +
-      '</div>' +
-    '</div>';
-  }
-  
-  indicatorsHtml += '</div>';
+  indicatorsHtml += '</div>'; // Close indicators-section
 
   // Advanced Context Row: S/R + HTF + Liquidity + BTC
   // حتی اگر سیگنال روی حالت "صبر" باشد، دیدن این اطلاعات مفید است
@@ -1727,23 +1882,29 @@ function renderAssetPanel(symbol) {
     
     indicatorsHtml += mtfRsiHtml;
     
-    // Fibonacci Retracement Levels Display
+    // Fibonacci Retracement Levels Display - Always show
     var fibonacciHtml = '';
-    if (signal && signal.fibonacciLevels && currentPrice > 0) {
-      var fibKeys = ['0.618', '0.786'];
-      var fibItems = [];
+    var fibKeys = ['0.618', '0.786'];
+    var fibItems = [];
+    if (sigData.fibonacciLevels && currentPrice > 0) {
       fibKeys.forEach(function(key) {
-        if (signal.fibonacciLevels[key]) {
-          var fibPrice = signal.fibonacciLevels[key];
+        if (sigData.fibonacciLevels[key]) {
+          var fibPrice = sigData.fibonacciLevels[key];
           var fibDistance = ((currentPrice - fibPrice) / currentPrice) * 100;
           var fibDistanceText = (fibDistance >= 0 ? '+' : '') + fibDistance.toFixed(2) + '%';
           fibItems.push('<div class="ind-item"><span class="ind-label">Fib ' + key + '</span><span class="ind-value">' + formatPrice(fibPrice) + ' <span style="font-size:9px;color:var(--text2);">(' + fibDistanceText + ')</span></span></div>');
+        } else {
+          fibItems.push('<div class="ind-item"><span class="ind-label">Fib ' + key + '</span><span class="ind-value">--</span></div>');
         }
       });
-      if (fibItems.length > 0) {
-        fibonacciHtml = '<div class="ind-fibonacci" style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);"><div style="font-size:11px;color:var(--text2);margin-bottom:6px;">سطوح Fibonacci:</div><div style="display:grid;grid-template-columns:repeat(' + fibItems.length + ',1fr);gap:6px;">' + fibItems.join('') + '</div></div>';
-      }
+    } else {
+      // No data or no fibonacci levels - show placeholders
+      fibKeys.forEach(function(key) {
+        fibItems.push('<div class="ind-item"><span class="ind-label">Fib ' + key + '</span><span class="ind-value">--</span></div>');
+      });
     }
+    // Always show fibonacci section
+    fibonacciHtml = '<div class="ind-fibonacci" style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);"><div style="font-size:11px;color:var(--text2);margin-bottom:6px;">سطوح Fibonacci:</div><div style="display:grid;grid-template-columns:repeat(' + fibItems.length + ',1fr);gap:6px;">' + fibItems.join('') + '</div></div>';
     
     indicatorsHtml += fibonacciHtml;
     
@@ -2123,13 +2284,45 @@ function renderAssetPanel(symbol) {
     var supportWalls = (smoothedWalls.bids || []).filter(function(w) { return w && w.strength > 0.5; }).slice(0, 3);
     var resistanceWalls = (smoothedWalls.asks || []).filter(function(w) { return w && w.strength > 0.5; }).slice(0, 3);
     
+    // Calculate total orderbook volume for percentage calculation (use cached if available)
+    var totalOrderBookVolume = 0;
+    if (signal && signal.orderBook && signal.orderBook.bids && signal.orderBook.asks) {
+      var totalBids = signal.orderBook.bids.reduce(function(sum, bid) { return sum + (bid.amount || 0); }, 0);
+      var totalAsks = signal.orderBook.asks.reduce(function(sum, ask) { return sum + (ask.amount || 0); }, 0);
+      totalOrderBookVolume = totalBids + totalAsks;
+    }
+    var currentPriceForWalls = price && price.price ? price.price : 0;
+    
     var supportHtml = '';
     if (supportWalls.length > 0) {
       supportHtml = supportWalls.map(function(wall) {
+        var wallAmount = wall.amount || 0;
+        var distance = currentPriceForWalls > 0 ? Math.abs((wall.price - currentPriceForWalls) / currentPriceForWalls) * 100 : 0;
+        var volumePercent = totalOrderBookVolume > 0 ? (wallAmount / totalOrderBookVolume) * 100 : 0;
+        
         return '<div class="wall-item wall-support">' +
-          '<span class="wall-label">حمایت</span>' +
-          '<span class="wall-price">' + formatPrice(wall.price) + '</span>' +
-          '<span class="wall-strength">' + wall.strength.toFixed(1) + 'x</span>' +
+          '<div class="wall-header">' +
+            '<span class="wall-label">حمایت</span>' +
+            '<span class="wall-strength">' + wall.strength.toFixed(1) + 'x</span>' +
+          '</div>' +
+          '<div class="wall-details">' +
+            '<div class="wall-detail-row">' +
+              '<span class="wall-detail-label">قیمت:</span>' +
+              '<span class="wall-detail-value">' + formatPrice(wall.price) + '</span>' +
+            '</div>' +
+            '<div class="wall-detail-row">' +
+              '<span class="wall-detail-label">حجم:</span>' +
+              '<span class="wall-detail-value">' + formatVolume(wallAmount) + ' USDT</span>' +
+            '</div>' +
+            '<div class="wall-detail-row">' +
+              '<span class="wall-detail-label">فاصله:</span>' +
+              '<span class="wall-detail-value">' + distance.toFixed(2) + '%</span>' +
+            '</div>' +
+            '<div class="wall-detail-row">' +
+              '<span class="wall-detail-label">درصد حجم:</span>' +
+              '<span class="wall-detail-value">' + volumePercent.toFixed(2) + '%</span>' +
+            '</div>' +
+          '</div>' +
         '</div>';
       }).join('');
     } else {
@@ -2139,10 +2332,33 @@ function renderAssetPanel(symbol) {
     var resistanceHtml = '';
     if (resistanceWalls.length > 0) {
       resistanceHtml = resistanceWalls.map(function(wall) {
+        var wallAmount = wall.amount || 0;
+        var distance = currentPriceForWalls > 0 ? Math.abs((wall.price - currentPriceForWalls) / currentPriceForWalls) * 100 : 0;
+        var volumePercent = totalOrderBookVolume > 0 ? (wallAmount / totalOrderBookVolume) * 100 : 0;
+        
         return '<div class="wall-item wall-resistance">' +
-          '<span class="wall-label">مقاومت</span>' +
-          '<span class="wall-price">' + formatPrice(wall.price) + '</span>' +
-          '<span class="wall-strength">' + wall.strength.toFixed(1) + 'x</span>' +
+          '<div class="wall-header">' +
+            '<span class="wall-label">مقاومت</span>' +
+            '<span class="wall-strength">' + wall.strength.toFixed(1) + 'x</span>' +
+          '</div>' +
+          '<div class="wall-details">' +
+            '<div class="wall-detail-row">' +
+              '<span class="wall-detail-label">قیمت:</span>' +
+              '<span class="wall-detail-value">' + formatPrice(wall.price) + '</span>' +
+            '</div>' +
+            '<div class="wall-detail-row">' +
+              '<span class="wall-detail-label">حجم:</span>' +
+              '<span class="wall-detail-value">' + formatVolume(wallAmount) + ' USDT</span>' +
+            '</div>' +
+            '<div class="wall-detail-row">' +
+              '<span class="wall-detail-label">فاصله:</span>' +
+              '<span class="wall-detail-value">' + distance.toFixed(2) + '%</span>' +
+            '</div>' +
+            '<div class="wall-detail-row">' +
+              '<span class="wall-detail-label">درصد حجم:</span>' +
+              '<span class="wall-detail-value">' + volumePercent.toFixed(2) + '%</span>' +
+            '</div>' +
+          '</div>' +
         '</div>';
       }).join('');
     } else {
@@ -2162,6 +2378,16 @@ function renderAssetPanel(symbol) {
   }
   
   // Always show buyer/seller power section
+  // Calculate actual volumes if available
+  var actualBidVolume = 0;
+  var actualAskVolume = 0;
+  var totalOrderBookVolumeForDisplay = 0;
+  if (signal && signal.orderBook && signal.orderBook.bids && signal.orderBook.asks) {
+    actualBidVolume = signal.orderBook.bids.reduce(function(sum, bid) { return sum + (bid.amount || 0); }, 0);
+    actualAskVolume = signal.orderBook.asks.reduce(function(sum, ask) { return sum + (ask.amount || 0); }, 0);
+    totalOrderBookVolumeForDisplay = actualBidVolume + actualAskVolume;
+  }
+  
   buyerSellerPowerHtml = '<div class="buyer-seller-power-section">' +
     '<div class="power-title">' + ICONS.barChart + ' قدرت خریدار/فروشنده</div>' +
     '<div class="power-slider-container">' +
@@ -2176,6 +2402,21 @@ function renderAssetPanel(symbol) {
       '<div class="power-percentages">' +
         '<span class="power-percent buyer-percent">' + buyerPowerPercent.toFixed(1) + '%</span>' +
         '<span class="power-percent seller-percent">' + sellerPowerPercent.toFixed(1) + '%</span>' +
+      '</div>' +
+      '<div class="power-volumes">' +
+        '<div class="volume-display buyer-volume">' +
+          '<span class="volume-label">حجم خرید:</span>' +
+          '<span class="volume-value">' + formatVolume(actualBidVolume) + ' USDT</span>' +
+        '</div>' +
+        '<div class="volume-display seller-volume">' +
+          '<span class="volume-label">حجم فروش:</span>' +
+          '<span class="volume-value">' + formatVolume(actualAskVolume) + ' USDT</span>' +
+        '</div>' +
+        (totalOrderBookVolumeForDisplay > 0 ? 
+          '<div class="volume-display total-volume">' +
+            '<span class="volume-label">حجم کل:</span>' +
+            '<span class="volume-value">' + formatVolume(totalOrderBookVolumeForDisplay) + ' USDT</span>' +
+          '</div>' : '') +
       '</div>' +
       (wallsHtml || '') +
     '</div>' +
@@ -2216,7 +2457,51 @@ function renderAssetPanel(symbol) {
   }
   actionsHtml += '</div>';
   
-  panel.innerHTML = priceHtml + signalHtml + scoreGaugeHtml + entryHtml + indicatorsHtml + buyerSellerPowerHtml + positionHtml + actionsHtml;
+  // Assemble cards with configurable order (for drag & drop)
+  var cardMap = {
+    price: priceHtml,
+    indicators: indicatorsHtml,
+    buyerSeller: buyerSellerPowerHtml,
+    position: positionHtml,
+    actions: actionsHtml
+  };
+
+  // In simple mode, hide buyerSeller section
+  var defaultCardOrder = isSimpleMode 
+    ? ['price', 'indicators', 'position', 'actions']
+    : ['price', 'indicators', 'buyerSeller', 'position', 'actions'];
+  var savedOrder = STATE.settings && Array.isArray(STATE.settings.cardOrder) ? STATE.settings.cardOrder : null;
+  var cardOrder = savedOrder && savedOrder.length ? savedOrder.slice() : defaultCardOrder.slice();
+
+  // Ensure all known cards are present in order (handle new cards gracefully)
+  defaultCardOrder.forEach(function(id) {
+    if (cardOrder.indexOf(id) === -1) cardOrder.push(id);
+  });
+
+  var panelHtml = '';
+  var upIconSvg = '<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M20.485 15.535L12 7.05l-8.485 8.485L4.93 16.95L12 9.878l7.071 7.072l1.414-1.415Z"/></svg>';
+  var downIconSvg = '<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M3.515 8.465L12 16.95l8.485-8.485L19.07 7.05L12 14.122L4.929 7.05L3.515 8.465Z"/></svg>';
+
+  cardOrder.forEach(function(id) {
+    var content = cardMap[id];
+    if (!content) return;
+    var isMovable = id !== 'actions'; // Keep actions fixed at bottom
+    var controlsHtml = isMovable
+      ? '<div class="card-move-controls">' +
+          '<button class="card-move-btn" type="button" aria-label="انتقال کارت به بالا" onclick="moveAssetCard(this, \'up\')">' + upIconSvg + '</button>' +
+          '<button class="card-move-btn" type="button" aria-label="انتقال کارت به پایین" onclick="moveAssetCard(this, \'down\')">' + downIconSvg + '</button>' +
+        '</div>'
+      : '';
+    panelHtml += '<div class="asset-card" data-card-id="' + id + '">' +
+      controlsHtml +
+      content +
+    '</div>';
+  });
+
+  panel.innerHTML = panelHtml;
+
+  // Enable drag & drop reordering for cards
+  enableAssetPanelDragAndDrop(panel);
   
   // Update prompt dropdown and button if not manually selected
   if (!STATE.promptManualSelection) {
@@ -2227,6 +2512,144 @@ function renderAssetPanel(symbol) {
     }
     updatePromptButtonText();
   }
+}
+
+// ==================== Asset Panel Drag & Drop ====================
+var ASSET_PANEL_DRAG_STATE = {
+  draggingId: null
+};
+
+function enableAssetPanelDragAndDrop(panel) {
+  if (!panel) return;
+
+  var cards = panel.querySelectorAll('.asset-card');
+  if (!cards || !cards.length) return;
+
+  cards.forEach(function(card) {
+    // Drag & drop غیرفعال شده؛ جابه‌جایی با فلش‌ها انجام می‌شود
+    return;
+  });
+}
+
+function onAssetCardDragStart(e) {
+  e.stopPropagation();
+  var source = e.currentTarget;
+  var card = source.closest ? source.closest('.asset-card') : null;
+  while (!card && source && source.parentElement) {
+    source = source.parentElement;
+    if (source.classList && source.classList.contains('asset-card')) {
+      card = source;
+      break;
+    }
+  }
+  if (!card) return;
+  var cardId = card.getAttribute('data-card-id');
+  ASSET_PANEL_DRAG_STATE.draggingId = cardId;
+  card.classList.add('dragging');
+  if (e.dataTransfer) {
+    e.dataTransfer.effectAllowed = 'move';
+    // Needed for Firefox
+    e.dataTransfer.setData('text/plain', cardId || '');
+  }
+}
+
+function onAssetCardDragOver(e) {
+  e.preventDefault();
+  if (e.dataTransfer) {
+    e.dataTransfer.dropEffect = 'move';
+  }
+
+  var targetCard = e.currentTarget;
+  var panel = targetCard.parentElement;
+  var draggingId = ASSET_PANEL_DRAG_STATE.draggingId;
+  if (!panel || !draggingId) return;
+
+  var cards = Array.prototype.slice.call(panel.querySelectorAll('.asset-card'));
+  var draggedEl = cards.find(function(c) { return c.getAttribute('data-card-id') === draggingId; });
+  if (!draggedEl || draggedEl === targetCard) return;
+
+  // Highlight current target
+  cards.forEach(function(c) { c.classList.remove('drag-over'); });
+  targetCard.classList.add('drag-over');
+
+  var rect = targetCard.getBoundingClientRect();
+  var offsetY = e.clientY - rect.top;
+  var shouldInsertBefore = offsetY < rect.height / 2;
+
+  if (shouldInsertBefore) {
+    panel.insertBefore(draggedEl, targetCard);
+  } else if (targetCard.nextSibling !== draggedEl) {
+    panel.insertBefore(draggedEl, targetCard.nextSibling);
+  }
+}
+
+function onAssetCardDrop(e) {
+  e.preventDefault();
+  var targetCard = e.currentTarget;
+  var targetId = targetCard.getAttribute('data-card-id');
+  var draggingId = ASSET_PANEL_DRAG_STATE.draggingId;
+
+  if (!draggingId || !targetId || draggingId === targetId) return;
+
+  var panel = targetCard.parentElement;
+  if (!panel) return;
+
+  var cards = Array.prototype.slice.call(panel.querySelectorAll('.asset-card'));
+  // Compute and save new order based on current DOM
+  var newOrder = Array.prototype.slice.call(panel.querySelectorAll('.asset-card'))
+    .map(function(c) { return c.getAttribute('data-card-id'); })
+    .filter(function(id) { return !!id; });
+
+  if (!STATE.settings) STATE.settings = {};
+  STATE.settings.cardOrder = newOrder;
+  saveSettings();
+}
+
+function onAssetCardDragEnd(e) {
+  var source = e.currentTarget;
+  var card = source.closest ? source.closest('.asset-card') : null;
+  if (card) {
+    card.classList.remove('dragging');
+  }
+  ASSET_PANEL_DRAG_STATE.draggingId = null;
+  var panel = document.getElementById('assetPanel');
+  if (!panel) return;
+  var cards = panel.querySelectorAll('.asset-card');
+  cards.forEach(function(c) {
+    c.classList.remove('dragging');
+    c.classList.remove('drag-over');
+  });
+}
+
+// Move card up or down using arrow buttons
+function moveAssetCard(buttonEl, direction) {
+  if (!buttonEl || !direction) return;
+  var card = buttonEl.closest ? buttonEl.closest('.asset-card') : null;
+  if (!card || !card.parentElement) return;
+
+  var panel = card.parentElement;
+  var cards = Array.prototype.slice.call(panel.querySelectorAll('.asset-card'));
+  var index = cards.indexOf(card);
+  if (index === -1) return;
+
+  if (direction === 'up' && index > 0) {
+    var prev = cards[index - 1];
+    panel.insertBefore(card, prev);
+  } else if (direction === 'down' && index < cards.length - 1) {
+    var next = cards[index + 1].nextSibling;
+    panel.insertBefore(card, next);
+  } else {
+    return;
+  }
+
+  // Update saved order based on new DOM
+  var newOrder = Array.prototype.slice.call(panel.querySelectorAll('.asset-card'))
+    .map(function(c) { return c.getAttribute('data-card-id'); })
+    .filter(function(id) { return !!id; });
+
+  if (!STATE.settings) STATE.settings = {};
+  STATE.settings.cardOrder = newOrder;
+  saveSettings();
 }
 
 // Update sticky AI Advisor section at bottom (DEPRECATED - no longer used)
@@ -2344,15 +2767,19 @@ function startDataLoop() {
   startRealtimePrices();
   
   // Data update loop (every 5 seconds) - mainly klines + notifications
-  setInterval(function() {
+  INTERVAL_IDS.dataUpdateLoop = setInterval(function() {
     STATE.watchlist.forEach(function(symbol) { 
       fetchAssetData(symbol);
       checkPositionNotifications(symbol);
     });
+    // Cleanup old data periodically (more frequent cleanup to prevent memory issues)
+    cleanupOldSymbolData();
+    // Also cleanup inactive symbols more aggressively
+    cleanupInactiveSymbolData();
   }, 5000);
   
   // Real-time clock update (every second)
-  setInterval(function() {
+  INTERVAL_IDS.clockUpdate = setInterval(function() {
     updateLastUpdateTime();
   }, 1000);
 }
@@ -2656,18 +3083,18 @@ function setErrorPrice(symbol, message) {
 
 // Fetch klines from Binance
 function fetchKlinesFromBinance(symbol, tf, baseAsset) {
-  // استفاده از حداکثر دیتای ممکن از Binance
-  // Binance max limit is 1000
+  // محدود کردن شدید اندازه برای جلوگیری از Out of Memory
+  // Aggressively reduced limits to prevent Out of Memory errors
   var limit;
   if (tf === '1d') {
-    // حدود یک سال داده روزانه
-    limit = 365;
+    // کاهش از 365 به 180 (حدود 6 ماه) برای صرفه‌جویی بیشتر در مموری
+    limit = 180;
   } else if (tf === '4h' || tf === '1h') {
-    // حداکثر دیتای ممکن برای ۱ ساعته و ۴ ساعته (۱۰۰۰ کندل)
-    limit = 1000;
+    // کاهش از 500 به 300 برای صرفه‌جویی بیشتر در مموری
+    limit = 300;
   } else {
-    // برای تایم‌فریم‌های دیگر (مثلاً 30m) مقدار متوسط
-    limit = 500;
+    // برای تایم‌فریم‌های دیگر (مثلاً 30m) کاهش به 300
+    limit = 300;
   }
 
   fetch(BINANCE_API + '/fapi/v1/klines?symbol=' + symbol + '&interval=' + tf + '&limit=' + limit)
@@ -2682,9 +3109,12 @@ function fetchKlinesFromBinance(symbol, tf, baseAsset) {
       
       checkAPIStatus('binance', true);
       if (!STATE.klines[symbol]) STATE.klines[symbol] = {};
-      STATE.klines[symbol][tf] = data.map(function(k) {
+      // Limit stored klines to prevent memory overflow (max 300 candles)
+      var klinesData = data.map(function(k) {
         return { t: k[0], o: parseFloat(k[1]), h: parseFloat(k[2]), l: parseFloat(k[3]), c: parseFloat(k[4]), v: parseFloat(k[5]) };
       });
+      // Only keep the most recent data (last 300 candles max)
+      STATE.klines[symbol][tf] = klinesData.slice(-300);
       checkAndAnalyze(symbol);
     })
     .catch(function(err) { 
@@ -2703,30 +3133,30 @@ function fetchKlinesFromCryptoCompare(symbol, tf, baseAsset) {
   switch(tf) {
     case '30m':
       endpoint = 'histominute';
-      // تا ۲۰۰۰ کندل نیم‌ساعته (چند ماه داده)
-      limit = 2000;
+      // کاهش شدید از 500 به 300 برای جلوگیری از Out of Memory
+      limit = 300;
       break;
     case '1h':
       endpoint = 'histohour';
-      // حداکثر دیتای ممکن برای یک‌ساعته
-      limit = 2000;
+      // کاهش شدید از 500 به 300 برای جلوگیری از Out of Memory
+      limit = 300;
       break;
     case '4h':
       endpoint = 'histohour';
-      // حداکثر دیتای ممکن، بعداً با aggregateKlines به ۴ساعته تبدیل می‌شود
-      limit = 2000;
+      // کاهش شدید از 500 به 300 برای جلوگیری از Out of Memory
+      limit = 300;
       break;
     case '1d':
       endpoint = 'histoday';
-      // تا ۲۰۰۰ کندل روزانه (چند سال داده)
-      limit = 2000;
+      // کاهش شدید از 365 به 180 برای جلوگیری از Out of Memory
+      limit = 180;
       break;
     default:
       endpoint = 'histohour';
-      limit = 2000;
+      limit = 300;
   }
   
-  fetch(CRYPTOCOMPARE_API + '/' + endpoint + '?fsym=' + baseAsset + '&tsym=USDT&limit=' + Math.min(limit, 2000))
+  fetch(CRYPTOCOMPARE_API + '/' + endpoint + '?fsym=' + baseAsset + '&tsym=USDT&limit=' + Math.min(limit, 300))
     .then(function(res) { 
       if (!res.ok) throw new Error('CryptoCompare error');
       return res.json(); 
@@ -2742,7 +3172,8 @@ function fetchKlinesFromCryptoCompare(symbol, tf, baseAsset) {
       // Aggregate data for larger timeframes
       var aggregated = aggregateKlines(rawData, tf);
       
-      STATE.klines[symbol][tf] = aggregated.map(function(k) {
+      // Limit stored klines to prevent memory overflow (max 300 candles)
+      var aggregatedKlines = aggregated.map(function(k) {
         return { 
           t: k.time * 1000, 
           o: k.open, 
@@ -2752,6 +3183,8 @@ function fetchKlinesFromCryptoCompare(symbol, tf, baseAsset) {
           v: k.volumefrom || 0 
         };
       });
+      // Only keep the most recent data (last 300 candles max)
+      STATE.klines[symbol][tf] = aggregatedKlines.slice(-300);
       
       console.log('Klines from CryptoCompare for ' + symbol + ' ' + tf + ':', STATE.klines[symbol][tf].length + ' candles');
       checkAndAnalyze(symbol);
@@ -2816,9 +3249,12 @@ function fetchKlinesFromCoinGecko(symbol, tf, baseAsset) {
       checkAPIStatus('coingecko', true);
       if (!STATE.klines[symbol]) STATE.klines[symbol] = {};
       
-      STATE.klines[symbol][tf] = data.map(function(k) {
+      // Limit stored klines to prevent memory overflow (max 300 candles)
+      var fallbackKlines = data.map(function(k) {
         return { t: k[0], o: k[1], h: k[2], l: k[3], c: k[4], v: 0 };
       });
+      // Only keep the most recent data (last 300 candles max)
+      STATE.klines[symbol][tf] = fallbackKlines.slice(-300);
       
       console.log('Klines from CoinGecko for ' + symbol + ' ' + tf + ':', STATE.klines[symbol][tf].length + ' candles');
       checkAndAnalyze(symbol);
@@ -2830,12 +3266,105 @@ function fetchKlinesFromCoinGecko(symbol, tf, baseAsset) {
   */
 }
 
+// Fetch derivatives data (always, regardless of signal type)
+async function fetchDerivativesData(symbol) {
+  try {
+    if (typeof AnalysisEngine === 'undefined') {
+      return;
+    }
+    
+    // Ensure signal object exists
+    if (!STATE.signals[symbol]) {
+      STATE.signals[symbol] = {};
+    }
+    var sig = STATE.signals[symbol];
+    var price = STATE.prices[symbol] ? STATE.prices[symbol].price : 0;
+    
+    // Fetch Funding Rate
+    try {
+      var tempEngine = new AnalysisEngine('binance', symbol);
+      await tempEngine.initialize();
+      var fundingRate = await tempEngine.fetchFundingRate();
+      
+      if (fundingRate && fundingRate.rate !== undefined) {
+        var fundingRatePercent = fundingRate.rate * 100;
+        var dailyFundingRate = fundingRatePercent * 3;
+        
+        sig.fundingRate = {
+          rate: fundingRate.rate,
+          dailyRate: dailyFundingRate,
+          annualizedRate: fundingRate.annualizedRate
+        };
+      }
+    } catch (e) {
+      console.warn('Funding rate fetch error:', e.message);
+    }
+    
+    // Fetch Open Interest
+    try {
+      var tempEngine = new AnalysisEngine('binance', symbol);
+      await tempEngine.initialize();
+      var openInterest = await tempEngine.fetchOpenInterest();
+      
+      // Handle null response (CORS blocked) gracefully
+      if (openInterest && openInterest.openInterest > 0) {
+        var oiValueUSD = openInterest.openInterestValue || 0;
+        if (oiValueUSD === 0 && price > 0) {
+          oiValueUSD = openInterest.openInterest * price;
+        }
+        sig.openInterest = {
+          value: openInterest.openInterest,
+          valueUSD: oiValueUSD,
+          timestamp: openInterest.timestamp,
+          change: openInterest.change || 0,
+          changePercent: openInterest.changePercent || 0,
+          changeUSD: openInterest.changeUSD || 0,
+          interpretation: openInterest.interpretation || 'neutral'
+        };
+      }
+    } catch (e) {
+      console.warn('Open Interest fetch error:', e.message);
+    }
+    
+    // Fetch Long/Short Ratio
+    try {
+      var tempEngine = new AnalysisEngine('binance', symbol);
+      await tempEngine.initialize();
+      var longShortRatio = await tempEngine.fetchLongShortRatio();
+      
+      if (longShortRatio && longShortRatio.ratio) {
+        sig.longShortRatio = {
+          ratio: longShortRatio.ratio,
+          longAccount: longShortRatio.longAccount,
+          shortAccount: longShortRatio.shortAccount,
+          sentiment: longShortRatio.sentiment,
+          interpretation: longShortRatio.interpretation,
+          timestamp: longShortRatio.timestamp
+        };
+      }
+    } catch (e) {
+      console.warn('Long/Short Ratio fetch error:', e.message);
+    }
+    
+    // Update UI if this is the active asset
+    if (symbol === STATE.activeAsset) {
+      renderAssetPanel(symbol);
+    }
+  } catch (e) {
+    console.warn('Error fetching derivatives data:', e.message);
+  }
+}
+
 // Check if all timeframes are loaded and analyze
 function checkAndAnalyze(symbol) {
   var allTFs = TIMEFRAMES.every(function(t) {
     return STATE.klines[symbol] && STATE.klines[symbol][t] && STATE.klines[symbol][t].length > 0;
   });
-  if (allTFs) analyzeAsset(symbol);
+  if (allTFs) {
+    analyzeAsset(symbol);
+    // Always fetch derivatives data, regardless of signal type
+    fetchDerivativesData(symbol);
+  }
 }
 
 function refreshAnalysis(symbol) {
@@ -2941,7 +3470,7 @@ function generateAIPrompt(symbol) {
   }
 
   prompt += 'System Signal: ' + signalType + ' (Score: ' + score + ')\n';
-  prompt += '- Entry: ' + formatPrice(signal.entry) + '\n';
+  prompt += '- Current Price: ' + formatPrice(price.price) + '\n';
   prompt += '- SL: ' + formatPrice(signal.sl) + '\n';
   prompt += '- TP1: ' + formatPrice(signal.tp1) + '\n';
   if (signal.tp2) {
@@ -2949,19 +3478,9 @@ function generateAIPrompt(symbol) {
   }
   prompt += '\n';
   
-  // Risk Detection System
-  prompt += '--- RISK DETECTION ---\n';
-  if (signal.riskWarning) {
-    var riskReasons = signal.reasons.filter(function(r) { return r.indexOf('⚠️') !== -1; });
-    if (riskReasons.length > 0) {
-      prompt += 'Risk Warnings: ' + riskReasons.join('; ') + '.\n';
-    } else {
-      prompt += 'Risk Warnings: Active (see reasons below).\n';
-    }
-  } else {
-    prompt += 'Risk Warnings: None detected.\n';
-  }
-  prompt += '\n';
+  // Risk Detection System - Removed
+  // prompt += '--- RISK DETECTION ---\n';
+  // Risk warnings section removed
   
   // VSA Patterns (7 الگو)
   prompt += '--- VSA (VOLUME SPREAD ANALYSIS) ---\n';
@@ -2979,12 +3498,7 @@ function generateAIPrompt(symbol) {
     }
     if (vsaPatterns.length > 0) {
       prompt += 'VSA Patterns Detected: ' + vsaPatterns.join(', ') + '.\n';
-      if (signal.vsa['30m'] && signal.vsa['30m'].reasons && signal.vsa['30m'].reasons.length > 0) {
-        prompt += 'VSA 30m: ' + signal.vsa['30m'].reasons.join('; ') + '.\n';
-      }
-      if (signal.vsa['1h'] && signal.vsa['1h'].reasons && signal.vsa['1h'].reasons.length > 0) {
-        prompt += 'VSA 1h: ' + signal.vsa['1h'].reasons.join('; ') + '.\n';
-      }
+      // VSA reasons removed from prompt
     } else {
       prompt += 'VSA Patterns: None detected.\n';
     }
@@ -3122,25 +3636,29 @@ async function generateCombinedPrompt(baseAsset) {
   // ==================== DERIVATIVES DATA ====================
   combinedPrompt += '=== داده‌های مشتقات (Derivatives) ===\n';
   
-  // Funding Rate
-  if (signal && signal.fundingRate) {
+  // Funding Rate - Show value even if 0 or null
+  if (signal && signal.fundingRate !== undefined && signal.fundingRate !== null) {
     var fr = signal.fundingRate;
+    if (fr.rate !== undefined && fr.rate !== null) {
     var frRate = (fr.rate * 100).toFixed(4);
-    var frDaily = fr.dailyRate !== undefined ? fr.dailyRate.toFixed(2) : (frRate * 3).toFixed(2);
+      var frDaily = fr.dailyRate !== undefined && fr.dailyRate !== null ? fr.dailyRate.toFixed(2) : (frRate * 3).toFixed(2);
     combinedPrompt += 'FundingRate: ' + frRate + '% (Daily: ' + frDaily + '%)\n';
-    if (fr.annualizedRate) {
+      if (fr.annualizedRate !== undefined && fr.annualizedRate !== null) {
       combinedPrompt += 'FundingRateAnnualized: ' + (fr.annualizedRate * 100).toFixed(2) + '%\n';
+      }
+    } else {
+      combinedPrompt += 'FundingRate: 0% (rate not available)\n';
     }
   } else {
     combinedPrompt += 'FundingRate: N/A\n';
   }
   
-  // Open Interest
-  if (signal && signal.openInterest && signal.openInterest.value > 0) {
-    var oiValue = signal.openInterest.value;
+  // Open Interest - Show value even if 0
+  if (signal && signal.openInterest !== undefined && signal.openInterest !== null) {
+    var oiValue = signal.openInterest.value !== undefined && signal.openInterest.value !== null ? signal.openInterest.value : 0;
     // Fix: Calculate ValueUSD if not available or zero
-    var oiValueUSD = signal.openInterest.valueUSD || 0;
-    if (oiValueUSD === 0 && price > 0) {
+    var oiValueUSD = signal.openInterest.valueUSD !== undefined && signal.openInterest.valueUSD !== null ? signal.openInterest.valueUSD : 0;
+    if (oiValueUSD === 0 && price > 0 && oiValue > 0) {
       oiValueUSD = oiValue * price;
     }
     combinedPrompt += 'OpenInterest: ' + (oiValue > 1000000 ? (oiValue / 1000000).toFixed(2) + 'M' : 
@@ -3175,20 +3693,26 @@ async function generateCombinedPrompt(baseAsset) {
   
   // ==================== RISK/REWARD ANALYSIS ====================
   combinedPrompt += '=== تحلیل Risk/Reward ===\n';
-  if (signal && signal.riskReward) {
+  if (signal && signal.riskReward !== undefined && signal.riskReward !== null) {
     var rr = signal.riskReward;
+    if (rr.riskRewardRatio !== undefined && rr.riskRewardRatio !== null) {
     combinedPrompt += 'RiskRewardRatio: ' + rr.riskRewardRatio.toFixed(2) + ':1\n';
-    if (rr.riskRewardRatio2) {
+    }
+    if (rr.riskRewardRatio2 !== undefined && rr.riskRewardRatio2 !== null) {
       combinedPrompt += 'RiskRewardRatio2: ' + rr.riskRewardRatio2.toFixed(2) + ':1 (to TP2)\n';
     }
+    if (rr.riskLevel !== undefined && rr.riskLevel !== null) {
     combinedPrompt += 'RiskLevel: ' + rr.riskLevel + '\n';
+    }
+    if (rr.risk !== undefined && rr.risk !== null && rr.reward1 !== undefined && rr.reward1 !== null) {
     combinedPrompt += 'Risk: ' + rr.risk.toFixed(2) + '% Reward1: ' + rr.reward1.toFixed(2) + '%';
-    if (rr.reward2) {
+      if (rr.reward2 !== undefined && rr.reward2 !== null) {
       combinedPrompt += ' Reward2: ' + rr.reward2.toFixed(2) + '%';
     }
     combinedPrompt += '\n';
+    }
     
-    if (rr.distanceToResistance !== null) {
+    if (rr.distanceToResistance !== undefined && rr.distanceToResistance !== null) {
       combinedPrompt += 'DistanceToResistance: ' + rr.distanceToResistance.toFixed(2) + '%';
       if (rr.nearestResistanceWall) {
         combinedPrompt += ' (WallPrice: ' + rr.nearestResistanceWall.price.toFixed(2) + ' Strength: ' + rr.nearestResistanceWall.strength.toFixed(1) + 'x)';
@@ -3196,7 +3720,7 @@ async function generateCombinedPrompt(baseAsset) {
       combinedPrompt += '\n';
     }
     
-    if (rr.distanceToSupport !== null) {
+    if (rr.distanceToSupport !== undefined && rr.distanceToSupport !== null) {
       combinedPrompt += 'DistanceToSupport: ' + rr.distanceToSupport.toFixed(2) + '%';
       if (rr.nearestSupportWall) {
         combinedPrompt += ' (WallPrice: ' + rr.nearestSupportWall.price.toFixed(2) + ' Strength: ' + rr.nearestSupportWall.strength.toFixed(1) + 'x)';
@@ -3253,8 +3777,9 @@ async function generateCombinedPrompt(baseAsset) {
   
   // ==================== BTC CORRELATION ====================
   combinedPrompt += '=== همبستگی با بیت‌کوین ===\n';
-  if (signal && signal.btcContext && signal.btcContext.isDependent) {
+  if (signal && signal.btcContext && signal.btcContext !== null) {
     var btcCtx = signal.btcContext;
+    if (btcCtx.isDependent) {
     var btcStatus = 'neutral';
     var btc4 = (btcCtx.btcTrend4h || '').toLowerCase();
     var btc1 = (btcCtx.btcTrend1d || '').toLowerCase();
@@ -3268,55 +3793,82 @@ async function generateCombinedPrompt(baseAsset) {
     }
     
     combinedPrompt += 'BTCStatus: ' + btcStatus + '\n';
-    combinedPrompt += 'BTCTrend4H: ' + (btcCtx.btcTrend4h || 'unknown') + '\n';
-    combinedPrompt += 'BTCTrend1D: ' + (btcCtx.btcTrend1d || 'unknown') + '\n';
+      if (btcCtx.btcTrend4h !== undefined && btcCtx.btcTrend4h !== null) {
+        combinedPrompt += 'BTCTrend4H: ' + btcCtx.btcTrend4h + '\n';
+      }
+      if (btcCtx.btcTrend1d !== undefined && btcCtx.btcTrend1d !== null) {
+        combinedPrompt += 'BTCTrend1D: ' + btcCtx.btcTrend1d + '\n';
+      }
     if (typeof btcCtx.correlation === 'number') {
       combinedPrompt += 'BTCCorrelation: ' + btcCtx.correlation.toFixed(2) + ' (Label: ' + (btcCtx.label || 'unknown') + ')\n';
     }
+    } else {
+      // Show correlation data even if not dependent
+      if (typeof btcCtx.correlation === 'number') {
+        combinedPrompt += 'BTCCorrelation: ' + btcCtx.correlation.toFixed(2) + ' (Label: ' + (btcCtx.label || 'unknown') + ', Not BTC-dependent)\n';
   } else {
     combinedPrompt += 'BTC Correlation: Not BTC-dependent asset (ignored)\n';
+      }
+    }
+  } else {
+    combinedPrompt += 'BTC Correlation: N/A\n';
   }
   combinedPrompt += '\n';
   
   // ==================== DASHBOARD ANALYSIS ====================
   combinedPrompt += '=== تحلیل داشبورد (Multi-Timeframe) ===\n';
   try {
-    // Check if engines are available
-    if (typeof AnalysisEngine === 'undefined' || typeof ScoringEngine === 'undefined') {
+    // Use existing signal data if available (much faster than running new analysis)
+    var analysisResult = null;
+    
+    if (signal && signal.tfAnalysis) {
+      // Use existing timeframe analysis from signal
+      analysisResult = {
+        success: true,
+        timeframeResults: signal.tfAnalysis,
+        orderBook: signal.orderBook || null,
+        walls: signal.orderBookWalls || null,
+        currentPrice: price,
+        scores: signal.scores || []
+      };
+      
+      // Score calculation removed - no longer needed
+    } else if (typeof AnalysisEngine !== 'undefined') {
+      // Fallback: Run new analysis with timeout
+      var analysisPromise = (async function() {
+    var engine = new AnalysisEngine('binance', symbol);
+        return await engine.analyze();
+      })();
+      
+      // Add timeout (15 seconds max)
+      var timeoutPromise = new Promise(function(resolve) {
+        setTimeout(function() {
+          resolve({ success: false, error: 'Timeout: Analysis took too long' });
+        }, 15000);
+      });
+      
+      analysisResult = await Promise.race([analysisPromise, timeoutPromise]);
+    
+      if (!analysisResult.success) {
+        combinedPrompt += 'خطا در تحلیل داشبورد: ' + (analysisResult.error || 'خطای نامشخص') + '\n';
+        return combinedPrompt;
+      }
+    } else {
       combinedPrompt += 'موتورهای تحلیل در حال بارگذاری هستند. لطفاً چند لحظه صبر کنید و دوباره تلاش کنید.\n';
       return combinedPrompt;
     }
     
-    // Run dashboard analysis
-    var engine = new AnalysisEngine('binance', symbol);
-    var analysisResult = await engine.analyze();
-    
-    if (!analysisResult.success) {
-      combinedPrompt += 'خطا در تحلیل داشبورد: ' + (analysisResult.error || 'خطای نامشخص') + '\n';
+    // Check if we have valid data (scoreData check removed)
+    if (!analysisResult || !analysisResult.success) {
+      combinedPrompt += 'خطا در تولید تحلیل داشبورد: داده‌های تحلیل در دسترس نیست\n';
       return combinedPrompt;
     }
-    
-    var scoringEngine = new ScoringEngine();
-    
-    // Pass BTC context for veto logic
-    var btcContextForScoring = signal && signal.btcContext ? signal.btcContext : null;
-    var scoreData = scoringEngine.calculateOverallScore({
-      timeframeResults: analysisResult.timeframeResults,
-      orderBook: analysisResult.orderBook,
-      walls: analysisResult.walls,
-      currentPrice: analysisResult.currentPrice
-    }, btcContextForScoring);
 
     var primaryTF = analysisResult.timeframeResults['1h'] || analysisResult.timeframeResults['4h'] || {};
     var momentum = primaryTF.momentum || 'Neutral';
 
-    // Dashboard analysis data
-    var finalScore = scoreData.overall;
-    combinedPrompt += 'OverallScore: ' + finalScore + '/100';
-    if (scoreData.btcVetoApplied) {
-      combinedPrompt += ' (BTC Veto Applied: Reduced by 50% due to High Correlation with Bearish BTC)';
-    }
-    combinedPrompt += '\n';
+    // Dashboard analysis data - Score removed
+    // OverallScore section removed from prompt
     combinedPrompt += 'Momentum: ' + momentum + '\n';
 
     // Add timeframe analysis - Simple numeric data only
@@ -3349,20 +3901,7 @@ async function generateCombinedPrompt(baseAsset) {
       }
     });
 
-    // Add score breakdown - Simple numeric
-    if (scoreData && scoreData.components) {
-      combinedPrompt += 'Score Components: ';
-      if (scoreData.components.timeframe !== undefined) {
-        combinedPrompt += 'Timeframe=' + Math.round(scoreData.components.timeframe) + ' ';
-      }
-      if (scoreData.components.liquidity !== undefined) {
-        combinedPrompt += 'Liquidity=' + Math.round(scoreData.components.liquidity) + ' ';
-      }
-      if (scoreData.components.indicators !== undefined) {
-        combinedPrompt += 'Indicators=' + Math.round(scoreData.components.indicators);
-      }
-      combinedPrompt += '\n';
-    }
+    // Score breakdown removed from prompt
 
     // Add walls information - Simple numeric
     if (analysisResult.walls) {
@@ -3490,7 +4029,6 @@ async function generateCombinedPrompt(baseAsset) {
   combinedPrompt += '   - اگر سیگنال LONG یا SHORT می‌دهید، اعتماد خود را از 1 تا 10 مشخص کنید\n';
   combinedPrompt += '   - توجه: پیشنهاد سیستم (SystemSuggestedSignal) را فقط به عنوان یک مرجع در نظر بگیرید، نه به عنوان سیگنال قطعی\n\n';
   combinedPrompt += '3. در صورت وجود سیگنال، تعیین سطوح معاملاتی\n';
-  combinedPrompt += '   - Entry (نقطه ورود): بر اساس تحلیل خودتان تعیین کنید\n';
   combinedPrompt += '   - Stop Loss (استاپ لاس): با در نظر گیری ریسک و سطوح حمایت/مقاومت\n';
   combinedPrompt += '   - Take Profit 1 و 2: بر اساس Risk/Reward و سطوح مقاومت/حمایت\n';
   combinedPrompt += '   - Leverage پیشنهادی: بر اساس فاصله Entry تا SL\n';
@@ -3501,7 +4039,6 @@ async function generateCombinedPrompt(baseAsset) {
   combinedPrompt += '   - ارزیابی کیفیت ستاپ\n\n';
   combinedPrompt += '5. هشدارهای مهم\n';
   combinedPrompt += '   - لیست تمام ریسک‌ها و هشدارهای مهم\n';
-  combinedPrompt += '   - توجه به تناقضات (مثل Score بالا اما Confidence پایین)\n';
   combinedPrompt += '   - وضعیت Choppy بودن بازار\n';
   combinedPrompt += '   - همبستگی با BTC و تأثیر آن\n\n';
   combinedPrompt += '6. پیشنهاد نهایی\n';
@@ -3576,6 +4113,7 @@ function handleAIPromptClick(symbol) {
   }
 }
 
+// Extract raw data only (without final request section)
 function showPromptModal(prompt) {
   var modal = document.getElementById('promptModal');
   var textarea = document.getElementById('promptTextarea');
@@ -3588,7 +4126,7 @@ function showPromptModal(prompt) {
     return;
   }
   
-  // Set prompt text
+  // Set prompt text (show full prompt in textarea)
   textarea.value = prompt || '';
   
   // Ensure textarea is selectable on mobile
@@ -3630,14 +4168,14 @@ function showPromptModal(prompt) {
     }
   };
   
-  // Copy button handler - use event capture for better mobile support
+  // Copy prompt button handler
   if (copyBtn) {
     copyBtn.onclick = function(e) {
       e.preventDefault();
       e.stopPropagation();
       copyPromptToClipboard(prompt, copyBtn, textarea);
     };
-    // Also add touchstart for better mobile support
+    // Also add touchend for better mobile support
     copyBtn.addEventListener('touchend', function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -4047,17 +4585,7 @@ function navigateToSuggestionDetails(symbol) {
   renderAssetPanel(symbol);
 }
 
-// Hook into analyzeAsset to update suggestions when analysis completes
-// This will be called after analyzeAsset finishes
-function onAnalysisComplete(symbol, signal) {
-  if (STATE.suggestions.symbols[symbol]) {
-    var symbolData = STATE.suggestions.symbols[symbol];
-    symbolData.signal = signal;
-    symbolData.lastUpdate = Date.now();
-    symbolData.isActive = signal && signal.confidence >= 4 && signal.type !== 'wait';
-    renderSuggestionCard(symbol);
-  }
-}
+// Suggestions system disabled - onAnalysisComplete removed
 
 // ==================== Confidence Caps (based on analyst feedback) ====================
 function applyConfidenceCaps(rawScore, mainTF, signalType) {
@@ -4373,7 +4901,8 @@ async function analyzeAsset(symbol) {
   
   TIMEFRAMES.forEach(function(tf) {
     var klines = STATE.klines[symbol][tf];
-    if (klines && klines.length >= 30) {
+    // Require at least 50 candles for analysis (reduced from 200 to allow analysis with limited data)
+    if (klines && klines.length >= 50) {
       var analysis = TradingCore.analyzeTF(klines, price);
       results[tf] = analysis;
       tfCount++;
@@ -4388,12 +4917,39 @@ async function analyzeAsset(symbol) {
   // Preserve previous counter-signal (for sticky display)
   var prevSignal = STATE.signals && STATE.signals[symbol] ? STATE.signals[symbol] : null;
   var prevCounterSignal = prevSignal && prevSignal.counterSignal ? prevSignal.counterSignal : null;
+  
+  // Preserve previous derivatives data (fundingRate, openInterest, longShortRatio)
+  // so they don't disappear when analyzeAsset runs
+  var prevFundingRate = prevSignal && prevSignal.fundingRate ? prevSignal.fundingRate : null;
+  var prevOpenInterest = prevSignal && prevSignal.openInterest ? prevSignal.openInterest : null;
+  var prevLongShortRatio = prevSignal && prevSignal.longShortRatio ? prevSignal.longShortRatio : null;
+  var prevFibonacciLevels = prevSignal && prevSignal.fibonacciLevels ? prevSignal.fibonacciLevels : null;
+  var prevObv = prevSignal && prevSignal.obv ? prevSignal.obv : null;
+  var prevStaticSR = prevSignal && prevSignal.staticSR ? prevSignal.staticSR : null;
+  var prevHtfSummary = prevSignal && prevSignal.htfSummary ? prevSignal.htfSummary : null;
+  var prevLiquidity = prevSignal && prevSignal.liquidity ? prevSignal.liquidity : null;
+  var prevBtcContext = prevSignal && prevSignal.btcContext ? prevSignal.btcContext : null;
+  var prevMarketStructure = prevSignal && prevSignal.marketStructure ? prevSignal.marketStructure : null;
+  var prevStochRSI = prevSignal && (prevSignal.stochRSI || prevSignal.stochRsi) ? (prevSignal.stochRSI || prevSignal.stochRsi) : null;
 
   var sig = {
     type: 'wait', entry: price, sl: 0, tp1: 0, tp2: 0, leverage: 3,
     confidence: 0, reasons: [], rsi: 50, ema21: price, ema50: price, ema200: price,
     trend: 'neutral', tfAnalysis: results
   };
+  
+  // Restore previous derivatives data if they exist
+  if (prevFundingRate) sig.fundingRate = prevFundingRate;
+  if (prevOpenInterest) sig.openInterest = prevOpenInterest;
+  if (prevLongShortRatio) sig.longShortRatio = prevLongShortRatio;
+  if (prevFibonacciLevels) sig.fibonacciLevels = prevFibonacciLevels;
+  if (prevObv) sig.obv = prevObv;
+  if (prevStaticSR) sig.staticSR = prevStaticSR;
+  if (prevHtfSummary) sig.htfSummary = prevHtfSummary;
+  if (prevLiquidity) sig.liquidity = prevLiquidity;
+  if (prevBtcContext) sig.btcContext = prevBtcContext;
+  if (prevMarketStructure) sig.marketStructure = prevMarketStructure;
+  if (prevStochRSI) sig.stochRSI = prevStochRSI;
   
   var mainTF = results['1h'] || results['30m'] || results['4h'];
   if (mainTF) {
@@ -4501,7 +5057,8 @@ async function analyzeAsset(symbol) {
   }
   
   // Calculate Pivot Points, ATR, Volume Profile, Ichimoku if AnalysisEngine is available
-  if (typeof AnalysisEngine !== 'undefined' && currentTFKlines && currentTFKlines.length >= 2) {
+  // Require at least 50 candles for accurate calculations
+  if (typeof AnalysisEngine !== 'undefined' && currentTFKlines && currentTFKlines.length >= 50) {
     try {
       var tempEngine = new AnalysisEngine('binance', symbol.replace('USDT', '/USDT'));
       // Convert klines format for calculations (needs h, l, c, v)
@@ -4682,25 +5239,8 @@ async function analyzeAsset(symbol) {
       }
     }
     
-    var smartEntry = TradingCore.findSmartEntry(
-      STATE.klines[symbol]['1h'] || STATE.klines[symbol]['4h'] || [],
-      STATE.klines[symbol]['4h'] || null,
-      price, 'long', mainTF ? mainTF.ema21 : price, mainTF ? mainTF.ema50 : price,
-      atr, entryCapital, swingPoints
-    );
-    
-    sig.entry = smartEntry.entry;
-    sig.entryReasons = smartEntry.reasons;
-    sig.entryQuality = smartEntry.quality;
-    sig.confluenceScore = smartEntry.confluenceScore;
-    sig.smartEntries = smartEntry.entries;
-    
-    // Realistic entry: limit pullback to max 1.5% from current price
-    var maxPullback = price * 0.015;
-    if (sig.entry < price - maxPullback) {
-      sig.entry = price - maxPullback * 0.5; // More realistic entry
-      sig.entryReasons = ['ورود نزدیک قیمت فعلی'];
-    }
+    // Entry logic removed - no entry suggestions
+    sig.entry = price; // Use current price as reference only
     
     // Adjust SL/TP based on volume - tighter in low volume markets
     var slMultiplier = volumeRatio < 0.5 ? 0.5 : (volumeRatio < 0.8 ? 0.6 : 0.8);
@@ -4710,18 +5250,6 @@ async function analyzeAsset(symbol) {
     sig.tp1 = sig.entry + atr * tpMultiplier;
     sig.tp2 = sig.entry + atr * tpMultiplier * 1.8;
     sig.leverage = TradingCore.getLeverage(sig.entry, sig.sl);
-    
-    // Entry validation: if entry is too far below current price (>0.5%), adjust to current price
-    if (sig.entry < price * 0.995) {
-      var oldEntry = sig.entry;
-      sig.entry = price;
-      sig.entryReasons.push('⚠️ نقطه ورود به قیمت فعلی تنظیم شد (ورود اصلی: ' + oldEntry.toFixed(2) + ' نیاز به بازگشت داشت)');
-      // Recalculate SL/TP based on new entry
-      sig.sl = sig.entry - atr * slMultiplier;
-      sig.tp1 = sig.entry + atr * tpMultiplier;
-      sig.tp2 = sig.entry + atr * tpMultiplier * 1.8;
-      sig.leverage = TradingCore.getLeverage(sig.entry, sig.sl);
-    }
     
     // Liquidity Grab Zones: بررسی و تنظیم SL
     var liquidityZones = TradingCore.detectLiquidityGrabZones(
@@ -5302,25 +5830,8 @@ async function analyzeAsset(symbol) {
       }
     }
     
-    var smartEntry = TradingCore.findSmartEntry(
-      STATE.klines[symbol]['1h'] || STATE.klines[symbol]['4h'] || [],
-      STATE.klines[symbol]['4h'] || null,
-      price, 'short', mainTF ? mainTF.ema21 : price, mainTF ? mainTF.ema50 : price,
-      atr, entryCapital, swingPoints
-    );
-    
-    sig.entry = smartEntry.entry;
-    sig.entryReasons = smartEntry.reasons;
-    sig.entryQuality = smartEntry.quality;
-    sig.confluenceScore = smartEntry.confluenceScore;
-    sig.smartEntries = smartEntry.entries;
-    
-    // Realistic entry: limit pullback to max 1.5% from current price
-    var maxPullback = price * 0.015;
-    if (sig.entry > price + maxPullback) {
-      sig.entry = price + maxPullback * 0.5; // More realistic entry
-      sig.entryReasons = ['ورود نزدیک قیمت فعلی'];
-    }
+    // Entry logic removed - no entry suggestions
+    sig.entry = price; // Use current price as reference only
     
     // Adjust SL/TP based on volume - tighter in low volume markets
     var slMultiplier = volumeRatio < 0.5 ? 0.5 : (volumeRatio < 0.8 ? 0.6 : 0.8);
@@ -5330,18 +5841,6 @@ async function analyzeAsset(symbol) {
     sig.tp1 = sig.entry - atr * tpMultiplier;
     sig.tp2 = sig.entry - atr * tpMultiplier * 1.8;
     sig.leverage = TradingCore.getLeverage(sig.entry, sig.sl);
-    
-    // Entry validation: if entry is too far above current price (>0.5%), adjust to current price
-    if (sig.entry > price * 1.005) {
-      var oldEntry = sig.entry;
-      sig.entry = price;
-      sig.entryReasons.push('⚠️ نقطه ورود به قیمت فعلی تنظیم شد (ورود اصلی: ' + oldEntry.toFixed(2) + ' نیاز به بازگشت داشت)');
-      // Recalculate SL/TP based on new entry
-      sig.sl = sig.entry + atr * slMultiplier;
-      sig.tp1 = sig.entry - atr * tpMultiplier;
-      sig.tp2 = sig.entry - atr * tpMultiplier * 1.8;
-      sig.leverage = TradingCore.getLeverage(sig.entry, sig.sl);
-    }
     
     // Liquidity Grab Zones: بررسی و تنظیم SL
     var liquidityZones = TradingCore.detectLiquidityGrabZones(
@@ -5650,7 +6149,6 @@ async function analyzeAsset(symbol) {
                   if (sig.reasons.indexOf('⚠️ سیگنال معکوس در دسترس است') === -1) {
                     sig.reasons.push('⚠️ سیگنال معکوس در دسترس است');
                   }
-                  console.log('[Counter-Signal] Generated counter-signal in async orderBook fetch for', symbol);
                   // Force re-render to show counter-signal
                   if (symbol === STATE.activeAsset) {
                     renderAssetPanel(symbol);
@@ -5660,7 +6158,6 @@ async function analyzeAsset(symbol) {
                   sig.counterSignal = null;
                 }
               } catch (e) {
-                console.log('Counter-Targeting re-check error for ' + symbol + ': ' + e.message);
               }
             }
             
@@ -5711,31 +6208,25 @@ async function analyzeAsset(symbol) {
         
         // ذخیره به عنوان سیگنال ثانویه (جایگزین سیگنال اصلی نمی‌شود)
         sig.counterSignal = counterSignal;
-        console.log('[Counter-Signal] Generated counter-signal for', symbol, counterSignal);
-        
         // اضافه کردن یادداشت به دلایل سیگنال اصلی
         if (!sig.reasons) sig.reasons = [];
         if (sig.reasons.indexOf('⚠️ سیگنال معکوس در دسترس است') === -1) {
           sig.reasons.push('⚠️ سیگنال معکوس در دسترس است');
         }
       } else {
-        console.log('[Counter-Signal] Conditions not met for', symbol, counterCheck.reason);
         // اگر شرایط برقرار نیست اما قبلاً counterSignal داشتیم و نوع آن درست است، آن را حفظ کن
         if (prevCounterSignal && !sig.counterSignal && prevCounterSignal.type === 'short') {
           sig.counterSignal = prevCounterSignal;
-          console.log('[Counter-Signal] Preserving previous counter-signal for', symbol);
         } else if (prevCounterSignal && prevCounterSignal.type !== 'short') {
           // اگر counterSignal قبلی نوع اشتباه دارد، آن را پاک کن
           sig.counterSignal = null;
         }
       }
     } catch (e) {
-      console.log('Counter-Targeting check error for ' + symbol + ': ' + e.message);
       // Continue without counter-signal if there's an error
       // اما اگر قبلاً counterSignal داشتیم و نوع آن درست است، آن را حفظ کن
       if (prevCounterSignal && !sig.counterSignal && prevCounterSignal.type === 'short') {
         sig.counterSignal = prevCounterSignal;
-        console.log('[Counter-Signal] Preserving previous counter-signal after error for', symbol);
       } else if (prevCounterSignal && prevCounterSignal.type !== 'short') {
         sig.counterSignal = null;
       }
@@ -5776,31 +6267,25 @@ async function analyzeAsset(symbol) {
         
         // ذخیره به عنوان سیگنال ثانویه (جایگزین سیگنال اصلی نمی‌شود)
         sig.counterSignal = counterSignal;
-        console.log('[Counter-Signal] Generated counter-signal for', symbol, counterSignal);
-        
         // اضافه کردن یادداشت به دلایل سیگنال اصلی
         if (!sig.reasons) sig.reasons = [];
         if (sig.reasons.indexOf('⚠️ سیگنال معکوس در دسترس است') === -1) {
           sig.reasons.push('⚠️ سیگنال معکوس در دسترس است');
         }
       } else {
-        console.log('[Counter-Signal] Conditions not met for', symbol, counterCheck.reason);
         // اگر شرایط برقرار نیست اما قبلاً counterSignal داشتیم و نوع آن درست است، آن را حفظ کن
         if (prevCounterSignal && !sig.counterSignal && prevCounterSignal.type === 'long') {
           sig.counterSignal = prevCounterSignal;
-          console.log('[Counter-Signal] Preserving previous counter-signal for', symbol);
         } else if (prevCounterSignal && prevCounterSignal.type !== 'long') {
           // اگر counterSignal قبلی نوع اشتباه دارد، آن را پاک کن
           sig.counterSignal = null;
         }
       }
     } catch (e) {
-      console.log('Counter-Targeting check error for ' + symbol + ': ' + e.message);
       // Continue without counter-signal if there's an error
       // اما اگر قبلاً counterSignal داشتیم و نوع آن درست است، آن را حفظ کن
       if (prevCounterSignal && !sig.counterSignal && prevCounterSignal.type === 'long') {
         sig.counterSignal = prevCounterSignal;
-        console.log('[Counter-Signal] Preserving previous counter-signal after error for', symbol);
       } else if (prevCounterSignal && prevCounterSignal.type !== 'long') {
         sig.counterSignal = null;
       }
@@ -5814,16 +6299,12 @@ async function analyzeAsset(symbol) {
   
   STATE.signals[symbol] = sig;
   
-  // Debug: Log counterSignal status
-  if (sig.counterSignal) {
-    console.log('[Counter-Signal] Signal has counterSignal before render:', symbol, sig.counterSignal);
-  }
   
   if (symbol === STATE.activeAsset) renderAssetPanel(symbol);
   // Notifications are now handled by checkPositionNotifications() in the data loop
   
   // Notify suggestions system
-  onAnalysisComplete(symbol, sig);
+  // Suggestions system disabled - onAnalysisComplete removed
 }
 
 function applyStrategy(signal) {
@@ -6063,6 +6544,13 @@ function formatPrice(price) {
   return price.toFixed(8);
 }
 
+function formatVolume(volume) {
+  if (!volume || !isFinite(volume)) return '--';
+  if (volume >= 1000000) return (volume / 1000000).toFixed(2) + 'M';
+  if (volume >= 1000) return (volume / 1000).toFixed(2) + 'K';
+  return volume.toFixed(2);
+}
+
 function updatePriceDisplay(symbol) {
   // Price is updated in renderAssetPanel
 }
@@ -6223,15 +6711,11 @@ function switchView(view) {
   if (view === 'chart') {
     initChart();
   } else if (view === 'scanner') {
-    // Always re-render when switching to this tab to ensure DOM is in sync
-    // Don't clear tracking - let renderScannerResults handle it properly
-    if (typeof renderScannerResults === 'function') {
-      renderScannerResults();
-    } else {
-      // Fallback: use renderSuggestionsCards if renderScannerResults doesn't exist
-      if (typeof renderSuggestionsCards === 'function') {
-        renderSuggestionsCards();
-      }
+    // Suggestions view disabled
+  } else if (view === 'signal') {
+    // Cleanup chart data when switching away from chart view
+    if (typeof Chart !== 'undefined' && Chart.cleanup) {
+      Chart.cleanup();
     }
   }
 }

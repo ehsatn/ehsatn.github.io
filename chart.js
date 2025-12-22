@@ -491,6 +491,26 @@ var Chart = (function() {
     render();
   }
 
+  function cleanup() {
+    // Clear chart data to free memory
+    chartData.klines = [];
+    chartData.ema21 = [];
+    chartData.ema50 = [];
+    chartData.bb = null;
+    chartData.signals = [];
+    
+    // Reset view state
+    viewState.offset = 0;
+    viewState.zoom = 1;
+    viewState.isDragging = false;
+    viewState.lastX = 0;
+    
+    // Clear canvas if it exists
+    if (canvas && ctx) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+
   return {
     init: init,
     setData: setData,
@@ -498,6 +518,7 @@ var Chart = (function() {
     render: render,
     toggleIndicator: toggleIndicator,
     resetView: resetView,
+    cleanup: cleanup,
     getViewState: function() { return viewState; }
   };
 })();

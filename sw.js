@@ -7,7 +7,11 @@ const STATIC_ASSETS = [
   '/app.js',
   '/core.js',
   '/chart.js',
+  '/scoring-engine.js',
+  '/analysis-engine.js',
+  '/counter-targeting.js',
   '/manifest.json',
+  '/libs/ccxt.browser.js',
   '/icons/icon-192.png',
   '/icons/icon-512.png'
 ];

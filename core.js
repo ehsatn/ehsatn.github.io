@@ -286,10 +286,182 @@ function calcStochRSI(closes, rsiPeriod, stochPeriod, kPeriod, dPeriod) {
   // See analyzeTF for proper implementation context
 }
 
+// ==================== Stochastic Oscillator ====================
+function calcStochastic(klines, kPeriod, dPeriod, smoothK) {
+  if (!klines || klines.length < kPeriod + dPeriod) {
+    return { k: 50, d: 50, signal: 'neutral' };
+  }
+  
+  kPeriod = kPeriod || 14;
+  dPeriod = dPeriod || 3;
+  smoothK = smoothK || 3;
+  
+  var kValues = [];
+  var recentKlines = klines.slice(-kPeriod - dPeriod);
+  
+  // Calculate %K for each period
+  for (var i = kPeriod; i < recentKlines.length; i++) {
+    var periodKlines = recentKlines.slice(i - kPeriod, i);
+    var highestHigh = Math.max.apply(null, periodKlines.map(function(k) { return k.h; }));
+    var lowestLow = Math.min.apply(null, periodKlines.map(function(k) { return k.l; }));
+    var currentClose = periodKlines[periodKlines.length - 1].c;
+    
+    if (highestHigh === lowestLow) {
+      kValues.push(50);
+    } else {
+      var k = ((currentClose - lowestLow) / (highestHigh - lowestLow)) * 100;
+      kValues.push(k);
+    }
+  }
+  
+  // Smooth %K
+  var smoothedK = [];
+  for (var j = smoothK - 1; j < kValues.length; j++) {
+    var kSum = 0;
+    for (var k = j - smoothK + 1; k <= j; k++) {
+      kSum += kValues[k];
+    }
+    smoothedK.push(kSum / smoothK);
+  }
+  
+  // Calculate %D (SMA of smoothed %K)
+  var currentK = smoothedK.length > 0 ? smoothedK[smoothedK.length - 1] : 50;
+  var dSum = 0;
+  var dCount = Math.min(dPeriod, smoothedK.length);
+  for (var d = smoothedK.length - dCount; d < smoothedK.length; d++) {
+    dSum += smoothedK[d];
+  }
+  var currentD = dCount > 0 ? dSum / dCount : currentK;
+  
+  // Determine signal
+  var signal = 'neutral';
+  if (currentK > 80 && currentD > 80) signal = 'overbought';
+  else if (currentK < 20 && currentD < 20) signal = 'oversold';
+  else if (currentK > currentD && currentK > 50) signal = 'bullish';
+  else if (currentK < currentD && currentK < 50) signal = 'bearish';
+  
+  return { k: currentK, d: currentD, signal: signal };
+}
+
+// ==================== Commodity Channel Index (CCI) ====================
+function calcCCI(klines, period) {
+  if (!klines || klines.length < period) {
+    return { cci: 0, signal: 'neutral' };
+  }
+  
+  period = period || 20;
+  var recentKlines = klines.slice(-period);
+  
+  // Calculate Typical Price (TP)
+  var typicalPrices = recentKlines.map(function(k) {
+    return (k.h + k.l + k.c) / 3;
+  });
+  
+  // Calculate SMA of TP
+  var smaTP = typicalPrices.reduce(function(sum, tp) { return sum + tp; }, 0) / period;
+  
+  // Calculate Mean Deviation
+  var meanDeviation = 0;
+  for (var i = 0; i < typicalPrices.length; i++) {
+    meanDeviation += Math.abs(typicalPrices[i] - smaTP);
+  }
+  meanDeviation = meanDeviation / period;
+  
+  // Calculate CCI
+  var currentTP = typicalPrices[typicalPrices.length - 1];
+  var cci = meanDeviation > 0 ? (currentTP - smaTP) / (0.015 * meanDeviation) : 0;
+  
+  // Determine signal
+  var signal = 'neutral';
+  if (cci > 100) signal = 'overbought';
+  else if (cci < -100) signal = 'oversold';
+  else if (cci > 0) signal = 'bullish';
+  else if (cci < 0) signal = 'bearish';
+  
+  return { cci: cci, signal: signal };
+}
+
+// ==================== Williams %R ====================
+function calcWilliamsR(klines, period) {
+  if (!klines || klines.length < period) {
+    return { wr: -50, signal: 'neutral' };
+  }
+  
+  period = period || 14;
+  var recentKlines = klines.slice(-period);
+  
+  var highestHigh = Math.max.apply(null, recentKlines.map(function(k) { return k.h; }));
+  var lowestLow = Math.min.apply(null, recentKlines.map(function(k) { return k.l; }));
+  var currentClose = recentKlines[recentKlines.length - 1].c;
+  
+  var wr = 0;
+  if (highestHigh !== lowestLow) {
+    wr = ((highestHigh - currentClose) / (highestHigh - lowestLow)) * -100;
+  } else {
+    wr = -50;
+  }
+  
+  // Determine signal
+  var signal = 'neutral';
+  if (wr > -20) signal = 'overbought';
+  else if (wr < -80) signal = 'oversold';
+  else if (wr > -50) signal = 'bullish';
+  else if (wr < -50) signal = 'bearish';
+  
+  return { wr: wr, signal: signal };
+}
+
+// ==================== Money Flow Index (MFI) ====================
+function calcMFI(klines, period) {
+  if (!klines || klines.length < period + 1) {
+    return { mfi: 50, signal: 'neutral' };
+  }
+  
+  period = period || 14;
+  var recentKlines = klines.slice(-period - 1);
+  
+  var positiveFlow = 0;
+  var negativeFlow = 0;
+  
+  for (var i = 1; i < recentKlines.length; i++) {
+    var current = recentKlines[i];
+    var previous = recentKlines[i - 1];
+    
+    // Calculate Typical Price
+    var currentTP = (current.h + current.l + current.c) / 3;
+    var previousTP = (previous.h + previous.l + previous.c) / 3;
+    
+    // Calculate Raw Money Flow
+    var rawMoneyFlow = currentTP * current.v;
+    
+    if (currentTP > previousTP) {
+      positiveFlow += rawMoneyFlow;
+    } else if (currentTP < previousTP) {
+      negativeFlow += rawMoneyFlow;
+    }
+  }
+  
+  // Calculate Money Flow Ratio
+  var moneyFlowRatio = negativeFlow > 0 ? positiveFlow / negativeFlow : 100;
+  
+  // Calculate MFI
+  var mfi = 100 - (100 / (1 + moneyFlowRatio));
+  
+  // Determine signal
+  var signal = 'neutral';
+  if (mfi > 80) signal = 'overbought';
+  else if (mfi < 20) signal = 'oversold';
+  else if (mfi > 50) signal = 'bullish';
+  else if (mfi < 50) signal = 'bearish';
+  
+  return { mfi: mfi, signal: signal };
+}
+
 // ==================== MASTER ANALYSIS FUNCTION ====================
 function analyzeTF(klines, price) {
-  if (!klines || klines.length < 200) { // Require more data for EMA200
-    return { signal: 'neutral', score: 0, rsi: 50, reasons: ['داده ناکافی'] };
+  // Minimum required candles for basic indicators
+  if (!klines || klines.length < 50) {
+    return { signal: 'neutral', score: 0, rsi: 50, reasons: ['داده ناکافی (حداقل 50 کندل نیاز است)'] };
   }
   
   var closes = klines.map(k => k.c);
@@ -298,7 +470,8 @@ function analyzeTF(klines, price) {
   var rsi = calcRSI(closes, 14);
   var ema21 = calcEMA(closes, 21);
   var ema50 = calcEMA(closes, 50);
-  var ema200 = calcEMA(closes, 200); // Trend Filter
+  // EMA200 requires at least 200 candles, use EMA50 as fallback if not enough data
+  var ema200 = klines.length >= 200 ? calcEMA(closes, 200) : ema50; // Trend Filter
   var bb = calcBB(closes, 20, 2);
   var adx = calcADX(klines, 14);
   var volAnalysis = analyzeVolume(klines, klines[klines.length-1].v);
@@ -601,6 +774,10 @@ if (typeof window !== 'undefined') {
     calcFibonacciLevels: calcFibonacciLevels,
     detectLiquidityGrabZones: detectLiquidityGrabZones,
     analyzeVSA: analyzeVSA,
+    calcStochastic: calcStochastic,
+    calcCCI: calcCCI,
+    calcWilliamsR: calcWilliamsR,
+    calcMFI: calcMFI,
     
     // Legacy support placeholders if needed elsewhere
     detectDivergence: () => ({ type: 'none' }),

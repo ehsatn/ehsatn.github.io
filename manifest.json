@@ -3,6 +3,7 @@
   "short_name": "signight",
   "description": "دستیار هوشمند معاملات با تحلیل تکنیکال پیشرفته",
   "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0a0f1c",
   "theme_color": "#00E5B0",
